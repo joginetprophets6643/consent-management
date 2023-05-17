@@ -8,6 +8,7 @@
     border-bottom: 16px solid #373250;
     width: 120px;
     height: 120px;
+    
     -webkit-animation: spin 2s linear infinite;
     /* Safari */
     animation: spin 2s linear infinite;
