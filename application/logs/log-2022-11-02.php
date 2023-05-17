@@ -1,0 +1,119 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2022-11-02 04:35:50 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:35:57 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:40:25 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:40:42 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:41:05 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:43:52 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:46:09 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:46:59 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:47:15 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:47:47 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:48:39 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:49:59 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:50:27 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:52:54 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:53:10 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:53:32 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:54:14 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:54:43 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:54:50 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:55:05 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:55:20 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:55:36 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:55:55 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:56:35 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:57:39 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 04:58:05 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:00:46 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:01:01 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:01:47 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 10:32:55 --> Severity: Warning --> Undefined array key "remark_dra" /home/stagtbny/ukpsc.consent.staggings.in/application/views/admin/consent_letter/grade_list.php 108
+ERROR - 2022-11-02 05:04:10 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:06:08 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:06:24 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:06:56 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:07:21 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:07:25 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:07:41 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:08:11 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:11:37 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:13:55 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:14:32 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:14:43 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:15:06 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:15:29 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:15:44 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:16:12 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:16:36 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:16:54 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:17:26 --> 404 Page Not Found: Robotstxt/index
+ERROR - 2022-11-02 05:17:31 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:17:31 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:17:43 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:20:53 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:20:57 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:21:11 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:22:48 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:23:55 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:24:43 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:27:51 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:27:53 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:30:49 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:31:15 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:31:32 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:36:32 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 05:49:19 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:02:24 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:17:22 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:20:16 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:20:29 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:21:28 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:21:31 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:22:05 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:22:32 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:22:46 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:23:09 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:23:45 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:24:19 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:24:37 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:24:56 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:25:19 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:26:30 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:27:29 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:27:54 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:28:19 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:28:43 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:30:15 --> 404 Page Not Found: Public/bootstrap
+ERROR - 2022-11-02 06:30:19 --> 404 Page Not Found: Public/bootstrap
+ERROR - 2022-11-02 06:30:27 --> 404 Page Not Found: Public/bootstrap
+ERROR - 2022-11-02 06:30:44 --> 404 Page Not Found: Public/bootstrap
+ERROR - 2022-11-02 06:30:52 --> 404 Page Not Found: Public/bootstrap
+ERROR - 2022-11-02 06:31:03 --> 404 Page Not Found: Public/bootstrap
+ERROR - 2022-11-02 06:31:37 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:32:24 --> 404 Page Not Found: Public/bootstrap
+ERROR - 2022-11-02 06:32:48 --> 404 Page Not Found: Public/bootstrap
+ERROR - 2022-11-02 06:33:13 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 06:34:08 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 07:11:58 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 07:12:32 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 08:43:31 --> 404 Page Not Found: Robotstxt/index
+ERROR - 2022-11-02 08:43:31 --> 404 Page Not Found: Robotstxt/index
+ERROR - 2022-11-02 08:43:32 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 14:19:36 --> Severity: Warning --> Undefined array key "remark_dra" /home/stagtbny/ukpsc.consent.staggings.in/application/views/admin/consent_letter/grade_list.php 190
+ERROR - 2022-11-02 14:20:31 --> Severity: Warning --> Undefined array key "remark_dra" /home/stagtbny/ukpsc.consent.staggings.in/application/views/admin/consent_letter/grade_list.php 190
+ERROR - 2022-11-02 14:20:35 --> Severity: Warning --> Undefined variable $states /home/stagtbny/ukpsc.consent.staggings.in/application/views/admin/consent_letter/consent_letter_index.php 55
+ERROR - 2022-11-02 14:20:35 --> Severity: Warning --> foreach() argument must be of type array|object, null given /home/stagtbny/ukpsc.consent.staggings.in/application/views/admin/consent_letter/consent_letter_index.php 55
+ERROR - 2022-11-02 09:51:46 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 10:37:04 --> 404 Page Not Found: Robotstxt/index
+ERROR - 2022-11-02 10:37:56 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 16:44:05 --> Severity: Warning --> Undefined variable $states /home/stagtbny/ukpsc.consent.staggings.in/application/views/admin/consent_letter/consent_letter_index.php 55
+ERROR - 2022-11-02 16:44:05 --> Severity: Warning --> foreach() argument must be of type array|object, null given /home/stagtbny/ukpsc.consent.staggings.in/application/views/admin/consent_letter/consent_letter_index.php 55
+ERROR - 2022-11-02 12:51:42 --> 404 Page Not Found: Robotstxt/index
+ERROR - 2022-11-02 18:23:34 --> Severity: Warning --> Undefined array key "remark_dra" /home/stagtbny/ukpsc.consent.staggings.in/application/views/admin/consent_letter/grade_list.php 190
+ERROR - 2022-11-02 18:23:58 --> Severity: Warning --> Undefined array key "remark_dra" /home/stagtbny/ukpsc.consent.staggings.in/application/views/admin/consent_letter/grade_list.php 190
+ERROR - 2022-11-02 14:03:48 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 14:04:41 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 15:46:57 --> 404 Page Not Found: Assets/dist
+ERROR - 2022-11-02 18:29:23 --> 404 Page Not Found: Assets/dist
