@@ -28,6 +28,22 @@
         .table thead th {
             color: #373250;
         }
+
+        .view-btn{
+    border-color: #384e4a;
+    background-color: #384e4a;
+    color: #fff;
+  }
+
+  .view-btn:hover{
+    border-color: #384e4a;
+    background-color: #fff;
+    color: #384e4a;
+  }
+
+  .view-all--button{
+    margin-top: 10px !important;
+  }
     </style>
 
 
@@ -148,6 +164,9 @@
                                     </tbody>
                                 </table>
                             </div>
+                                <div class="view-all--button">
+                                    <button onclick="window.history.go(-1)" class="btn view-btn">Back (पीछे)</button>
+                                </div>
                         </div>
                     </div>
                 </div>

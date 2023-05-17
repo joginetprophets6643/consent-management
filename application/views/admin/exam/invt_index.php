@@ -1,6 +1,27 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.css">
 <style>
+
+.view-btn{
+    border-color: #384e4a;
+    background-color: #384e4a;
+    color: #fff;
+  }
+
+  .view-btn:hover{
+    border-color: #384e4a;
+    background-color: #fff;
+    color: #384e4a;
+  }
+
+  .view-all--button{
+    margin-top: 10px !important;
+  }
+
+    .table-main{
+        width: 100% !important;
+    }
+
 .loader {
     border: 16px solid #e0e0e0;
     border-radius: 50%;
@@ -197,7 +218,7 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table id="send_invitation_list" class="table table-bordered table-striped"
+                    <table id="send_invitation_list" class="table table-bordered table-striped table-main"
                         style="border-collapse: collapse !important;">
                         <thead>
                             <tr>
@@ -216,9 +237,13 @@
                 </div>
                 <div id="invitation_recreate_div"></div>
                 <div class="loader d-none"></div>
-
-            </div>
+                <div class="view-all--button  ml-1">
+            <button onclick="window.history.go(-1)" class="btn view-btn">Back (पीछे)</button>
         </div>
+            </div>
+            
+        </div>
+       
     </section>
 </div>
 
