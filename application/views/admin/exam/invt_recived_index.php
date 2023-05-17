@@ -1,5 +1,23 @@
 <!-- DataTables -->
 
+<style>
+     .view-btn{
+    border-color: #384e4a;
+    background-color: #384e4a;
+    color: #fff;
+  }
+
+  .view-btn:hover{
+    border-color: #384e4a;
+    background-color: #fff;
+    color: #384e4a;
+  }
+
+  .view-all--button{
+    margin-top: 10px !important;
+  }
+</style>
+
 <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.css">
 
 <!-- Content Wrapper. Contains page content -->
@@ -184,6 +202,9 @@
                         <!-- <label style="font-weight:bold;" for="car"></label> -->
                     </div>
                 </table>
+                 <div class="view-all--button ml-1">
+            <button onclick="window.history.go(-1)" class="btn view-btn">Back (पीछे)</button>
+        </div>
             </div>
         </div>
 
