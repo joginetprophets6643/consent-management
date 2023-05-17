@@ -194,11 +194,8 @@ class Examshedule_schedule extends MY_Controller {
     public function consent_letter_preview($id) {
 
         $data['id'] = ($id);
-        // echo urldecrypt($id);
         $data['admin'] = $this->Exam_model->get_invitation_data_new(urldecrypt($id));
-        // print_r( $data['admin'] ); die;
         $data['states'] = $this->location_model->get_states();
-
         $this->load->view('admin/includes/_header');
         $this->load->view('admin/exam/consent_letter_preview', $data);
         $this->load->view('admin/includes/_footer');
@@ -489,7 +486,7 @@ class Examshedule_schedule extends MY_Controller {
             $user_id = $this->input->post('user_id');
             $data = array(
                 'speedpost' => $this->input->post('speedpost'),
-                // 'subjectline' => $this->input->post('subjectline'),
+                'subjectline' => $this->input->post('subjectline'),
                 // 'startdate' => $this->input->post('startdate'),
                 // 'enddate' => $this->input->post('enddate'),
                 // 'exam_name' => $this->input->post('exam_name'),
@@ -504,9 +501,7 @@ class Examshedule_schedule extends MY_Controller {
                 'created_at' => date('d-m-Y : h:m:s'),
                 'created_by' => $this->session->userdata('admin_id'),
             );
-            echo '<pre>';print_r($data);exit;
-            // $data = $this->security->xss_clean($data);
-            // $result = $this->Exam_model->add_invitation($data);
+        
             $result = $this->Exam_model->update_invitation($data,$user_id);
 
             $this->session->set_flashdata('success', ' Add successfully!(सफलतापूर्वक जोड़ें!)');
@@ -535,36 +530,19 @@ class Examshedule_schedule extends MY_Controller {
         if ($this->input->post()) {
 
             $sub_name = $this->input->post('sub_name') ? implode(',', $this->input->post('sub_name')) : "";
-            //$exam_name = $this->input->post('exam_name') ? implode(',', $this->input->post('exam_name')) : "";
             $no_candidate = $this->input->post('no_candidate') ? implode(',', $this->input->post('no_candidate')) : "";
             $shft_exam = $this->input->post('shft_exam') ? implode(',', $this->input->post('shft_exam')) : "";
             $date_exam = $this->input->post('date_exam') ? implode(',', $this->input->post('date_exam')) : "";
             $time_exam = $this->input->post('time_exam') ? implode(',', $this->input->post('time_exam')) : "";
-            // $id = $this->uri->segment(4);
-            // $new_id = urldecrypt($id);
-            // echo $new_id;exit;
-            
             $user_id = $this->input->post('user_id');
             $data = array(
                 'speedpost' => $this->input->post('speedpost'),
-                // 'subjectline' => $this->input->post('subjectline'),
-                // 'startdate' => $this->input->post('startdate'),
-                // 'enddate' => $this->input->post('enddate'),
-                // 'exam_name' => $this->input->post('exam_name'),
-                // 'sub_name' => $sub_name,
-                // 'exam_name' => $exam_name,
-                // 'no_candidate' => $no_candidate,
-                // 'shft_exam' => $shft_exam,
-                // 'date_exam' => $date_exam,
-                // 'time_exam' => $time_exam,
+                'subjectline' => $this->input->post('subjectline'),
                 'name_designation_mobile' => $this->input->post('name_designation_mobile'),
                 'created_by' => $this->session->userdata('admin_id'),
                 'created_at' => date('d-m-Y : h:m:s'),
                 'created_by' => $this->session->userdata('admin_id'),
             );
-            // echo '<pre>';print_r($data);exit;
-            // $data = $this->security->xss_clean($data);
-            // $result = $this->Exam_model->add_invitation($data);
             $result = $this->Exam_model->update_invitation($data,$user_id);
 
             $this->session->set_flashdata('success', ' Update successfully!(अपडेट सफलतापूर्वक हो गया)');

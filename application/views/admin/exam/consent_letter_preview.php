@@ -65,6 +65,11 @@
                                             <td><?= get_exam_name($admin[0]['exam_name']) ?></td>
                                         </tr>
                                         <tr>
+                                            <th>Subject Line</th>
+                                            <td><?=$admin[0]['subjectline'] ?></td>
+                                        </tr>
+                                        
+                                        <tr>
                                             <th>Speed Post</th>
                                             <td><?= $admin[0]['speedpost'] ?></td>
                                         </tr>
