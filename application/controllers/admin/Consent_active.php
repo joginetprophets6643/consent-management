@@ -959,23 +959,18 @@ public function consent_recieved(){
 
                     $email = $fetch_controller_details['email'];
                     $phone = $fetch_controller_details['mobile_no'];
-                    $template_id = "1007102212957051003";
+                    // $template_id = "1007102212957051003";
+                    $template_id = "1007261310462557602";
 
-                        // Message for Mobile 
-                    $messageP1='Dear Sir/Madam ,';
-                    $messageP1.='Candidates has been allotted as per your consent for '.$examName.' Kindly login into your portal to check the details.';
-                    $messageP1.='Regards,';
-                    $messageP1.='UKPSC Haridwar.';
-                    // Message For Email Address 
+                    $messageP1='Dear Sir/Madam,';
+                    $messageP1.='Consent for the '.$examName.' of UKPSC has been applied and submitted for your kind perusal.';
+                    $messageP1.='Regards';
+                    $messageP1.='Centre';
+
                     $messageE1='Dear Sir/Madam ,<br>';
-                    $messageE1.='Candidates has been allotted as per your consent for '.$examName.' Kindly login into your portal to check the details.';
+                    $messageE1.='Consent for the '.$examName.' of UKPSC has been applied and submitted for your kind perusal.';
                     $messageE1.='Regards,<br>';
-                    $messageE1.='UKPSC Haridwar.';
-                    
-                    // $email = $cData[0]['email'];
-                    // $phone = $cData[0]['pri_mobile'];
-                    // $template_id = "1007109235460260699";
-                    // EMAIL AND MESSAGE SEND UDING TEMPLETE
+                    $messageE1.='Centre';
                     sendSMS($phone,$messageP1,$template_id);
                     sendEmail($email,$messageE1,$template_id);
                  
@@ -1188,6 +1183,9 @@ public function consent_recieved(){
   
        return false;
     }
+
+
+  
 
    
 }

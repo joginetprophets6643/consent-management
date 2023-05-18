@@ -658,7 +658,7 @@
 
                                                     <th>Date<br />(दिनांक) </th>
 
-                                                    <td><?php echo date("d/m/Y h:s:a"); ?></td>
+                                                    <td><?php echo  date("d/m/Y h:s:a"); ?></td>
 
                                                 </tr>
 
@@ -726,7 +726,7 @@
 
                                                     <td>
 
-                                                        <?= $val['date_exam']; ?>
+                                                        <?= date("d-m-Y", strtotime($val['date_exam'])) ; ?>
 
                                                     </td>
 

@@ -95,10 +95,6 @@ class Auth extends MY_Controller {
 						$this->rbac->set_access_in_session(); // set access in session
                                                 
                                                 redirect(base_url('admin/dashboard'), 'refresh');
-//						if($result['is_supper'])
-//						redirect(base_url('admin/dashboard/index_1'), 'refresh');
-//						else
-//						redirect(base_url('admin/dashboard/index_2'), 'refresh');
 
 						}
 					}
@@ -226,98 +222,6 @@ class Auth extends MY_Controller {
 			}
 		}	
 		
-		
-		// public function register(){
-
-		// 	if($this->input->post('submit')){
-
-		// 		// for google recaptcha
-		// 		if ($this->recaptcha_status == true) {
-		//             if (!$this->recaptcha_verify_request()) {
-		//                 $this->session->set_flashdata('form_data', $this->input->post());
-		//                 $this->session->set_flashdata('error', 'reCaptcha Error');
-		//                 redirect(base_url('admin/auth/register'));
-		//                 exit();
-		//             }
-		//         }
-	        
-			
-		// 		// $this->form_validation->set_rules('school_registration_number', 'School Registration Number', 'trim|is_unique[ci_admin.school_registration_number]|required');
-		// 		// $this->form_validation->set_rules('email', 'Email', 'trim|valid_email|required');
-		// 		$this->form_validation->set_rules('email', 'Email', 'trim|is_unique[ci_admin.email]|required');
-			
-		// 		if ($this->form_validation->run() == FALSE) {
-		// 			$data = array(
-		// 				'errors' => validation_errors()
-		// 			);
-		// 			$this->session->set_flashdata('form_data', $this->input->post());
-		// 			$this->session->set_flashdata('errors', $data['errors']);
-		// 			redirect(base_url('admin/auth/register'),'refresh');
-		// 		}
-		// 		else{
-
-		// 			$data = array(
-		// 					'school_name' => $this->input->post('school_name'),
-		// 					'username' => $this->input->post('email'),
-		// 					'school_registration_number' => $this->input->post('school_registration_number'),
-		// 					'address' => $this->input->post('address'),
-		// 					'landmark' => $this->input->post('landmark'),
-		// 					'district' => $this->input->post('district'),
-		// 					'admin_role_id' => 6, // By default i putt role is 2 for registraiton
-		// 					'city' => $this->input->post('city'),
-		// 					'principal_name' => $this->input->post('principal_name'),
-		// 					'pri_mobile' => $this->input->post('pri_mobile'),
-		// 					'email' => $this->input->post('email'),
-		// 					'whats_num' => $this->input->post('whats_num'),
-		// 					'password' =>  password_hash($this->input->post('pri_mobile'), PASSWORD_BCRYPT),
-		// 					'is_active' => 1,
-		// 					'is_verify' => 0,
-		// 					'token' => md5(rand(0,1000)),    
-		// 					'last_ip' => $this->input->ip_address(),
-		// 					'created_at' => date('Y-m-d h:m:s'),
-		// 					'updated_at' => date('Y-m-d h:m:s'),
-		// 			);
-		// 			$data = $this->security->xss_clean($data);
-		// 			$result = $this->auth_model->register($data);
-		// 			if($result){
-		// 				//sending welcome email to user
-		// 				$this->load->helper('email_helper');
-
-		// 				$mail_data = array(
-		// 					'fullname' => $data['principal_name'].' '.'-'.$data['school_name'],
-		// 					'email' => $data['email'],
-		// 					'verification_link' => base_url('admin/auth/verify').'/'.$data['token']
-		// 				);
-
-		// 				$to = $data['email'];
-
-		// 				$email = $this->mailer->mail_template($to,'email-verification',$mail_data);
-
-		// 				if($email){
-		// 					$this->session->set_flashdata('success', 'Your account has been successfully created, please verify it by clicking the activation link that has been send to your email address and generate your new password to log in to UKPSC.');	
-		// 					redirect(base_url('admin/auth/login'));
-		// 				}	
-		// 				else{
-		// 					echo 'Email Error';
-		// 				}
-		// 			}
-		// 		}
-		// 	}
-		// 	else{
-		// 		$data['title'] = 'Create an Account';
-		// 		$data['navbar'] = false;
-		// 		$data['sidebar'] = false;
-		// 		$data['footer'] = false;
-		// 		$data['bg_cover'] = true;
-  //               $data['states'] = $this->location_model->get_states();
-		// 		// $data['school_num'] = $this->location_model->get_last_reg_number();
-		// 		// print_r($data['school_num']); die();
-  //               $data['role'] = $this->auth_model->get_auth_dd();
-		// 		$this->load->view('admin/includes/_header', $data);
-		// 		$this->load->view('admin/auth/register');
-		// 		$this->load->view('admin/includes/_footer', $data);
-		// 	}
-		// }
 
 
 		public function register(){
@@ -432,9 +336,10 @@ class Auth extends MY_Controller {
 						$email = $this->mailer->mail_template($to,'email-verification',$mail_data);
 						// Message for Mobile 
 						$messageP1='Dear Sir/Madam ,';
-						$messageP1.='Your primary registration is completed. Kindly complete your registration using your email id and password after clicking on password generation link on registered email id.';
+						$messageP1.='Your primary registration is completed. Kindly complete your registration using your email id and password after clicking on password generation link on registered email id.%0a';
 						$messageP1.='Regards,';
 						$messageP1.='UKPSC, Haridwar';
+						
 						// Message For Email Address 
 						$messageE1='Dear Sir/Madam ,<br>';
 						$messageE1.='Your primary registration is completed. Kindly complete your registration using your email id and password after clicking on password generation link on registered email id.<br>';
@@ -806,6 +711,35 @@ class Auth extends MY_Controller {
 			// EMAIL AND MESSAGE SEND UDING TEMPLETE
 			sendSMS($phone,$messageP1,$template_id);
 			sendEmail($email,$messageE1,$template_id);
+		}
+
+
+
+		public function mailTesting (){
+			$template_id = "1007261310462557602";
+			// $template_id = "1007239655187710009";
+			$messageP1='Dear Sir/Madam,';
+			$messageP1.='Consent for the exam Name of UKPSC has been applied and submitted for your kind perusal.';
+			$messageP1.='Regards';
+			$messageP1.='Centre';
+	
+			$messageE1='Dear Sir/Madam,<br>';
+			$messageE1.='Consent for the exam Name of UKPSC has been applied and submitted for your kind perusal.';
+			$messageE1.='Regards <br>';
+			$messageE1.='Centre';
+
+			// $messageP1='Dear Sir/Madam ,';
+			// $messageP1.='Your primary registration is completed. Kindly complete your registration using your email id and password after clicking on password generation link on registered email id.';
+			// $messageP1.='Regards,';
+			// $messageP1.='UKPSC, Haridwar';
+			
+			// $messageE1='Dear Sir/Madam ,<br>';
+			// $messageE1.='Your primary registration is completed. Kindly complete your registration using your email id and password after clicking on password generation link on registered email id.<br>';
+			// $messageE1.='Regards,<br>';
+			// $messageE1.='UKPSC, Haridwar';
+
+			sendSMS(8700488718,$messageP1,$template_id);
+			sendEmail('demo@yopmail.com',$messageE1,$template_id);
 		}
 
 			}  // end class

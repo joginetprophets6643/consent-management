@@ -383,13 +383,13 @@
 			                alert("Only '.pdf' formats are allowed.");
 			                $(this).val('');
 			            }
-			            else{
-			            	  var convertInMB = (this.files[0].size / 1024).toFixed(2);
-			                if(convertInMB>30){
-			                	 alert("pdf file should be less and equal to 30MB");
-			                     $(this).val('');
-			                }
-			            }
+			            // else{
+			            // 	  var convertInMB = (this.files[0].size / 1024).toFixed(2);
+			            //     if(convertInMB>30){
+			            //     	 alert("pdf file should be less and equal to 30MB");
+			            //          $(this).val('');
+			            //     }
+			            // }
 			            })
              
                 });

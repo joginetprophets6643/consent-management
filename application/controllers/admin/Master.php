@@ -483,8 +483,7 @@ class Master extends MY_Controller
             $city_code = $data['admin']['city_code'];
             $city_code_array = explode(",",$city_code);
 
-
-
+       
             foreach ($number_of_can_array as $k=>$value1){
                 $subjectId = $number_of_can_array[$k];
                 $sub_info[$k]['number_of_can_array'] = $number_of_can_array[$k]; 
