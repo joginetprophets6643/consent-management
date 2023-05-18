@@ -1,16 +1,25 @@
 <!-- DataTables -->
 
-<link rel="stylesheet" href="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.css"> 
+<!-- <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.css">  -->
 <style type="text/css">
   #na_datatable1 thead th:nth-child(2) {
-    width: 325.4px !important;
+    min-width: 38.680vh !important;
   }
   #na_datatable1 thead th:nth-child(3),
   #na_datatable1 thead th:nth-child(4) {
-    width: 170.4px !important;
+    min-width: 38.680vh !important;
   }
   #na_datatable1 thead th:nth-child(5) {
-    width: 192.4px !important;
+    min-width: 38.680vh !important;
+  }
+
+  .dataTables_filter{
+    text-align: end;
+  }
+
+  .dataTables_paginate{
+    /* width: 100% !important; */
+    text-align: end !important;
   }
 </style>
 
