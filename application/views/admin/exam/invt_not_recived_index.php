@@ -211,7 +211,7 @@
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <div id="consentNotRecievedDiv"></div>
-                            <table id="consent_not_recieved_by_user_list" class="table table-bordered table-striped" style="border-collapse: collapse !important;">
+                            <table id="consent_not_recieved_by_user_list" class="table table-bordered table-striped w-100" style="border-collapse: collapse !important;">
                                 <thead>
                                     <tr>
                                         <th>#</th>

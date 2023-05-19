@@ -392,7 +392,7 @@ class Examshedule_schedule extends MY_Controller {
                 }
                 else{
                     $action =   '<input type="checkbox" id="a" class="send_email_ids" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">
-                    <a title="Revoke Consent" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
+                    <a title="Revoke Consentfsend_consent" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
                
                 }
                 $row['principal_name'] = '<h4 class="m0 mb5">'.$row['principal_name'] .'</h4>'.'<small class="text-muted">'.$row['pri_mobile'].'</small><br/>'.'<small class="text-muted">'.$row['email'].'</small>';
@@ -1125,7 +1125,7 @@ class Examshedule_schedule extends MY_Controller {
 
         $this->load->view('admin/includes/_header', $data);
 
-        $this->load->view('admin/exam/invt_sent_index', $data);
+    $this->load->view('admin/exam/invt_sent_index', $data);
 
         $this->load->view('admin/includes/_footer', $data);
     }

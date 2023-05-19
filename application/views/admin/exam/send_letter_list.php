@@ -28,7 +28,7 @@
 
             <th>Exam Name</th>
 
-            <th>Total Candidates</th>
+            <th>Total Enrolled Candidates</th>
 
             <th>Start Date of exam</th>
 

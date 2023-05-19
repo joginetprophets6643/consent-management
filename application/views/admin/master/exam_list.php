@@ -82,7 +82,7 @@
 
               <th>Advertisement Number</th>
 
-               <th>No of Candidates</th>
+               <th>Total Enrolled Candidates</th>
 
                <th>Start Date</th>
 

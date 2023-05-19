@@ -167,7 +167,7 @@
         <div class="card">
             <div class="card-body table-responsive">
                 <div id="consentRecievedDiv"></div>
-                <table id="consent_recieved_list" class="table table-bordered table-striped"
+                <table id="consent_recieved_list" class="table table-bordered table-striped w-100"
                     style="border-collapse: collapse !important;">
                     <thead>
                         <tr>
