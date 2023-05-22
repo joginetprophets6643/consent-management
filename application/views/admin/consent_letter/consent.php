@@ -1,4 +1,4 @@
-<?php echo get_district_name($admin['district']) ?>
+<?php //echo get_district_name($admin['district']) ?>
 
 
 <script type="text/javascript">

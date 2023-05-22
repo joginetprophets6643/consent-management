@@ -172,7 +172,7 @@
                                                                 <td>
                                                                     <?= $val['time_exam_array']; ?>
                                                                 </td>
-                                                                <?php if(count($sub_info)!=1){?>
+                                                                <!-- <?php //if(count($sub_info)!=1){?> -->
                                                                 <td>
                                                                     
                                                                     <input type="hidden" id="yes" id="examincation_ids"
@@ -184,16 +184,16 @@
                                                                     <input type="hidden" name="examincation_id" id="examincation_id"
                                                                         value="<?= $all_value; ?>" />
                                                                 </td>
-                                                                 <?php }?>
+                                                                 <!-- <?//php// }?> -->
             
         
         
                                                             </tr>
                                                         
                                                         <?php    
-                                                                // print_r($val);
+                                                        
                                                             }
-                                                            // die;
+                                                            
                                                         ?>
                                                         </tbody>
                                                     </table>

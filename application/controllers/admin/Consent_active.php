@@ -741,6 +741,7 @@ public function consent_recieved(){
 
             $examincation_ids = $this->input->post('examincation_ids');
             $exmin_ceter_option = $this->input->post('exmin_ceter_option');
+          
             $exmin_ceter_option = implode(",",$exmin_ceter_option);
             // $examincation_id = implode(",",$examincation_id);
  
