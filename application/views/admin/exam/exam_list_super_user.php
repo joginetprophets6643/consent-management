@@ -19,7 +19,7 @@
                         <tr>
                             <th>#</th>
                             <th>Exam Name </th>
-                            <th>No of Candidate</th>
+                            <th>Total Enrolled Candidates</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                                                  
