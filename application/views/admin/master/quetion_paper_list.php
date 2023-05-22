@@ -2,15 +2,19 @@
 
 <!-- <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.css">  -->
 <style type="text/css">
-  #na_datatable1 thead th:nth-child(2) {
-    min-width: 38.680vh !important;
+  /* #na_datatable1 thead th:nth-child(1) {
+    width: 33.33% !important;
   }
+  */
+  #na_datatable1 thead th:nth-child(2) {
+    width: 33.33% !important;
+  } 
   #na_datatable1 thead th:nth-child(3),
   #na_datatable1 thead th:nth-child(4) {
-    min-width: 38.680vh !important;
+    width: 33.33% !important;
   }
   #na_datatable1 thead th:nth-child(5) {
-    min-width: 38.680vh !important;
+    width: 33.33% !important;
   }
 
   .dataTables_filter{
@@ -18,8 +22,8 @@
   }
 
   .dataTables_paginate{
-    /* width: 100% !important; */
-    text-align: end !important;
+    display: flex !important;
+    justify-content: end !important;
   }
 </style>
 
