@@ -28,7 +28,8 @@
 
 
 
-                    <h3 class="card-title"><i class="fa fa-plus"></i>&nbsp;Edit Candidate&nbsp;(उम्मीदवार संपादित करें)</h3>
+                    <h3 class="card-title"><i class="fa fa-plus"></i>&nbsp;Edit Candidate&nbsp;(उम्मीदवार संपादित करें)
+                    </h3>
 
 
 
@@ -84,7 +85,9 @@
 
                                 <label for="name" class="col-sm- control-label">Exam Name<br />परीक्षा का नाम</label>
 
-                                <input type="text" readonly id="exam_name" name="exam_name" class="form-control" maxlength="4" value="<?php echo get_exam_name($admin['exam_name']); ?>" placeholder="">
+                                <input type="text" readonly id="exam_name" name="exam_name" class="form-control"
+                                    maxlength="4" value="<?php echo get_exam_name($admin['exam_name']); ?>"
+                                    placeholder="">
 
 
 
@@ -98,63 +101,86 @@
 
                         <?php foreach ($sub_info as $value) {?>
 
-                            <?php //echo '<pre>'; print_r($value);?>
+                        <div class="form-group has-feedback col-md-2">
 
-                            <div class="form-group has-feedback col-md-3">
+                            <label>District<br />जिला</label>
 
-                                <label>District<br />जिला</label>
+                            <input type="text" readonly id="state" name="state" class="form-control" maxlength="4"
+                                value="<?php echo get_district_name($value['state_array']); ?>" placeholder="">
 
-                                <input type="text" readonly id="state" name="state" class="form-control" maxlength="4" value="<?php echo get_district_name($value['state_array']); ?>" placeholder="">
+                        </div>
 
-                            </div>
+                        <div class="col-md-2">
 
-                            <div class="col-md-3">
+                            <div class="form-group">
 
-                                <div class="form-group">
+                                <label for="name" class="col-sm- control-label">District Code<br />जिला कोड</label>
 
-                                    <label for="name" class="col-sm- control-label">District Code<br />जिला कोड</label>
-
-                                    <input type="text" id="district_code" name="district_code[]" class="form-control" maxlength="4" value="<?php echo $value['district_code_array']; ?>" placeholder="">
-
-                                </div>
+                                <input type="text" id="district_code" name="district_code[]" class="form-control"
+                                    maxlength="4" value="<?php echo $value['district_code_array']; ?>" placeholder="">
 
                             </div>
 
-                            <div class="form-group has-feedback col-md-2">
+                        </div>
 
-                                <label>City<br />शहर</label>
+                        <div class="form-group has-feedback col-md-2">
 
-                                <input type="text" readonly id="state" name="state" class="form-control" maxlength="4" value="<?php echo get_subcity_name($value['city_array']); ?>" placeholder="">
+                            <label>City<br />शहर</label>
+
+                            <input type="text" readonly id="state" name="state" class="form-control" maxlength="4"
+                                value="<?php echo get_subcity_name($value['city_array']); ?>" placeholder="">
+
+                        </div>
+
+                        <div class="col-md-2">
+
+                            <div class="form-group">
+
+                                <label for="name" class="col-sm- control-label">City Code<br />शहर कोड</label>
+
+                                <input type="text" id="city_code" name="city_code[]" class="form-control" maxlength="4"
+                                    value="<?php echo $value['city_code_array']; ?>" placeholder="">
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-2">
+
+                            <div class="form-group">
+
+                                <label for="name" class="col-sm- control-label">Number of Candidates<br />संबंधित की
+                                    संख्या
+
+                                    <span>*</span>
+
+                                </label>
+
+                                <input type="number" id="number_of_can" min=1 name="number_of_can[]"
+                                    class="form-control" maxlength="4"
+                                    value="<?php echo $value['number_of_can_array']; ?>" placeholder="">
 
                             </div>
 
-                            <div class="col-md-2">
+                        </div>
 
-                                <div class="form-group">
 
-                                    <label for="name" class="col-sm- control-label">City Code<br />शहर कोड</label>
+                        <div class="col-md-2">
 
-                                    <input type="text" id="city_code" name="city_code[]" class="form-control" maxlength="4" value="<?php echo $value['city_code_array']; ?>" placeholder="">
+                            <div class="form-group">
 
-                                </div>
+                                <label for="name" class="control-label">Subject Name<br />विषय नाम<span>*</span></label>
 
-                            </div>
+                                <select name="sub_name[]" class="form-control sub_name" id="sub_name">
+                                    <?php foreach($subjects as $sub){ ?>
+                                    <option <?php echo $value['sub_name_array']==$sub['id']?'selected':'' ?> value="<?php echo $sub['id']?>"><?php echo $sub['sub_name']?></option>
+                                    <?php }?>
 
-                            <div class="col-md-2">
-
-                                <div class="form-group">
-
-                                    <label for="name" class="col-sm- control-label">Number of Candidates<br />संबंधित की संख्या
-
-                                        <span>*</span>
-
-                                    </label>
-
-                                    <input type="number" id="number_of_can" min=1 name="number_of_can[]" class="form-control" maxlength="4" value="<?php echo $value['number_of_can_array']; ?>" placeholder="">
-
-                                </div>
+                                </select>
 
                             </div>
+
+                        </div>
 
                         <?php } ?>
 
@@ -162,7 +188,8 @@
 
                             <div class="form-group mb-0">
 
-                                <input type="submit" name="submit" style="margin-top:25px;" value="Update " class="btn btn-primary pull-center">
+                                <input type="submit" name="submit" style="margin-top:25px;" value="Update "
+                                    class="btn btn-primary pull-center">
 
                             </div>
 
@@ -209,229 +236,225 @@
 
 
 <script>
+$("#country").addClass('active');
 
-    $("#country").addClass('active');
 
 
+$(document).ready(function() {
 
-    $(document).ready(function() {
 
 
 
 
 
 
+    $("#xin-form")["submit"](function(d) {
 
-        $("#xin-form")["submit"](function(d) {
 
 
+        if ($("#exam_name").val() === "") {
 
-            if ($("#exam_name").val() === "") {
 
 
+            alert("Please fill 'Exam Name'\nकृपया 'परीक्षा का नाम' भरें");
 
-                alert("Please fill 'Exam Name'\nकृपया 'परीक्षा का नाम' भरें");
 
 
+            $("#exam_name").focus();
 
-                $("#exam_name").focus();
 
 
+            return false;
 
-                return false;
 
 
+        }
 
-            }
 
 
+        if ($("#state").val() === "") {
 
-            if ($("#state").val() === "") {
 
 
+            alert("Please fill 'state'\n(कृपया 'राज्य' भरें)");
 
-                alert("Please fill 'state'\n(कृपया 'राज्य' भरें)");
 
 
+            $("#state").focus();
 
-                $("#state").focus();
 
 
+            return false;
 
-                return false;
 
 
+        }
 
-            }
 
 
+        if ($("#district_code").val() === "") {
 
-            if ($("#district_code").val() === "") {
 
 
+            alert("Please fill 'District Code'\n(कृपया 'जिला कोड' भरें)");
 
-                alert("Please fill 'District Code'\n(कृपया 'जिला कोड' भरें)");
 
 
+            $("#district_code").focus();
 
-                $("#district_code").focus();
 
 
+            return false;
 
-                return false;
 
 
+        }
 
-            }
+        if ($("#city").val() === "") {
 
-            if ($("#city").val() === "") {
 
 
+            alert("Please fill 'city'\n(कृपया 'सिटी' भरें)");
 
-                alert("Please fill 'city'\n(कृपया 'सिटी' भरें)");
 
 
+            $("#city").focus();
 
-                $("#city").focus();
 
 
+            return false;
 
-                return false;
 
 
+        }
 
-            }
 
 
+        if ($("#city_code").val() === "") {
 
-            if ($("#city_code").val() === "") {
 
 
+            alert("Please fill 'City Code'\n(कृपया 'सिटी कोड' भरें)");
 
-                alert("Please fill 'City Code'\n(कृपया 'सिटी कोड' भरें)");
 
 
+            $("#city_code").focus();
 
-                $("#city_code").focus();
 
 
+            return false;
 
-                return false;
 
 
+        }
 
-            }
 
 
+        if ($("#number_of_can").val() === "") {
 
-            if ($("#number_of_can").val() === "") {
 
 
+            alert("Please fill 'Number Of Can'\n(कृपया 'कैन की संख्या' भरें)");
 
-                alert("Please fill 'Number Of Can'\n(कृपया 'कैन की संख्या' भरें)");
 
 
+            $("#number_of_can").focus();
 
-                $("#number_of_can").focus();
 
 
+            return false;
 
-                return false;
 
 
-
-            }
-
-
-
-        });
+        }
 
 
 
     });
 
+
+
+});
 </script>
 
 <script>
+var dtToday = new Date();
 
-    var dtToday = new Date();
+// alert(dtToday);
 
-    // alert(dtToday);
+var month = dtToday.getMonth() + 1; // getMonth() is zero-based
 
-    var month = dtToday.getMonth() + 1; // getMonth() is zero-based
+var day = dtToday.getDate();
 
-    var day = dtToday.getDate();
+var year = dtToday.getFullYear();
 
-    var year = dtToday.getFullYear();
+if (month < 10)
 
-    if (month < 10)
+    month = '0' + month.toString();
 
-        month = '0' + month.toString();
+if (day < 10)
 
-    if (day < 10)
-
-        day = '0' + day.toString();
-
-
-
-    var maxDate = year + '-' + month + '-' + day;
-
-    $('.date_disable').attr('min', maxDate);
+    day = '0' + day.toString();
 
 
 
-    $(document).ready(function() {
+var maxDate = year + '-' + month + '-' + day;
+
+$('.date_disable').attr('min', maxDate);
 
 
 
-        $(function() {
-
-            $('#state').change(function() {
-
-                var district_id = $(this).val();
-
-                if (district_id != '') {
-
-                    $('#othstate').val('').hide();
+$(document).ready(function() {
 
 
 
-                    $.ajax({
+    $(function() {
 
-                        type: "POST",
+        $('#state').change(function() {
 
-                        url: base_url + 'admin/location/get_city_by_state_id',
+            var district_id = $(this).val();
 
-                        dataType: 'html',
+            if (district_id != '') {
 
-                        data: {
+                $('#othstate').val('').hide();
 
-                            'district_id': district_id,
 
-                            'csfr_token_name': csfr_token_value
 
-                        },
+                $.ajax({
 
-                        success: function(data) {
+                    type: "POST",
 
-                            // $('#city').html(data);
+                    url: base_url + 'admin/location/get_city_by_state_id',
 
-                        }
+                    dataType: 'html',
 
-                    });
+                    data: {
 
-                } else {
+                        'district_id': district_id,
 
-                    $('#state').val('').hide();
+                        'csfr_token_name': csfr_token_value
 
-                    $('#othstate').show();
+                    },
 
-                }
+                    success: function(data) {
 
-            });
+                        // $('#city').html(data);
+
+                    }
+
+                });
+
+            } else {
+
+                $('#state').val('').hide();
+
+                $('#othstate').show();
+
+            }
 
         });
 
     });
 
+});
 </script>

@@ -367,6 +367,7 @@ class Master extends MY_Controller
                 'created_by' => $this->session->userdata('admin_id'),
                 'created_at' => date('d-m-Y : h:m:s'),
             );
+          
             $data = $this->security->xss_clean($data);
             $result = $this->Exam_model->add_application_cand($data);
 
@@ -400,16 +401,18 @@ class Master extends MY_Controller
 
             $number_of_can = $this->input->post('number_of_can');
             $number_of_can_array = implode(",",$number_of_can);
+            $subjects = $this->input->post('sub_name');
+            $subjectsArray =implode(",",$subjects);
             
             $data = array(
                 'number_of_can' => $number_of_can_array,
-                // 'exam_name' =>  $this->input->post('exam_name'),
-                // 'state' => $this->input->post('state'),
+                 'sub_name'=>$subjectsArray,
                 'district_code' => $district_code_array,
                 'city_code' => $city_code_array,
                 'updated_by' => $this->session->userdata('admin_id'),
                 'updated_at' => date('d-m-Y : h:m:s'),
             );
+         
 
             $data = $this->security->xss_clean($data);
             // print_r($data); die();
@@ -419,8 +422,12 @@ class Master extends MY_Controller
 
             redirect(base_url('admin/master/app_of_candidate'), 'refresh');
         } else {
-
+            // echo urldecrypt($id)."kjhfkrk";
             $data['admin'] = $this->Exam_model->get_data_candidate(urldecrypt($id));
+         
+            $data['subjects'] = $this->Exam_model->get_subject_new_by_id($data['admin']['exam_name']);
+            
+           
             $data['states'] = $this->location_model->get_states();
             $data['role'] = $this->auth_model->get_auth_dd();
             $data['exam'] = $this->Master_model->get_exam();
@@ -440,7 +447,8 @@ class Master extends MY_Controller
             $city_code = $data['admin']['city_code'];
             $city_code_array = explode(",",$city_code);
 
-
+            $sub_name = $data['admin']['sub_name'];
+            $sub_name_array = explode(",",$sub_name);
 
             foreach ($number_of_can_array as $k=>$value1){
                 $subjectId = $number_of_can_array[$k];
@@ -449,10 +457,11 @@ class Master extends MY_Controller
                 $sub_info[$k]['city_array'] = $city_array[$k];
                 $sub_info[$k]['district_code_array'] = $district_code_array[$k]; 
                 $sub_info[$k]['city_code_array'] = $city_code_array[$k]; 
+                $sub_info[$k]['sub_name_array'] = $sub_name_array[$k]; 
             }
 
 
-            // echo '<pre>';print_r($sub_info); die();
+          
             $sub_info['sub_info'] = $sub_info;
             $this->load->view('admin/includes/_header',$sub_info);
             $this->load->view('admin/exam/candidate_edit', $data);
@@ -482,6 +491,8 @@ class Master extends MY_Controller
 
             $city_code = $data['admin']['city_code'];
             $city_code_array = explode(",",$city_code);
+            $subjects = $data['admin']['sub_name'];
+            $subjects_array = explode(",",$subjects);
 
        
             foreach ($number_of_can_array as $k=>$value1){
@@ -491,7 +502,7 @@ class Master extends MY_Controller
                 $sub_info[$k]['city_array'] = $city_array[$k];
                 $sub_info[$k]['district_code_array'] = $district_code_array[$k]; 
                 $sub_info[$k]['city_code_array'] = $city_code_array[$k]; 
-                $sub_info[$k]['subjectname'] = $data['admin']['sub_name'];
+                $sub_info[$k]['subjectname'] = $subjects_array[$k];
             }
 
 
