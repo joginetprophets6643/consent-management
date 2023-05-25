@@ -338,7 +338,7 @@
 
                             <th>Start Date of exam</th>
 
-                            <th>End Date of exam Details</th>
+                            <th>End Date of exam</th>
 
                             <th width="120"><?= trans('action') ?></th>
 
