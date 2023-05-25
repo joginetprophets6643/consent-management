@@ -574,7 +574,8 @@ function sendEmail($email,$message,$template_id){
 
     /*get response*/
     $output = curl_exec($ch);
-
+    
+    
     /*Print error if any*/
     if(curl_errno($ch))
     {

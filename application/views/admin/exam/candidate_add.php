@@ -63,7 +63,6 @@
                 <div>
 
 
-
                     <div class="row">
 
                         <div class="col-md-12">
@@ -261,6 +260,8 @@
 <script>
 $('document').ready(function () {
 // valiation 
+
+const subjects=JSON.parse('<?php echo json_encode($subject); ?>' || [])
 $("#xin-form-update")["submit"](function(d) {
       
 
@@ -446,9 +447,19 @@ $(addButton).click(function(){
 
         const count=$('div[class="after-add-more field_wrapper count"]').length || 0
 
+       
+
+        // console.log(subjects,id)
         if((count+1) < maxField){ 
 
-        var fieldHTML ='<div id="'+x+'"><div class="after-add-more field_wrapper count"><div class="row"><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">District<i style="color:#ff0000; font-size:12px;">*</i></label> <select class="state form-control" name="state[]" id="state'+x+'" onchange="getval(this,'+x+');"><option value="">Select District</option><?php foreach ($states as $k => $state) { ?><option value="<?= $state->id ?>"><?= $state->name ?></option><?php } ?></select></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">District Code<i style="color:#ff0000; font-size:12px;">*</i></label> <input type="text" name="district_code[]" id="district_code'+x+'" min=1 class="form-control" required placeholder="District Code"/></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">City<i style="color:#ff0000; font-size:12px;">*</i></label> <select name="city[]" id="city'+x+'" class="form-control"><option value=""> Select City</option></select></div></div><div class="col-md-1"><div class="form-group"><label for="name" class="col-sm- control-label">City Code<i style="color:#ff0000; font-size:12px;">*</i></label> <input type="text" name="city_code[]" id="city_code'+x+'" min=1 class="form-control" required placeholder="City Code"/></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">Subject Name <i style="color:#ff0000; font-size:12px;">*</i></label> <br/><select name="sub_name[]" class="form-control sub_name" id="sub_name'+x+'" required><option value="">Select Subject</option><?php foreach ($subject as $k => $subjects) {if($subjects->exam_id==$_COOKIE['exam_id']){ ?> <option value="<?php echo $subjects->id; ?>" ><?php echo $subjects->sub_name."(".$subjects->sub_name_hindi.")"; ?></option><?php }} ?></select></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">No. of Candidate<i style="color:#ff0000; font-size:12px;">*</i></label> <input type="number" name="number_of_can[]" id="number_of_can'+x+'" min=1 class="form-control" required placeholder="No. of Candidate"/></div></div><div class="col-md-1 text-right"><a class="btn btn-danger remove_button" style="margin-top: 33px;height:28px; padding: 0 8px; text-align: center; color: white; text-overflow: initial; font-size: 19px;"><i class="fa fa-minus"></i></a></div></div> </div>';
+        var fieldHTML ='<div id="'+x+'"><div class="after-add-more field_wrapper count"><div class="row"><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">District<i style="color:#ff0000; font-size:12px;">*</i></label> <select class="state form-control" name="state[]" id="state'+x+'" onchange="getval(this,'+x+');"><option value="">Select District</option><?php foreach ($states as $k => $state) { ?><option value="<?= $state->id ?>"><?= $state->name ?></option><?php } ?></select></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">District Code<i style="color:#ff0000; font-size:12px;">*</i></label> <input type="text" name="district_code[]" id="district_code'+x+'" min=1 class="form-control" required placeholder="District Code"/></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">City<i style="color:#ff0000; font-size:12px;">*</i></label> <select name="city[]" id="city'+x+'" class="form-control"><option value=""> Select City</option></select></div></div><div class="col-md-1"><div class="form-group"><label for="name" class="col-sm- control-label">City Code<i style="color:#ff0000; font-size:12px;">*</i></label> <input type="text" name="city_code[]" id="city_code'+x+'" min=1 class="form-control" required placeholder="City Code"/></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">Subject Name <i style="color:#ff0000; font-size:12px;">*</i></label> <br/><select name="sub_name[]" class="form-control sub_name" id="sub_name'+x+'" required><option value="">Select Subject</option>'
+        
+        subjects.forEach((sub)=>{
+            if(sub.exam_id==id){
+                fieldHTML+=`<option value="${sub.id}" >${sub.sub_name}(${sub.sub_name_hindi})</option>`
+            }
+        })
+        fieldHTML+='</select></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">No. of Candidate<i style="color:#ff0000; font-size:12px;">*</i></label> <input type="number" name="number_of_can[]" id="number_of_can'+x+'" min=1 class="form-control" required placeholder="No. of Candidate"/></div></div><div class="col-md-1 text-right"><a class="btn btn-danger remove_button" style="margin-top: 33px;height:28px; padding: 0 8px; text-align: center; color: white; text-overflow: initial; font-size: 19px;"><i class="fa fa-minus"></i></a></div></div> </div>';
 
         x++;             
 

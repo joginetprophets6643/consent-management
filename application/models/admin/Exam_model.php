@@ -1857,6 +1857,7 @@ public function get_invitation_data($id) {
     }
 // New Code 22-09-2022 ----JOgi
 public function get_subject_new_by_id($id) {
+ 
     $query = $this->db->get_where('ci_subject', array('exam_id' => $id));
    
     return $result = $query->result_array();
