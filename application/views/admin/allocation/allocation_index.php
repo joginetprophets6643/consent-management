@@ -67,7 +67,7 @@
 
                             <select name="state" id="state_id" class="form-control dd_state">
 
-                                <option value="">Select State</option>
+                                <option value="">Select District</option>
 
                                 <?php foreach($states as $state):?>
 
@@ -95,7 +95,7 @@
 
                             <select name="district" id="district_filter" class="form-control">
 
-                                <option value="">Select District</option>
+                                <option value="">Select City</option>
 
                                 <?php 
 
@@ -125,7 +125,7 @@
 
                             <select name="status" id="grade" class="form-control">
 
-                                <option value=""><?= trans('all_status') ?></option>
+                                <option value="">Select Grade</option>
 
 
 
