@@ -1529,82 +1529,7 @@ public function get_deactivation_data($id) {
       
         return $module;
     }   
-     public function get_consent_recved_databakup29_09_2022($state_name, $city_name, $grade_name,$ref_id) {
-        $this->db->from('ci_exam_registration');
-
-        if ($city_name != '' && $state_name != '' ) {
-
-            $this->db->where('ci_exam_registration.district', $state_name);
-            $this->db->where('ci_exam_registration.city', $city_name);
-            // $this->db->count_all('ci_exam_registration'); 
-        }
-
-        if ($state_name != '' || $state_name = '') {
-            
-            $this->db->where('ci_exam_registration.district', $state_name);
-        }
-        
-        
-        if ($grade_name != '') {
-
-            $this->db->where('ci_exam_registration.ranking_admin', $grade_name);
-        }
-
-        // if ($this->session->userdata('filter_state') != '') {
-            // $this->db->where('ci_exam_registration.state ',
-                    // $this->session->userdata('filter_state'));
-        // }
-        // if ($this->session->userdata('filter_state') != '' && $this->session->userdata('filter_district') != '') {
-            // $this->db->where('ci_exam_registration.district ',
-                    // $this->session->userdata('filter_district'));
-        // }
-
-        // if ($this->session->userdata('filter_status') != '') {
-            // $this->db->where('ci_exam_registration.file_movement ',
-                    // $this->session->userdata('filter_status'));
-        // }
-
-        $admin_role_id = $this->session->userdata('admin_role_id');
-        // echo '<pre>'; echo $admin_role_id;exit;
-//        if ($admin_role_id == 1 || $admin_role_id == 2) {
-//            
-//            $this->db->where('ci_exam_registration.file_movement !=', 1);
-//        }
-//         if ($admin_role_id == 3 || $admin_role_id == 4) {
-//             $this->db->where('ci_exam_registration.state',
-//                     $this->session->userdata('state_id'));
-// //            $this->db->where('ci_exam_registration.file_movement !=', 1);
-//         }
-//         if ($admin_role_id == 5) {
-//             $this->db->where('ci_exam_registration.district',
-//                     $this->session->userdata('district_id'));
-// //            $this->db->where('ci_exam_registration.file_movement !=', 1);
-//         }
-        if ($admin_role_id == 6) {
-            $this->db->where('ci_exam_registration.created_by',
-                    $this->session->userdata('admin_id'));
-        }
-
-        $filterData = $this->session->userdata('filter_keyword');
-
-        // $this->db->where('status','1');
-        $this->db->where('ref_id', $ref_id);
-        $this->db->where('invt_recieved', '1');
-        $this->db->order_by('ci_exam_registration.id', 'desc');
-		// echo $this->db->last_query();
-        $query = $this->db->get();
-
-        $module = array();
-       
-        $num_rows_count = $query->num_rows();
-        if ($query->num_rows() > 0) {
-            $module = $query->result_array();
-            
-        }
-        $module = array($num_rows_count,$module);
-      
-        return $module;
-    }   
+   
     
     public function get_consent_not_recved_data($state_name, $city_name, $grade_name,$ref_id) {
 
@@ -1647,80 +1572,7 @@ public function get_deactivation_data($id) {
         $module = array($num_rows_count,$module);
         return $module;
     }
-    public function get_consent_not_recved_databackup29_09_2022($state_name, $city_name, $grade_name,$ref_id) {
-
-        $this->db->from('ci_exam_registration');
-
-        if ($city_name != '' && $state_name != '' ) {
-
-            $this->db->where('ci_exam_registration.district', $state_name);
-            $this->db->where('ci_exam_registration.city', $city_name);
-        }
-
-        if ($state_name != '' || $state_name = '') {
-            
-            $this->db->where('ci_exam_registration.district', $state_name);
-        }
-        
-        
-        if ($grade_name != '') {
-
-            $this->db->where('ci_exam_registration.ranking_admin', $grade_name);
-        }
-
-        // if ($this->session->userdata('filter_state') != '') {
-            // $this->db->where('ci_exam_registration.state ',
-                    // $this->session->userdata('filter_state'));
-        // }
-        // if ($this->session->userdata('filter_state') != '' && $this->session->userdata('filter_district') != '') {
-            // $this->db->where('ci_exam_registration.district ',
-                    // $this->session->userdata('filter_district'));
-        // }
-
-        // if ($this->session->userdata('filter_status') != '') {
-            // $this->db->where('ci_exam_registration.file_movement ',
-                    // $this->session->userdata('filter_status'));
-        // }
-
-        $admin_role_id = $this->session->userdata('admin_role_id');
-        // echo '<pre>'; echo $admin_role_id;exit;
-//        if ($admin_role_id == 1 || $admin_role_id == 2) {
-//            
-//            $this->db->where('ci_exam_registration.file_movement !=', 1);
-//        }
-//         if ($admin_role_id == 3 || $admin_role_id == 4) {
-//             $this->db->where('ci_exam_registration.state',
-//                     $this->session->userdata('state_id'));
-// //            $this->db->where('ci_exam_registration.file_movement !=', 1);
-//         }
-//         if ($admin_role_id == 5) {
-//             $this->db->where('ci_exam_registration.district',
-//                     $this->session->userdata('district_id'));
-// //            $this->db->where('ci_exam_registration.file_movement !=', 1);
-//         }
-        if ($admin_role_id == 6) {
-            $this->db->where('ci_exam_registration.created_by',
-                    $this->session->userdata('admin_id'));
-        }
-
-        $filterData = $this->session->userdata('filter_keyword');
-
-        // $this->db->where('status','1');
-        $this->db->where('invt_recieved', '0');
-        $this->db->where('ref_id', $ref_id);
-        $this->db->order_by('ci_exam_registration.id', 'desc');
-		// echo $this->db->last_query();
-        $query = $this->db->get();
-        $module = array();
-        
-        if ($query->num_rows() > 0) {
-            $module = $query->result_array();
-        }
-        
-        $num_rows_count = $query->num_rows();
-        $module = array($num_rows_count,$module);
-        return $module;
-    }
+   
 
      public function add_pulish_data($data) {
 
@@ -1816,37 +1668,23 @@ public function get_deactivation_data($id) {
 
         $admin_id = $this->session->userdata('admin_id');
         $this->db->from('ci_exam_invitation');
-        // $this->db->where('invt_recieved','1');
+        $this->db->where('create_letter_status','1');
         $this->db->where('created_by',$admin_id);
-        $this->db->order_by('id','desc');
+        $this->db->group_by('exam_name','desc');
         $q = $this->db->get()->result_array();
         return $q;
     }
 
 public function get_invitation_data($id) {
         $admin_id = $this->session->userdata('admin_id');
-
-        // echo $id ."===".$admin_id;
-        // exit;
-        // $query = $this->db->order_by('id','desc')->get_where('ci_exam_invitation', array('exam_name' => $id));
-        //  return $result = $query->result_array();
-
-          $array = array('exam_name' => $id);
+        $array = array('exam_name' => $id);
         return $this->db->select('*')->from('ci_exam_invitation')->where($array)->order_by('id','desc')->get()->result_array();
-        // return $result = $query->row_array();
     }
 
     public function get_invitation_data_new($id) {
         $admin_id = $this->session->userdata('admin_id');
-
-        // echo $id ."===".$admin_id;
-        // exit;
-        // $query = $this->db->order_by('id','desc')->get_where('ci_exam_invitation', array('exam_name' => $id));
-        //  return $result = $query->result_array();
-
           $array = array('id' => $id);
         return $this->db->select('*')->from('ci_exam_invitation')->where($array)->order_by('id','desc')->get()->result_array();
-        // return $result = $query->row_array();
     }
 
     public function get_return_data($id) {

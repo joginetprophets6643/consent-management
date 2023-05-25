@@ -1132,18 +1132,11 @@ class Examshedule_schedule extends MY_Controller {
 
     public function invitation_sent_list_data() {
 
-
-        // $data['info'] = $this->Exam_model->get_all_recived_invites();
-
-        // echo '<pre>'; print_r($data['info']); die();
-
-        // $this->load->view('admin/exam/invitation_sent_list', $data);
-        // $data['info'] = $this->Exam_model->get_all_recived_invites();
         $state_name = $city_name = $grade_name = "";
         $records['data'] = $this->Exam_model->get_all_recived_invites($state_name,$city_name,$grade_name);
+        
         $data = [];
-        // echo 'ujjwal'; print_r($records['data']);
-        // die;
+
         $i = 0;
 
         foreach ($records['data'] as $row) {
@@ -1155,18 +1148,15 @@ class Examshedule_schedule extends MY_Controller {
                   $row['total_sum'] =  $total_sum;
                   $row['startdate'] =  date("d-m-Y", strtotime($row['startdate']));
                   $row['enddate'] =  date("d-m-Y", strtotime($row['enddate']));
-
-                // $row['principal_name'] = '<h4 class="m0 mb5">'.$row['principal_name'] .'</h4>'.'<small class="text-muted">'.$row['pri_mobile'].'</small><br/>'.'<small class="text-muted">'.$row['email'].'</small>';
-                // $row['max_allocate_candidate'] = '<input style="height: 1px;width: 1px;" type="checkbox" id="a" id="sum_value" name="sum_value" class="checkbox-item sum" rel="'.$row['max_allocate_candidate'].'"> '.$row['max_allocate_candidate'].'';
                 $data[] = [
                     ++$i,
 
-                    $row['subjectline'] ? get_exam_name($row['exam_name']) : '',
-                    $row['total_sum'] ? $row['total_sum'] : '',
-                    $row['startdate']? $row['startdate'] : '',
-                    $row['enddate']? $row['enddate'] : '',
-                    '<a href="' . base_url('admin/examshedule_schedule/consent_recieved_by_user_list/' . urlencrypt($row['id'])) .'?total_number='.$total_sum. '" title="Consent Recieved" class="btn btn-success consent_recieved"><i class="fa fa-eye"></i></a>
-                     <a href="' . base_url('admin/examshedule_schedule/consent_not_recieved_by_user_list/' . urlencrypt($row['id'])) .'?total_number='.$total_sum. '" title="Consent Not Recieved" class="btn btn-danger consent_not_recieved"><i class="fa fa-eye"></i></a>',
+                    $row['subjectline'] ? get_exam_name($row['exam_name']): '',
+                    $row['total_sum'] ? get_exam_name_details($row['exam_name'])['no_of_cand'] : '',
+                    $row['startdate']? date("d-m-Y", strtotime(get_exam_name_details($row['exam_name'])['start_date_exam'])) : '',
+                    $row['enddate']? date("d-m-Y", strtotime(get_exam_name_details($row['exam_name'])['end_date_exam'])) : '',
+                    '<a href="' . base_url('admin/examshedule_schedule/consent_recieved_by_user_list/' . urlencrypt($row['id'])).'" title="Consent Recieved" class="btn btn-success consent_recieved"><i class="fa fa-eye"></i></a>
+                     <a href="' . base_url('admin/examshedule_schedule/consent_not_recieved_by_user_list/' . urlencrypt($row['id'])) .'" title="Consent Not Recieved" class="btn btn-danger consent_not_recieved"><i class="fa fa-eye"></i></a>',
                 ];
             // }
         }
@@ -1488,43 +1478,23 @@ class Examshedule_schedule extends MY_Controller {
         $this->load->view('admin/exam/create_letter_list', $data);
     }
      public function create_invt_add() {
-
-        // $this->rbac->check_operation_access();
-
-
         if ($this->input->post()) {
 
             $sub_name = $this->input->post('sub_name') ? implode(',', $this->input->post('sub_name')) : "";
-            //$exam_name = $this->input->post('exam_name') ? implode(',', $this->input->post('exam_name')) : "";
             $no_candidate = $this->input->post('no_candidate') ? implode(',', $this->input->post('no_candidate')) : "";
             $shft_exam = $this->input->post('shft_exam') ? implode(',', $this->input->post('shft_exam')) : "";
             $date_exam = $this->input->post('date_exam') ? implode(',', $this->input->post('date_exam')) : "";
             $time_exam = $this->input->post('time_exam') ? implode(',', $this->input->post('time_exam')) : "";
-            // $id = $this->uri->segment(4);
-            // $new_id = urldecrypt($id);
-            // echo $new_id;exit;
-            
             $user_id = $this->input->post('user_id');
             $data = array(
                 'speedpost' => $this->input->post('speedpost'),
                 'subjectline' => $this->input->post('subjectline'),
-                // 'startdate' => $this->input->post('startdate'),
-                // 'enddate' => $this->input->post('enddate'),
-                // 'exam_name' => $this->input->post('exam_name'),
-                // 'sub_name' => $sub_name,
-                // 'exam_name' => $exam_name,
-                // 'no_candidate' => $no_candidate,
-                // 'shft_exam' => $shft_exam,
-                // 'date_exam' => $date_exam,
-                // 'time_exam' => $time_exam,
                 'name_designation_mobile' => $this->input->post('name_designation_mobile'),
                 'created_by' => $this->session->userdata('admin_id'),
                 'created_at' => date('d-m-Y : h:m:s'),
                 'created_by' => $this->session->userdata('admin_id'),
+                'create_letter_status' => $this->session->userdata('admin_id'),
             );
-            // echo '<pre>';print_r($data);exit;
-            // $data = $this->security->xss_clean($data);
-            // $result = $this->Exam_model->add_invitation($data);
             $result = $this->Exam_model->update_invitation($data,$user_id);
 
             $this->session->set_flashdata('success', ' Add successfully!(सफलतापूर्वक जोड़ें!)');
@@ -1535,6 +1505,7 @@ class Examshedule_schedule extends MY_Controller {
 
             $id = $this->uri->segment(4);
             $new_id = urldecrypt($id);
+            
             // $data['subject'] = $this->Master_model->get_subject();
             // $data['exam'] = $this->Master_model->get_exam();
             // C:\xampp\htdocs\UKPSC\uk\application\models\admin\Exam_model.php

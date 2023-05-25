@@ -94,6 +94,10 @@ function get_exam_name($id) {
     $ci = & get_instance();
     return @$ci->db->get_where('ci_exam_master', array('id' => $id))->row_array()['exam_name'];
 }
+function get_exam_name_details($id) {
+    $ci = & get_instance();
+    return @$ci->db->get_where('ci_exam_master', array('id' => $id))->row_array();
+}
 
 function get_exam_controller_id($id) {
     $ci = & get_instance();
