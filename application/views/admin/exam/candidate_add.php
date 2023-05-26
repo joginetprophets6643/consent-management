@@ -285,7 +285,7 @@ $("#xin-form-update")["submit"](function(d) {
 
 
 
-          alert("Please fill 'state'\n(कृपया 'राज्य' भरें)");
+          alert("Please fill 'District'\n(कृपया 'ज़िला' भरें)");
 
           $("#state").focus();
 
@@ -336,18 +336,26 @@ $("#xin-form-update")["submit"](function(d) {
       }
 
 
+      if ($("#sub_name").val() === "") {
+
+        alert("Please fill 'Subject Name'\n(कृपया 'विषय नाम*' भरें)");
+
+        $("#sub_name").focus();
+
+        return false;
+
+        }
 
       if ($("#number_of_can").val() === "") {
 
-
-
-          alert("Please fill 'Number Of Can'\n(कृपया 'कैन की संख्या' भरें)");
+          alert("Please fill 'Number of Candidates'\n(कृपया 'उम्मीदवारों की संख्या' भरें)");
 
           $("#number_of_can").focus();
 
           return false;
 
       }
+    
 
   });
 

@@ -135,8 +135,8 @@
                                                 data-file_detail="file_detail5" onchange="get_detail(this);" style="height: 35px !important; font-size: 14px !important;"/>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label>Upload Downloaded Consent Form (Signed and Stamped) <span class="formatColor">(PDF format Only)*<span></label>
-                                            <input type="file" class="form-control pdfValidationClass" name="fileName6" id="fileName6"
+                                            <label>Main Gate image   <span class="formatColor">(JPG format Only)*<span></label>
+                                            <input type="file" class="form-control ImageValidationClass" name="fileName6" id="fileName6"
                                                 data-file_detail="file_detail5" onchange="get_detail(this);" style="height: 35px !important; font-size: 14px !important;"/>
                                         </div>
                                     </div>

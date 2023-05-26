@@ -998,6 +998,8 @@ public function consent_recieved(){
         $data['admin'] = $this->admin_model->get_user_detail($admin_id);
         $data['user'] = $this->admin_model->get_center_data($admin_id,$ref_id);    
         $data["info"] = $this->Certificate_model->get_all_active_consent();
+        // print_r($data["info"]);
+        // die();
         $examinationid = $this->uri->segment(4);
         $examinationid;
 

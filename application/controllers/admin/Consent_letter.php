@@ -450,7 +450,7 @@ public function consent_add_1() {
                   if (!empty($_FILES['fileName6']['name'])) {
 
                     $config['upload_path'] = 'uploads/consent_data/';
-                    $config['allowed_types'] ='pdf';
+                    $config['allowed_types'] ='jpeg|jpg|pdf';
                     $config['file_name'] = time() . '-' . $_FILES['fileName6']['name'];
                     $config['max_size'] = 1024 * 1024;
 
@@ -477,7 +477,7 @@ public function consent_add_1() {
          $file_movement = $this->input->post('submit') == 'Submit' ? "2" : "1";
 
                 $data = [
-                    'fileName1' => $fileName6,
+                    'fileName1' => $fileName1,
                     'fileName2' => $fileName2,
                     'fileName3' => $fileName3,
                     'fileName4' => $fileName4,
@@ -488,7 +488,7 @@ public function consent_add_1() {
                     'created_by' => $this->session->userdata('admin_id'),                                     
                 ];
                 $data2 = [
-                    'fileName1' => $fileName6,
+                    'fileName1' => $fileName1,
                     'fileName2' => $fileName2,
                     'fileName3' => $fileName3,
                     'fileName4' => $fileName4,

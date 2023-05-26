@@ -9,6 +9,7 @@ application/cache/*
 application/session/*
 
 uploads/consent_data/*
+uploads/consent_form/*
 
 application/logs/*
 
