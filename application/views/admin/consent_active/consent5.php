@@ -13,6 +13,11 @@ $(function() {
 });
 </script>
 <style>
+    img{
+        width: 100% !important;
+        height: 200px !important;
+        object-fit: contain !important;
+    }
 .table-ms td,
 .table-ms th {
     border: 1px solid black;
