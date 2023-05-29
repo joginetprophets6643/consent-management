@@ -270,95 +270,7 @@ class Examshedule_schedule extends MY_Controller {
         $array = array('created_by' => $this->session->userdata('admin_id'));
         $this->load->view('admin/exam/sending_invitations', $data);
     }
-    public function inv_list_data_for_mail_copy() {
-        $state_name = isset($_GET['state_id'])?get_district_name($_GET['state_id']):'';
-        $city_name = isset($_GET['district_id'])?get_subcity_name($_GET['district_id']):'';
-        $grade_name = isset($_GET['grade'])?$_GET['grade']:'Grade New';
-
-        echo "district".$state_name."City".$city_name."Grade".$grade_name;
-        die();
-        if((isset($_GET['district_id'])) && (!isset($_GET['state_id']))){
-            echo '1';
-            die();
-            $city_name = '';
-            $grade_name = '';
-            $id = $_GET['state_id'];
-            $state_name = get_district_name($id); 
-            $data['data'] = $this->Exam_model->get_all_search_registration_data($state_name, $city_name, $grade_name);
-           
-            
-            
-        }else if(isset($_GET['district_id'])){
-            echo '2';
-            die();
-            $state_id = $_GET['state_id'];
-            $state_name = get_district_name($state_id);
-            $district_id = $_GET['district_id'];
-            $city_name = get_subcity_name($district_id);
-            $grade_name = $_GET['grade']; 
-            $data['data'] = $this->Exam_model->get_all_search_registration_data($state_name, $city_name, $grade_name);
-            
-        }else if(isset($_GET['grade_id'])){
-            echo '3';
-            die();
-            $state_id = $_GET['state_id'];
-            $state_name = get_district_name($state_id);
-            $district_id = $_GET['district_id'];
-            $city_name = get_subcity_name($district_id);
-            $grade_name = $_GET['grade'];
-            $data['data'] = $this->Exam_model->get_all_search_registration_data($state_name, $city_name, $grade_name);
-            
-        }else{
-           echo '4';
-           die();
-            $state_name = '';
-            $city_name = '';
-            $grade_name = '';
-            $data['data'] = $this->Exam_model->get_all_search_registration_data($state_name, $city_name, $grade_name);
-        }    
-
-
-        $array = array('created_by' => $this->session->userdata('admin_id'));
-        // $records['data'] = $this->db
-        //     ->select('*')
-        //     ->from('ci_exam_master')
-        //     ->where($array)
-        //     ->order_by('id','desc')
-        //     ->get()
-        //     ->result_array();
-        // $records['data'] = $this->Exam_model->get_all_registration_data();
-        // $data = [];
-        // echo '<pre>'; print_r($records['data']);
-        // die;
-        // $i = 0;
-
-        // foreach ($records['data'] as $row) {
-        //     if($row['school_name'] != ''){
-        //         $data[] = [
-        //             ++$i,
-
-        //             $row['school_name'] ? $row['school_name'] : '',
-        //             $row['district'] ? $row['district'] : '',
-        //             $row['city']? $row['city'] : '',
-        //             $row['principal_name']? $row['principal_name'] : '',
-        //             $row['pri_mobile']? $row['pri_mobile'] : '',
-        //             $row['ranking_admin']? $row['ranking_admin'] : '',
-        //             $row['max_allocate_candidate']? $row['max_allocate_candidate'] : '',
-        //             $row['id']? $row['id'] : '',
-        //             '<a title="Edit"  class="update btn btn-sm btn-warning" href="' . base_url('admin/master/exam_edit/' . urlencrypt($row['ref_id'])) . '"> <i class="fa fa-pencil-square-o"></i></a>
-        //             <a title="Delete" class="delete btn btn-sm btn-danger" href="' .
-        //             base_url('admin/master/exam_del/' . urlencrypt($row['ref_id'])) .
-        //             '" onclick="return confirm(\'Do you want to delete ?\nक्या आपको यकीन है?\')" > <i class="fa fa-trash-o"></i></a>',
-        //         ];
-        //     }
-        // }
-
-        // $data['data'] = $records1['data'] = $data;      
-        // echo '<pre>';print_r($data['totalcountindistricts']);die;  
-        // echo json_encode($records1);
-
-        $this->load->view('admin/exam/sending_invitations', $data);
-    }
+  
 
 
     public function inv_all_data_for_mail($exam_id) {
@@ -487,19 +399,11 @@ class Examshedule_schedule extends MY_Controller {
             $data = array(
                 'speedpost' => $this->input->post('speedpost'),
                 'subjectline' => $this->input->post('subjectline'),
-                // 'startdate' => $this->input->post('startdate'),
-                // 'enddate' => $this->input->post('enddate'),
-                // 'exam_name' => $this->input->post('exam_name'),
-                // 'sub_name' => $sub_name,
-                // 'exam_name' => $exam_name,
-                // 'no_candidate' => $no_candidate,
-                // 'shft_exam' => $shft_exam,
-                // 'date_exam' => $date_exam,
-                // 'time_exam' => $time_exam,
                 'name_designation_mobile' => $this->input->post('name_designation_mobile'),
                 'created_by' => $this->session->userdata('admin_id'),
                 'created_at' => date('d-m-Y : h:m:s'),
                 'created_by' => $this->session->userdata('admin_id'),
+                'create_letter_status' => 1,
             );
         
             $result = $this->Exam_model->update_invitation($data,$user_id);
@@ -1493,7 +1397,7 @@ class Examshedule_schedule extends MY_Controller {
                 'created_by' => $this->session->userdata('admin_id'),
                 'created_at' => date('d-m-Y : h:m:s'),
                 'created_by' => $this->session->userdata('admin_id'),
-                'create_letter_status' => $this->session->userdata('admin_id'),
+                'create_letter_status' => 1,
             );
             $result = $this->Exam_model->update_invitation($data,$user_id);
 

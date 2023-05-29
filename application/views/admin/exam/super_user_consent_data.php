@@ -24,7 +24,6 @@
                             <th>Principal Details</th>
                             <th>Grade</th>
                             <th width="120">Max No of Applicant</th>
-                             <th width="120">Status</th>
                             <th width="120"><?= trans('action') ?></th>
                             <th> View Consent</th>
                           
@@ -39,13 +38,7 @@
                             <td><?php echo $d['principal_name'];?></td>
                             <td><?php echo $d['ranking_admin'];?> </td>
                             <td><?php echo $d['max_allocate_candidate'];?> </td>
-                            <td>
-                                <?php if($d['superuserStatus']==1){ ?>
-                                Approved
-                                <?} else{?>
-                                    Dis Approved
-                                 <?php }?>
-                            </td>
+                        
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                 <?php if($d['superuserStatus']==1){ ?>
