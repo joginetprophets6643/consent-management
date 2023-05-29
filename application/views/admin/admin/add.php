@@ -616,7 +616,7 @@
 
                                                         var role_id = $(this).val();
 
-                                                        if (role_id == 5) {
+                                                        if (role_id == 5 || role_id ==7) {
 
                                                             $("#div_district").removeClass('hide');
 

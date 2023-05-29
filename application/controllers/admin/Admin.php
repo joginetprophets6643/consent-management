@@ -274,13 +274,7 @@ class Admin extends MY_Controller
 
 	function edit($id=""){
 
-                //echo '<pre>';print_r($_SERVER); die;
-
-//                if(!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] != base_url('admin/admin/') )
-
-//                    redirect(base_url('admin/auth/login/'));
-
-                
+            
 
 		$this->rbac->check_operation_access(); // check opration permission
 
@@ -348,7 +342,7 @@ class Admin extends MY_Controller
 
                                         'lastname' => $this->input->post('lastname'),
 
-                                        //'username' => $this->input->post('username'),
+                                        'username' => $this->input->post('username'),
 
                                         'email' => $this->input->post('email'),
 
