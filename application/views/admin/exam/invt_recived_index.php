@@ -309,6 +309,7 @@ var table = $('#consent_recieved_list').DataTable({
 $(function() {
     $('#state').change(function() {
         var district_id = $(this).val();
+      
         if (district_id != '') {
             $('#othstate').val('').hide();
 

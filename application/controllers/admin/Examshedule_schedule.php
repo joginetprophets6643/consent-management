@@ -1110,12 +1110,13 @@ class Examshedule_schedule extends MY_Controller {
           
             if($row['school_name'] != ''){
                 
-                if($row['invt_recieved']==0 && $row['invite_sent']==1)
+                // if($row['invt_recieved']==0 && $row['invite_sent']==1)
+                if($row["superuserStatus"]==1)
                 {
-                    $action =   'Pending';
-                }
-                elseif ($row['invt_recieved']==1 && $row['invite_sent']==1) {
                     $action =   'Recieved';
+                }
+                elseif ($row["superuserStatus"]==0) {
+                    $action =   'Pending';
                 }
                 else{
                     $action =   '<input type="checkbox" id="a" class="send_email_ids" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">
@@ -1124,21 +1125,21 @@ class Examshedule_schedule extends MY_Controller {
 
                 }
                 // echo $row["consents_signstamp_file"] . "00000". $row["superuserStatus"];
-                if(isset($row["consents_signstamp_file"]))
-                {
+                // if(isset($row["superuserStatus"]) && $row["superuserStatus"]==1)
+                // {
                     if($row["superuserStatus"]==1){
                          $path = base_url("uploads/consent_form/".$row["consents_signstamp_file"]);
                     $downloadConsent = '<a href='.$path.' target="_blank" class="btn btn-primary">Download Consent</a>'; 
                     }
                     else{
-                        $downloadConsent = '<button class="btn btn-default" disabled>Dis Approved</button>';
+                        $downloadConsent = '<button class="btn btn-default" disabled>Consent Not available</button>';
                     }
                   
-                }
-                else{
+                // }
+                // else{
 
-                    $path ='<button class="btn btn-default" disabled>Consent Not available</button>';
-                }
+                //     $path ='<button class="btn btn-default" disabled>Consent Not available</button>';
+                // }
                
 
                 $row['principal_name'] = '<h4 class="m0 mb5">'.$row['principal_name'] .'</h4>'.'<small class="text-muted">'.$row['pri_mobile'].'</small><br/>'.'<small class="text-muted">'.$row['email'].'</small>';
@@ -1209,6 +1210,8 @@ class Examshedule_schedule extends MY_Controller {
         $array = array('created_by' => $this->session->userdata('admin_id'));
         $data['count'] = $data['data'][0];
         $data['main_data'] = $data['data'][1];  
+        // print_r($data);
+        // die();
         $this->load->view('admin/exam/consent_recieved_search', $data);
     }
 
