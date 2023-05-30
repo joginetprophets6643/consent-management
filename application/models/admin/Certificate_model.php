@@ -138,14 +138,15 @@ class Certificate_model extends CI_Model {
         $q = $this->db->get();
         $result = $q->result_array();
         if(!empty($result)){
-            // echo "Given Array is not empty please wait <br>";exit;
+
+            // echo "If Given Array is not empty please wait <br>";exit;
             $this->db->where('admin_id', $admin_id);
             $this->db->where('ref_id', $data['ref_id']);
             $this->db->update('ci_exam_registration', $data);
             // echo $this->db->last_query();exit;
             return true;
         }else {
-            // echo '<pre>';print_r($data);exit;
+            // echo  '<pre> esle';print_r($data);exit;
             $this->db->insert('ci_exam_registration', $data);
             return true;
         }

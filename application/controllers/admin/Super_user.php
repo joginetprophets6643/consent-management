@@ -41,12 +41,10 @@ class Super_user extends MY_Controller {
 
     public function consent_recieved_by_super_user($exam_id) {
         $exam_id = base64_decode($exam_id);
-         
-         $exam_new_id =  get_exam_name_new_id($exam_id);
-         $data['exam_name'] = get_exam_name($exam_id);
-    
+        $exam_new_id =  get_exam_namewithStatusOne($exam_id);
+        $data['exam_name'] = get_exam_name($exam_new_id);
         $data['title'] = 'Invitation and Schedule List';
-        $data['data'] = $this->Super_user_model->get_consent_data_by_super_user($exam_id);
+        $data['data'] = $this->Super_user_model->get_consent_data_by_super_user($exam_new_id);
         $this->load->view('admin/includes/_header', $data);
 
         $this->load->view('admin/exam/super_user_consent_data', $data);
