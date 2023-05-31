@@ -17,6 +17,10 @@
     width: 33.33% !important;
   }
 
+  .dataTables_empty{
+    text-align: center !important;
+  }
+
   .dataTables_filter{
     text-align: end;
   }

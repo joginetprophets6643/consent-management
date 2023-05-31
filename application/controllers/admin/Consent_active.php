@@ -978,7 +978,7 @@ public function consent_recieved(){
                  
 
                     $data['fileupload'] = 'fileupload';
-                    $this->session->set_flashdata('consent_recievedsuss', 'Request for "Consent Letter" has been add successfully! ("सहमति पत्र" के लिए अनुरोध सफलतापूर्वक जोड़ दिया गया है!)');
+                    $this->session->set_flashdata('consent_recievedsuss', 'Request for "Consent Letter" has been applied successfully! (""सहमति पत्र" के लिए अनुरोध सफलतापूर्वक लागू कर दिया गया है!)');
                     // $this->session->set_flashdata('message_name', 'This is my message');
                     $ci_exam_registrationid5 = $this->input->post('ci_exam_registrationid5'); 
                     redirect(base_url("admin/consent_active/consent_recieved"));

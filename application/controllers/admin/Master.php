@@ -42,7 +42,7 @@ class Master extends MY_Controller
 
             $result = $this->master_model->add_subject($data);
 
-            $this->session->set_flashdata('success', 'Subject has been added successfully<br/>(विषय सफलतापूर्वक जोड़ दिया गया है)');
+            $this->session->set_flashdata('success', 'Subject has been updated successfully<br/विषय को सफलतापूर्वक अपडेट कर दिया गया है>');
 
             redirect(base_url('admin/master/que_list'));
 
@@ -226,7 +226,7 @@ class Master extends MY_Controller
             // print_r($result);
             // die();
 
-            $this->session->set_flashdata('success', 'Subject has been added successfully<br/विषय सफलतापूर्वक जोड़ दिया गया है>');
+            $this->session->set_flashdata('success', 'Subject has been updated successfully<br/विषय को सफलतापूर्वक अपडेट कर दिया गया है>');
 
             redirect(base_url('admin/master/quetion_paper_list'));
         } else {
@@ -694,7 +694,7 @@ public function addsubjectforexam()
        // $result = $this->master_model->add_subject($data);
        
 
-       $this->session->set_flashdata('success', 'Subject has been added successfully<br/>(विषय सफलतापूर्वक जोड़ दिया गया है)');
+       $this->session->set_flashdata('success', 'Subject has been updated successfully<br/विषय को सफलतापूर्वक अपडेट कर दिया गया है>');
     //    'admin/master/view_all_subjectNew/'. urlencrypt($id)
        redirect(base_url('admin/master/view_all_subjectNew/'. urlencrypt($this->input->post('exam_id'))));
    }
