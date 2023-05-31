@@ -20,6 +20,24 @@
   .dataTables_filter{
     text-align: end;
   }
+  .dataTables_filter label{
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .dataTables_filter label input{
+    margin-left: 10px !important;
+  }
+
+  .dataTables_length label{
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .dataTables_length label select{
+    margin: 0 10px !important;
+    width: auto !important;
+  }
 
   .dataTables_paginate{
     display: flex !important;
@@ -75,7 +93,7 @@
 
             <tr>
 
-              <th>#</th>
+              <th>S.No.</th>
 
               <th>Exam Name</th>
 

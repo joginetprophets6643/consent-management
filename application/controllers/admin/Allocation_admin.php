@@ -299,7 +299,7 @@ class Allocation_admin extends MY_Controller {
                  $data['info'][$key]['examination_center_name'] = getSchoolName( $d['school_id']); 
              }
             // $data['exam_name'] = get_exam_name_new( $exam_id);
-            $data['title'] = 'Allocation Master List';
+            $data['title'] = 'Attendance Master List';
             $this->load->view('admin/includes/_header', $data);
             $this->load->view('admin/allocation/markAttendanceListForExamination', $data);
             $this->load->view('admin/includes/_footer', $data);
