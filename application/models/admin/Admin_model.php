@@ -277,7 +277,8 @@ class Admin_model extends CI_Model{
 
                 // $this->db->where('ci_admin.admin_role_id !=', 7);
 
-		$this->db->order_by('ci_admin.admin_role_id','desc');
+		// $this->db->order_by('ci_admin.admin_role_id','desc');
+		$this->db->order_by('ci_admin.admin_id','desc');
 
 
 

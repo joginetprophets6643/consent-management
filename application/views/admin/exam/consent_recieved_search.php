@@ -68,10 +68,12 @@
                </td>             
                <td style="text-align: center;">
                         <?php  if ($admin_role_id == 5 )  { 
-                           if ($row['invt_recieved']==1 && $row['invite_sent']==1){
+                           if ($row['superuserStatus']==1){
                            ?>
                              Recieved
-                         <?php }?>
+                         <?php }else{
+                           ?>Pending<?php
+                         }?>
                         <?php }  if ($admin_role_id == 5 )  { ?>
                                              
                         <?php }
@@ -82,7 +84,7 @@
                </td>
                <td>
                   <?php
-                     if(isset($row["consents_signstamp_file"]))
+                     if(isset($row["superuserStatus"]) && $row["superuserStatus"]==1)
                      {
                         $file = $row["consents_signstamp_file"];
                         ?>

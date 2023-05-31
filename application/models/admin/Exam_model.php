@@ -1487,6 +1487,7 @@ public function get_deactivation_data($id) {
         return $query->result_array();
     }
      public function get_consent_recved_data($state_name, $city_name, $grade_name,$ref_id) {
+     
         $this->db->from('ci_exam_according_to_school');
 
         if ($city_name != '' && $state_name != '' ) {
@@ -1526,7 +1527,7 @@ public function get_deactivation_data($id) {
             
         }
         $module = array($num_rows_count,$module);
-      
+  
         return $module;
     }   
    

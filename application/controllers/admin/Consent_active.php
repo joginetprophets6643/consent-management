@@ -761,13 +761,14 @@ public function consent_recieved(){
                 'created_by' => $this->session->userdata('admin_id'),                                     
                 ];
 
-                // echo '<pre>';print_r($data);exit;
 
                 $data = $this->security->xss_clean($data);
                 // print_r($data); die();
                 // $result = $this->Certificate_model->add_edit_step_data($data,$admin_id);
                 $result = $this->Certificate_model->add_edit_step_update($data,$admin_id);
-                
+                 print_r($result);
+                 die();
+
             // New 28-09-2022
             $ref_id = $this->input->post('ci_exam_registrationid5');
             $this->db->select('*');
