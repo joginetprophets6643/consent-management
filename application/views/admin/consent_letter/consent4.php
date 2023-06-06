@@ -16,6 +16,12 @@
 
 </script>
 
+<style>
+  .astrict{
+    color: red;
+  }
+</style>
+
  
 
 <div class="content-wrapper">
@@ -60,7 +66,7 @@
 
             <li >School/College/University Information <br>स्कूल/कॉलेज/विश्वविद्यालय विवरण</li>
 
-          <li >Principal Deatils<br>प्रधानाचार्य का विवरण</li>
+          <li >Principal Details<br>प्रधानाचार्य का विवरण</li>
 
           <li >Centre Superintendent Details<br>केंद्र अधीक्षक का विवरण</li>
 
@@ -98,7 +104,7 @@
 
 			   <div class="form-group col-md-6">
 
-			   <label for="Address1">School/College/University Account Name<br>(स्कूल / कॉलेज /  विश्वविद्यालय खाता नाम)</label>
+			   <label for="Address1">School/College/University Account Name<br>(स्कूल / कॉलेज /  विश्वविद्यालय खाता नाम)<span class="astrict">*</span></label>
 
 				  <input class="form-control" value="<?php if (isset($user['acc_holder_name'])) {
 
@@ -114,7 +120,7 @@
 
 				<label for="Address2">
 
-Bank Name<br>बैंक का नाम</label>
+Bank Name<br>बैंक का नाम<span class="astrict">*</span></label>
 
 				  <input class="form-control" value="<?php if (isset($user['ban_name'])) {
 
@@ -134,7 +140,7 @@ Bank Name<br>बैंक का नाम</label>
 
 			    <label for="Address2">
 
-Bank Branch Name<br>बैंक शाखा का नाम</label>
+Bank Branch Name<br>बैंक शाखा का नाम<span class="astrict">*</span></label>
 
 				   <input class="form-control" value="<?php if (isset($user['branch_name'])) {
 
@@ -150,7 +156,7 @@ Bank Branch Name<br>बैंक शाखा का नाम</label>
 
 				  <label for="Address1">
 
-Bank IFSC Code<br>बैंक IFSC कोड</label>
+Bank IFSC Code<br>बैंक IFSC कोड<span class="astrict">*</span></label>
 
 				  <input class="form-control" value="<?php if (isset($user['ifsc'])) {
 
@@ -170,7 +176,7 @@ Bank IFSC Code<br>बैंक IFSC कोड</label>
 
 			      <label for="Address2">
 
-Account Number<br>खाता संख्या</label>
+Account Number<br>खाता संख्या<span class="astrict">*</span></label>
 
 				  <input class="form-control" value="<?php if (isset($user['acc_num'])) {
 
@@ -188,7 +194,7 @@ Account Number<br>खाता संख्या</label>
 
 Confirm Account Number<br>
 
-खाता संख्या की पुष्टि करें</label>
+खाता संख्या की पुष्टि करें<span class="astrict">*</span></label>
 
                   <input class="form-control" value="<?php if (isset($user['acc_num_con'])) {
 
@@ -494,7 +500,7 @@ var step_num_content=document.querySelectorAll(".step-number-content");
 
             if ($("#acc_holder_name").val() == "") {
 
-                alert("Please enter 'Account Holder Name खाता धारक का नाम' ");
+                alert("Please enter 'School/College/University Account Name (स्कूल / कॉलेज /  विश्वविद्यालय खाता नाम)' ");
 
                 $("#acc_holder_name").focus();
 

@@ -151,7 +151,7 @@ $(function() {
 
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label>Main Gate image <span class="formatColor">(JPG format Only)*
+                                            <label>Main Gate Image <span class="formatColor">(JPG format Only)*
                                                 </span><i style="color:#ff0000; font-size:12px;"></i></label>
                                             <img src="<?php echo $fileNameType6?>" />
                                             <input type="file"
@@ -495,7 +495,7 @@ $(document).ready(function() {
         var fileName6 = $("#fileName6").val();
         var extension6 = fileName6.split('.').pop().toUpperCase();
         if (fileName6 == "") {
-            alert("Please upload 'Main Gate image'\nकृपया 'मेन गेट इमेज' अपलोड करें");
+            alert("Please upload 'Main Gate Image'\nकृपया 'मेन गेट इमेज' अपलोड करें");
             $("#fileName6").focus();
             return false;
         } else if (extension6 != "PDF" && extension6 != "JPG" && extension6 != "JPEG") {

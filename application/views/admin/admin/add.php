@@ -292,7 +292,7 @@
 
                                                             <div class="form-group">
 
-                                                                <label for="status" class="col-md-12 control-label"><?= trans('status') ?></label>
+                                                                <label for="status" class="col-md-12 control-label"><?= trans('status') ?><span style="color:red;font-weight:bold">*</span></label>
 
 
 
@@ -314,7 +314,7 @@
 
                                                             <div class="form-group">
 
-                                                                <label for="password" class="col-md-12 control-label"><?= trans('password') ?></label>
+                                                                <label for="password" class="col-md-12 control-label"><?= trans('password') ?><span style="color:red;font-weight:bold">*</span></label>
 
                                                                 <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password "></div>
 

@@ -96,9 +96,9 @@
 
                   <div class="text">
 
-                    <h2>Principal's Deatils (प्राचार्य का विवरण)</h2>
+                    <h2>Principal's Details (प्राचार्य का विवरण)</h2>
 
-                    <p class="mt-0">Enter your School/College/University Principal Deatils</p>
+                    <p class="mt-0">Enter your School/College/University Principal Details</p>
 
                   </div>
 

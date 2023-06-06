@@ -228,7 +228,7 @@ class Admin extends MY_Controller
 
 						if($email){
 
-                        $this->session->set_flashdata('success', 'User Account has been made and account details has been send to user email.');	
+                        $this->session->set_flashdata('success', 'User Account has been made and account details has been sent to user email.');	
 
                                                     //redirect(base_url('admin/auth/login'));
 
@@ -390,7 +390,7 @@ class Admin extends MY_Controller
 
 
 
-					$this->session->set_flashdata('success', 'Admin has been updated successfully!');
+					$this->session->set_flashdata('success', 'User has been updated successfully!');
 
 					redirect(base_url('admin/admin'));
 

@@ -392,7 +392,7 @@ if ($admin['district_id'] != '' && $admin['district_id'] != 0) {
 
                     <div class="col-md-12">
 
-                        <input type="submit" name="submit" value="Update Admin" class="btn btn-primary pull-right">
+                        <input type="submit" name="submit" value="Update" class="btn btn-primary pull-right">
 
                     </div>
 

@@ -29,7 +29,7 @@
               </div>
               <ul class="progress-bar">
                 <li>School/College/University Information<br>स्कूल/कॉलेज/विश्वविद्यालय विवरण</li>
-                <li>Principal Deatils<br>प्रधानाचार्य का विवरण</li>
+                <li>Principal Details<br>प्रधानाचार्य का विवरण</li>
                 <li class="active">Centre Superintendent Details<br>केंद्र अधीक्षक का विवरण</li>
                 <li>Infrastructure Details<br>बुनियादी ढांचे का विवरण</li>          
                 <li>Bank Details<br>बैंक विवरण</li>

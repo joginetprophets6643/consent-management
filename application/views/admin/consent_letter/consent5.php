@@ -135,7 +135,7 @@
                                                 data-file_detail="file_detail5" onchange="get_detail(this);" style="height: 35px !important; font-size: 14px !important;"/>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label>Main Gate image   <span class="formatColor">(JPG format Only)*<span></label>
+                                            <label>Main Gate Image   <span class="formatColor">(JPG format Only)*<span></label>
                                             <input type="file" class="form-control ImageValidationClass" name="fileName6" id="fileName6"
                                                 data-file_detail="file_detail5" onchange="get_detail(this);" style="height: 35px !important; font-size: 14px !important;"/>
                                         </div>
@@ -279,32 +279,32 @@
 
         $("#xin-form")["submit"](function () {
             if ($("#fileName1").val() == "") {
-                alert("Please upload images 'Parking' ");
+                alert("Please upload images 'Parking Area Image' ");
                 $("#fileName1").focus();
                 return false;
             }
             if ($("#fileName2").val() == "") {
-                alert("Please upload images 'Classroom ' ");
+                alert("Please upload images 'Classroom Image' ");
                 $("#fileName2").focus();
                 return false;
             }
             if ($("#fileName3").val() == "") {
-                alert("Please upload images 'Washroom' ");
+                alert("Please upload images 'Furniture Image' ");
                 $("#fileName3").focus();
                 return false;
             }
             if ($("#fileName4").val() == "") {
-                alert("Please upload images 'Main Gate' ");
+                alert("Please upload images 'Class Room Image 2' ");
                 $("#fileName4").focus();
                 return false;
             }
             if ($("#fileName5").val() == "") {
-                alert("Please upload images 'Locker' ");
+                alert("Please upload images 'Cloak Room Image' ");
                 $("#fileName5").focus();
                 return false;
             }
             if ($("#fileName6").val() == "") {
-                alert("Please upload  'Singed Consent Form'  ");
+                alert("Please upload  'Main Gate Image'  ");
                 $("#fileName6").focus();
                 return false;
             }
