@@ -899,9 +899,8 @@ class Examshedule_schedule extends MY_Controller {
             
             $id = $this->input->get('id');
             $data['user_data'] = $this->Exam_model->get_all_invites_ids($id); 
-
             $examName = get_exam_name($data['exam'][0]['exam_name']);
-            
+          
             $messageP1='Dear Sir/Madam ,';
             $messageP1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.';
             $messageP1.='Kindly ignore if already done.';
@@ -916,6 +915,7 @@ class Examshedule_schedule extends MY_Controller {
             
             $email = $data['user_data'][0]['email'];
             $phone = $data['user_data'][0]['pri_mobile'];
+         
             $template_id = "1007970272335112709";
             // EMAIL AND MESSAGE SEND UDING TEMPLETE
             sendSMS($phone,$messageP1,$template_id);
