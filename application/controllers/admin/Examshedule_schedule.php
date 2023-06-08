@@ -832,18 +832,6 @@ class Examshedule_schedule extends MY_Controller {
         $new_id = urldecrypt($send_consent_id); 
        
         $data['exam'] = $this->Exam_model->get_invites_byid($new_id);
-        echo '<pre>';
-        echo '<br/>';
-        echo $data['exam'][0]['subjectline'];
-        echo '<br/>';
-        echo $data['exam'][0]['speedpost'];
-        echo '<br/>';
-        echo $data['exam'][0]['startdate'];
-        echo '<br/>';
-        echo $data['exam'][0]['enddate'];
-        echo '<br/>';
-        echo $data['exam'][0]['name_designation_mobile'];
-        echo '<br/>';
         
         if(!empty($ids)){
             $i = 0;

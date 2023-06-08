@@ -523,8 +523,7 @@
 
     function single_send_invitations(id) {
 
-        var send_consent_id = $("#send_consent_id").val()
-        console.log("Send Consent for test",send_consent_id);
+        var send_consent_id = $("#send_consent_id").val();
         var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/')?>"
         $.ajax({
             url: url,
