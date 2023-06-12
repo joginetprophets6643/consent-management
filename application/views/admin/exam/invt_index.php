@@ -562,53 +562,49 @@ $('#select_all').click(function(event) {
 });
 
 
-$('.select_all_count').click(function(event) {
+// $('.select_all_count').click(function(event) {
+//     var hrefs = new Array();
+//     $(':checkbox').each(function() {
+//         // alert(this.checked)
+//         this.checked = true;
+//         var r = $(this).attr('rel');
+//         if (r != 'undefined') {
+//             hrefs.push(r);
 
-    var hrefs = new Array();
-
-
-    $(':checkbox').each(function() {
-        // alert(this.checked)
-        this.checked = true;
-        var r = $(this).attr('rel');
-        if (r != 'undefined') {
-            hrefs.push(r);
-
-        }
-    });
-
-    var sum = 0;
-    $('.sum').each(function() {
-        sum += parseFloat($(this).attr('rel'));
-    });
-
-    total_candidate_display = parseInt($("#total_candidate_display").text());
+//         }
+//     });
+//     alert(hrefs);
+//     var sum = 0;
+//     $('.sum').each(function() {
+//         sum += parseFloat($(this).attr('rel'));
+//     });
+//     alert(sum);
+//     total_candidate_display = parseInt($("#total_candidate_display").text());
 
 
-    if (total_candidate_display > sum) {
-        renaming_value = (total_candidate_display - sum);
-        console.log('renaming_value', renaming_value);
-        $('#total_candidate_display').html(renaming_value);
-        return false;
+//     if (total_candidate_display > sum) {
+//         renaming_value = (total_candidate_display - sum);
+//         console.log('renaming_value', renaming_value);
+//         $('#total_candidate_display').html(renaming_value);
+//         return false;
 
-    } else {
+//     } else {
 
-        alert(
-            "Total number of candidates not more than send invitation\nउम्मीदवारों की कुल संख्या आमंत्रण भेजने से अधिक नहीं है");
-        $(':checkbox').each(function() {
-            // alert(this.checked)
-            this.checked = false;
-            var r = $(this).attr('rel');
-            if (r != 'undefined') {
-                hrefs.push(r);
-                console.log('i am here', r)
-                // return false;
-            }
-        });
-        $("#allcheckids").focus();
-        return false;
-    }
-});
+//         alert(
+//             "Total number of candidates not more than send invitation\nउम्मीदवारों की कुल संख्या आमंत्रण भेजने से अधिक नहीं है");
+//         $(':checkbox').each(function() {
+//             // alert(this.checked)
+//             this.checked = false;
+//             var r = $(this).attr('rel');
+//             if (r != 'undefined') {
+//                 hrefs.push(r);
+//                 // return false;
+//             }
+//         });
+//         $("#allcheckids").focus();
+//         return false;
+//     }
+// });
 
 
 $('.select_all_uncheck').click(function(event) {
@@ -638,11 +634,8 @@ $('.select_all_uncheck').click(function(event) {
             $('.sum').each(function() {
                 sum += parseFloat($(this).attr('rel'));
             });
-
-            console.log('i am here', sum);
             total_candidate_int = parseInt($("#total_candidate_display").text());
             var renaming_add_value = total_candidate_int + sum;
-            console.log('renaming_add_value', renaming_add_value);
             $('#total_candidate_display').html(renaming_add_value);
             return false;
         }
@@ -778,7 +771,7 @@ $(document).ready(function() {
     });
 
     $('.select_all_count').click(function(e) {
-        //  let arr=[];
+         let arr=[];
         // alert(this.checked).attr('rel');
         // Iterate each checkbox
 
@@ -791,12 +784,14 @@ $(document).ready(function() {
 
             }
         });
-        // console.log('testing',arr);
+        // let all = arr;
+        console.log('testing',arr);
         $.ajax({
             type: "GET",
             url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
             data: {
-                'school_ids': 'all',
+                // 'school_ids': 'all',
+                'school_ids': arr,
                 'csfr_token_name': csfr_token_value
             },
             success: function(data) {
