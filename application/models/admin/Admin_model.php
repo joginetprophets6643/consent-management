@@ -216,7 +216,7 @@ class Admin_model extends CI_Model{
         $this->db->join('ci_states','ci_states.id=ci_admin.state_id', 'left');
 
 		if($this->session->userdata('filter_type')!='')
-
+            
 			$this->db->where('ci_admin.admin_role_id',$this->session->userdata('filter_type'));
 
 		if($this->session->userdata('filter_status')!='')
@@ -228,14 +228,15 @@ class Admin_model extends CI_Model{
                 // Filter data as per user role
 
                 $admin_role_id = $this->session->userdata('admin_role_id');
+				// echo $admin_role_id;
 
-                if($admin_role_id == 3 || $admin_role_id == 4){
+                if($admin_role_id == 5|| $admin_role_id == 3 || $admin_role_id == 4 || $admin_role_id == 6){
 
 			$this->db->where('ci_admin.state_id',$this->session->userdata('state_id'));
 
                 }
 
-                if($admin_role_id == 5 )
+                if($admin_role_id == 5|| $admin_role_id == 3 || $admin_role_id == 4 || $admin_role_id == 6 )
 
 			$this->db->where('ci_admin.district_id',$this->session->userdata('district_id'));
 
@@ -273,7 +274,7 @@ class Admin_model extends CI_Model{
 
 		$this->db->where('ci_admin.is_supper !=', 1);
 
-                $this->db->where('ci_admin.admin_role_id !=', 6);
+                // $this->db->where('ci_admin.admin_role_id !=', 6);
 
                 // $this->db->where('ci_admin.admin_role_id !=', 7);
 

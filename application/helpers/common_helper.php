@@ -157,7 +157,14 @@ function get_city_name($id) {
 function get_subcity_name($id) {
     $ci = & get_instance();
     if ($id != null or $id != '') {
-        return $ci->db->get_where('ci_sub_cities', array('id' => $id))->row_array()['subcityname'];
+        // return $ci->db->get_where('ci_sub_cities', array('id' => $id))->row_array()['subcityname'];
+
+        $ci = & get_instance();
+        $q = $ci->db->select('subcityname')->where('id',$id)
+             ->get('ci_sub_cities')->row_array();
+        $city = isset($q['subcityname'])?$q['subcityname']:'';
+        
+        return $city;
     } else {
         return false;
     }
@@ -469,6 +476,7 @@ function getcityInSuperAdminList($admin_id)
     $q = $ci->db->select('district_id')->where('admin_id',$admin_id)
          ->get('ci_admin')->row_array();
     $district_id = isset($q['district_id'])?$q['district_id']:'';
+    
     return $district_id;
 }
 
