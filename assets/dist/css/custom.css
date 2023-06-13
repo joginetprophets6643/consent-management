@@ -341,3 +341,7 @@ textarea {
 .myTable tbody tr td {
   color: #e14658 !important;
 }
+.progress-bar li {
+  margin-left: 28px !important;
+  white-space: normal!important;
+}
