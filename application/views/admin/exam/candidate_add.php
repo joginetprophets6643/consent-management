@@ -69,7 +69,7 @@
 
                             <div class="form-group">
 
-
+                                <input type="text" hidden id="totalCounts" value=""  class="form-control"/>
 
                                 <label for="name" class="col-sm- control-label">Exam Name<br />परीक्षा का नाम<i style="color:#ff0000; font-size:12px;">*</i></label>
 
@@ -90,11 +90,9 @@
                                         if ($exam->exam_hindi_name == '') {
 
                                             $examination_name = $exam->exam_name;
-
                                         } else {
 
                                             $examination_name = $exam->exam_name . '(' . $exam->exam_hindi_name . ')';
-
                                         }
 
 
@@ -185,17 +183,17 @@
 
                             <div class="form-group has-feedback">
 
-                                <label for="name" class="control-label">Subject Name<br/>विषय नाम<span>*</span></label>
+                                <label for="name" class="control-label">Subject Name<br />विषय नाम<span>*</span></label>
 
-                                    <select name="sub_name[]" class="form-control sub_name" id="sub_name" >
+                                <select name="sub_name[]" class="form-control sub_name" id="sub_name">
 
-                                        <option value="">Select Subject</option>
+                                    <option value="">Select Subject</option>
 
-                                    </select>
+                                </select>
 
                             </div>
 
-                        </div>  
+                        </div>
 
                         <div class="col-md-2">
 
@@ -203,7 +201,7 @@
 
                                 <label for="name" class="col-sm- control-label">Number of Candidates<br />संबंधित की संख्या<span>*</span></label>
 
-                                <input type="number" id="number_of_can" name="number_of_can[]" min=1 class="form-control" placeholder="Number of Candidates">
+                                <input type="number" id="number_of_can" name="number_of_can[]" min=1 class="form-control number_of_can" placeholder="Number of Candidates">
 
                             </div>
 
@@ -229,7 +227,7 @@
 
                                 </div>
 
-                            
+
 
                                 <div class="form-group mb-0" style="margin-left:25px;">
 
@@ -255,289 +253,275 @@
 
     </section>
 
-</div> 
+</div>
 
 <script>
-$('document').ready(function () {
-// valiation 
+    $('document').ready(function() {
+        // valiation 
 
-const subjects=JSON.parse('<?php echo json_encode($subject); ?>' || [])
-$("#xin-form-update")["submit"](function(d) {
-      
+        const subjects = JSON.parse('<?php echo json_encode($subject); ?>' || [])
+        $("#xin-form-update")["submit"](function(d) {
+            if ($("#exam_name").val() === "") {
+                alert("Please fill 'Exam Name'\nकृपया 'परीक्षा का नाम' भरें");
+                $("#exam_name").focus();
+                return false;
+            }
 
-      if ($("#exam_name").val() === "") {
 
 
+            if ($("#state").val() === "") {
+                alert("Please fill 'District'\n(कृपया 'ज़िला' भरें)");
+                $("#state").focus();
+                return false;
+            }
+            if ($("#district_code").val() === "") {
+                alert("Please fill 'District Code'\n(कृपया 'जिला कोड' भरें)");
+                $("#district_code").focus();
+                return false;
 
-          alert("Please fill 'Exam Name'\nकृपया 'परीक्षा का नाम' भरें");
+            }
+            if ($("#city").val() === "") {
+                alert("Please fill 'city'\n(कृपया 'सिटी' भरें)");
+                $("#city").focus();
+                return false;
+            }
+            if ($("#city_code").val() === "") {
+                alert("Please fill 'City Code'\n(कृपया 'सिटी कोड' भरें)");
+                $("#city_code").focus();
+                return false;
+            }
+            if ($("#sub_name").val() === "") {
+                alert("Please fill 'Subject Name'\n(कृपया 'विषय नाम*' भरें)");
+                $("#sub_name").focus();
+                return false;
 
-          $("#exam_name").focus();
+            }
 
-          return false;
+            if ($("#number_of_can").val() === "") {
+                alert("Please fill 'Number of Candidates'\n(कृपया 'उम्मीदवारों की संख्या' भरें)");
+                $("#number_of_can").focus();
+                return false;
+            }
 
+            var sum = 0;
+            $('.number_of_can').each(function() {
+                sum += parseFloat(this.value);
+            });
+            let total_studentCount =  $('#totalCounts').val();
+            if(sum>Number(total_studentCount)){
+                alert(`Number of Candidate should be less then or equal ${total_studentCount.trim()}`);
+                return false;
+            }
+         
 
+        });
 
-      }
+        // Exam Change
 
+        $("#exam_name").change(function() {
 
+            var id = $('select[name=exam_name]').val();
+           
 
-      if ($("#state").val() === "") {
+            document.cookie = `exam_id=${$('select[name=exam_name]').val()}`;
 
+            var url = "<?php echo base_url('admin/Examshedule_schedule/getSubjectNameNew/'); ?>"
 
+            // 22-09-2022
 
-          alert("Please fill 'District'\n(कृपया 'ज़िला' भरें)");
+            $.ajax({
 
-          $("#state").focus();
+                url: url,
 
-          return false;
+                type: 'get',
 
-      }
+                dataType: 'html',
 
+                data: {
+                    'exam_id': id,
+                    'csfr_token_name': csfr_token_value
+                },
 
+                success: function(data) {
 
-      if ($("#district_code").val() === "") {
+                    $('.sub_name').html(data);
+                    var urlTotalCount = "<?php echo base_url('admin/Examshedule_schedule/totalCountNumber/'); ?>";
 
+                    $.ajax({
 
+                        url: urlTotalCount,
 
-          alert("Please fill 'District Code'\n(कृपया 'जिला कोड' भरें)");
+                        type: 'get',
 
-          $("#district_code").focus();
+                        data: {
+                            'exam_id': id,
+                            'csfr_token_name': csfr_token_value
+                        },
 
-          return false;
+                        success: function(count) {
 
-      }
+                            $('#totalCounts').val(count);
 
+                        }
 
+                    });
 
-      if ($("#city").val() === "") {
 
+                }
 
+            });
 
-          alert("Please fill 'city'\n(कृपया 'सिटी' भरें)");
+        });
 
-          $("#city").focus();
+        // 
 
-          return false;
 
-      }
+        $('#state').change(function() {
 
+            var district_id = $(this).val();
 
-
-      if ($("#city_code").val() === "") {
-
-
-
-          alert("Please fill 'City Code'\n(कृपया 'सिटी कोड' भरें)");
-
-          $("#city_code").focus();
-
-          return false;
-
-      }
-
-
-      if ($("#sub_name").val() === "") {
-
-        alert("Please fill 'Subject Name'\n(कृपया 'विषय नाम*' भरें)");
-
-        $("#sub_name").focus();
-
-        return false;
-
-        }
-
-      if ($("#number_of_can").val() === "") {
-
-          alert("Please fill 'Number of Candidates'\n(कृपया 'उम्मीदवारों की संख्या' भरें)");
-
-          $("#number_of_can").focus();
-
-          return false;
-
-      }
-    
-
-  });
-
-  // Exam Change
-
-$("#exam_name").change(function () {
-
-        var id = $('select[name=exam_name]').val();
-
-        document.cookie = `exam_id=${$('select[name=exam_name]').val()}`;
-
-        var url = "<?php echo base_url('admin/Examshedule_schedule/getSubjectNameNew/');?>"
-
-               // 22-09-2022
+            if (district_id != '') {
 
                 $.ajax({
 
-                    url:url,
+                    type: "POST",
 
-                    type: 'get',
+                    url: base_url + 'admin/location/get_city_by_state_id',
 
                     dataType: 'html',
 
-                    data: { 'exam_id' : id, 'csfr_token_name':csfr_token_value },
+                    "processing": true,
 
-                    success: function (data) {
+                    "serverSide": false,
 
-                       $('.sub_name').html(data);
+                    data: {
+                        'district_id': district_id,
+                        'csfr_token_name': csfr_token_value
+                    },
+
+                    success: function(data) {
+
+                        // console.log(data);
+
+                        $('#city').html(data);
 
                     }
 
                 });
 
-    });
-
-    // 
-
-
-$('#state').change(function () {
-
-var district_id = $(this).val();
-
-if (district_id != '') {
-
-    $.ajax({
-
-        type: "POST",
-
-        url: base_url + 'admin/location/get_city_by_state_id',
-
-        dataType: 'html',
-
-        "processing": true,
-
-        "serverSide": false,
-
-        data: {'district_id': district_id, 'csfr_token_name': csfr_token_value},
-
-        success: function (data) {
-
-            // console.log(data);
-
-            $('#city').html(data);
-
-        }
-
-    });
-
-} else {
+            } else {
 
 
 
-    $('#state').val('').hide();
+                $('#state').val('').hide();
 
-    // $('#othstate').show();
+                // $('#othstate').show();
 
-}
-
-});
-
-//
-
-var x = 1; //Initial field counter is 1    
-
-var maxField = 100; //Input fields increment limitation
-
-var addButton = $('.add-more'); //Add button selector
-
-var wrapper = $('.field_wrapper'); //Input field wrapper
-
-
-$(addButton).click(function(){
-
-  var id = $('select[name=exam_name]').val();
-
-    if(id){
-
-        const count=$('div[class="after-add-more field_wrapper count"]').length || 0
-
-       
-
-        // console.log(subjects,id)
-        if((count+1) < maxField){ 
-
-        var fieldHTML ='<div id="'+x+'"><div class="after-add-more field_wrapper count"><div class="row"><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">District<i style="color:#ff0000; font-size:12px;">*</i></label> <select class="state form-control" name="state[]" id="state'+x+'" onchange="getval(this,'+x+');"><option value="">Select District</option><?php foreach ($states as $k => $state) { ?><option value="<?= $state->id ?>"><?= $state->name ?></option><?php } ?></select></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">District Code<i style="color:#ff0000; font-size:12px;">*</i></label> <input type="text" name="district_code[]" id="district_code'+x+'" min=1 class="form-control" required placeholder="District Code"/></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">City<i style="color:#ff0000; font-size:12px;">*</i></label> <select name="city[]" id="city'+x+'" class="form-control"><option value=""> Select City</option></select></div></div><div class="col-md-1"><div class="form-group"><label for="name" class="col-sm- control-label">City Code<i style="color:#ff0000; font-size:12px;">*</i></label> <input type="text" name="city_code[]" id="city_code'+x+'" min=1 class="form-control" required placeholder="City Code"/></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">Subject Name <i style="color:#ff0000; font-size:12px;">*</i></label> <br/><select name="sub_name[]" class="form-control sub_name" id="sub_name'+x+'" required><option value="">Select Subject</option>'
-        
-        subjects.forEach((sub)=>{
-            if(sub.exam_id==id){
-                fieldHTML+=`<option value="${sub.id}" >${sub.sub_name}(${sub.sub_name_hindi})</option>`
             }
-        })
-        fieldHTML+='</select></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">No. of Candidate<i style="color:#ff0000; font-size:12px;">*</i></label> <input type="number" name="number_of_can[]" id="number_of_can'+x+'" min=1 class="form-control" required placeholder="No. of Candidate"/></div></div><div class="col-md-1 text-right"><a class="btn btn-danger remove_button" style="margin-top: 33px;height:28px; padding: 0 8px; text-align: center; color: white; text-overflow: initial; font-size: 19px;"><i class="fa fa-minus"></i></a></div></div> </div>';
 
-        x++;             
+        });
 
-        $(wrapper).append(fieldHTML); //Add field html      
+        //
 
-    }
+        var x = 1; //Initial field counter is 1    
 
-    }else{
+        var maxField = 100; //Input fields increment limitation
 
-        alert('Please first select the exam')
+        var addButton = $('.add-more'); //Add button selector
 
-    }
-
-  
-
-});
+        var wrapper = $('.field_wrapper'); //Input field wrapper
 
 
+        $(addButton).click(function() {
 
-$(wrapper).on('click', '.remove_button', function(e){
+            var id = $('select[name=exam_name]').val();
 
-   
+            if (id) {
 
-    e.preventDefault();
-
-    $(this).parent('div').parent('div').parent('div').parent('div').remove(); //Remove field html
-
-    // x--; //Decrement field counter
-
-});
-
-});
-
-function getval(sel,id){
-
-var district_id = sel.value;
-
-if (district_id != '') {
+                const count = $('div[class="after-add-more field_wrapper count"]').length || 0
 
 
 
-    $.ajax({
+                // console.log(subjects,id)
+                if ((count + 1) < maxField) {
 
-        type: "POST",
+                    var fieldHTML = '<div id="' + x + '"><div class="after-add-more field_wrapper count"><div class="row"><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">District<i style="color:#ff0000; font-size:12px;">*</i></label> <select class="state form-control" name="state[]" id="state' + x + '" onchange="getval(this,' + x + ');"><option value="">Select District</option><?php foreach ($states as $k => $state) { ?><option value="<?= $state->id ?>"><?= $state->name ?></option><?php } ?></select></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">District Code<i style="color:#ff0000; font-size:12px;">*</i></label> <input type="text" name="district_code[]" id="district_code' + x + '" min=1 class="form-control" required placeholder="District Code"/></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">City<i style="color:#ff0000; font-size:12px;">*</i></label> <select name="city[]" id="city' + x + '" class="form-control"><option value=""> Select City</option></select></div></div><div class="col-md-1"><div class="form-group"><label for="name" class="col-sm- control-label">City Code<i style="color:#ff0000; font-size:12px;">*</i></label> <input type="text" name="city_code[]" id="city_code' + x + '" min=1 class="form-control" required placeholder="City Code"/></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">Subject Name <i style="color:#ff0000; font-size:12px;">*</i></label> <br/><select name="sub_name[]" class="form-control sub_name" id="sub_name' + x + '" required><option value="">Select Subject</option>'
 
-        url: base_url + 'admin/location/get_city_by_state_id',
+                    subjects.forEach((sub) => {
+                        if (sub.exam_id == id) {
+                            fieldHTML += `<option value="${sub.id}" >${sub.sub_name}(${sub.sub_name_hindi})</option>`
+                        }
+                    })
+                    fieldHTML += '</select></div></div><div class="col-md-2"><div class="form-group"><label for="name" class="col-sm- control-label">No. of Candidate<i style="color:#ff0000; font-size:12px;">*</i></label> <input type="number" name="number_of_can[]" id="number_of_can' + x + '" min=1 class="form-control number_of_can" required placeholder="No. of Candidate"/></div></div><div class="col-md-1 text-right"><a class="btn btn-danger remove_button" style="margin-top: 33px;height:28px; padding: 0 8px; text-align: center; color: white; text-overflow: initial; font-size: 19px;"><i class="fa fa-minus"></i></a></div></div> </div>';
 
-        dataType: 'html',
+                    x++;
 
-        data: {'district_id': district_id, 'csfr_token_name': csfr_token_value},
+                    $(wrapper).append(fieldHTML); //Add field html      
 
-        success: function (data) {
+                }
 
-            $('#city'+id).html(data);
+            } else {
 
-        }
+                alert('Please first select the exam')
+
+            }
+
+
+
+        });
+
+
+
+        $(wrapper).on('click', '.remove_button', function(e) {
+
+
+
+            e.preventDefault();
+
+            $(this).parent('div').parent('div').parent('div').parent('div').remove(); //Remove field html
+
+            // x--; //Decrement field counter
+
+        });
 
     });
 
-} else {
+    function getval(sel, id) {
 
-    // $('#state'+id).val('').hide();
+        var district_id = sel.value;
 
-    // $('#othstate').show();
+        if (district_id != '') {
 
-}
 
-}
 
+            $.ajax({
+
+                type: "POST",
+
+                url: base_url + 'admin/location/get_city_by_state_id',
+
+                dataType: 'html',
+
+                data: {
+                    'district_id': district_id,
+                    'csfr_token_name': csfr_token_value
+                },
+
+                success: function(data) {
+
+                    $('#city' + id).html(data);
+
+                }
+
+            });
+
+        } else {
+
+            // $('#state'+id).val('').hide();
+
+            // $('#othstate').show();
+
+        }
+
+    }
 </script>
-
-
-                      

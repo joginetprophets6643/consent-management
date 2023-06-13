@@ -1459,6 +1459,14 @@ class Examshedule_schedule extends MY_Controller {
             echo $options;
         }
     }
+    public function totalCountNumber(){
+        if(isset($_GET['exam_id']))
+        {
+            $id = $_GET['exam_id'];
+            $totalCount = $this->Exam_model->totalCountNumberInExam($id);
+            echo $totalCount;
+        }
+    }
 
     public function checkExamInvitationStatus($exam_id,$school_rgister_id)
     {

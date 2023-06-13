@@ -312,6 +312,13 @@ class Exam_model extends CI_Model {
         $this->db->update('ci_examination', $data);
         return true;
     }
+    public function totalCountNumberInExam($id){
+        $query = $this->db->get_where('ci_exam_master',
+        array('id' => $id));
+       $result = $query->row_array()['no_of_cand'];
+       return $result;
+
+    }
      public function edit_candi($data, $id) {
         $this->db->where('id', $id);
         $this->db->update('ci_candidate_app', $data);
