@@ -175,9 +175,9 @@
                         <tr>
                             <td><?php echo $key+1;?></td>
                             <td><a href="<?php echo site_url("admin/allocation_admin/allocation_send_to_user/".urlencrypt($d['id'])."/".urlencrypt($d['exam_name'])); ?>" class="btn btn-sec" ><?php echo get_exam_name($d['exam_name']);?></a></td>
-                            <td><?php echo $d['no_candidate'];?></td>
-                            <td><?= date("d-m-Y", strtotime($d['startdate']));?></td>
-                            <td><?= date("d-m-Y", strtotime($d['enddate']));?></td>
+                            <td><?php echo get_exam_name_details($d['exam_name'])['no_of_cand'];?></td>
+                            <td><?=  date("d-m-Y", strtotime(get_exam_name_details($d['exam_name'])['start_date_exam']));?></td>
+                            <td><?=  date("d-m-Y", strtotime(get_exam_name_details($d['exam_name'])['end_date_exam']));?></td>
                         </tr> 
                         <?php }?>                  
                 </table>

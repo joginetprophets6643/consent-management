@@ -562,49 +562,49 @@ $('#select_all').click(function(event) {
 });
 
 
-// $('.select_all_count').click(function(event) {
-//     var hrefs = new Array();
-//     $(':checkbox').each(function() {
-//         // alert(this.checked)
-//         this.checked = true;
-//         var r = $(this).attr('rel');
-//         if (r != 'undefined') {
-//             hrefs.push(r);
+$('.select_all_count').click(function(event) {
+    var hrefs = new Array();
+    $(':checkbox').each(function() {
+        // alert(this.checked)
+        this.checked = true;
+        var r = $(this).attr('rel');
+        if (r != 'undefined') {
+            hrefs.push(r);
 
-//         }
-//     });
-//     alert(hrefs);
-//     var sum = 0;
-//     $('.sum').each(function() {
-//         sum += parseFloat($(this).attr('rel'));
-//     });
-//     alert(sum);
-//     total_candidate_display = parseInt($("#total_candidate_display").text());
+        }
+    });
+    // alert(hrefs);
+    var sum = 0;
+    $('.sum').each(function() {
+        sum += parseFloat($(this).attr('rel'));
+    });
+    // alert(sum);
+    total_candidate_display = parseInt($("#total_candidate_display").text());
 
 
-//     if (total_candidate_display > sum) {
-//         renaming_value = (total_candidate_display - sum);
-//         console.log('renaming_value', renaming_value);
-//         $('#total_candidate_display').html(renaming_value);
-//         return false;
+    if (total_candidate_display > sum) {
+        renaming_value = (total_candidate_display - sum);
+        console.log('renaming_value', renaming_value);
+        $('#total_candidate_display').html(renaming_value);
+        return false;
 
-//     } else {
+    } else {
 
-//         alert(
-//             "Total number of candidates not more than send invitation\nउम्मीदवारों की कुल संख्या आमंत्रण भेजने से अधिक नहीं है");
-//         $(':checkbox').each(function() {
-//             // alert(this.checked)
-//             this.checked = false;
-//             var r = $(this).attr('rel');
-//             if (r != 'undefined') {
-//                 hrefs.push(r);
-//                 // return false;
-//             }
-//         });
-//         $("#allcheckids").focus();
-//         return false;
-//     }
-// });
+        alert(
+            "The number of candidates not more than send invitations\nउम्मीदवारों की संख्या निमंत्रण भेजने से अधिक नहीं है");
+        $(':checkbox').each(function() {
+            // alert(this.checked)
+            this.checked = false;
+            var r = $(this).attr('rel');
+            if (r != 'undefined') {
+                hrefs.push(r);
+                // return false;
+            }
+        });
+        $("#allcheckids").focus();
+        return false;
+    }
+});
 
 
 $('.select_all_uncheck').click(function(event) {

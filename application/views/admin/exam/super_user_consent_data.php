@@ -78,8 +78,8 @@
   });
 function superUserButtonHandle(exam_id ,school_id,status)
 {
-   let action =  (status===1) ? 'Approved' : 'Dis Approved';
-   text = "Do you want "+action;
+   let action =  (status===1) ? 'Approve?' : 'Dis-Approve?';
+   text = "Do you want to "+action;
   if (confirm(text) == true) {
      $.ajax({
         type: "GET",
