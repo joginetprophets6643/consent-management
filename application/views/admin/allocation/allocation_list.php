@@ -58,7 +58,7 @@
                             <?php $getCenterCode = getCenterCode($row['school_id'], $row['id']);
 
                             ?>
-                            <input type="text" class="form-control validateClass<?php echo $i; ?>" onkeypress="return onlyNumberKey(event)" id="exam_center_code<?php echo $i ?>" name="exam_center_code" value="<?php echo isset($getCenterCode) ? $getCenterCode : '' ?>" required>
+                            <input type="text"  class="form-control validateClass<?php echo $i; ?>" onkeypress="return onlyNumberKey(event)" id="exam_center_code<?php echo $i ?>" name="exam_center_code"  value="<?php echo isset($getCenterCode) ? $getCenterCode : '99' ?>">
                         </td>
 
                         <input hidden type="text" id="candidate_value_count<?php echo $i ?>" value="<?php echo count($no_candidate) ?>">
@@ -80,12 +80,12 @@
                                 <?php $option = checkOption($row['id'], $row['school_id'], date('d-m-Y', strtotime($date_exam[$key])), $shft_exam[$key]);
                                 if ($option == 'no') {
                                 ?>
-                                    <input type="text" require hidden class="form-control  validateClass<?php echo $i; ?>" onkeypress="return onlyNumberKey(event)" id="candidate_value_school_id_new<?php echo $i . $key ?>" value="<?php echo isset($candidateNo[$key]) ? $candidateNo[$key] : '' ?>" required>
+                                    <input type="text" hidden class="form-control  validateClass<?php echo $i; ?>" onkeypress="return onlyNumberKey(event)" id="candidate_value_school_id_new<?php echo $i . $key ?>" value="<?php echo isset($candidateNo[$key]) ? $candidateNo[$key] : '' ?>">
 
                                 <?php } else {
                                 ?>
 
-                                    <input type="text" class="form-control validateClass<?php echo $i; ?>" onkeypress="return onlyNumberKey(event)" id="candidate_value_school_id_new<?php echo $i . $key ?>" value="<?php echo isset($candidateNo[$key]) ? $candidateNo[$key] : '' ?>" required>
+                                    <input type="text"  class="form-control validateClass<?php echo $i; ?>" onkeypress="return onlyNumberKey(event)" id="candidate_value_school_id_new<?php echo $i . $key ?>" value="<?php echo isset($candidateNo[$key]) ? $candidateNo[$key] : '' ?>">
 
                                 <?php
 
@@ -159,10 +159,9 @@
               const flag=[];
               console.log(id)
                $(`.validateClass${id}`).each(function(i, element) {
-                // console.log(element,'hhhhhhhhh',element.value);
-                    if (element.value === '') {
+                   let val = $('#' + element.id).val();
+                    if (val === '') {
                         $('#' + element.id).focus()
-                        // e.preventDefault();
                         flag.push(false)
                         return false
                     }

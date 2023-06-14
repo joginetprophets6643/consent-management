@@ -110,7 +110,6 @@
                             <?php echo $row['max_allocate_candidate'] ?>
                         </td>
                         <?php $getCenterCode = getCenterCode( $row['school_id'],$row['id']); 
-                        
                         ?>
                         <td>
                         <?php echo isset($getCenterCode)?$getCenterCode:''?>
@@ -126,6 +125,7 @@
                         <?php $candidateNo = getCandidateNumbers( $row['school_id'],$row['id']); ?>
 
                         <?php foreach ($no_candidate as $key => $value) { 
+                         $blank =  isset($candidateNo[$key])?$candidateNo[$key]:'disabled';
                             ?>
                         <td>
                         <?php echo isset($candidateNo[$key])?$candidateNo[$key]:''?>
@@ -136,15 +136,15 @@
 
                             </a>
                             <?php }  if ($admin_role_id == 5 )  { ?>
-
-                            <!-- <button class="btn btn-success" onclick="formdataSubmit(<?php echo $i; ?>)"> Submit</button> -->
+                            <?php if($blank !='disabled' && $getCenterCode!=''){?>
                             <div class="d-flex">
-                                <input type="checkbox" id="a" class="allocation_user_ids mr-2" name="allocation_user_ids"
+                                <input type="checkbox" id="a" class="allocation_user_ids mr-2 disabled" name="allocation_user_ids"
                                     rel="<?php echo $row['school_id']?>" value="<?php echo $row['school_id']?>">
                                 <a title="Send Invitations" class="btn btn-success"
                                     onclick="single_send_allocation(<?php echo $row['school_id']?>)"> <i class="fa fa-paper-plane-o"></i></a>
 
                             </div>
+                            <?php }?>
 
                             <?php }
                 if ($admin_role_id == 5 ) { ?>
