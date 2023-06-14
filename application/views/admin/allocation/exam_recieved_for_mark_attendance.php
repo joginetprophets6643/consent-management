@@ -36,7 +36,7 @@
                                             <?php echo get_exam_name($value['exam_name']); ?>
                                         </a></td>
                                     <td>
-                                        <?php echo $value['speedpost']; ?>
+                                        <?php echo $value['subjectline']; ?>
                                     </td>
                                     <td>
                                         <?php echo date("d-m-Y", strtotime($value['startdate'])); ?>
