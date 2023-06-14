@@ -59,7 +59,7 @@
             <div class="small-box bg-info">
               <div class="d-flex justify-content-between p-3 align-items-center">
                 <div class="inner">
-                  <h6 class="text-white mb-0 text-bold">NO OF SECTIONS <?=$sections?></h6>
+                  <h6 class="text-white mb-0 text-bold">NO OF SECTIONS  <?=$sections?></h6>
                 </div>
 
                 <div class="img-wrapper">

@@ -1,6 +1,6 @@
 <div class="datalist table-responsive">
 
-    <table id="example1" class="table table-bordered table-hover ">
+    <table id="adminList" class="table table-bordered table-hover" style="border-collapse: collapse !important; width: 100%;">
 
         <thead>
 
@@ -112,6 +112,14 @@
     </table>
 
 </div>
+
+<script>
+    $(document).ready(function() {
+    $('#adminList').DataTable( {
+        dom: 'Qlfrtip'
+    });
+});
+</script>
 
 
 

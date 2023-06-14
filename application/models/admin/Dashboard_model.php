@@ -350,9 +350,11 @@ class Dashboard_model extends CI_Model {
                 $this->db->group_end();
                 }
 		$this->db->where('ci_admin.is_supper !=', 1);
-                $this->db->where('ci_admin.admin_role_id !=', 6);
-                $this->db->where('ci_admin.admin_role_id !=', 7);
+                // $this->db->where('ci_admin.admin_role_id !=', 6);
+                // $this->db->where('ci_admin.admin_role_id !=', 7);
 		$this->db->order_by('ci_admin.admin_role_id','desc');
+
+
 
 		$query = $this->db->get();
                 //echo $this->db->last_query();
