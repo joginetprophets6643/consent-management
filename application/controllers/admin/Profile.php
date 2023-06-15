@@ -69,7 +69,7 @@ class Profile extends MY_Controller {
     public function index() {
 
 
-
+    
         $data['js_file'] = 'admin.js';
 
 

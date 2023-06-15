@@ -236,6 +236,9 @@
 
                             value="Back"></input>
 
+                            
+                          
+
                     </div>
 
                 </div>
@@ -588,11 +591,7 @@
 
                     <div class="col-md-12">
 
-                        <!-- <input type="submit" name="submit" value="Update Admin" class="btn btn-primary pull-right"> -->
-
-                        <input type="button" onclick="window.history.go(-1)" class="btn btn-sec px-3 py-2"
-
-                            value="Back"></input>
+                            <a href="<?= base_url('admin/dashboard'); ?>" class="btn btn-sec px-3 py-2">Back</a>
 
                     </div>
 

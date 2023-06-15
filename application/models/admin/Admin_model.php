@@ -214,6 +214,7 @@ class Admin_model extends CI_Model{
         $this->db->join('ci_cities','ci_cities.id=ci_admin.district_id', 'left');
 
         $this->db->join('ci_states','ci_states.id=ci_admin.state_id', 'left');
+		
 
 		if($this->session->userdata('filter_type')!='')
             
@@ -279,7 +280,8 @@ class Admin_model extends CI_Model{
                 // $this->db->where('ci_admin.admin_role_id !=', 7);
 
 		// $this->db->order_by('ci_admin.admin_role_id','desc');
-		$this->db->order_by('ci_admin.admin_id','desc');
+		// $this->db->order_by('ci_admin.admin_id','desc');
+		// $this->db->order_by('ci_admin.admin_id','desc');
 
 
 
@@ -289,7 +291,7 @@ class Admin_model extends CI_Model{
 
 		$module = array();
 
-
+       
 
 		if ($query->num_rows() > 0) 
 
