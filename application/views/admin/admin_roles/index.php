@@ -73,13 +73,13 @@
                     <tbody>
 
 
-                        <?php foreach ($records as $record): ?>
+                        <?php foreach ($records as $key=> $record): ?>
 
 
                             <tr>
 
 
-                                <td><?php echo $record['admin_role_id']; ?></td>
+                                <td><?php echo $key+1; ?></td>
 
 
                                 <td><?php echo $record['admin_role_title']; ?></td>

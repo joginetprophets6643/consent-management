@@ -30,7 +30,7 @@
 
         <tbody>
 
-            <?php  foreach ($info as $row): ?>
+            <?php  foreach ($info as $key=>$row): ?>
 
                 <tr>
 
