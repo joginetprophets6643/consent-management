@@ -93,13 +93,13 @@
 
                     <td>
 
-                        <a href="<?= base_url("admin/admin/edit/" . urlencrypt($row['admin_id'])); ?>" class="btn btn-warning btn-xs mr5" >
+                        <a href="<?= base_url("admin/admin/edit/" . urlencrypt($row['admin_id'])); ?>" class="btn btn-warning btn-xs mr5" data-toggle="tooltip" data-placement="top" title="Edit" >
 
                             <i class="fa fa-edit"></i>
 
                         </a>
 
-                        <a href="<?= base_url("admin/admin/delete/" . urlencrypt($row['admin_id'])); ?>" onclick="return confirm('are you sure to delete?')" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                        <a href="<?= base_url("admin/admin/delete/" . urlencrypt($row['admin_id'])); ?>" onclick="return confirm('are you sure to delete?')" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="delete"><i class="fa fa-remove"></i></a>
 
                     </td>
 
@@ -118,6 +118,10 @@
     $('#adminList').DataTable( {
         dom: 'Qlfrtip'
     });
+
+    $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 });
 </script>
 
