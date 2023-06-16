@@ -7,6 +7,7 @@ class Consent_letter extends MY_Controller {
     public function __construct() {
 
         parent::__construct();
+        $this->load->library('mailer');
         auth_check(); // check login auth
         $this->load->model('admin/admin_model', 'admin_model');
         $this->load->model('admin/location_model', 'location_model');
@@ -514,18 +515,21 @@ public function consent_add_1() {
                 $messageP1.='Registration of school/college for exam centre has been completed successfully.';
                 $messageP1.='Regards,';
                 $messageP1.='UKPSC, Haridwar';
+
                 // Message For Email Address 
-                $messageE1='Dear Sir/Madam ,<br>';
-                $messageE1.='Registration of school/college for exam centre has been completed successfully.<br>';
-                $messageE1.='Regards,<br>';
-                $messageE1.='UKPSC, Haridwar';
+                // $messageE1='Dear Sir/Madam ,<br>';
+                // $messageE1.='Registration of school/college for exam centre has been completed successfully.<br>';
+                // $messageE1.='Regards,<br>';
+                // $messageE1.='UKPSC, Haridwar';
                 
                 $email = $cData[0]['email'];
                 $phone = $cData[0]['pri_mobile'];
                 $template_id = "1007539069098300497";
                 // EMAIL AND MESSAGE SEND UDING TEMPLETE
                 sendSMS($phone,$messageP1,$template_id);
-                sendEmail($email,$messageE1,$template_id);
+                // sendEmail($email,$messageE1,$template_id);
+                $this->load->helper('email_helper');
+                $this->mailer->mail_template($email,'registration-completed');
              
                 $this->Certificate_model->editforconsentData($data2,$admin_id);
                 $result = $this->Certificate_model->add_edit_step_data($data,$admin_id);

@@ -11,6 +11,7 @@ class Examshedule_schedule extends MY_Controller {
         parent::__construct();
 
         auth_check(); // check login auth
+        $this->load->library('mailer');
 
         $this->load->model('admin/admin_model', 'admin_model');
 
@@ -679,23 +680,12 @@ class Examshedule_schedule extends MY_Controller {
                 $messageP1.='Centre';
 
                 // Message For Email Address 
-                $messageE1='Dear Sir/Madam ,<br>';
-                $messageE1.='Consent for the  '.$examName.' of UKPSC has been applied and submitted for your kind perusal.<br>';
-                $messageE1.='Regards,<br>';
-                $messageE1.='Centre';
-
-                // $messageP1='Dear Sir/Madam ,';
-                // $messageP1.='Consent for the '.$examName.' has been sent for your kind approval. Kindly login into your account on consent portal to complete the consent sending process.';
-                // $messageP1.='Regards,';
-                // $messageP1.='UKPSC, Haridwar';
-
-                // // Message For Email Address 
                 // $messageE1='Dear Sir/Madam ,<br>';
-                // $messageE1.='Consent for the '.$examName.' has been sent for your kind approval. Kindly login into your account on consent portal to complete the consent sending process.<br>';
+                // $messageE1.='Consent for the  '.$examName.' of UKPSC has been applied and submitted for your kind perusal.<br>';
                 // $messageE1.='Regards,<br>';
-                // $messageE1.='UKPSC, Haridwar';
+                // $messageE1.='Centre';
 
-
+      
                 
                 $email = $singledata['email'];
                 $phone = $singledata['pri_mobile'];
@@ -703,7 +693,15 @@ class Examshedule_schedule extends MY_Controller {
                 $template_id ="1007261310462557602";
                 // EMAIL AND MESSAGE SEND UDING TEMPLETE
                 sendSMS($phone,$messageP1,$template_id);
-                sendEmail($email,$messageE1,$template_id);
+                $mail_data = array(
+                    'examname' => $examName
+                  
+                );
+
+                $this->load->helper('email_helper');
+                $this->mailer->mail_template($email,'send-consent',$mail_data);
+
+                // sendEmail($email,$messageE1,$template_id);
       
 
                 }
@@ -765,22 +763,32 @@ class Examshedule_schedule extends MY_Controller {
                    // Message for Mobile 
             $examName = get_exam_name($data['exam'][0]['exam_name']);
             
-            $messageP1='Dear Sir/Madam ,';
-            $messageP1.='Consent for the '.$examName.' has been sent for your kind approval. Kindly login into your account on consent portal to complete the consent sending process.';
-            $messageP1.='Regards,';
-            $messageP1.='UKPSC, Haridwar';
+            // $messageP1='Dear Sir/Madam ,';
+            // $messageP1.='Consent for the '.$examName.' has been sent for your kind approval. Kindly login into your account on consent portal to complete the consent sending process.';
+            // $messageP1.='Regards,';
+            // $messageP1.='UKPSC, Haridwar';
             // Message For Email Address 
-            $messageE1='Dear Sir/Madam ,<br>';
-            $messageE1.='Consent for the '.$examName.' has been sent for your kind approval. Kindly login into your account on consent portal to complete the consent sending process.<br>';
-            $messageE1.='Regards,<br>';
-            $messageE1.='UKPSC, Haridwar';
+            // $messageE1='Dear Sir/Madam ,<br>';
+            // $messageE1.='Consent for the '.$examName.' has been sent for your kind approval. Kindly login into your account on consent portal to complete the consent sending process.<br>';
+            // $messageE1.='Regards,<br>';
+            // $messageE1.='UKPSC, Haridwar';
+            $messageP1='Dear Sir/Madam ,';
+            $messageP1.='Consent for the  '.$examName.' of UKPSC has been applied and submitted for your kind perusal.';
+            $messageP1.='Regards,';
+            $messageP1.='Centre';
             
             $email = $data['user_data'][0]['email'];
             $phone = $data['user_data'][0]['pri_mobile'];
             $template_id = "1007076974594881905";
             // EMAIL AND MESSAGE SEND UDING TEMPLETE
             sendSMS($phone,$messageP1,$template_id);
-            sendEmail($email,$messageE1,$template_id);
+            $mail_data = array(
+                'examname' => $examName
+              
+            );
+            $this->load->helper('email_helper');
+            $this->mailer->mail_template($email,'send-consent',$mail_data);
+            // sendEmail($email,$messageE1,$template_id);
         }
         
 
@@ -866,18 +874,20 @@ class Examshedule_schedule extends MY_Controller {
                     $messageP1.='Regards,';
                     $messageP1.='UKPSC, Haridwar';
                     // Message For Email Address 
-                    $messageE1='Dear Sir/Madam ,<br>';
-                    $messageE1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.<br>';
-                    $messageE1.='Kindly ignore if already done.<br>';
-                    $messageE1.='Regards,<br>';
-                    $messageE1.='UKPSC, Haridwar';
+                    // $messageE1='Dear Sir/Madam ,<br>';
+                    // $messageE1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.<br>';
+                    // $messageE1.='Kindly ignore if already done.<br>';
+                    // $messageE1.='Regards,<br>';
+                    // $messageE1.='UKPSC, Haridwar';
                     
                     $email = $singledata['email'];
                     $phone = $singledata['pri_mobile'];
                     $template_id = "1007970272335112709";
                     // EMAIL AND MESSAGE SEND UDING TEMPLETE
                     sendSMS($phone,$messageP1,$template_id);
-                    sendEmail($email,$messageE1,$template_id);
+                    // sendEmail($email,$messageE1,$template_id);
+                    $this->load->helper('email_helper');
+                    $this->mailer->mail_template($email,'consent-not-send');
 
                 }
             }
@@ -895,11 +905,11 @@ class Examshedule_schedule extends MY_Controller {
             $messageP1.='Regards,';
             $messageP1.='UKPSC, Haridwar';
             // Message For Email Address 
-            $messageE1='Dear Sir/Madam ,<br>';
-            $messageE1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.<br>';
-            $messageE1.='Kindly ignore if already done.<br>';
-            $messageE1.='Regards,<br>';
-            $messageE1.='UKPSC, Haridwar';
+            // $messageE1='Dear Sir/Madam ,<br>';
+            // $messageE1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.<br>';
+            // $messageE1.='Kindly ignore if already done.<br>';
+            // $messageE1.='Regards,<br>';
+            // $messageE1.='UKPSC, Haridwar';
             
             $email = $data['user_data'][0]['email'];
             $phone = $data['user_data'][0]['pri_mobile'];
@@ -907,7 +917,9 @@ class Examshedule_schedule extends MY_Controller {
             $template_id = "1007970272335112709";
             // EMAIL AND MESSAGE SEND UDING TEMPLETE
             sendSMS($phone,$messageP1,$template_id);
-            sendEmail($email,$messageE1,$template_id);
+            $this->load->helper('email_helper');
+            $this->mailer->mail_template($email,'consent-not-send');
+            // sendEmail($email,$messageE1,$template_id);
         }
     
         

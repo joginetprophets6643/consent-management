@@ -1,5 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
+
 class Auth extends MY_Controller {
 	
 		public function __construct(){
@@ -335,23 +336,20 @@ class Auth extends MY_Controller {
 
 						$email = $this->mailer->mail_template($to,'email-verification',$mail_data);
 						// Message for Mobile 
+					
 						$messageP1='Dear Sir/Madam ,';
 						$messageP1.='Your primary registration is completed. Kindly complete your registration using your email id and password after clicking on password generation link on registered email id.%0a';
 						$messageP1.='Regards,';
 						$messageP1.='UKPSC, Haridwar';
-						
-						// Message For Email Address 
-						$messageE1='Dear Sir/Madam ,<br>';
-						$messageE1.='Your primary registration is completed. Kindly complete your registration using your email id and password after clicking on password generation link on registered email id.<br>';
-						$messageE1.='Regards,<br>';
-						$messageE1.='UKPSC, Haridwar';
 						
 						$email = $data['email'];
 						$phone = $this->input->post('pri_mobile');
 						$template_id = "1007239655187710009";
 						// EMAIL AND MESSAGE SEND UDING TEMPLETE
 						sendSMS($phone,$messageP1,$template_id);
-						sendEmail($email,$messageE1,$template_id);
+						$emailll = $this->mailer->mail_template($email,'primary-registration');
+
+						// sendEmail($email,$messageE1,$template_id);
 
 
 						if($email){
@@ -738,9 +736,10 @@ class Auth extends MY_Controller {
 			// $messageE1.='Regards,<br>';
 			// $messageE1.='UKPSC, Haridwar';
 
-			sendSMS(8700488718,$messageP1,$template_id);
-			sendEmail('demo@yopmail.com',$messageE1,$template_id);
+			// sendSMS(8700488718,$messageP1,$template_id);
+			sendEmail('jugendra.singh@netprophetsglobal.com',$messageE1,$template_id);
 		}
+
 
 			}  // end class
 

@@ -108,15 +108,17 @@ $config = array(
 
     'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
 
-    'smtp_host' => 'smtp.gmail.com', 
+    // 'smtp_host' => 'smtp.gmail.com', 
+    'smtp_host' => 'email-smtp.ap-south-1.amazonaws.com', 
 
-    'smtp_port' => 465,
+    // 'smtp_port' => 465,
+    'smtp_port' => 587,
 
-    'smtp_user' => 'mokshendra@netprophetsglobal.com',
-    // 'smtp_user' => 'jugendra.singh@netprophetsglobal.com',
+    // 'smtp_user' => 'mokshendra@netprophetsglobal.com',
+    'smtp_user' => 'AKIA2SOJMUZBO7YPGUE2',
 
-    'smtp_pass' => 'zara@123',
-    // 'smtp_pass' => 'Jogi@6643',
+    // 'smtp_pass' => 'zara@123',
+    'smtp_pass' => 'BLBxbHOZhSN60FwOR+xmrSjH+I9sNV1I7bGa3k/x7aX4',
 
     'smtp_crypto' => '', //can be 'ssl' or 'tls' for example
 

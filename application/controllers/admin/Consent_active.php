@@ -15,6 +15,7 @@ class Consent_active extends MY_Controller
     {
 
         parent::__construct();
+        $this->load->library('mailer');
         auth_check();
         $this->load->model("admin/admin_model", "admin_model");
         $this->load->model("admin/location_model", "location_model");
@@ -968,12 +969,20 @@ public function consent_recieved(){
                     $messageP1.='Regards';
                     $messageP1.='Centre';
 
-                    $messageE1='Dear Sir/Madam ,<br>';
-                    $messageE1.='Consent for the '.$examName.' of UKPSC has been applied and submitted for your kind perusal.';
-                    $messageE1.='Regards,<br>';
-                    $messageE1.='Centre';
+                    // $messageE1='Dear Sir/Madam ,<br>';
+                    // $messageE1.='Consent for the '.$examName.' of UKPSC has been applied and submitted for your kind perusal.';
+                    // $messageE1.='Regards,<br>';
+                    // $messageE1.='Centre';
                     sendSMS($phone,$messageP1,$template_id);
-                    sendEmail($email,$messageE1,$template_id);
+                    // sendEmail($email,$messageE1,$template_id);
+
+                    $mail_data = array(
+                        'examname' => $examName
+                      
+                    );
+    
+                    $this->load->helper('email_helper');
+                    $this->mailer->mail_template($email,'apply-consent-school-1',$mail_data);
                  
 
                     $data['fileupload'] = 'fileupload';

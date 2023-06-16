@@ -556,7 +556,7 @@ $postData = array(
     echo 'error:' . curl_error($ch);
     }
     curl_close($ch);
-            echo "Message Sent Successfully !";
+            echo "Message Sent Successfully  11!";
     
    
 }
