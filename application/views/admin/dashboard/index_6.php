@@ -47,7 +47,7 @@
               <div class="inner">
                 <h5 class="text-white mb-0 text-bold">Profile</h5>
               </div>
-               <a  hidden=""> href=" <?php echo base_url("admin/auth/update_user_info")?>">
+               <a href="<?php echo base_url("admin/auth/update_user_info")?>">
                 change Info
                </a>
   

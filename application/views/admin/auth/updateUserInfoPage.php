@@ -219,7 +219,7 @@
 
       if ($("#password").val().length < 8) {
 
-        alert(" 'Password' must contain 8 charactor");
+        alert(" 'Password' must contain 8 character");
 
         $("#password").focus();
 

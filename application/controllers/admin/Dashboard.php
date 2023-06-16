@@ -85,8 +85,7 @@ class Dashboard extends My_Controller {
 		$admin_id = $this->session->userdata('admin_id'); 
 	
 		$data['allocation_recieved'] = count($this->Allocation_Model->allocationConsentRecievedByUser($admin_id));
-        // print_r($_SESSION['admin_role_id']);
-        // die();
+    
 		$this->load->view('admin/includes/_header', $data);
 		$this->load->view('admin/dashboard/index_'.$_SESSION['admin_role_id']); //general .$_SESSION['admin_role_id'].$_SESSION['admin_role_id']
 		$this->load->view('admin/includes/_footer');
