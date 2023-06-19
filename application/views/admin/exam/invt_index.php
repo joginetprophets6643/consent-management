@@ -653,7 +653,6 @@ $('.select_all_uncheck').click(function(event) {
 function single_send_invitations(id) {
     $('.loader').removeClass('d-none');
     var send_consent_id = $("#send_consent_id").val();
-
     var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all/')?>"
     $.ajax({
         url: url,

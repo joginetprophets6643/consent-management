@@ -45,7 +45,6 @@ class Consent_active extends MY_Controller
 
 
     function consent_active_list_data()
-
     {
 
         $data["info"] = $this->Certificate_model->get_all_active_consent();
@@ -954,20 +953,23 @@ public function consent_recieved(){
                     $messageP1.='Regards,';
                     $messageP1.='Exam Center.';
                     // Message For Email Address 
-                    $messageE1='Dear Sir/Madam ,<br>';
-                    $messageE1.='Consent has been sent for the '.$examName.' of UKPSC.<br>';
-                    $messageE1.='Regards,<br>';
-                    $messageE1.='Exam Center.';
+                    // $messageE1='Dear Sir/Madam ,<br>';
+                    // $messageE1.='Consent has been sent for the '.$examName.' of UKPSC.<br>';
+                    // $messageE1.='Regards,<br>';
+                    // $messageE1.='Exam Center.';
 
                     $email = $fetch_controller_details['email'];
                     $phone = $fetch_controller_details['mobile_no'];
                     // $template_id = "1007102212957051003";
-                    $template_id = "1007261310462557602";
+                    // $template_id = "1007261310462557602";
+                    // $template_id = "100710923546026069";
+                    $template_id = "1007109235460260699";
 
-                    $messageP1='Dear Sir/Madam,';
-                    $messageP1.='Consent for the '.$examName.' of UKPSC has been applied and submitted for your kind perusal.';
-                    $messageP1.='Regards';
-                    $messageP1.='Centre';
+
+                    // $messageP1='Dear Sir/Madam,';
+                    // $messageP1.='Consent for the '.$examName.' of UKPSC has been applied and submitted for your kind perusal.';
+                    // $messageP1.='Regards';
+                    // $messageP1.='Centre';
 
                     // $messageE1='Dear Sir/Madam ,<br>';
                     // $messageE1.='Consent for the '.$examName.' of UKPSC has been applied and submitted for your kind perusal.';
@@ -980,14 +982,15 @@ public function consent_recieved(){
                         'examname' => $examName
                       
                     );
-    
+                  
                     $this->load->helper('email_helper');
-                    $this->mailer->mail_template($email,'apply-consent-school-1',$mail_data);
-                 
+                    $this->mailer->mail_template($email,'apply-consent-school',$mail_data);
+                   
 
                     $data['fileupload'] = 'fileupload';
                     $this->session->set_flashdata('consent_recievedsuss', 'Request for "Consent Letter" has been applied successfully! (""सहमति पत्र" के लिए अनुरोध सफलतापूर्वक लागू कर दिया गया है!)');
                     // $this->session->set_flashdata('message_name', 'This is my message');
+                
                     $ci_exam_registrationid5 = $this->input->post('ci_exam_registrationid5'); 
                     redirect(base_url("admin/consent_active/consent_recieved"));
          

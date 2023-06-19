@@ -92,6 +92,13 @@ class Exam_model extends CI_Model {
         // return  $this->db->select('*')->from('ci_exam_registration')->where($array)->order_by('id','desc')->get()->result_array();
         return  $this->db->select('*')->from('ci_exam_according_to_school')->where($array)->order_by('id','desc')->get()->result_array();       
     }
+	function get_all_invites_idsupdate($id) {
+        // $query = $this->db->select('*')->from('ci_exam_registration')->where('id', $id)->get()->row_array();  
+        $admin_id = $this->session->userdata('admin_id');  
+        $array = array('id' => $id);
+        return  $this->db->select('*')->from('ci_exam_registration')->where($array)->order_by('id','desc')->get()->result_array();
+        // return  $this->db->select('*')->from('ci_exam_according_to_school')->where($array)->order_by('id','desc')->get()->result_array();       
+    }
 	function get_all_registration_data() {
     
         $this->db->from('ci_exam_registration');

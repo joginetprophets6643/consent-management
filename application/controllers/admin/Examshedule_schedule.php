@@ -582,18 +582,6 @@ class Examshedule_schedule extends MY_Controller {
         $new_id = urldecrypt($send_consent_id); 
         $data['exam'] = $this->Exam_model->get_invites_byid($new_id);
       
-        echo '<pre>';
-        echo '<br/>';
-        echo $data['exam'][0]['subjectline'];
-        echo '<br/>';
-        echo $data['exam'][0]['speedpost'];
-        echo '<br/>';
-        echo $data['exam'][0]['startdate'];
-        echo '<br/>';
-        echo $data['exam'][0]['enddate'];
-        echo '<br/>';
-        echo $data['exam'][0]['name_designation_mobile'];
-        echo '<br/>';
         
         if(!empty($ids)){
             foreach ($ids as $id) {
@@ -651,7 +639,7 @@ class Examshedule_schedule extends MY_Controller {
             $i = 0;
             foreach ($ids as $id) {
 
-                $data[$i] = $this->Exam_model->get_all_invites_ids($id);  
+                $data[$i] = $this->Exam_model->get_all_invites_idsupdate($id);  
 
                 foreach($data[$i] as $email => $value){
                     $emails[$i] = $value['email'];
@@ -697,7 +685,7 @@ class Examshedule_schedule extends MY_Controller {
                     'examname' => $examName
                   
                 );
-
+             
                 $this->load->helper('email_helper');
                 $this->mailer->mail_template($email,'send-consent',$mail_data);
 
@@ -757,9 +745,9 @@ class Examshedule_schedule extends MY_Controller {
                 'invite_sent' => '1',
                 'invt_recieved' => '0',
             ];
+    
             $this->db->where(['school_id' => $id])->update('ci_exam_according_to_school', $newDataForconsent);
-
-            $data['user_data'] = $this->Exam_model->get_all_invites_ids($id);     
+            $data['user_data'] = $this->Exam_model->get_all_invites_idsupdate($id);   
                    // Message for Mobile 
             $examName = get_exam_name($data['exam'][0]['exam_name']);
             
@@ -779,13 +767,15 @@ class Examshedule_schedule extends MY_Controller {
             
             $email = $data['user_data'][0]['email'];
             $phone = $data['user_data'][0]['pri_mobile'];
-            $template_id = "1007076974594881905";
+            // $template_id = "1007076974594881905";
+            $template_id ="1007261310462557602";
             // EMAIL AND MESSAGE SEND UDING TEMPLETE
             sendSMS($phone,$messageP1,$template_id);
             $mail_data = array(
                 'examname' => $examName
               
             );
+           
             $this->load->helper('email_helper');
             $this->mailer->mail_template($email,'send-consent',$mail_data);
             // sendEmail($email,$messageE1,$template_id);
@@ -858,7 +848,7 @@ class Examshedule_schedule extends MY_Controller {
             $i = 0;
             foreach ($ids as $id) {
 
-                $data['user_data'][$i] = $this->Exam_model->get_all_invites_ids($id); 
+                $data['user_data'][$i] = $this->Exam_model->get_all_invites_idsupdate($id); 
                 $i++;
             }
 
@@ -896,7 +886,7 @@ class Examshedule_schedule extends MY_Controller {
         }else{
             
             $id = $this->input->get('id');
-            $data['user_data'] = $this->Exam_model->get_all_invites_ids($id); 
+            $data['user_data'] = $this->Exam_model->get_all_invites_idsupdate($id); 
             $examName = get_exam_name($data['exam'][0]['exam_name']);
           
             $messageP1='Dear Sir/Madam ,';
