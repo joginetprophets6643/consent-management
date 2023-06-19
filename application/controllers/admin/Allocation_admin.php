@@ -317,7 +317,8 @@ class Allocation_admin extends MY_Controller {
 
         public function downreportbutton($id){
             $id = urldecrypt($id);
-            $data['exam_name'] = get_exam_name_new( $id);
+            $data['exam_name'] = get_exam_name(get_exam_name_downloadreport( $id));
+         
             $data['id'] = $id;
             $data['title'] = 'Download Report buttons for';
 
@@ -325,12 +326,15 @@ class Allocation_admin extends MY_Controller {
             $state_name = $city_name = $grade_name = '';
             $data['temp'][1] = $this->Exam_model->get_consent_recved_data($state_name, $city_name, $grade_name,$id);
             $data['data']=$data['temp'][1][1];
+           
             foreach ($data['data'] as $key => $value) {
                 $data['data'][$key]['centerCode'] = getCenterCode( $value['school_id'],$id)?getCenterCode( $value['school_id'],$id):'';
                 $data['data'][$key]['consent_allocation'] = getConsentAllocate_max($value['school_id'])?getConsentAllocate_max($value['school_id']):'';
                 $data['data'][$key]['candidateNo'] = getCandidateNumbers($value['school_id'],$id);
+                $data['data'][$key]['uniqueSnoschool'] = uniqueSnoschool($value['email']);
 
             }
+         
             $records1['info'] = $this->Allocation_Model->get_data_for_allocation($id);
             $date_exam_consent_recieve = isset($records1['info'][0]['date_exam']) ? explode(",",$records1['info'][0]['date_exam']) : [];
             $shft_exam_consent_recieve = isset($records1['info'][0]['shft_exam']) ? explode(",",$records1['info'][0]['shft_exam']) : [];
@@ -347,6 +351,7 @@ class Allocation_admin extends MY_Controller {
                 $data['notrecieveddata'][$key]['centerCode'] = getCenterCode( $value['school_id'],$id)?getCenterCode( $value['school_id'],$id):'';
                 $data['notrecieveddata'][$key]['consent_allocation'] = getConsentAllocate_max($value['school_id'])?getConsentAllocate_max($value['school_id']):'';
                 $data['notrecieveddata'][$key]['candidateNo'] = getCandidateNumbers($value['school_id'],$id);
+                $data['notrecieveddata'][$key]['uniqueSnoschool'] = uniqueSnoschool($value['email']);
 
             }
 

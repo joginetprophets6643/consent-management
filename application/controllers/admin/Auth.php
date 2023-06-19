@@ -338,7 +338,7 @@ class Auth extends MY_Controller {
 						// Message for Mobile 
 					
 						$messageP1='Dear Sir/Madam ,';
-						$messageP1.='Your primary registration is completed. Kindly complete your registration using your email id and password after clicking on password generation link on registered email id.%0a';
+						$messageP1.='Your primary registration is completed. Kindly complete your registration using your email id and password after clicking on password generation link on registered email id.';
 						$messageP1.='Regards,';
 						$messageP1.='UKPSC, Haridwar';
 						

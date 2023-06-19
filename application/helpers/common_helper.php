@@ -118,6 +118,10 @@ function get_exam_name_new($id) {
     $ci = & get_instance();
     return @$ci->db->get_where('ci_exam_invitation', array('id' => $id))->row_array()['subjectline'];
 }
+function get_exam_name_downloadreport($id) {
+    $ci = & get_instance();
+    return @$ci->db->get_where('ci_exam_invitation', array('id' => $id))->row_array()['exam_name'];
+}
 function get_startdate_new($id) {
     $ci = & get_instance();
     return @$ci->db->get_where('ci_exam_invitation', array('id' => $id))->row_array()['startdate'];
@@ -425,6 +429,14 @@ function getCandidateNumbers($school_id,$exam_id)
          ->get('ci_allocation_table')->row_array();
     $candidateValues = isset($q['candidate_array'])?explode(",",$q['candidate_array']):[];
     return $candidateValues;
+}
+function uniqueSnoschool($email)
+{
+    $ci = & get_instance();
+    $q = $ci->db->select('school_registration_number')->where('email',$email)
+         ->get('ci_admin')->row_array();
+    $snoSchool = isset($q['school_registration_number'])?$q['school_registration_number']:'';
+    return $snoSchool;
 }
 
 function getCenterCode($school_id,$exam_id)
