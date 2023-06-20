@@ -46,10 +46,10 @@
             <div class="d-flex justify-content-between p-3 align-items-center">
               <div class="inner">
                 <h5 class="text-white mb-0 text-bold">Profile</h5>
-              </div>
-               <a href="<?php echo base_url("admin/auth/update_user_info")?>">
-                change Info
+                <a style="font-size: 12px;margin-bottom: -20px;margin-top: 10px;color: #091583!important;text-decoration: underline;font-weight: 400;" href="<?php echo base_url("admin/auth/update_user_info")?>">
+                Change Credentials
                </a>
+              </div>
   
               <div class="img-wrapper">
                 <img src=" <?php echo base_url("assets/dist/img/people_2.png")?>" height="100" alt="">

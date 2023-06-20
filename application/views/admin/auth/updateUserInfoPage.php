@@ -4,14 +4,15 @@
   }
   .form-background {
     position: relative;
+    height: auto;
   }
   .login-box {
     width: 35%;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
+    margin: 20px auto!important;
+    position: relative!important;
+    top: auto!important;
+    left: auto!important;
+    transform: none!important;
   }
   .column {
     float: left;
