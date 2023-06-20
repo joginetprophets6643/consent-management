@@ -204,6 +204,7 @@ class Auth extends MY_Controller {
 					else{
 						$error_type = true;
 						// echo $error_type; die();
+						// $this->session->set_flashdata('errors', 'Invalid Username or Password!');
 						$this->session->set_flashdata('errors', 'Invalid Username or Password!');
 						//$this->session->set_flashdata('errors_type', $error_type);
 						redirect(base_url('admin/auth/login'));
@@ -742,8 +743,3 @@ class Auth extends MY_Controller {
 
 
 			}  // end class
-
-
-
-
-?>

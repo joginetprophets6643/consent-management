@@ -104,6 +104,7 @@
                         <hr class="style1" style="border-color: #fff;">
 
                         <?php $this->load->view('admin/includes/_messages.php') ?>
+                        <?php $this->load->view('admin/includes/_error.php') ?>
 
                         <?php echo form_open(base_url('admin/auth/login'), 'id="xin-form"  class="login-form" '); ?>
                         <div class="form-group has-feedback col-12 mt-4 mb-4">

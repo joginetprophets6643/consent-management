@@ -752,7 +752,7 @@ $(document).ready(function() {
         } else {
             arr = arr.filter(item => item !== e.target.value)
         }
-        console.log(arr);
+        console.log(arr,'oggjojgrjg');
         $.ajax({
             type: "GET",
             url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
@@ -761,6 +761,7 @@ $(document).ready(function() {
                 'csfr_token_name': csfr_token_value
             },
             success: function(data) {
+                alert(data);
                 $('#schoolCount').removeClass("d-none");
                 $('#schoolWiseCounts').html(data);
             }
@@ -784,7 +785,6 @@ $(document).ready(function() {
             }
         });
         // let all = arr;
-        console.log('testing',arr);
         $.ajax({
             type: "GET",
             url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
@@ -814,6 +814,7 @@ $(document).ready(function() {
         });
         $('#schoolCount').addClass("d-none");
     });
+
 
 })
 </script>

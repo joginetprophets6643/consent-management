@@ -30,7 +30,7 @@
                         <tr>
                         <!-- ."==". echo $d['no_candidate']; -->
                             <td><?php echo $key+1;?></td>
-                            <td><a href="<?= base_url('admin/Super_user/consent_recieved_by_super_user/'.base64_encode($d['exam_name'])); ?>" target="_blank"><?php echo get_exam_name($d['exam_name']);?></a></td>
+                            <td><a href="<?= base_url('admin/Super_user/consent_recieved_by_super_user/'.base64_encode($d['exam_name'])); ?>" target="_blank"><?php echo get_exam_name($d['exam_name'])."==".$d['exam_name'];?></a></td>
                             <td><?php   echo get_exam_name_details($d['exam_name'])['no_of_cand']?></td>
                             <td><?php   echo  date('d-m-Y', strtotime(get_exam_name_details($d['exam_name'])['start_date_exam']));?></td>
                             <td><?php   echo  date('d-m-Y', strtotime(get_exam_name_details($d['exam_name'])['end_date_exam']));?> </td>
