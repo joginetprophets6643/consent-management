@@ -279,7 +279,7 @@
 
         $("#xin-form")["submit"](function () {
             if ($("#fileName1").val() == "") {
-                alert("Please upload images 'Parking Area Image' ");
+                alert("Please upload images 'Parking Area' ");
                 $("#fileName1").focus();
                 return false;
             }

@@ -984,7 +984,7 @@ public function consent_recieved(){
                     );
                   
                     $this->load->helper('email_helper');
-                    $this->mailer->mail_template($email,'apply-consent-school',$mail_data);
+                    $this->mailer->mail_template($email,'apply-consent-school-1',$mail_data);
                    
 
                     $data['fileupload'] = 'fileupload';

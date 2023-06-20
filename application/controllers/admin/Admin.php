@@ -64,6 +64,7 @@ class Admin extends MY_Controller
 
 	function list_data(){
 		$data['info'] = $this->admin->get_all();
+		
 		$this->load->view('admin/admin/list',$data);
 
 	}

@@ -797,7 +797,7 @@ class Examshedule_schedule extends MY_Controller {
             'exam_name' => $data['exam'][0]['subjectline'],
             'ref_id' => $new_id,
             'invite_sent' => '0',
-            'invt_recieved' => '0'
+            'invt_recieved' => '1'
         ];
      
         $arrForInvitation = [
@@ -817,6 +817,7 @@ class Examshedule_schedule extends MY_Controller {
             'exam_name' => $data['exam'][0]['subjectline'],
             'invite_sent' => '0',
             'invt_recieved' => '0',
+            'superuserStatus' => '0',
         ];
         $this->db->where(['school_id' => $id])->update('ci_exam_according_to_school', $newDataForconsent);
         // echo 'ok';

@@ -541,7 +541,7 @@ $('#select_all').click(function(event) {
             success: function(result) {
                 if (result) {
                     $('.loader').addClass('d-none');
-                    alert("success, Sent Sucessfully");
+                    alert("Consent sent sucessfully");
                     $(':checkbox.send_email_ids').each(function() {
                         // alert(this.checked)
                         this.checked = false;
@@ -665,7 +665,7 @@ function single_send_invitations(id) {
         success: function(result) {
             if (result) {
                 $('.loader').addClass('d-none');
-                alert("success, Sent Sucessfully");
+                alert("Consent sent sucessfully");
                 this.checked = false;
                 window.location.reload();
             }
@@ -690,7 +690,7 @@ function revokeConsentsInvitations(id) {
 
             if (result) {
                 $('.loader').addClass('d-none');
-                alert("success, Sent Sucessfully");
+                alert("Consent sent sucessfully");
                 this.checked = false;
                 window.location.reload();
             }
@@ -726,7 +726,7 @@ $('#select_single_count').click(function(event) {
             success: function(result) {
                 if (result) {
                     $('.loader').addClass('d-none');
-                    alert("success, Sent Sucessfully");
+                    alert("Consent sent sucessfully");
                     $(':checkbox.send_email_ids').each(function() {
                         this.checked = false;
                     });

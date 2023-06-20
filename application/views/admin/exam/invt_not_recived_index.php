@@ -462,7 +462,7 @@
                 dataType: 'text',
                 data: { data: hrefs, 'send_consent_id': send_consent_id },
                 success: function (result) {
-                    alert("success, Sent Sucessfully");
+                    alert("Consent sent sucessfully");
                     $(':checkbox.send_email_ids').each(function () {
                         // alert(this.checked)
                         this.checked = false;
@@ -500,7 +500,6 @@
                 this.checked = false;
                 var r = $(this).attr('rel'); if (r != 'undefined') {
                     hrefs.push(r);
-                    console.log('i am here', r)
                     // return false;
                 }
             });
@@ -532,7 +531,7 @@
             data: { id: id, 'send_consent_id': send_consent_id },
             success: function (result) {
 
-                alert("success, Sent Sucessfully");
+                alert("Consent sent sucessfully");
                 this.checked = false;
             }
         });
@@ -565,7 +564,7 @@
                 dataType: 'text',
                 data: { data: hrefs, 'send_consent_id': send_consent_id },
                 success: function (result) {
-                    alert("success, Sent Sucessfully");
+                    alert("Consent sent sucessfully");
                     $(':checkbox.send_email_ids').each(function () {
                         // alert(this.checked)
                         this.checked = false;

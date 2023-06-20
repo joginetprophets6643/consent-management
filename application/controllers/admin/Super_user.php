@@ -25,13 +25,13 @@ class Super_user extends MY_Controller {
     {
     	$data['title'] = 'Exam List';
     	 $this->db->from('ci_exam_invitation');
-        $this->db->where('invt_recieved','1');
+        // $this->db->where('invt_recieved','1');
         // $this->db->order_by('id','desc');
         $this->db->group_by('exam_name','desc');
         $q = $this->db->get()->result_array();
-        // $data['data'] = $this->Super_user_model->get_consent_data_by_super_user();
         $data['data'] = $q;
-      
+        
+
         $this->load->view('admin/includes/_header', $data);
 
         $this->load->view('admin/exam/exam_list_super_user', $data);
@@ -45,6 +45,7 @@ class Super_user extends MY_Controller {
         $data['exam_name'] = get_exam_name($exam_new_id);
         $data['title'] = 'Invitation and Schedule List';
         $data['data'] = $this->Super_user_model->get_consent_data_by_super_user($exam_new_id);
+       
         $this->load->view('admin/includes/_header', $data);
 
         $this->load->view('admin/exam/super_user_consent_data', $data);
