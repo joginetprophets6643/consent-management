@@ -10,7 +10,7 @@ class Super_user_model extends CI_Model {
       
          $district_id = $this->session->userdata('state_id');
          $districtName = get_district_name($district_id);
-       
+     
         $this->db->from('ci_exam_according_to_school');
         // $this->db->like('ci_exam_according_to_school.district', $districtName);
          $this->db->where('ci_exam_according_to_school.ref_id', $exam_id);

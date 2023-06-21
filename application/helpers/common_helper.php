@@ -97,7 +97,8 @@ function get_exam_name($id) {
 function get_exam_namewithStatusOne($id) {
     $ci = & get_instance();
     // ->where('invite_sent',1)->where('invt_recieved',1)
-    return $ci->db->select('*')->where('exam_name', $id)->or_where('invite_sent',1)->or_where('invite_sent',1)->get('ci_exam_invitation')->row_array()['id'];
+    // or_where('invite_sent',1)->or_where('invite_sent',1)
+    return $ci->db->select('*')->where('exam_name', $id)->get('ci_exam_invitation')->row_array()['id'];
     // return @$ci->db->where('ci_exam_master', array('id' => $id))->row_array()['exam_name'];
 }
 function get_exam_name_details($id) {
