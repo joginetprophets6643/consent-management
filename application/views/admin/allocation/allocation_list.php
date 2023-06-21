@@ -157,7 +157,6 @@
 
     function formdataSubmit(id) {
         const flag = [];
-        console.log(id)
         $(`.validateClass${id}`).each(function(i, element) {
             let val = $('#' + element.id).val();
             if (val === '') {
@@ -183,23 +182,23 @@
         $('.no_candi' + id).each(function(i,e) {
              i = i + 1;
              if(numItems>=i){
-                sum += parseFloat(this.value);
+                sum += parseInt(this.value);
              }
 
         });
 
         if (sum > consentCount) {
-            alert('Allocation can not be greater than Consent Recieved');
+            alert('Allocation can not be greater than Consent Received');
             return false;
         }
 
         var candidate_array = [];
         for (let k = 0; k < candidate_value_count; k++) {
-            var candi_count = $('#candidate_value_school_id_new' + id + k).val();
+            var candi_count = parseInt($('#candidate_value_school_id_new' + id + k).val());
             if (consentCount >= candi_count) {
                 candidate_array.push(candi_count);
             } else {
-                alert('Allocation can not be greater than Consent Recieved');
+                alert('Allocation can not be greater than Consent Received');
                 return false;
             }
 

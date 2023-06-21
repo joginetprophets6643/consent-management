@@ -45,7 +45,7 @@ class Super_user extends MY_Controller {
         $data['exam_name'] = get_exam_name($exam_id);
         $data['title'] = 'Invitation and Schedule List';
         $data['data'] = $this->Super_user_model->get_consent_data_by_super_user($exam_new_id);
-    
+       
         $this->load->view('admin/includes/_header', $data);
 
         $this->load->view('admin/exam/super_user_consent_data', $data);

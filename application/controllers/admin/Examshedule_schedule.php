@@ -616,7 +616,6 @@ class Examshedule_schedule extends MY_Controller {
 
                
 
-
                 $arrForInvitation = [
                     'invite_sent' => '1',
                     'invt_recieved' => '0'

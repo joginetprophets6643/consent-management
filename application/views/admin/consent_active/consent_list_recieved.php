@@ -56,6 +56,7 @@
            <!-- <a href="<?php //echo base_url("admin/examshedule_schedule/invitation_reply/" . urlencrypt($row['ref_id'])); ?>" title="Reply"   class="btn btn-success btn-xs reply-btn"> -->
            <!-- <a href="<?= base_url("admin/examshedule_schedule/invitation_reply/" . urlencrypt($row['id'])); ?>" title="Reply"   class="btn btn-success btn-xs reply-btn"> -->
            <?php
+           
                if($row['circonsents_signstamp_status'] == 1){
                ?>
            <a class="d-none" href="<?= base_url("admin/examshedule_schedule/invitation_reply/" . urlencrypt($row['cieid'])); ?>" title="Reply"   class="btn btn-success">
