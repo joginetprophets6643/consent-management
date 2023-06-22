@@ -118,7 +118,7 @@
 
                                         <h3 class="card-title" center>
 
-                                            Please form check, Stamp and upload documents
+                                        Kindly check the following information, then sign and stamp it and then scan and upload it.
 
                                         </h3>
 

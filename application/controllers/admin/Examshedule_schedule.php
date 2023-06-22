@@ -1060,7 +1060,7 @@ class Examshedule_schedule extends MY_Controller {
                     $action =   'Recieved';
                 }
                 elseif ($row["superuserStatus"]==0) {
-                    $action =   'Pending';
+                    $action =   'Pending at government officer for approval';
                 }
                 else{
                     $action =   '<input type="checkbox" id="a" class="send_email_ids" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">

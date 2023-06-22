@@ -33,12 +33,7 @@
                                 </div>
                                 <div class="steps-content">
                                     <h3>Step <span class="step-number">6</span></h3>
-                                    <!--<p class="step-number-content active">Enter your School/College Information.</p>
-                                            <p class="step-number-content d-none">Enter your School/College Principal Deatils</p>
-                                            <p class="step-number-content d-none">Enter your School/College Centre Superintendent Details</p>
-                                            <p class="step-number-content d-none">Enter your School/College Centre Infrastructure Details.</p>
-                                            <p class="step-number-content d-none">Add Bank Details</p>
-                                            <p class="step-number-content d-none">Add your School/College Images as per required filed</p>-->
+                                   
                                 </div>
                                 <ul class="progress-bar">
                                     <li>School/College/University Information <br>स्कूल/कॉलेज/विश्वविद्यालय विवरण</li>
@@ -68,14 +63,14 @@
 
                                         </div>
                                     </div>
-                                    <p class="formatColor mt-4 mb-0"> <strong> Instructions :</strong> Kindly click on preview and download form and take the printout of filled information, sign it and then click on ready to upload the form with sign and stamp and images.</p>
+                                    <!-- <p class="formatColor mt-4 mb-0"> <strong> Instructions :</strong> Kindly click on preview and download form and take the printout of filled information, sign it and then click on ready to upload the form with sign and stamp and images.</p> -->
                                     <div class="input-text">
                                         <div id="input-text down_form_up">
 
 
                                             <input type="checkbox" id="checkbox2" onchange="valueChanged()"
                                                 name="checkbox" value="">
-                                            <label for="checkbox2"> Ready to upload the form with sign and stamp and images</label><br>
+                                            <label for="checkbox2">Ready to upload the images</label><br>
                                         </div>
                                     </div>
 
