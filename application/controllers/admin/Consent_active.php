@@ -810,17 +810,11 @@ class Consent_active extends MY_Controller
             $sub_info[$k]['no_candidate_array'] = $no_candidate_array[$k];
             $sub_info[$k]['exmin_ceter_option_array'] = $exmin_ceter_option_array[$k];
         }
-        // echo '<pre>';
-        // print_r($data['admin']['exmin_ceter_option']);
-        // echo '<hr/>';
-        // print_r($sub_info);
 
-
-        // die;
         $sub_info['sub_info'] = $sub_info;
         $this->load->view('admin/includes/_header2', $sub_info);
         $this->load->view('admin/consent_active/consent_letter_preview', $data);
-        // $this->load->view('admin/includes/_footer');
+
     }
 
     public function preview_form($id)

@@ -1527,7 +1527,6 @@ public function get_deactivation_data($id) {
 
         $filterData = $this->session->userdata('filter_keyword');
 
-        // $this->db->where('status','1');
         $this->db->where('ref_id', $ref_id);
         $this->db->where('invt_recieved', '1');
         $this->db->order_by('ci_exam_according_to_school.id', 'desc');
