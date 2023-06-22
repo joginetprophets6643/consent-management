@@ -665,8 +665,9 @@ function single_send_invitations(id) {
         success: function(result) {
             if (result) {
                 $('.loader').addClass('d-none');
-                alert("Consent sent sucessfully");
+                alert("Consent sent sucessfully ");
                 this.checked = false;
+                // return false;
                 window.location.reload();
             }
 
@@ -726,7 +727,7 @@ $('#select_single_count').click(function(event) {
             success: function(result) {
                 if (result) {
                     $('.loader').addClass('d-none');
-                    alert("Consent sent sucessfully");
+                    alert("Consent sent sucessfully ");
                     $(':checkbox.send_email_ids').each(function() {
                         this.checked = false;
                     });
@@ -752,7 +753,6 @@ $(document).ready(function() {
         } else {
             arr = arr.filter(item => item !== e.target.value)
         }
-        console.log(arr,'oggjojgrjg');
         $.ajax({
             type: "GET",
             url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
@@ -761,7 +761,7 @@ $(document).ready(function() {
                 'csfr_token_name': csfr_token_value
             },
             success: function(data) {
-                alert(data);
+        
                 $('#schoolCount').removeClass("d-none");
                 $('#schoolWiseCounts').html(data);
             }

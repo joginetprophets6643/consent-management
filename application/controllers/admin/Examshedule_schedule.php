@@ -700,6 +700,7 @@ class Examshedule_schedule extends MY_Controller {
         }else{
             
             $id = $this->input->get('id');
+
             $arr = [
                 'exam_name' => $data['exam'][0]['subjectline'],
                 'ref_id' => $new_id,
@@ -710,7 +711,8 @@ class Examshedule_schedule extends MY_Controller {
                 'invite_sent' => '1',
                 'invt_recieved' => '0'
             ];
-          
+            // echo $id."==".$new_id."==";
+            // die();
             $this->db->from('ci_registration_invitation');
             $this->db->where('ci_registration_invitation.school_id', $id);
             $this->db->where('ci_registration_invitation.ref_id', $new_id);
@@ -730,6 +732,17 @@ class Examshedule_schedule extends MY_Controller {
                 'consents_signstamp_status'=>'0'
             ];
             $this->db->insert('ci_registration_invitation', $dataForNewTable);
+
+            $newDataForconsent = [
+                'ref_id' => $new_id,
+                'exam_name' => $data['exam'][0]['subjectline'],
+                'invite_sent' => '1',
+                'invt_recieved' => '0',
+                'school_id'=>$id,
+            ];
+    
+            $this->db->insert('ci_exam_according_to_school', $newDataForconsent);
+            // $this->db->where(['school_id' => $id])->update('ci_exam_according_to_school', $newDataForconsent);
         }
 
 
@@ -738,14 +751,16 @@ class Examshedule_schedule extends MY_Controller {
             $this->db->where(['id' => $new_id])->update('ci_exam_invitation', $arrForInvitation);
        
             
-           $newDataForconsent = [
-                'ref_id' => $new_id,
-                'exam_name' => $data['exam'][0]['subjectline'],
-                'invite_sent' => '1',
-                'invt_recieved' => '0',
-            ];
+        //    $newDataForconsent = [
+        //         'ref_id' => $new_id,
+        //         'exam_name' => $data['exam'][0]['subjectline'],
+        //         'invite_sent' => '1',
+        //         'invt_recieved' => '0',
+        //     ];
     
-            $this->db->where(['school_id' => $id])->update('ci_exam_according_to_school', $newDataForconsent);
+        //     $this->db->where(['school_id' => $id])->update('ci_exam_according_to_school', $newDataForconsent);
+
+            
             $data['user_data'] = $this->Exam_model->get_all_invites_idsupdate($id);   
                    // Message for Mobile 
             $examName = get_exam_name($data['exam'][0]['exam_name']);
@@ -811,14 +826,21 @@ class Examshedule_schedule extends MY_Controller {
         $this->db->where(['id' => $id])->update('ci_exam_registration', $arr);
 
         $this->db->where(['id' => $new_id])->update('ci_exam_invitation', $arrForInvitation);
-       $newDataForconsent = [
-            'ref_id' => $new_id,
-            'exam_name' => $data['exam'][0]['subjectline'],
-            'invite_sent' => '0',
-            'invt_recieved' => '0',
-            'superuserStatus' => '0',
-        ];
-        $this->db->where(['school_id' => $id])->update('ci_exam_according_to_school', $newDataForconsent);
+
+    //    $newDataForconsent = [
+    //         'ref_id' => $new_id,
+    //         'exam_name' => $data['exam'][0]['subjectline'],
+    //         'invite_sent' => '0',
+    //         'invt_recieved' => '0',
+    //         'superuserStatus' => '0',
+    //     ];
+
+        $this->db->from('ci_exam_according_to_school');
+        $this->db->where('ci_exam_according_to_school.school_id', $id);
+        $this->db->where('ci_exam_according_to_school.ref_id', $new_id);
+        $this->db->delete('ci_exam_according_to_school');
+
+        // $this->db->where(['school_id' => $id])->update('ci_exam_according_to_school', $newDataForconsent);
         // echo 'ok';
     }
     public function send_invitation_user_all_not_recieved_consent() {

@@ -109,7 +109,8 @@ class Certificate_model extends CI_Model {
     }
     
     public function get_registration_preview($id,$ref_id) {
-        $query = $this->db->get_where('ci_exam_registration', array('admin_id' => $id, 'ref_id' => $ref_id));
+        // $query = $this->db->get_where('ci_exam_registration', array('admin_id' => $id, 'ref_id' => $ref_id));
+        $query = $this->db->get_where('ci_exam_according_to_school', array('admin_id' => $id, 'ref_id' => $ref_id));
         // echo $this->db->last_query();
         return $result = $query->row_array();
     }
@@ -418,8 +419,6 @@ public function get_all_recieved_consent() {
     public function editNewDataForExam($data) {
         $ref_id = $data['ref_id'];
         $school_id = $data['school_id'];
-        $admin_id = $this->session->userdata('admin_id');
-        $this->db->where('admin_id', $admin_id);
         $this->db->where('ref_id', $ref_id);
         $this->db->where('school_id', $school_id);
         $this->db->update('ci_exam_according_to_school', $data);
