@@ -220,28 +220,19 @@ class Mailer
 
 
                 $content = str_replace('{PASSWORD}',$data['password'],$content);
-
-
-
                 return $content;
-
-
-
             break;
-
-
-
             case 'primary-registration':
                 return $content;
             break;
-
             case 'registration-completed':
                 return $content;
             break;
-
-
             case 'send-consent':
-                
+                $content = str_replace('{examname}',$data['examname'],$content);
+                return $content;
+            break;
+            case 'send-consent-1':
                 $content = str_replace('{examname}',$data['examname'],$content);
                 return $content;
             break;

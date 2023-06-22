@@ -578,6 +578,7 @@ class Examshedule_schedule extends MY_Controller {
     public function send_invitation_user_all() {
 
         $ids = $this->input->get('data');
+    
         $send_consent_id = $this->input->get('send_consent_id');
         $new_id = urldecrypt($send_consent_id); 
         $data['exam'] = $this->Exam_model->get_invites_byid($new_id);
@@ -585,6 +586,7 @@ class Examshedule_schedule extends MY_Controller {
         
         if(!empty($ids)){
             foreach ($ids as $id) {
+
                 $arr = [
                     'exam_name' => $data['exam'][0]['subjectline'],
                     'ref_id' => $new_id,
@@ -597,7 +599,6 @@ class Examshedule_schedule extends MY_Controller {
                 $this->db->where('ci_registration_invitation.ref_id', $new_id);
                 $queryNew = $this->db->get();
                 if ($queryNew->num_rows()== 0) {
-                    
                     $dataForNewTable = [
                         'school_id' =>$id,
                         'exam_name' => $data['exam'][0]['subjectline'],
@@ -611,10 +612,16 @@ class Examshedule_schedule extends MY_Controller {
                         'consents_signstamp_status'=>'0'
                     ];
                     $this->db->insert('ci_registration_invitation', $dataForNewTable);
+                    $newDataForconsent = [
+                        'ref_id' => $new_id,
+                        'exam_name' => $data['exam'][0]['subjectline'],
+                        'invite_sent' => '1',
+                        'invt_recieved' => '0',
+                        'school_id'=>$id,
+                    ];
+                    $this->db->insert('ci_exam_according_to_school', $newDataForconsent);
                     
                 }
-
-               
 
                 $arrForInvitation = [
                     'invite_sent' => '1',
@@ -623,79 +630,28 @@ class Examshedule_schedule extends MY_Controller {
                  $this->db->where(['id' => $new_id])->update('ci_exam_invitation', $arrForInvitation);
                
                  $this->db->where(['id' => $id])->update('ci_exam_registration', $arr);
-
-                $newDataForconsent = [
-                    'ref_id' => $new_id,
-                    'exam_name' => $data['exam'][0]['subjectline'],
-                    'invite_sent' => '1',
-                    'invt_recieved' => '0',
-                ];
-                $this->db->where(['school_id' => $id])->update('ci_exam_according_to_school', $newDataForconsent);
+                 $email = getEmail($id);
+                 $phone = getMobile($id);
+                 $examName = get_exam_name($data['exam'][0]['exam_name']);
+                 $messageP1='Dear Sir/Madam , ';
+                 $messageP1.= 'Consent for the '.$examName.' has been sent for your kind approval. Kindly login into your account on consent portal to complete the consent sending process.';
+                 $messageP1.='Regards';
+                 $messageP1.='UKPSC, Haridwar';
+                 
+               
+                 $template_id = "1007076974594881905";
+    
+                 sendSMS($phone,$messageP1,$template_id);
+                 $mail_data = array(
+                     'examname' => $examName
+                   
+                 );
+              
+                 $this->load->helper('email_helper');
+                 $this->mailer->mail_template($email,'send-consent-1',$mail_data);
+ 
                
             }
-
-
-            $i = 0;
-            foreach ($ids as $id) {
-
-                $data[$i] = $this->Exam_model->get_all_invites_idsupdate($id);  
-
-                foreach($data[$i] as $email => $value){
-                    $emails[$i] = $value['email'];
-                    $emails[$i] = $value['principal_name'];
-                }
-
-                $i++;
-            }
-        
-            $i = 0;
-            foreach ($ids as $id) {
-
-                $data['user_data'][$i] = $this->Exam_model->get_all_invites_ids($id); 
-                $i++;
-            }
-
-
-        
-            foreach($data['user_data'] as $value){
-                foreach($value as $singledata){
-
-                $examName = get_exam_name($data['exam'][0]['exam_name']);
-                $messageP1='Dear Sir/Madam ,';
-                $messageP1.='Consent for the  '.$examName.' of UKPSC has been applied and submitted for your kind perusal.';
-                $messageP1.='Regards,';
-                $messageP1.='Centre';
-
-                // Message For Email Address 
-                // $messageE1='Dear Sir/Madam ,<br>';
-                // $messageE1.='Consent for the  '.$examName.' of UKPSC has been applied and submitted for your kind perusal.<br>';
-                // $messageE1.='Regards,<br>';
-                // $messageE1.='Centre';
-
-      
-                
-                $email = $singledata['email'];
-                $phone = $singledata['pri_mobile'];
-                // $template_id = "1007076974594881905";
-                $template_id ="1007261310462557602";
-                // EMAIL AND MESSAGE SEND UDING TEMPLETE
-                sendSMS($phone,$messageP1,$template_id);
-                $mail_data = array(
-                    'examname' => $examName
-                  
-                );
-             
-                $this->load->helper('email_helper');
-                $this->mailer->mail_template($email,'send-consent',$mail_data);
-
-                // sendEmail($email,$messageE1,$template_id);
-      
-
-                }
-            }
-  
-
-        
         
         }else{
             
@@ -711,8 +667,7 @@ class Examshedule_schedule extends MY_Controller {
                 'invite_sent' => '1',
                 'invt_recieved' => '0'
             ];
-            // echo $id."==".$new_id."==";
-            // die();
+        
             $this->db->from('ci_registration_invitation');
             $this->db->where('ci_registration_invitation.school_id', $id);
             $this->db->where('ci_registration_invitation.ref_id', $new_id);
@@ -742,7 +697,6 @@ class Examshedule_schedule extends MY_Controller {
             ];
     
             $this->db->insert('ci_exam_according_to_school', $newDataForconsent);
-            // $this->db->where(['school_id' => $id])->update('ci_exam_according_to_school', $newDataForconsent);
         }
 
 
@@ -751,39 +705,17 @@ class Examshedule_schedule extends MY_Controller {
             $this->db->where(['id' => $new_id])->update('ci_exam_invitation', $arrForInvitation);
        
             
-        //    $newDataForconsent = [
-        //         'ref_id' => $new_id,
-        //         'exam_name' => $data['exam'][0]['subjectline'],
-        //         'invite_sent' => '1',
-        //         'invt_recieved' => '0',
-        //     ];
-    
-        //     $this->db->where(['school_id' => $id])->update('ci_exam_according_to_school', $newDataForconsent);
+            $data['user_data'] = $this->Exam_model->get_all_invites_idsupdate($id); 
 
-            
-            $data['user_data'] = $this->Exam_model->get_all_invites_idsupdate($id);   
                    // Message for Mobile 
             $examName = get_exam_name($data['exam'][0]['exam_name']);
-            
-            // $messageP1='Dear Sir/Madam ,';
-            // $messageP1.='Consent for the '.$examName.' has been sent for your kind approval. Kindly login into your account on consent portal to complete the consent sending process.';
-            // $messageP1.='Regards,';
-            // $messageP1.='UKPSC, Haridwar';
-            // Message For Email Address 
-            // $messageE1='Dear Sir/Madam ,<br>';
-            // $messageE1.='Consent for the '.$examName.' has been sent for your kind approval. Kindly login into your account on consent portal to complete the consent sending process.<br>';
-            // $messageE1.='Regards,<br>';
-            // $messageE1.='UKPSC, Haridwar';
-            $messageP1='Dear Sir/Madam ,';
-            $messageP1.='Consent for the  '.$examName.' of UKPSC has been applied and submitted for your kind perusal.';
-            $messageP1.='Regards,';
-            $messageP1.='Centre';
-            
+             $messageP1='Dear Sir/Madam ,';
+            $messageP1.= 'Consent for the '.$examName.' has been sent for your kind approval. Kindly login into your account on consent portal to complete the consent sending process.';
+            $messageP1.='Regards';
+            $messageP1.='UKPSC, Haridwar';
             $email = $data['user_data'][0]['email'];
             $phone = $data['user_data'][0]['pri_mobile'];
-            // $template_id = "1007076974594881905";
-            $template_id ="1007261310462557602";
-            // EMAIL AND MESSAGE SEND UDING TEMPLETE
+            $template_id = "1007076974594881905";
             sendSMS($phone,$messageP1,$template_id);
             $mail_data = array(
                 'examname' => $examName
@@ -791,8 +723,8 @@ class Examshedule_schedule extends MY_Controller {
             );
            
             $this->load->helper('email_helper');
-            $this->mailer->mail_template($email,'send-consent',$mail_data);
-            // sendEmail($email,$messageE1,$template_id);
+            $this->mailer->mail_template($email,'send-consent-1',$mail_data);
+
         }
         
 

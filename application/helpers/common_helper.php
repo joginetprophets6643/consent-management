@@ -464,6 +464,22 @@ function getSchoolName($school_id)
     $exam_center_code = isset($q['school_name'])?$q['school_name']:'';
     return $exam_center_code;
 }
+function getMobile($school_id)
+{
+    $ci = & get_instance();
+    $q = $ci->db->select('pri_mobile')->where('id',$school_id)
+         ->get('ci_exam_registration')->row_array();
+    $mobile = isset($q['pri_mobile'])?$q['pri_mobile']:'';
+    return $mobile;
+}
+function getEmail($school_id)
+{
+    $ci = & get_instance();
+    $q = $ci->db->select('email')->where('id',$school_id)
+         ->get('ci_exam_registration')->row_array();
+    $email = isset($q['email'])?$q['email']:'';
+    return $email;
+}
 function getConsentAllocate_max($school_id)
 {
     $ci = & get_instance();

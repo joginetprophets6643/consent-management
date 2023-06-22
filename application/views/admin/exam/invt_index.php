@@ -731,6 +731,7 @@ $('#select_single_count').click(function(event) {
                     $(':checkbox.send_email_ids').each(function() {
                         this.checked = false;
                     });
+                    
                     window.location.reload();
                 }
             }

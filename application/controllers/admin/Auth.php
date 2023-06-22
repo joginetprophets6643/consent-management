@@ -240,24 +240,6 @@ class Auth extends MY_Controller {
 		            }
 		        }        
 			
-				// $this->form_validation->set_rules('school_registration_number', 'school_registration_number', 'trim|required');
-				// $this->form_validation->set_rules('email', 'Email', 'trim|valid_email|required');
-
-				// $this->form_validation->set_rules('email', 'Email', 'trim|is_unique[ci_admin.email]|required');
-				
-				// $this->form_validation->set_rules('email', 'Email', 'required|callback_email_unique');
-				// $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[ci_admin.email]');
-				// $this->form_validation->set_rules('school_registration_number', "Registration Number already registered<br/>पंजीकरण संख्या पहले से पंजीकृत<br/>", 'required|is_unique|[ci_admin.school_registration_number]');
-				
-				// if ($this->form_validation->run() == FALSE){
-				// 	echo '<pre>';
-				// 	echo 'email duplicate';
-				// 	exit;
-				// }else{
-				// 	echo '<pre>';
-				// 	echo 'email not duplicate';
-				// 	exit;
-				// }	
 
 				$school_registration_result = $this->auth_model->schoolregistrationcheck($this->input->post('school_registration'));
 				$result = $this->auth_model->emailcheck($this->input->post('email'));
@@ -291,21 +273,14 @@ class Auth extends MY_Controller {
 					$completeAddress = $this->input->post('address1')." ".$this->input->post('address2')." ".$this->input->post('address3');
 				
 					$uni_sch_reg =  substr($a,1,6);
-					// print_r($uni_sch_reg); die();
-
 						$data = array(
 							'school_name' => $this->input->post('school_name'),
 							'username' => $this->input->post('email'),
-							// 'uni_sch_reg' =>$school_registration ,
 							'uni_sch_reg' =>$this->input->post('school_registration'),
 							'school_registration_number' => $uni_sch_reg,
-							// 'address' => $this->input->post('address'),
 							'address' => $completeAddress,
 							'landmark' => $this->input->post('landmark'),
-							// 'state' => $this->input->post('district'),
 							'district' => $this->input->post('district'),
-							// 'district' => $this->input->post('state'),
-							// 'admin_role_id' => 6, // By default i putt role is 2 for registraiton
 							'admin_role_id' => 6, // By default i putt role is 2 for registraiton
 							'city' => $this->input->post('city'),
 							'principal_name' => $this->input->post('principal_name'),
@@ -335,7 +310,7 @@ class Auth extends MY_Controller {
 
 						$to = $data['email'];
 
-						$email = $this->mailer->mail_template($to,'email-verification',$mail_data);
+						
 						// Message for Mobile 
 					
 						$messageP1='Dear Sir/Madam ,';
@@ -348,7 +323,9 @@ class Auth extends MY_Controller {
 						$template_id = "1007239655187710009";
 						// EMAIL AND MESSAGE SEND UDING TEMPLETE
 						sendSMS($phone,$messageP1,$template_id);
+						
 						$emailll = $this->mailer->mail_template($email,'primary-registration');
+						$email = $this->mailer->mail_template($to,'email-verification',$mail_data);
 
 						// sendEmail($email,$messageE1,$template_id);
 
