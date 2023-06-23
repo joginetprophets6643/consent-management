@@ -279,10 +279,22 @@ class Master extends MY_Controller
     }
     public function quetion_paper_del($id)
     {
-        // echo "here".urldecrypt($id);die();
+        
+        $id =  urldecrypt($id);
+
+        // $examId = getExamIdFromSubjectList($id); 
+        // echo $examId; 
+        // die();
+        // ci_subject
+        // ci_exam_invitation
+        // ci_candidate_app
+
         $this->rbac->check_operation_access();
 
-        $this->db->delete('ci_subject', ['id' => urldecrypt($id)]);
+        $this->db->delete('ci_subject', ['id' => $id]);
+
+        // $this->db->delete('ci_exam_invitation', ['id' => $id]);
+        // $this->db->delete('ci_candidate_app', ['id' => $id]);
 
         $this->session->set_flashdata('success', 'Deleted Successfully!<br/>सफलतापूर्वक हटा दिया गया!');
 
@@ -291,21 +303,25 @@ class Master extends MY_Controller
 
     public function exam_del($id)
     {
-        // $this->rbac->check_operation_access();
+     
+        $id =  urldecrypt($id);
+        $ref_id = get_exam_namewithStatusOne($id);
+        $this->db->delete('ci_exam_master', ['id' => $id]);
+        $this->db->delete('ci_exam_invitation', ['exam_name' => $id]);
+        $this->db->delete('ci_subject', ['exam_id' => $id]);
+        $this->db->delete('ci_candidate_app', ['exam_name' => $id]);
 
-        $this->db->delete('ci_exam_master', ['id' => urldecrypt($id)]);
-
+        $this->db->delete('ci_registration_invitation', ['ref_id' => $ref_id]);
+        $this->db->delete('examshiftchoice', ['examId' => $ref_id]);
+        $this->db->delete('ci_exam_according_to_school', ['ref_id' => $ref_id]);
+        $this->db->delete('ci_allocation_table', ['exam_id' => $ref_id]);
+       
         $this->session->set_flashdata('success', 'Deleted Successfully!<br/>सफलतापूर्वक हटा दिया गया!');
-
         redirect(base_url('admin/master/exam_list'));
     }
 
 
-    // public function exam_schedule(){
-
-    //     print_r("hi"); die();   
-
-    // }
+ 
     public function app_of_candidate()
     {
         // $this->rbac->check_operation_access();
@@ -548,6 +564,7 @@ class Master extends MY_Controller
     {
 
         $data['info'] = $this->Exam_model->get_all_invites();
+         
 
         $this->load->view('admin/exam/invitation_list', $data);
     }
@@ -556,11 +573,7 @@ class Master extends MY_Controller
     {
 
         $data['id'] = ($id);
-        // echo urldecrypt($id);
         $data['admin'] = $this->Exam_model->get_invitation_data(urldecrypt($id));
-
-        // print_r($data['admin']);
-        // die();
         $data['states'] = $this->location_model->get_states();
 
         $this->load->view('admin/includes/_header');
@@ -570,7 +583,12 @@ class Master extends MY_Controller
 
     public function date_sheet_del($id)
     {
-        $this->db->delete('ci_exam_invitation', array('id' => urldecrypt($id)));
+        $id =  urldecrypt($id);
+        $this->db->delete('ci_registration_invitation', ['ref_id' => $id]);
+        $this->db->delete('examshiftchoice', ['examId' => $id]);
+        $this->db->delete('ci_exam_according_to_school', ['ref_id' => $id]);
+        $this->db->delete('ci_allocation_table', ['exam_id' => $id]);
+        $this->db->delete('ci_exam_invitation', array('id' => $id));
         $this->session->set_flashdata('success', 'Deleted Successfully!<br/सफलतापूर्वक हटा दिया गया!>');
 
         redirect(base_url('admin/master/invt_list'));

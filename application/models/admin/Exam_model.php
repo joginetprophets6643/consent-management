@@ -1594,7 +1594,7 @@ public function get_deactivation_data($id) {
     }
 
     public function get_all_invites(){
-        // echo 'asdfsadfasfd';exit;
+       
         $admin_id = $this->session->userdata('admin_id');  
      
         $array = array('created_by' => $admin_id);

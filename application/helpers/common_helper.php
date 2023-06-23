@@ -554,6 +554,14 @@ function getEmail($school_id)
     $email = isset($q['email']) ? $q['email'] : '';
     return $email;
 }
+function getExamIdFromSubjectList($subjectId)
+{
+    $ci = &get_instance();
+    $q = $ci->db->select('exam_id')->where('id', $subjectId)
+        ->get('ci_subject')->row_array();
+    $exam_id = isset($q['exam_id']) ? $q['exam_id'] : '';
+    return $exam_id;
+}
 function getConsentAllocate_max($school_id)
 {
     $ci = &get_instance();

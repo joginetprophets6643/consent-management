@@ -82,8 +82,7 @@ class Consent_active extends MY_Controller
 
 
         $data["info"] = isset($get_full_data) ? $get_full_data : '';
-        // print_r($data["info"]);
-        // die();
+      
         // 
         $this->load->view("admin/consent_active/consent_list_recieved", $data);
     }
@@ -673,6 +672,8 @@ class Consent_active extends MY_Controller
                     $this->mailer->mail_template($email, 'apply-consent-school', $mail_data);
 
 
+
+
                     $data['fileupload'] = 'fileupload';
                     $this->session->set_flashdata('consent_recievedsuss', 'Request for "Consent Letter" has been applied successfully! (""सहमति पत्र" के लिए अनुरोध सफलतापूर्वक लागू कर दिया गया है!)');
        
@@ -694,8 +695,7 @@ class Consent_active extends MY_Controller
             $data['admin'] = $this->admin_model->get_user_detail($admin_id);
             $data['user'] = $this->admin_model->get_center_data($admin_id, $ref_id);
             $data["info"] = $this->Certificate_model->get_all_active_consent();
-            // print_r($data["info"]);
-            // die();
+        
             $examinationid = $this->uri->segment(4);
             $examinationid;
 
@@ -751,11 +751,7 @@ class Consent_active extends MY_Controller
 
             $data = $this->security->xss_clean($data);
             $result = $this->Certificate_model->add_edit_step_data($data, $admin_id);
-            // if ($result) {
-            //     // $this->session->set_flashdata('success', 'Request for "Consent Letter" has been add successfully!');
-            //     redirect(base_url('admin/consent_active/consent_add_5'));
-
-            // }
+    
 
         } else {
 
