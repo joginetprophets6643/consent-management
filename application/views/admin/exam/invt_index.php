@@ -463,55 +463,56 @@ var table = $('#send_invitation_list').DataTable({
     "order": [
         [0, 'asc']
     ],
-    "columnDefs": [{
-            "targets": 0,
-            "name": "id",
-            'searchable': true,
-            'orderable': true
-        },
-        {
-            "targets": 1,
-            "name": "school_name",
-            'searchable': true,
-            'orderable': true
-        },
-        {
-            "targets": 2,
-            "name": "district",
-            'searchable': true,
-            'orderable': true
-        },
-        {
-            "targets": 3,
-            "name": "city",
-            'searchable': true,
-            'orderable': true
-        },
-        {
-            "targets": 4,
-            "name": "principal_name",
-            'searchable': true,
-            'orderable': true
-        },
-        {
-            "targets": 5,
-            "name": "ranking_admin",
-            'searchable': true,
-            'orderable': true
-        },
-        {
-            "targets": 6,
-            "name": "max_allocate_candidate",
-            'max_allocate_candidate': true,
-            'orderable': true
-        },
-        {
-            "targets": 7,
-            "name": "created_at",
-            'searchable': true,
-            'orderable': true
-        },
-    ]
+
+    // "columnDefs": [{
+    //         "targets": 0,
+    //         "name": "id",
+    //         'searchable': true,
+    //         'orderable': true
+    //     },
+    //     {
+    //         "targets": 1,
+    //         "name": "school_name",
+    //         'searchable': true,
+    //         'orderable': true
+    //     },
+    //     {
+    //         "targets": 2,
+    //         "name": "district",
+    //         'searchable': true,
+    //         'orderable': true
+    //     },
+    //     {
+    //         "targets": 3,
+    //         "name": "city",
+    //         'searchable': true,
+    //         'orderable': true
+    //     },
+    //     {
+    //         "targets": 4,
+    //         "name": "principal_name",
+    //         'searchable': true,
+    //         'orderable': true
+    //     },
+    //     {
+    //         "targets": 5,
+    //         "name": "ranking_admin",
+    //         'searchable': true,
+    //         'orderable': true
+    //     },
+    //     {
+    //         "targets": 6,
+    //         "name": "max_allocate_candidate",
+    //         'max_allocate_candidate': true,
+    //         'orderable': true
+    //     },
+    //     {
+    //         "targets": 7,
+    //         "name": "created_at",
+    //         'searchable': true,
+    //         'orderable': true
+    //     },
+    // ]
 });
 
 

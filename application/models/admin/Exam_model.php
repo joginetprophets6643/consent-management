@@ -102,51 +102,19 @@ class Exam_model extends CI_Model {
 	function get_all_registration_data() {
     
         $this->db->from('ci_exam_registration');
-
-        // if ($this->session->userdata('filter_state') != '') {
-            // $this->db->where('ci_exam_registration.state ',
-                    // $this->session->userdata('filter_state'));
-        // }
-        // if ($this->session->userdata('filter_state') != '' && $this->session->userdata('filter_district') != '') {
-            // $this->db->where('ci_exam_registration.district ',
-                    // $this->session->userdata('filter_district'));
-        // }
-
-        // if ($this->session->userdata('filter_status') != '') {
-            // $this->db->where('ci_exam_registration.file_movement ',
-                    // $this->session->userdata('filter_status'));
-        // }
-
         $admin_role_id = $this->session->userdata('admin_role_id');
-        // echo '<pre>'; echo $admin_role_id;exit;
-//        if ($admin_role_id == 1 || $admin_role_id == 2) {
-//            
-//            $this->db->where('ci_exam_registration.file_movement !=', 1);
-//        }
-//         if ($admin_role_id == 3 || $admin_role_id == 4) {
-//             $this->db->where('ci_exam_registration.state',
-//                     $this->session->userdata('state_id'));
-// //            $this->db->where('ci_exam_registration.file_movement !=', 1);
-//         }
+
         if ($admin_role_id == 5) {
               $this->db->where('ci_exam_registration.fileName6 is  NOT NULL');
         }
         if ($admin_role_id == 6) {
             $this->db->where('ci_exam_registration.fileName6 is  NOT NULL');
             $this->db->where('ci_exam_registration.created_by',$this->session->userdata('admin_id'));
-           
-            // $this->db->where('ci_exam_registration.fileName6 is  NOT NULL');
         }
 
         $filterData = $this->session->userdata('filter_keyword');
-
-        // $this->db->where('status','1');
-      
-        // $this->db->join('ci_exam_invitation','ci_exam_invitation.id = ci_exam_registration.ref_id');
         $this->db->order_by('ci_exam_registration.id', 'desc');
-		// echo $this->db->last_query(); die;
         $query = $this->db->get();
-        // echo 'here' ; print_r($query->num_rows()); die();
         $module = array();
     
         if ($query->num_rows() > 0) {
@@ -174,7 +142,7 @@ class Exam_model extends CI_Model {
             $this->db->where('ci_exam_registration.created_by',
                     $this->session->userdata('admin_id'));
         }
-
+        $this->db->where('ci_exam_registration.fileName6 is  NOT NULL');
         $filterData = $this->session->userdata('filter_keyword');
         $this->db->order_by('ci_exam_registration.id', 'desc');
         $query = $this->db->get();
@@ -185,45 +153,7 @@ class Exam_model extends CI_Model {
         }
         return $module;
     }
-    function get_all_search_registration_data_copy($state_name, $city_name, $grade_name) {
-
-        $this->db->from('ci_exam_registration');
-
-        if ($city_name != '' && $state_name != '' ) {
-
-            $this->db->where('ci_exam_registration.district', $state_name);
-            $this->db->where('ci_exam_registration.city', $city_name);
-        }
-
-        if ($state_name != '' || $state_name = '') {
-            
-            $this->db->where('ci_exam_registration.district', $state_name);
-        }
-        
-        
-        if ($grade_name != '') {
-
-            $this->db->where('ci_exam_registration.ranking_admin', $grade_name);
-        }
-        $admin_role_id = $this->session->userdata('admin_role_id');
-        if ($admin_role_id == 6) {
-            $this->db->where('ci_exam_registration.created_by',
-                    $this->session->userdata('admin_id'));
-        }
-
-        $filterData = $this->session->userdata('filter_keyword');
-
-        // $this->db->where('invite_sent',0);
-        $this->db->order_by('ci_exam_registration.id', 'desc');
-		// echo $this->db->last_query();
-        $query = $this->db->get();
-        $module = array();
-        
-        if ($query->num_rows() > 0) {
-            $module = $query->result_array();
-        }
-        return $module;
-    }
+ 
 // NEW LOGIC FOR COUNTS
     public function getTotalCountinDistrict($district_name,$city_name)
     {
@@ -1530,7 +1460,6 @@ public function get_deactivation_data($id) {
         $this->db->where('ref_id', $ref_id);
         $this->db->where('invt_recieved', '1');
         $this->db->order_by('ci_exam_according_to_school.id', 'desc');
-		// echo $this->db->last_query();
         $query = $this->db->get();
 
         $module = array();

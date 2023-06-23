@@ -268,6 +268,7 @@ class Examshedule_schedule extends MY_Controller {
         $exam_id = isset($_GET['exam_Id'])?$_GET['exam_Id']:'';
         $data['exam_id'] = isset($_GET['exam_Id'])?$_GET['exam_Id']:'';
         $data['data'] = $this->Exam_model->get_all_search_registration_data($state_name, $city_name, $grade_name,$exam_id);
+     
         $array = array('created_by' => $this->session->userdata('admin_id'));
         $this->load->view('admin/exam/sending_invitations', $data);
     }
@@ -1015,11 +1016,8 @@ class Examshedule_schedule extends MY_Controller {
     }
 
     public function consent_recieved_by_user_list() {
-        // urldecrypt($id)
         $id = urldecrypt($this->uri->segment(4));
-         
-        // $this->rbac->check_operation_access();
-        
+
         $data['states'] = $this->location_model->get_states();
          
         $data['title'] = 'Recieved Consent';

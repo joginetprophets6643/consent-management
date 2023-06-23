@@ -72,7 +72,8 @@
                            ?>
                              Recieved
                          <?php }else{
-                           ?>Pending<?php
+                           ?>Pending at government officer for approval	
+                           <?php
                          }?>
                         <?php }  if ($admin_role_id == 5 )  { ?>
                                              
