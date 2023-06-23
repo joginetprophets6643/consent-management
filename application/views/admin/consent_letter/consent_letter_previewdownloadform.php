@@ -92,7 +92,7 @@
                 <div class="d-inline-block">
                     <h3 class="card-title">
                         <i class="fa fa-pencil"></i>
-                        &nbsp; Consent Letter Form &nbsp; (सहमति पत्र प्रपत्र)
+                        &nbsp; Registration Form &nbsp; (पंजीकरण फॉर्म)
                     </h3>
                 </div>
             </div>

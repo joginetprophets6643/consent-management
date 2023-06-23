@@ -526,14 +526,13 @@ function createCaptcha() {
 
 
 $('#principal_name,#school_name').keydown(function(er) {
-    console.log(er.keyCode)
     if (er.altKey) {
 
         er.preventDefault();
     } else {
         var key = er.keyCode;
 
-        if (!((key == 8) ||(key===86)|| (key == 9) || (key == 32) || (key == 46) || (key == 189) || (key == 190) || (key >=
+        if (!((key == 222)||(key == 8) ||(key===86)|| (key == 9) || (key == 32) || (key == 46) || (key == 189) || (key == 190) || (key >=
                 65 && key <= 90))) {
             er.preventDefault();
             // alert("Please Enter Only Alphabets")

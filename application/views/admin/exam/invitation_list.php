@@ -129,7 +129,6 @@
                <td class="dataTables_empty" style="text-align: center;" colspan="5">No data available in table</td>               
             </tr> 
          <?php
-            echo "Given Array is empty";
          }
          ?>
 
