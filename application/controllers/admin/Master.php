@@ -21,7 +21,7 @@ class Master extends MY_Controller
     }
     public function quetion_paper_add()
     {
-        // echo '123456';exit;
+    
         $this->rbac->check_operation_access();
 
         if ($this->input->post()) {
@@ -120,11 +120,6 @@ class Master extends MY_Controller
                 $row['sub_name_hindi'] ? $row['sub_name_hindi'] : '',
 
                 $row['sub_code'] ? $row['sub_code'] : '',
-
-                // '<span class="btn btn-xs btn-success" title="status">' . $row['status'] . '<span>',
-
-                // '<a title="Edit"  class="update btn btn-sm btn-warning" href="' . base_url('admin/master/quetion_paper_edit/' . urlencrypt($row['id'])) . '"> <i class="fa fa-pencil-square-o"></i></a>
-
                 '<a title="Delete" class="delete btn btn-sm btn-danger" href="' .
                     base_url('admin/master/quetion_paper_del/' . urlencrypt($row['id'])) .
                     '" onclick="return confirm(\'Do you want to delete ?\nक्या आपको यकीन है?\')" > <i class="fa fa-trash-o"></i></a>',
@@ -132,8 +127,6 @@ class Master extends MY_Controller
         }
 
         $records['data'] = $data;
-        // echo '<pre>';print_r($records);exit;
-        // echo '<pre>';echo json_encode($records);exit;
         echo json_encode($records);
     }
 
@@ -219,14 +212,7 @@ class Master extends MY_Controller
             ];
 
             $data = $this->security->xss_clean($data);
-
-            // $result = $this->master_model->edit_subject_data($data, $id);
-
             $result = $this->db->update('ci_subject', $data)->where('id', $id);
-
-            // print_r($result);
-            // die();
-
             $this->session->set_flashdata('success', 'Subject has been updated successfully<br/विषय को सफलतापूर्वक अपडेट कर दिया गया है>');
 
             redirect(base_url('admin/master/quetion_paper_list'));
@@ -315,6 +301,7 @@ class Master extends MY_Controller
         $this->db->delete('examshiftchoice', ['examId' => $ref_id]);
         $this->db->delete('ci_exam_according_to_school', ['ref_id' => $ref_id]);
         $this->db->delete('ci_allocation_table', ['exam_id' => $ref_id]);
+        $this->db->delete('ci_mark_attendance_allocation', ['exam_id' => $ref_id]);
        
         $this->session->set_flashdata('success', 'Deleted Successfully!<br/>सफलतापूर्वक हटा दिया गया!');
         redirect(base_url('admin/master/exam_list'));
@@ -344,9 +331,7 @@ class Master extends MY_Controller
         $data['total'] = ($a['sum(number_of_can)']);
 
         $data['info'] = $this->Exam_model->get_all_candidate_data();
-
-        // $array_total_sum = array_sum($data['info'][0]['number_of_can']);
-        // echo '<pre>';print_r($data);exit;
+    
         $this->load->view('admin/exam/candidate_app_list', $data);
     }
 
@@ -493,7 +478,7 @@ class Master extends MY_Controller
 
     public function candidate_view($id)
     {
-
+       
         $data['admin'] = $this->Exam_model->get_data_candidate(urldecrypt($id));
         $data['states'] = $this->location_model->get_states();
         $data['role'] = $this->auth_model->get_auth_dd();
@@ -527,8 +512,6 @@ class Master extends MY_Controller
             $sub_info[$k]['subjectname'] = $subjects_array[$k];
         }
 
-
-        // echo '<pre>';print_r($sub_info); die();
         $sub_info['sub_info'] = $sub_info;
         $this->load->view('admin/includes/_header', $sub_info);
         $this->load->view('admin/exam/candidate_view', $data);
@@ -538,9 +521,19 @@ class Master extends MY_Controller
     public function candiate_del($id)
     {
 
-        // $this->rbac->check_operation_access();
+       $id =  urldecrypt($id);
+       $ref_id = get_exam_namewithStatusOne(getExamIdFromCandidateTable($id)); //
+    
+       $this->db->delete('ci_candidate_app', array('id' => $id)); 
 
-        $this->db->delete('ci_candidate_app', array('id' => urldecrypt($id)));
+       $this->db->delete('ci_registration_invitation', ['ref_id' => $ref_id]);
+       $this->db->delete('examshiftchoice', ['examId' => $ref_id]);
+       $this->db->delete('ci_exam_according_to_school', ['ref_id' => $ref_id]);
+       $this->db->delete('ci_allocation_table', ['exam_id' => $ref_id]);
+       $this->db->delete('ci_exam_invitation', array('id' => $ref_id));
+       $this->db->delete('ci_mark_attendance_allocation', ['exam_id' => $ref_id]);
+
+       
 
         $this->session->set_flashdata('success', 'Deleted Successfully!<br/सफलतापूर्वक हटा दिया गया!>');
 
@@ -584,11 +577,17 @@ class Master extends MY_Controller
     public function date_sheet_del($id)
     {
         $id =  urldecrypt($id);
+
+        $ref_id = get_exam_name_downloadreport($id);
+      
+        $this->db->delete('ci_candidate_app', ['exam_name' => $ref_id]);
+
         $this->db->delete('ci_registration_invitation', ['ref_id' => $id]);
         $this->db->delete('examshiftchoice', ['examId' => $id]);
         $this->db->delete('ci_exam_according_to_school', ['ref_id' => $id]);
         $this->db->delete('ci_allocation_table', ['exam_id' => $id]);
         $this->db->delete('ci_exam_invitation', array('id' => $id));
+        $this->db->delete('ci_mark_attendance_allocation', ['exam_id' => $id]);
         $this->session->set_flashdata('success', 'Deleted Successfully!<br/सफलतापूर्वक हटा दिया गया!>');
 
         redirect(base_url('admin/master/invt_list'));

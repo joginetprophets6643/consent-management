@@ -202,8 +202,8 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); 
 
 
 
-                                    <?php foreach ($sub_menu as $sub_nav): ?>
-
+                                    <?php foreach ($sub_menu as $sub_nav):  ?>
+                                        
 
 
                                         <li class="nav-item"  <?php if ($sub_nav['link']) {
@@ -225,10 +225,7 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); 
                                         } else {
 
 
-
                                             if (current_url() == base_url('admin/' . $nav['controller_name'])) { ?>
-
-
 
                                              style="background:#5f6d7b;"
 
@@ -241,53 +238,19 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); 
                                         } ?>>
 
 
-
+                                           <?php if(trans($sub_nav['name'])!="View Paper (Subject)"){ ?>
                                             <a href="<?= base_url('admin/' . $nav['controller_name'] . '/' . $sub_nav['link']) ?>" class="nav-link">
-
-
-
                                                 <i class="fa fa-circle-o nav-icon"></i>
-
-                                                
-
                                                 <p>
-
-                                                    <?php echo trans($sub_nav['name']) ?>
-
-                                                    
-
+                                                    <?php echo trans($sub_nav['name']);?>
                                                 </p>
-
-
-
                                             </a>
-
-
-
+                                            <?php } ?>
                                         </li>
 
-
-
-
-
-
-
                                     <?php endforeach; ?>
-
-
-
                                 </ul>
-
-
-
                             <?php endif; ?>
-
-
-
-                            <!-- /sub-menu -->
-
-
-
                         </li>
 
 

@@ -138,6 +138,12 @@ function get_exam_name_new($id)
     $ci = &get_instance();
     return @$ci->db->get_where('ci_exam_invitation', array('id' => $id))->row_array()['subjectline'];
 }
+
+function getExamIdFromCandidateTable($id)
+{
+    $ci = &get_instance();
+    return @$ci->db->get_where(' ci_candidate_app', array('id' => $id))->row_array()['exam_name'];
+}
 function get_exam_name_downloadreport($id)
 {
     $ci = &get_instance();
