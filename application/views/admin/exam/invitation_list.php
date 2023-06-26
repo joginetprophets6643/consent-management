@@ -34,7 +34,6 @@
 
          <?php
             if(!empty($info)){
-
                $i = 1;
                foreach ($info as $row):
                $admin_role_id = $this->session->userdata('admin_role_id');

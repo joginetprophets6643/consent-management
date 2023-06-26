@@ -655,7 +655,7 @@ class Consent_active extends MY_Controller
                     $phone = $fetch_controller_details['mobile_no'];
                 
                     $template_id ="1007261310462557602";
-
+                    $schoolName = getSchoolName($school_Id);
                     $messageP1='Dear Sir/Madam ,';
                     $messageP1.='Consent for the '.$examName.' of UKPSC has been applied and submitted for your kind perusal.';
                     $messageP1.='Regards';
@@ -664,7 +664,8 @@ class Consent_active extends MY_Controller
                     sendSMS($phone, $messageP1, $template_id);
 
                     $mail_data = array(
-                        'examname' => $examName
+                        'examname' => $examName,
+                        'Centre' => $schoolName
 
                     );
 

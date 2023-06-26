@@ -241,6 +241,7 @@ class Mailer
             break;
             case 'apply-consent-school':
                 $content = str_replace('{examname}',$data['examname'],$content);
+                $content = str_replace('{Centre}',$data['Centre'],$content);
                 return $content;
             break;
             case 'apply-consent-school-1':
