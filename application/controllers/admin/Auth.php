@@ -270,14 +270,15 @@ class Auth extends MY_Controller {
 					$ukpscid = $generateukpscidchar.$lastincrementid;
 			
 					$a=  $this->input->post('state').''.$this->input->post('city').''.time();
+
 					$completeAddress = $this->input->post('address1')." ".$this->input->post('address2')." ".$this->input->post('address3');
 				
-					$uni_sch_reg =  substr($a,1,6);
+					$uni_sch_reg =  substr($a,1,4);
 						$data = array(
 							'school_name' => $this->input->post('school_name'),
 							'username' => $this->input->post('email'),
 							'uni_sch_reg' =>$this->input->post('school_registration'),
-							'school_registration_number' => $uni_sch_reg,
+							'school_registration_number' => $uni_sch_reg.$lastincrementid,
 							'address' => $completeAddress,
 							'landmark' => $this->input->post('landmark'),
 							'district' => $this->input->post('district'),

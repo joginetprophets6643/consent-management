@@ -598,6 +598,7 @@ class Examshedule_schedule extends MY_Controller {
                 $this->db->from('ci_registration_invitation');
                 $this->db->where('ci_registration_invitation.school_id', $id);
                 $this->db->where('ci_registration_invitation.ref_id', $new_id);
+                
                 $queryNew = $this->db->get();
                 if ($queryNew->num_rows()== 0) {
                     $dataForNewTable = [

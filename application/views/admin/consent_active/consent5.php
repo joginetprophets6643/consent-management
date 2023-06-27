@@ -86,13 +86,14 @@
                                         <p>Add your School/College/University Images as per required filed</p>
                                     </div>
                                     <?php
+                                  
                                     $file_url =  base_url('uploads/consent_data/');
-                                    $fileNameType1 = pathinfo($file_url . "/" . $info[0]['fileName1'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info[0]['fileName1'];
-                                    $fileNameType2 = pathinfo($file_url . "/" . $info[0]['fileName2'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info[0]['fileName2'];
-                                    $fileNameType3 = pathinfo($file_url . "/" . $info[0]['fileName3'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info[0]['fileName3'];;
-                                    $fileNameType4 = pathinfo($file_url . "/" . $info[0]['fileName4'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info[0]['fileName4'];;
-                                    $fileNameType5 = pathinfo($file_url . "/" . $info[0]['fileName5'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info[0]['fileName5'];;
-                                    $fileNameType6 = pathinfo($file_url . "/" . $info[0]['fileName6'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info[0]['fileName6'];;
+                                    $fileNameType1 = pathinfo($file_url . "/" . $info['fileName1'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info['fileName1'];
+                                    $fileNameType2 = pathinfo($file_url . "/" . $info['fileName2'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info['fileName2'];
+                                    $fileNameType3 = pathinfo($file_url . "/" . $info['fileName3'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info['fileName3'];;
+                                    $fileNameType4 = pathinfo($file_url . "/" . $info['fileName4'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info['fileName4'];;
+                                    $fileNameType5 = pathinfo($file_url . "/" . $info['fileName5'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info['fileName5'];;
+                                    $fileNameType6 = pathinfo($file_url . "/" . $info['fileName6'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info['fileName6'];;
 
                                     ?>
                                     <div class="row">

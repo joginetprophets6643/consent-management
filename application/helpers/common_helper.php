@@ -165,6 +165,11 @@ function get_exam_name_new_id($id)
     $ci = &get_instance();
     return @$ci->db->get_where('ci_exam_invitation', array('id' => $id))->row_array()['exam_name'];
 }
+function getNewInvitationId($id)
+{
+    $ci = &get_instance();
+    return @$ci->db->get_where('ci_exam_invitation', array('exam_name' => $id))->row_array()['id'];
+}
 
 function get_auth_name($id)
 {
@@ -544,6 +549,14 @@ function getSchoolName($school_id)
         ->get('ci_exam_registration')->row_array();
     $exam_center_code = isset($q['school_name']) ? $q['school_name'] : '';
     return $exam_center_code;
+}
+function getSchoolNameFromEmailId($emailId)
+{
+    $ci = &get_instance();
+    $q = $ci->db->select('id')->where('email', $emailId)
+        ->get('ci_exam_registration')->row_array();
+    $id = isset($q['id']) ? $q['id'] : '';
+    return $id;
 }
 function getMobile($school_id)
 {

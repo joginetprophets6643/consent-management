@@ -33,23 +33,25 @@
          foreach ($info as $row):
          $admin_role_id = $this->session->userdata('admin_role_id');
          $admin_id = $this->session->userdata('admin_id'); 
+         $schoolId = getSchoolNameFromEmailId($this->session->userdata('username')); 
+         
       ?>
       <tr>
          <td>
             <?= $i ?>
          </td>
          <td>
-            <?php get_exam_name($row['cieid']); ?> 
-            <span style="color: #E14658;"> <?= get_exam_name(get_exam_name_new_id($row['cieid'])) ?></span>
+            <?php get_exam_name($row['ref_id']); ?> 
+            <span style="color: #E14658;"> <?= get_exam_name(get_exam_name_new_id($row['ref_id'])) ?></span>
          </td>
          <td>
-            <span style="color: #E14658;"> <?= $row['ciesubjectline'] ?></span>
+            <span style="color: #E14658;"> <?= $row['exam_name'] ?></span>
          </td>
          <td>
-            <?= date("d-m-Y", strtotime($row['ciestartdate']));?>
+            <?= date("d-m-Y", strtotime($row['startdate']));?>
          </td>
          <td>
-            <?= date("d-m-Y", strtotime($row['cieenddate']));?>
+            <?= date("d-m-Y", strtotime($row['enddate']));?>
          </td>
          <td style="text-align:center;">
          <?php  if ($admin_role_id == 6 )  { ?>
@@ -57,9 +59,9 @@
            <!-- <a href="<?= base_url("admin/examshedule_schedule/invitation_reply/" . urlencrypt($row['id'])); ?>" title="Reply"   class="btn btn-success btn-xs reply-btn"> -->
            <?php
            
-               if($row['circonsents_signstamp_status'] == 1){
+               if($row['consents_signstamp_status'] == 1){
                ?>
-           <a class="d-none" href="<?= base_url("admin/examshedule_schedule/invitation_reply/" . urlencrypt($row['cieid'])); ?>" title="Reply"   class="btn btn-success">
+           <a class="d-none" href="<?= base_url("admin/examshedule_schedule/invitation_reply/" . urlencrypt($row['ref_id'])); ?>" title="Reply"   class="btn btn-success">
             <i class="fa fa-reply"></i>
            </a>
            <button type="button" class="btn btn-sec" disabled>Applied</button>
@@ -69,11 +71,10 @@
            
             <?php //echo '<pre>'; print_r($row['ref_id']); exit; ?>
             <?php
-               if($row['circonsents_signstamp_status'] != 1){
+               if($row['consents_signstamp_status'] != 1){
                ?>
-                  <!-- <a href="<?= base_url("admin/consent_active/consent_add/" . $_SESSION['admin_id']).'/'.$row['id']; ?>" title="Apply" rel="<?php echo $row['id'] ?>" class="btn btn-warning btn-xs update_db apply-btn"> -->
             
-                  <a href="<?= base_url("admin/consent_active/consent_add/" . $_SESSION['admin_id']).'/'.$row['cieid']; ?>" title="Apply" rel="<?php echo $row['cieid'] ?>" class="btn btn-warning">
+                  <a href="<?= base_url("admin/consent_active/consent_add/" . $schoolId).'/'.$row['ref_id']; ?>" title="Apply" rel="<?php echo $row['ref_id'] ?>" class="btn btn-warning">
                      Apply  
                   </a>   
             <?php

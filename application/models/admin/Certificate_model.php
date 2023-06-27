@@ -15,11 +15,11 @@ class Certificate_model extends CI_Model {
     }
 
     // getting register details
-    public function get_user_detail_register($admin_id,$exam_id){
+    public function get_user_detail_register($school_id,$exam_id){
         $admin_id = $this->session->userdata('admin_id');
         
-        $this->db->where('admin_id',$admin_id);
-        $this->db->where('ref_id',$exam_id);
+        $this->db->where('id',$school_id);
+        // $this->db->where('ref_id',$exam_id);
         $this->db->from('ci_exam_registration');
         $this->db->order_by('ci_exam_registration.id', 'desc');
 
@@ -50,6 +50,14 @@ class Certificate_model extends CI_Model {
             $this->db->update('ci_exam_registration', $data);
             return $result;
         }
+    }
+    public function get_user_detail_register_modify(){
+        $admin_id = $this->session->userdata('admin_id');
+        $this->db->where('admin_id',$admin_id);
+            $this->db->from('ci_admin');
+            $query = $this->db->get();
+            $result = $query->result_array();
+            return $result;
     }
 
     public function generatedistrict($district){
@@ -319,10 +327,27 @@ class Certificate_model extends CI_Model {
         $school_id = $this->db->get();
         $school_id = $school_id->row_array();
         $school_id = isset($school_id['id'])?$school_id['id']:0;
+        // echo $school_id;
+        // die();
         // $query = $this->db->query("SELECT * FROM `ci_exam_according_to_school` WHERE `school_id`=$school_id and `invite_sent`=1 ORDER BY cri.ref_id DESC");
+
         $query = $this->db->query("SELECT DISTINCT   cir.exam_name  as exam_name_new,  cri.ref_id as cieid, cri.speedpost as ciespeedpost, cri.exam_name as ciesubjectline, cri.startdate as ciestartdate, cri.enddate as cieenddate, cir.admin_id as ciradminid , cri.consents_signstamp_status as circonsents_signstamp_status FROM `ci_exam_invitation` as cie left JOIN `ci_exam_registration` as cir ON cie.`id` = cir.`ref_id` LEFT JOIN ci_registration_invitation as cri ON cri.school_id = cir.id where cri.`invite_sent` = '1' and cir.admin_id=$admin_id and cir.id=$school_id ORDER BY cri.ref_id DESC");
         
         return $query->result_array();
+    }
+
+    public function getSentConsentFromExamController(){
+        $username = $this->session->userdata('username');
+
+        $this->db->select('*');
+        $this->db->from('ci_exam_registration');
+        $this->db->where('email',$username);
+        $school_id = $this->db->get();
+        $school_id = $school_id->row_array();
+        $school_id = isset($school_id['id'])?$school_id['id']:0;
+        $query = $this->db->query("SELECT * FROM `ci_registration_invitation` WHERE `school_id`= $school_id and `invite_sent`='1' ORDER BY id DESC");
+        return $query->result_array();
+
     }
 	 public function get_examination_form($examinationid) {
        
