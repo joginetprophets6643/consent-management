@@ -360,7 +360,7 @@ class Allocation_admin extends MY_Controller {
                 $data['data'][$key]['uniqueSnoschool'] = uniqueSnoschool($value['email']);
 
             }
-         
+       
             $records1['info'] = $this->Allocation_Model->get_data_for_allocation($id);
             $date_exam_consent_recieve = isset($records1['info'][0]['date_exam']) ? explode(",",$records1['info'][0]['date_exam']) : [];
             $shft_exam_consent_recieve = isset($records1['info'][0]['shft_exam']) ? explode(",",$records1['info'][0]['shft_exam']) : [];
@@ -397,7 +397,8 @@ class Allocation_admin extends MY_Controller {
                 $data['info'][$key]['centerCode'] = getCenterCode( $d['school_id'],$id); 
                 $data['info'][$key]['examination_center_name'] = getSchoolName( $d['school_id']); 
             }
-
+            print_r($data);
+            die();
             $this->load->view('admin/includes/_header', $data);
             $this->load->view('admin/report/downloadreportbutton', $data);
             $this->load->view('admin/includes/_footer', $data);

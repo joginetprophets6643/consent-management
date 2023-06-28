@@ -319,7 +319,7 @@ $('.select_all_count').click(function(e) {
                 success:function(result){
                     if(result){
                     $('.loader').addClass('d-none');
-                    alert("success, Allocated Sucessfully");
+                    alert("Send allocation sucessfully");
                     $(':checkbox.allocation_user_ids').each(function() {
                     this.checked = false;     
                 });

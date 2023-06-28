@@ -278,9 +278,11 @@ class Examshedule_schedule extends MY_Controller {
     public function inv_all_data_for_mail($exam_id) {
   
         $array = array('created_by' => $this->session->userdata('admin_id'));
+        
         $state_name = '';
         $city_name = '';
         $grade_name = '';
+
         $records['data'] = $this->Exam_model->get_all_registration_data($state_name, $city_name, $grade_name);
         $data = [];
         $i = 0;

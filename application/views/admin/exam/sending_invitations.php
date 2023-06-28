@@ -312,6 +312,8 @@
 
 $(document).ready(function () {
 
+   var table = $('#send_invitation_listo').DataTable();
+
 let arr=[];
 
 $('.send_email_ids').click(function(e) {

@@ -103,7 +103,19 @@ class Exam_model extends CI_Model {
     
         $this->db->from('ci_exam_registration');
         $admin_role_id = $this->session->userdata('admin_role_id');
+// new
+        // if ($state_name != '' ) {
+        //     $this->db->where('ci_exam_registration.district', $state_name);
+        // }
+        // if ($city_name != '') { 
+         
+        //     $this->db->where('ci_exam_registration.city', $city_name);
+        // }
+        // if ($grade_name != '') {
+        //     $this->db->where('ci_exam_registration.ranking_admin', $grade_name);
+        // }
 
+////// end code
         if ($admin_role_id == 5) {
               $this->db->where('ci_exam_registration.fileName6 is  NOT NULL');
         }
@@ -142,6 +154,7 @@ class Exam_model extends CI_Model {
             $this->db->where('ci_exam_registration.created_by',
                     $this->session->userdata('admin_id'));
         }
+
         $this->db->where('ci_exam_registration.fileName6 is  NOT NULL');
         $filterData = $this->session->userdata('filter_keyword');
         $this->db->order_by('ci_exam_registration.id', 'desc');

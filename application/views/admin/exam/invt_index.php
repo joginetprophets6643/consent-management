@@ -306,10 +306,10 @@
                         },
                         success: function(data) {
 
-                            $('#send_invitation_list').DataTable().destroy();
-                            // $('#send_invitation_list').hide();
-                            $('#send_invitation_list').html(data);
-                            // $('#invitation_recreate_div').html(data);
+                            $('#send_invitation_list').DataTable().clear();
+                            $('#send_invitation_list').hide();
+                            // $('#send_invitation_list').html(data);
+                            $('#invitation_recreate_div').html(data);
                             $('#invitation_recreate').DataTable();
 
                             // New Logic For Count Students on the basis of Distrcit Id  
@@ -360,10 +360,12 @@
                         },
                         success: function(data) {
 
-                            $('#send_invitation_list').DataTable().destroy();
-                            $('#send_invitation_list').hide();
-                            $('#invitation_recreate_div').html(data);
-                            $('#invitation_recreate').DataTable();
+                            // $('#send_invitation_list').DataTable().destroy();
+                            $('#send_invitation_list').DataTable().clear();
+                            // $('#send_invitation_list').hide();
+                            $('#send_invitation_list').html(data);
+                            // $('#invitation_recreate_div').html(data);
+                            // $('#invitation_recreate').DataTable();
                             // New Logic For Count Students on the basis of Distrcit Id  -- Jogi
                             $.ajax({
                                 type: "GET",
@@ -708,7 +710,8 @@
                     }
 
                 });
-                
+                console.log(hrefs);
+                return false
                 var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all/') ?>"
                 $.ajax({
                     url: url,
