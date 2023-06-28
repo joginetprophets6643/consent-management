@@ -8,6 +8,7 @@ class Allocation_admin extends MY_Controller {
 
         parent::__construct();
         auth_check(); // check login auth
+        $this->load->library('mailer');
         $this->load->model('admin/admin_model', 'admin_model');
         $this->load->model('admin/location_model', 'location_model');
         $this->load->model('admin/Certificate_model', 'Certificate_model');
@@ -256,8 +257,33 @@ class Allocation_admin extends MY_Controller {
 
             if(isset($_GET['exam_id']) && isset($_GET['school_ids'])){
                     $school_ids = $_GET['school_ids'];
-                    $exam_id = $_GET['exam_id'];
-                    $check = $this->Allocation_Model->sendAllocationForUser($school_ids,$exam_id);
+                     $exam_id = $_GET['exam_id'];
+                     $examName = get_exam_name($exam_id);
+                    $mail_data = array(
+                        'examname' => $examName
+                      
+                    );
+                foreach(array_unique($school_ids) as $id){
+                    $email = getEmail($id);
+                    $phone = getMobile($id);
+                    $messageP1='Dear Sir/Madam ,';
+                    $messageP1.='Candidates has been allotted as per your consent for '.$examName.'. Kindly login';
+                    $messageP1.='into your portal to check the details.';
+                    $messageP1.='Regards,';
+                    $messageP1.='UKPSC, Haridwar';
+                    $template_id = "1007102212957051003";
+                    // EMAIL AND MESSAGE SEND UDING TEMPLETE
+                    sendSMS($phone,$messageP1,$template_id);
+                    $this->load->helper('email_helper');
+                    $this->mailer->mail_template($email,'allocation-sent',$mail_data);
+                   
+                }
+                $check = $this->Allocation_Model->sendAllocationForUser($school_ids,$exam_id);
+
+                die();
+
+
+               
 
             }
         }

@@ -72,11 +72,9 @@ class Allocation_user extends MY_Controller {
     }
   
     public function allocate_user_attendance($exam_id,$key,$newCandidateNo) {
-    
         $exam_id = urldecrypt($exam_id);
         $key = urldecrypt($key);
         $newCandidateNo = urldecrypt($newCandidateNo);
-     
         $admin_id = $this->session->userdata('admin_id');
         $data['info'] = $this->Allocation_Model->get_data_for_allocation_user($exam_id);
         $data['date_exam'] = isset($data['info'][0]['date_exam']) ? explode(",",$data['info'][0]['date_exam']) : [];
@@ -87,15 +85,18 @@ class Allocation_user extends MY_Controller {
         $data['admin_id'] = $admin_id;
         $data['school_id'] = $data['info'][0]['school_id'];
         $data['Exam_subject_line'] = $data['info'][0]['subjectline'];
+        $convertExamShiftDate = date("d-m-Y",strtotime( $data['date_exam'][$key]));
         $this->db->where('school_id ', $data['info'][0]['school_id']);
         $this->db->where('exam_id ',  $exam_id);
         $this->db->where('admin_id ', $admin_id);
-        $this->db->where('exam_date ', $data['date_exam'][$key]);
+        $this->db->where('exam_date ', $convertExamShiftDate);
         $this->db->where('exam_shift ', $data['shft_exam'][$key]);
+        $this->db->where('total_candidates ', $newCandidateNo);
         $query1 = $this->db->get('ci_mark_attendance_allocation');
         $tempData = $query1->result_array();
-        $data['present_candidate']=isset($tempData[0]['present_candidate'])?$tempData[0]['present_candidate'] :'';
-        $data['absent_candidate']=isset($tempData[0]['absent_candidate'])?$tempData[0]['absent_candidate'] :'';
+
+        $data['present_candidate']=isset($tempData[0]['present_candidate'])?$tempData[0]['present_candidate'] :'00';
+        $data['absent_candidate']=isset($tempData[0]['absent_candidate'])?$tempData[0]['absent_candidate'] :'00';
         $this->load->view('admin/includes/_header', $data);
         $this->load->view('admin/allocation/attendanceFormForUser', $data);
         $this->load->view('admin/includes/_footer', $data);

@@ -225,7 +225,27 @@ public function sendAllocationForUser($school_ids,$exam_id){
       'status'=>1
   ];
 
-  foreach($school_ids as $school_id){
+  $examName = get_exam_name($exam_id);
+                    die();
+                    $mail_data = array(
+                        'examname' => $examName
+                      
+                    );
+
+  $email = getEmail($id);
+  $phone = getMobile($id);
+  $messageP1='Dear Sir/Madam ,';
+  $messageP1.='Candidates has been allotted as per your consent for '.$examName.'. Kindly login';
+  $messageP1.='into your portal to check the details.';
+  $messageP1.='Regards,';
+  $messageP1.='UKPSC, Haridwar';
+  $template_id = "1007102212957051003";
+  // EMAIL AND MESSAGE SEND UDING TEMPLETE
+  sendSMS($phone,$messageP1,$template_id);
+  $this->load->helper('email_helper');
+  $this->mailer->mail_template($email,'consent-not-send',$mail_data);
+
+  foreach(array_unique($school_ids) as $school_id){
   $this->db->where('school_id ', $school_id);
   $this->db->where('exam_id ', $exam_id);
   $this->db->update('ci_allocation_table', $dataUpdate);

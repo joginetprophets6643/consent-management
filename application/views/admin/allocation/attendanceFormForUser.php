@@ -31,7 +31,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name" class="col-sm- control-label">Exam Date&nbsp;(परीक्षा तिथि)<i style="color:#ff0000; font-size:12px;">*</i></label>
-                            <input type="text" readonly name="exam_date" value="<?php echo date("d-m-Y",strtotime($date_exam[$key]))?>"  class="form-control" id="exam_date" placeholder="Enter a Date"  >
+                            <input type="text" readonly name="exam_date"  value="<?php echo date("d-m-Y",strtotime($date_exam[$key]))?>"  class="form-control" id="exam_date" placeholder="Enter a Date"  >
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -101,9 +101,8 @@
                             <div class="form-group mb-0" >
                                 <input type="button" onclick="window.history.go(-1)" class="btn btn-sec mr-4" value="Back"></input>
                             </div>
-    
                             <div class="form-group mb-0">
-                                <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-primary">
+                                <input <?php echo date("Y-m-d") == $date_exam[$key]?'':'disabled'?> type="submit" name="submit" id="submit" value="Submit" class="btn btn-primary">
                             </div>
 
                         </div>

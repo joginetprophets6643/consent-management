@@ -236,6 +236,10 @@ class Mailer
                 $content = str_replace('{examname}',$data['examname'],$content);
                 return $content;
             break;
+            case 'allocation-sent':
+                $content = str_replace('{examname}',$data['examname'],$content);
+                return $content;
+            break;
             case 'consent-not-send':
                 return $content;
             break;

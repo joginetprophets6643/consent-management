@@ -204,6 +204,7 @@ $('#publish_permanent').click(function(event) {
 </script>
 <script>
 $('#select_all').click(function(event) {
+    
     if ($('input[name="allocation_user_ids"]:checked').length > 0) {
         $('.loader').removeClass('d-none');
         var exam_id = $("#exam_id").val()
@@ -216,6 +217,7 @@ $('#select_all').click(function(event) {
             }
 
         });
+
         var url = "<?php echo base_url('admin/Allocation_admin/send_allocation_to_user/')?>"
         $.ajax({
             url: url,
@@ -224,11 +226,11 @@ $('#select_all').click(function(event) {
                 success:function(result){
                     if(result){
                     $('.loader').addClass('d-none');
-                    alert("success, Allocated Sucessfully");
+                    alert("Send allocation sucessfully");
                     $(':checkbox.allocation_user_ids').each(function() {
                     this.checked = false;     
                 });
-                window.location.reload();
+                // window.location.reload();
             }
             } 
 
