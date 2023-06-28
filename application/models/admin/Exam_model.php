@@ -272,6 +272,10 @@ class Exam_model extends CI_Model {
         $query = $this->db->get_where('ci_candidate_app', array('id' => $id));
         return $result = $query->row_array();
     } 
+ public function getCadidateDataUsingExamId($id) {
+        $query = $this->db->get_where('ci_candidate_app', array('exam_name' => $id));
+        return $result = $query->row_array();
+    } 
 
 
      public function get_registration_data($id) {

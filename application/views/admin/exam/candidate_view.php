@@ -112,7 +112,7 @@
 
                                 <div class="table-responsive">
 
-                                    <table class="table table-bordered table-striped ">
+                                    <table class="table table-bordered table-striped" id="candidateView">
 
                                         <thead>
 
@@ -294,10 +294,14 @@
 
 
 
+<script src="<?= base_url() ?>assets/plugins/datatables/jquery.dataTables.js"></script>
 
+<script src="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.js"></script>
 
 
 <script>
+
+var table = $('#candidateView').DataTable();
 
     $("#country").addClass('active');
 

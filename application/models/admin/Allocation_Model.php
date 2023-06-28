@@ -249,6 +249,8 @@ public function sendAllocationForUser($school_ids,$exam_id){
   $this->db->where('school_id ', $school_id);
   $this->db->where('exam_id ', $exam_id);
   $this->db->update('ci_allocation_table', $dataUpdate);
+
+  
   }
   return '201';
   

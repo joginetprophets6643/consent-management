@@ -358,10 +358,24 @@ class Master extends MY_Controller
             $number_of_can = $this->input->post('number_of_can');
             $number_of_can_array = implode(",", $number_of_can);
 
-            // echo '<pre>';
-            // print_r($state_array);
-            // exit;
-            $data = array(
+            $editData = $this->Exam_model->getCadidateDataUsingExamId($this->input->post('exam_name'));
+            if(isset($editData)){
+                $data = array(
+                    'exam_name' => $this->input->post('exam_name'),
+                    'state' => $state_array.','.$editData['state'],
+                    'city' => $city_array.','.$editData['city'],
+                    'district_code' => $district_code_array.','.$editData['district_code'],
+                    'city_code' => $city_code_array.','.$editData['city_code'],
+                    'sub_name' => $sub_name_array.','.$editData['sub_name'],
+                    'number_of_can' => $number_of_can_array.','.$editData['number_of_can'],
+                    'created_by' => $this->session->userdata('admin_id'),
+                    'created_at' => date('d-m-Y : h:m:s'),
+                );
+                $data = $this->security->xss_clean($data);
+               $this->Exam_model->edit_candi($data, $editData['id']);
+    
+            }else{
+              $data = array(
                 'exam_name' => $this->input->post('exam_name'),
                 'state' => $state_array,
                 'city' => $city_array,
@@ -372,9 +386,11 @@ class Master extends MY_Controller
                 'created_by' => $this->session->userdata('admin_id'),
                 'created_at' => date('d-m-Y : h:m:s'),
             );
-
+    
             $data = $this->security->xss_clean($data);
-            $result = $this->Exam_model->add_application_cand($data);
+            $this->Exam_model->add_application_cand($data);
+            }
+           
 
             $this->session->set_flashdata('success', ' Add successfully!<br>सफलतापूर्वक जोड़ें!');
 

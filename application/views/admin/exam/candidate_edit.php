@@ -187,7 +187,7 @@
                         <div class="col-md-12">
 
                             <div class="form-group mb-0">
-
+                            <input type="button" onclick="window.history.go(-1)" class="btn btn-sec"  style="margin-top:25px;" value="Back"></input>
                                 <input type="submit" name="submit" style="margin-top:25px;" value="Update "
                                     class="btn btn-primary pull-center">
 
