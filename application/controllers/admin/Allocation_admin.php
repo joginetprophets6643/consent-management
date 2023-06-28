@@ -343,6 +343,7 @@ class Allocation_admin extends MY_Controller {
 
         public function downreportbutton($id){
             $id = urldecrypt($id);
+           
             $data['exam_name'] = get_exam_name(get_exam_name_downloadreport( $id));
          
             $data['id'] = $id;
@@ -351,6 +352,7 @@ class Allocation_admin extends MY_Controller {
             // Consent recieved Table
             $state_name = $city_name = $grade_name = '';
             $data['temp'][1] = $this->Exam_model->get_consent_recved_data($state_name, $city_name, $grade_name,$id);
+        
             $data['data']=$data['temp'][1][1];
            
             foreach ($data['data'] as $key => $value) {
@@ -360,7 +362,7 @@ class Allocation_admin extends MY_Controller {
                 $data['data'][$key]['uniqueSnoschool'] = uniqueSnoschool($value['email']);
 
             }
-       
+          
             $records1['info'] = $this->Allocation_Model->get_data_for_allocation($id);
             $date_exam_consent_recieve = isset($records1['info'][0]['date_exam']) ? explode(",",$records1['info'][0]['date_exam']) : [];
             $shft_exam_consent_recieve = isset($records1['info'][0]['shft_exam']) ? explode(",",$records1['info'][0]['shft_exam']) : [];
@@ -368,18 +370,24 @@ class Allocation_admin extends MY_Controller {
             $data['shft_exam_consent_recieve'] = $shft_exam_consent_recieve;
             $data['no_candidate'] = isset($records1['info'][0]['no_candidate']) ? explode(",",$records1['info'][0]['no_candidate']) : [];
             $data['candidates'] = isset($records1['info'][0]['candidates']) ? explode(",",$records1['info'][0]['candidates']) : [];
-
+             
+            
             // cosent_not_recved_data
             $state_name = $city_name = $grade_name = '';
-            $data['notrecievetempdata'][1] = $this->Exam_model->get_consent_not_recved_data($state_name, $city_name, $grade_name,$id);
+
+     
+            
+            $data['notrecievetempdata'][1] = $this->Exam_model->get_consent_not_recved_datadownrport($state_name, $city_name, $grade_name,$id);
+         
             $data['notrecieveddata']=$data['notrecievetempdata'][1][1];
             foreach ($data['notrecieveddata'] as $key => $value) {
-                $data['notrecieveddata'][$key]['centerCode'] = getCenterCode( $value['school_id'],$id)?getCenterCode( $value['school_id'],$id):'';
-                $data['notrecieveddata'][$key]['consent_allocation'] = getConsentAllocate_max($value['school_id'])?getConsentAllocate_max($value['school_id']):'';
-                $data['notrecieveddata'][$key]['candidateNo'] = getCandidateNumbers($value['school_id'],$id);
+                $data['notrecieveddata'][$key]['centerCode'] = getCenterCode( $value['id'],$id)?getCenterCode( $value['id'],$id):'';
+                $data['notrecieveddata'][$key]['consent_allocation'] = getConsentAllocate_max($value['id'])?getConsentAllocate_max($value['id']):'';
+                $data['notrecieveddata'][$key]['candidateNo'] = getCandidateNumbers($value['id'],$id);
                 $data['notrecieveddata'][$key]['uniqueSnoschool'] = uniqueSnoschool($value['email']);
 
             }
+            
 
             $records2['info'] = $this->Allocation_Model->get_data_for_allocation($id);
             $date_exam_consent_not_recieve = isset($records2['info'][0]['date_exam']) ? explode(",",$records2['info'][0]['date_exam']) : [];
@@ -388,7 +396,7 @@ class Allocation_admin extends MY_Controller {
             $data['shft_exam_consent_not_recieve'] = $shft_exam_consent_not_recieve;
             $data['no_candidate'] = isset($records1['info'][0]['no_candidate']) ? explode(",",$records1['info'][0]['no_candidate']) : [];
             $data['candidates'] = isset($records1['info'][0]['candidates']) ? explode(",",$records1['info'][0]['candidates']) : [];
-
+           
 
 
             // attendence_master_report
@@ -397,8 +405,7 @@ class Allocation_admin extends MY_Controller {
                 $data['info'][$key]['centerCode'] = getCenterCode( $d['school_id'],$id); 
                 $data['info'][$key]['examination_center_name'] = getSchoolName( $d['school_id']); 
             }
-            print_r($data);
-            die();
+         
             $this->load->view('admin/includes/_header', $data);
             $this->load->view('admin/report/downloadreportbutton', $data);
             $this->load->view('admin/includes/_footer', $data);

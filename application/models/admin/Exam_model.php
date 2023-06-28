@@ -1580,6 +1580,33 @@ public function get_deactivation_data($id) {
         
         return $module;
     }
+
+    public function get_consent_not_recved_datadownrport($state_name, $city_name, $grade_name,$ref_id) {
+
+        $sql = "SELECT `school_id` FROM `ci_exam_according_to_school` WHERE `ref_id` =$ref_id and `invt_recieved`='0'";
+        $query = $this->db->query($sql);
+        $array = $query->result_array();
+        $arr = array_column($array,"school_id");
+        // print_r($arr);
+        // die();
+        $this->db->from('ci_exam_registration');
+        $this->db->where_in('id', $arr);
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->get();
+        $module = array();
+        $module = $query->result_array();
+        
+        
+        if ($query->num_rows() > 0) {
+            $module = $query->result_array();
+        }
+      
+        $num_rows_count = $query->num_rows();
+
+        $module = array($num_rows_count,$module);
+         
+        return $module;
+    }
    
 
      public function add_pulish_data($data) {
