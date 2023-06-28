@@ -579,7 +579,6 @@ class Examshedule_schedule extends MY_Controller {
     public function send_invitation_user_all() {
 
         $ids = $this->input->get('data');
-    
         $send_consent_id = $this->input->get('send_consent_id');
         $new_id = urldecrypt($send_consent_id); 
         $data['exam'] = $this->Exam_model->get_invites_byid($new_id);
@@ -734,6 +733,85 @@ class Examshedule_schedule extends MY_Controller {
         
 
     }
+    public function send_invitation_user_all_OneTime() {
+
+        // $ids = $this->input->get('data');
+        $ids = [];
+
+        $state_name = '';
+        $city_name = '';
+        $grade_name = '';
+        $send_consent_id = $this->input->get('send_consent_id');
+        $exam_id = urldecrypt($send_consent_id); 
+
+        $schoolRecords = $this->Exam_model->get_all_registration_data($state_name, $city_name, $grade_name);
+
+        
+        foreach ($schoolRecords as $row) {
+            if($row['school_name'] != ''){
+                
+                $invitationStatus = $this->checkExamInvitationStatus($exam_id,$row['id']);
+            
+                $invt_recieved = isset($invitationStatus['invt_recieved'])?$invitationStatus['invt_recieved']:0;
+                $invite_sent = isset($invitationStatus['invite_sent'])?$invitationStatus['invite_sent']:0;
+                
+                if($invt_recieved==0 && $invite_sent==0)
+                {
+                    array_push($ids,(int)$row['id']);
+                }
+            }
+        }
+
+    
+        echo json_encode($ids);
+        exit();
+
+        $data['exam'] = $this->Exam_model->get_invites_byid($exam_id);
+        print_r($data['exam']);
+        print_r(count($ids));
+        die();
+        
+    }
+
+    public function send_invitation_user_not_recieve_all_OneTime() {
+
+        // $ids = $this->input->get('data');
+        $ids = [];
+
+        $state_name = '';
+        $city_name = '';
+        $grade_name = '';
+        $send_consent_id = $this->input->get('send_consent_id');
+        $exam_id = urldecrypt($send_consent_id); 
+
+        $schoolRecords = $this->Exam_model->get_all_registration_data($state_name, $city_name, $grade_name);
+
+        
+        foreach ($schoolRecords as $row) {
+            if($row['school_name'] != ''){
+                
+                $invitationStatus = $this->checkExamInvitationStatus($exam_id,$row['id']);
+            
+                $invt_recieved = isset($invitationStatus['invt_recieved'])?$invitationStatus['invt_recieved']:0;
+                $invite_sent = isset($invitationStatus['invite_sent'])?$invitationStatus['invite_sent']:0;
+                
+                if($invt_recieved==0 && $invite_sent==1)
+                {
+                    array_push($ids,(int)$row['id']);
+                }
+            }
+        }
+
+    
+        echo json_encode($ids);
+        exit();
+
+        $data['exam'] = $this->Exam_model->get_invites_byid($exam_id);
+        print_r($data['exam']);
+        print_r(count($ids));
+        die();
+        
+    }
 
     public function revokeConsentsInvitations()
     {
@@ -779,8 +857,160 @@ class Examshedule_schedule extends MY_Controller {
     }
     public function send_invitation_user_all_not_recieved_consent() {
 
+
         $ids = $this->input->get('data');
-     
+        $send_consent_id = $this->input->get('send_consent_id');
+        $new_id = urldecrypt($send_consent_id); 
+        $data['exam'] = $this->Exam_model->get_invites_byid($new_id);
+      
+        
+        if(!empty($ids)){
+            foreach ($ids as $id) {
+
+                 $email = getEmail($id);
+                 $phone = getMobile($id);
+                 $messageP1='Dear Sir/Madam ,';
+                 $messageP1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.';
+                 $messageP1.='Kindly ignore if already done.';
+                 $messageP1.='Regards,';
+                 $messageP1.='UKPSC, Haridwar';
+           
+              
+                 $template_id = "1007970272335112709";
+                 // EMAIL AND MESSAGE SEND UDING TEMPLETE
+                 sendSMS($phone,$messageP1,$template_id);
+                 $this->load->helper('email_helper');
+                 $this->mailer->mail_template($email,'consent-not-send');
+ 
+               
+            }
+        
+        }else{
+            
+            $id = $this->input->get('id');
+          
+            $data['user_data'] = $this->Exam_model->get_all_invites_idsupdate($id); 
+            $messageP1='Dear Sir/Madam ,';
+            $messageP1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.';
+            $messageP1.='Kindly ignore if already done.';
+            $messageP1.='Regards,';
+            $messageP1.='UKPSC, Haridwar';
+            
+            $email = $data['user_data'][0]['email'];
+            $phone = $data['user_data'][0]['pri_mobile'];
+         
+            $template_id = "1007970272335112709";
+            // EMAIL AND MESSAGE SEND UDING TEMPLETE
+            sendSMS($phone,$messageP1,$template_id);
+            $this->load->helper('email_helper');
+            $this->mailer->mail_template($email,'consent-not-send');
+
+        }
+        
+
+
+
+
+
+
+        // New Code for Upadte
+
+        $ids = $this->input->get('data');
+       
+        $send_consent_id = $this->input->get('send_consent_id');
+        
+        $new_id = urldecrypt($send_consent_id); 
+       
+        $data['exam'] = $this->Exam_model->get_invites_byid($new_id);
+        
+        if(!empty($ids)){
+            $i = 0;
+            foreach ($ids as $id) {
+
+                $data[$i] = $this->Exam_model->get_all_invites_ids($id);  
+
+                foreach($data[$i] as $email => $value){
+                    $emails[$i] = $value['email'];
+                    $emails[$i] = $value['principal_name'];
+                }
+
+                $i++;
+            }
+        
+            $i = 0;
+            foreach ($ids as $id) {
+
+                $data['user_data'][$i] = $this->Exam_model->get_all_invites_idsupdate($id); 
+                $i++;
+            }
+
+
+        
+            foreach($data['user_data'] as $value){
+                foreach($value as $singledata){
+                  
+                    $examName = get_exam_name($data['exam'][0]['exam_name']);
+                    $messageP1='Dear Sir/Madam ,';
+                    $messageP1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.';
+                    $messageP1.='Kindly ignore if already done.';
+                    $messageP1.='Regards,';
+                    $messageP1.='UKPSC, Haridwar';
+                    // Message For Email Address 
+                    // $messageE1='Dear Sir/Madam ,<br>';
+                    // $messageE1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.<br>';
+                    // $messageE1.='Kindly ignore if already done.<br>';
+                    // $messageE1.='Regards,<br>';
+                    // $messageE1.='UKPSC, Haridwar';
+                    
+                    $email = $singledata['email'];
+                    $phone = $singledata['pri_mobile'];
+                    $template_id = "1007970272335112709";
+                    // EMAIL AND MESSAGE SEND UDING TEMPLETE
+                    sendSMS($phone,$messageP1,$template_id);
+                    // sendEmail($email,$messageE1,$template_id);
+                    $this->load->helper('email_helper');
+                    $this->mailer->mail_template($email,'consent-not-send');
+
+                }
+            }
+        
+        
+        }else{
+            
+            $id = $this->input->get('id');
+            $data['user_data'] = $this->Exam_model->get_all_invites_idsupdate($id); 
+            $examName = get_exam_name($data['exam'][0]['exam_name']);
+          
+            $messageP1='Dear Sir/Madam ,';
+            $messageP1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.';
+            $messageP1.='Kindly ignore if already done.';
+            $messageP1.='Regards,';
+            $messageP1.='UKPSC, Haridwar';
+            // Message For Email Address 
+            // $messageE1='Dear Sir/Madam ,<br>';
+            // $messageE1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.<br>';
+            // $messageE1.='Kindly ignore if already done.<br>';
+            // $messageE1.='Regards,<br>';
+            // $messageE1.='UKPSC, Haridwar';
+            
+            $email = $data['user_data'][0]['email'];
+            $phone = $data['user_data'][0]['pri_mobile'];
+         
+            $template_id = "1007970272335112709";
+            // EMAIL AND MESSAGE SEND UDING TEMPLETE
+            sendSMS($phone,$messageP1,$template_id);
+            $this->load->helper('email_helper');
+            $this->mailer->mail_template($email,'consent-not-send');
+            // sendEmail($email,$messageE1,$template_id);
+        }
+    
+        
+
+    }
+    public function send_invitation_user_all_not_recieved_consent_copy() {
+
+        $ids = $this->input->get('data');
+       
         $send_consent_id = $this->input->get('send_consent_id');
         
         $new_id = urldecrypt($send_consent_id); 
@@ -1163,6 +1393,7 @@ class Examshedule_schedule extends MY_Controller {
 
     public function consent_not_recieved_by_user_list() {
         $id = urldecrypt($this->uri->segment(4));
+       
         $data['states'] = $this->location_model->get_states();
         $data['title'] = 'Recieved Not Consent';
         $data['id'] = $id;
@@ -1268,12 +1499,21 @@ class Examshedule_schedule extends MY_Controller {
     }
 
     public function consent_notrecieved_by_user_data($id) {
+       
         $data['states'] = $this->location_model->get_states();
         $state_name = $city_name = $grade_name = '';
         $records['data'] = $this->Exam_model->get_consent_not_recved_data($state_name, $city_name, $grade_name,$id);
+         
         $data = [];
+        $exam_id = $id;
         $i = 0;
         foreach ($records['data'][1] as $row) {
+            $invitationStatus = $this->checkExamInvitationStatus($exam_id,$row['id']);
+            $invt_recieved = isset($invitationStatus['invt_recieved'])?$invitationStatus['invt_recieved']:0;
+            $invite_sent = isset($invitationStatus['invite_sent'])?$invitationStatus['invite_sent']:0;
+           
+            if($invt_recieved==0 && $invite_sent==1)
+            {
             if($row['school_name'] != ''){
                 $row['principal_name'] = '<h4 class="m0 mb5">'.$row['principal_name'] .'</h4>'.'<small class="text-muted">'.$row['pri_mobile'].'</small><br/>'.'<small class="text-muted">'.$row['email'].'</small>';
                 $row['max_allocate_candidate'] = '<input style="height: 1px;width: 1px;" type="checkbox" id="a" id="sum_value" name="sum_value" class="checkbox-item sum" rel="'.$row['max_allocate_candidate'].'"> '.$row['max_allocate_candidate'].'';
@@ -1281,6 +1521,63 @@ class Examshedule_schedule extends MY_Controller {
                  <a title="Send Invitations" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
                 $data[] = [
                     ++$i,
+                    $row['school_name'] ? $row['school_name'] : '',
+                    $row['district'] ? $row['district'] : '',
+                    $row['city']? $row['city'] : '',
+                    $row['principal_name']? $row['principal_name'] : '',
+                    $row['ranking_admin']? $row['ranking_admin'] : '',
+                    $row['max_allocate_candidate']? $row['max_allocate_candidate'] : '',
+                    $action,
+                ];
+            }
+
+
+        }
+    }
+
+        $records1['data'] = $data;        
+        echo json_encode($records1);
+    }
+    public function consent_notrecieved_by_user_data_copy($id) {
+       
+
+        $array = array('created_by' => $this->session->userdata('admin_id'));
+        $state_name = '';
+        $city_name = '';
+        $grade_name = '';
+        $records['data'] = $this->Exam_model->get_all_registration_data($state_name, $city_name, $grade_name);
+        $data = [];
+        $i = 0;
+
+        foreach ($records['data'] as $row) {
+            if($row['school_name'] != ''){
+                
+                $invitationStatus = $this->checkExamInvitationStatus($exam_id,$row['id']);
+                $doneImage =  base_url("assets/img/check.png");
+                $pendingImage =  base_url("assets/img/pending.png");
+                
+            
+                $invt_recieved = isset($invitationStatus['invt_recieved'])?$invitationStatus['invt_recieved']:0;
+                $invite_sent = isset($invitationStatus['invite_sent'])?$invitationStatus['invite_sent']:0;
+                
+                if($invt_recieved==0 && $invite_sent==1)
+                {
+                    $action =   'Status: <img src="'.$pendingImage.'" height="34" alt="">';
+                }
+                elseif ($invt_recieved==1 && $invite_sent==1) {
+                    $action =   'Status: <img src="'.$doneImage.'" alt=""> <br>
+                    <a title="Send Invitations" class="btn btn-warning mt-2" onClick="revokeConsentsInvitations('.$row['id'].')"> Revoke Consent </a>';
+                }
+                else{
+                    $action =   '<input type="checkbox" id="a" class="send_email_ids" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">
+                    <a title="Revoke Consentfsend_consent" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
+               
+                }
+                $row['principal_name'] = '<h4 class="m0 mb5">'.$row['principal_name'] .'</h4>'.'<small class="text-muted">'.$row['pri_mobile'].'</small><br/>'.'<small class="text-muted">'.$row['email'].'</small>';
+                $row['max_allocate_candidate'] = $row['max_allocate_candidate'];
+                $data[] = [
+                    ++$i,
+
                     $row['school_name'] ? $row['school_name'] : '',
                     $row['district'] ? $row['district'] : '',
                     $row['city']? $row['city'] : '',

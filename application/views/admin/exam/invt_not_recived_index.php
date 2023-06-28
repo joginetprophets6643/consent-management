@@ -14,6 +14,23 @@
   .view-all--button{
     margin-top: 10px !important;
   }
+
+  .loader {
+        border: 16px solid #e0e0e0;
+        border-radius: 50%;
+        border-top: 16px solid #373250;
+        border-bottom: 16px solid #373250;
+        width: 120px;
+        height: 120px;
+
+        -webkit-animation: spin 2s linear infinite;
+        /* Safari */
+        animation: spin 2s linear infinite;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(50%, 50%)
+    }
 </style>
 
 <!-- DataTables -->
@@ -202,7 +219,7 @@
                                 </div>
                                 <div class="send-option">
                                     <input  type="button"  class="btn btn-success" id="select_all" onclick="return confirm('Are you sure want to send all invitation?\nक्या आप वाकई सभी आमंत्रण भेजना चाहते हैं?')" value="Send to All (सभी को भेजो)"> 
-                                    <input  type="button" class="btn btn-success" id="select_single_count" onclick="return confirm('Are you sure want to send select user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?')" value="Send to Selected (चयनित को भेजें)">
+                                    <input  type="button" class="btn btn-success" id="select_single_count" value="Send to Selected (चयनित को भेजें)">
                                 </div>
                             </div>
                             <!-- <label style="font-weight:bold;" for="car"></label> -->
@@ -232,7 +249,7 @@
                         
                     </div>
                 </div>
-                
+                <div class="loader d-none"></div>
                 <div class="view-all--button ml-1">
             <button onclick="window.history.go(-1)" class="btn view-btn">Back (पीछे)</button>
         </div>
@@ -276,15 +293,15 @@
         "order": [
             [0, 'asc']
         ],
-        "columnDefs": [{ "targets": 0, "name": "id", 'searchable': true, 'orderable': true },
-        { "targets": 1, "name": "school_name", 'searchable': true, 'orderable': true },
-        { "targets": 2, "name": "district", 'searchable': true, 'orderable': true },
-        { "targets": 3, "name": "city", 'searchable': true, 'orderable': true },
-        { "targets": 4, "name": "principal_name", 'searchable': true, 'orderable': true },
-        { "targets": 5, "name": "ranking_admin", 'searchable': true, 'orderable': true },
-        { "targets": 6, "name": "max_allocate_candidate", 'max_allocate_candidate': true, 'orderable': true },
-        { "targets": 7, "name": "created_at", 'searchable': true, 'orderable': true },
-        ]
+        // "columnDefs": [{ "targets": 0, "name": "id", 'searchable': true, 'orderable': true },
+        // { "targets": 1, "name": "school_name", 'searchable': true, 'orderable': true },
+        // { "targets": 2, "name": "district", 'searchable': true, 'orderable': true },
+        // { "targets": 3, "name": "city", 'searchable': true, 'orderable': true },
+        // { "targets": 4, "name": "principal_name", 'searchable': true, 'orderable': true },
+        // { "targets": 5, "name": "ranking_admin", 'searchable': true, 'orderable': true },
+        // { "targets": 6, "name": "max_allocate_candidate", 'max_allocate_candidate': true, 'orderable': true },
+        // { "targets": 7, "name": "created_at", 'searchable': true, 'orderable': true },
+        // ]
     });
 
 
@@ -423,26 +440,60 @@
     });
 
 
-    $('#select_all').click(function (event) {
-        var send_consent_id = $("#send_consent_id").val()
-        var hrefs = new Array();
-        $(':checkbox.send_email_ids').each(function () {
-            this.checked = true;
-            var r = $(this).attr('rel');
-            if (r != undefined) {
-                hrefs.push(r);
-            }
 
-        });
+    $('#select_all').click(function(event) {
+        if (confirm("Are you sure want to select All  user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?")) {
+            $(".send_email_ids").attr("checked", this.checked);
+            var send_consent_id = $("#send_consent_id").val()
+            var hrefs = new Array();
+            var urlUpdate = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/')
+                            ?>"
+            var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_not_recieve_all_OneTime/') ?>"
+            $.ajax({
+                url: url,
+                type: 'get',
+                dataType: 'text',
+                data: {
+                    data: hrefs,
+                    'send_consent_id': send_consent_id
+                },
+                success: function(result) {
+                    JSON.parse(result).forEach(element => $(`input[rel="${element}"]`).prop('checked', true));
+                    if (result) {
+                        
+                        $('.loader').removeClass('d-none');
+                        $.ajax({
+                            url: urlUpdate,
+                            type: 'get',
+                            dataType: 'text',
+                            data: {
+                                data: JSON.parse(result),
+                                'send_consent_id': send_consent_id
+                            },
+                            success: function(result) {
+                                $('.loader').addClass('d-none');
+                                alert("Consent sent sucessfully");
+                                  window.location.reload();
+                            }
+                        })
 
+
+
+
+                      
+                    }
+                }
+
+            });
+        } else {
+            return false;
+        }
 
     });
 
 
     $('#send_all').click(function (event) {
-
-
-
+        alert('ffj');
         if ($('input[name="send_email_ids"]:checked').length > 2) {
             var send_consent_id = $("#send_consent_id").val()
             var hrefs = new Array();
@@ -521,7 +572,7 @@
     });
 
     function single_send_invitations(id) {
-
+        $('.loader').removeClass('d-none');
         var send_consent_id = $("#send_consent_id").val();
         var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/')?>"
         $.ajax({
@@ -531,32 +582,28 @@
             data: { id: id, 'send_consent_id': send_consent_id },
             success: function (result) {
 
-                alert("Consent sent sucessfully");
-                this.checked = false;
+                $('.loader').addClass('d-none');
+                    alert("Consent sent sucessfully ");
+                    // return false;
+                    window.location.reload();
             }
         });
     }
 
     $('#select_single_count').click(function (event) {
-
+        if (confirm('Are you sure want to send select user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?')) {
         if ($('input[name="send_email_ids"]:checked').length > 1) {
-
+            $('.loader').removeClass('d-none');
             var hrefs = new Array();
             var send_consent_id = $("#send_consent_id").val();
-
             $('input[name="send_email_ids"]:checked').each(function () {
 
-                // console.log($(this).attr('rel'));
                 var r = $(this).attr('rel');
                 if (r != 'undefined') {
                     hrefs.push(r);
                 }
 
             });
-            // console.log('send_email_ids i am',$('input[name="send_email_ids"]:checked').serialize());
-            // console.log('send_email_ids i am',$('input[name="send_email_ids"]:checked').length > 0);
-            console.log('send_email_ids i am', $('input[name="send_email_ids"]:checked').length);
-            // return false;
             var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/')?>"
             $.ajax({
                 url: url,
@@ -564,11 +611,13 @@
                 dataType: 'text',
                 data: { data: hrefs, 'send_consent_id': send_consent_id },
                 success: function (result) {
+                    $('.loader').addClass('d-none');
                     alert("Consent sent sucessfully");
-                    $(':checkbox.send_email_ids').each(function () {
-                        // alert(this.checked)
-                        this.checked = false;
-                    });
+                    window.location.reload();
+                    // $(':checkbox.send_email_ids').each(function () {
+                    //     // alert(this.checked)
+                    //     this.checked = false;
+                    // });
                 }
             });
 
@@ -578,6 +627,9 @@
             return false;
 
         }
+    }else{
+        return false;
+    }
 
     });
 
