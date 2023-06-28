@@ -6,7 +6,7 @@
 
 
 
-   <table id="na_datatable" class="table table-bordered table-hover " style="overflow-x: auto; border-collapse: collapse !important;">
+   <table id="na_datatable" clpass="table table-bordered table-hover " style="overflow-x: auto; border-collapse: collapse !important;">
 
 
 
@@ -23,16 +23,8 @@
 
 
             <th>Exam Name</th>
-
-            <th>District</th>
-
-            <th>City</th>
-
-
-
-            <th>Number Of Candidates</th>
-
-
+            <th>Start Date</th>
+            <th>End Date</th>
 
             <th width="120"><?= trans('action') ?></th>
 
@@ -47,18 +39,6 @@
 
 
       <tbody>
-
-
-
-      <!-- if(!empty($info)){
-
-            echo "Given Array is not empty <br>";
-
-         }else{
-
-            echo "Given Array is empty";
-
-         } -->
 
 
 
@@ -99,68 +79,16 @@
                   </td>
 
                   <td>
-
-
-
                      <?= get_exam_name($row['exam_name']) ?> 
-
-            
-
                   </td>
-
-
-
                   <td>
-
-
-
-                  <span style="width:100%;"> <?= get_district_name($row['state']) ?> </span>
-
-            
-
+                     <?= date("d-m-Y", strtotime(get_exam_name_details($row['exam_name'])['start_date_exam'])) ?> 
                   </td>
-
                   <td>
-
-<!-- get_city_name -->
-
-                  <span style="width:100%;"> <?= get_subcity_name($row['city']) ?> </span>
-
-            
-
+                     <?= date("d-m-Y", strtotime(get_exam_name_details($row['exam_name'])['end_date_exam'])) ?> 
                   </td>
 
 
-
-                  <td>
-
-
-
-                     <?php 
-
-                        $str = $row['number_of_can'];
-
-                        $str_array = explode(",",$str);
-
-                        $array_total_sum = array_sum($str_array);
-
-                     ?>
-
-
-
-                     <span style="width:100%;"> <?= $array_total_sum; ?></span>
-
-
-
-                           
-
-
-
-                  </td>
-
-
-
-         
 
                   <td style="text-align: center;">
 
