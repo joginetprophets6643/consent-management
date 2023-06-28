@@ -200,9 +200,16 @@
 
   $(document).ready(function () {
 
-    // alert('hi');
+    $('#email_confirm').bind("cut copy paste", function(e) {
+        e.preventDefault();
+    });
+    $('#pri_mobile_confirm').bind("cut copy paste", function(e) {
+        e.preventDefault();
+    });
+    $('#confirm_password').bind("cut copy paste", function(e) {
+        e.preventDefault();
+    });
 
-    // createCaptcha();
 
     $("#xin-form")["submit"](function () {
 
