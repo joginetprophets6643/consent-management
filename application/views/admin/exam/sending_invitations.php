@@ -130,9 +130,6 @@
                <td>
 
                   <?= $row['max_allocate_candidate']; ?>
-
-                  <input style="height: 50px;width: 1px;" type="checkbox" id="a" id="sum_value" name="sum_value" class="checkbox-item sum" rel="<?php echo $row['max_allocate_candidate']; ?>">
-
                </td>             
 
                <td style="text-align: center;">
@@ -159,20 +156,14 @@
                                <a title="Send Invitations" class="btn btn-warning mt-2" onClick="revokeConsentsInvitations('.$row['id'].')"> Revoke Consent </a>';
                            }
                            else{
-                               $action =   '<input type="checkbox" id="a" class="send_email_ids" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">
-                               <a title="Revoke Consentfsend_consent" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
+                               $action =   '<input type="checkbox" id="a" onClick="getCount('.$row['id'].')" class="send_email_ids" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">
+                               <a title="Consent Sent" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
                           
                            }
                         
 
                         ?>
                         <?php echo $action ?>
-
-                           <!-- <a onClick="single_send_invitations(<?php echo $row['id']; ?>)" title="Send Invitations" class="btn btn-success" >
-                              <i class="fa fa-paper-plane-o"></i>
-                           </a> -->
-
-                  
                                   
 
                </td>

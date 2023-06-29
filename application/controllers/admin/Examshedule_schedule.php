@@ -276,14 +276,18 @@ class Examshedule_schedule extends MY_Controller {
 
 
     public function inv_all_data_for_mail($exam_id) {
-  
+        
+        // ,$state_id,$district_id,$grade
+        // echo $exam_id.$state_id.$district_id.$grade;
+    
         $array = array('created_by' => $this->session->userdata('admin_id'));
         
-        $state_name = '';
-        $city_name = '';
-        $grade_name = '';
+        $state_name = isset($_GET['state_id'])?get_district_name($_GET['state_id']):'';
+        $city_name = isset($_GET['district_id'])?get_subcity_name($_GET['district_id']):'';
+        $grade_name = isset($_GET['grade'])?$_GET['grade']:'';
 
-        $records['data'] = $this->Exam_model->get_all_registration_data($state_name, $city_name, $grade_name);
+        $records['data'] = $this->Exam_model->getAllRegisterDataForInvitation($state_name, $city_name, $grade_name,$exam_id);
+        
         $data = [];
         $i = 0;
 
@@ -307,29 +311,27 @@ class Examshedule_schedule extends MY_Controller {
                     <a title="Send Invitations" class="btn btn-warning mt-2" onClick="revokeConsentsInvitations('.$row['id'].')"> Revoke Consent </a>';
                 }
                 else{
-                    $action =   '<input type="checkbox" id="a" class="send_email_ids" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">
-                    <a title="Revoke Consentfsend_consent" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
+                    $action =   '<input type="checkbox" id="a" class="send_email_ids" onClick="getCount('.$row['id'].')" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">
+                    <a title="Consent Sent" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
                
                 }
                 $row['principal_name'] = '<h4 class="m0 mb5">'.$row['principal_name'] .'</h4>'.'<small class="text-muted">'.$row['pri_mobile'].'</small><br/>'.'<small class="text-muted">'.$row['email'].'</small>';
                 $row['max_allocate_candidate'] = $row['max_allocate_candidate'];
                 $data[] = [
                     ++$i,
-
                     $row['school_name'] ? $row['school_name'] : '',
                     $row['district'] ? $row['district'] : '',
                     $row['city']? $row['city'] : '',
                     $row['principal_name']? $row['principal_name'] : '',
                     $row['ranking_admin']? $row['ranking_admin'] : '',
                     $row['max_allocate_candidate']? $row['max_allocate_candidate'] : '',
-                    $action,
+                    $action
                 ];
             }
         }
 
-        $records1['data'] = $data;        
+        $records1['data'] = $data;    
         echo json_encode($records1);
-        // $this->load->view('admin/exam/sending_invitations', $data);
     }
 
 

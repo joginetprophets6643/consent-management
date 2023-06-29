@@ -135,6 +135,40 @@ class Exam_model extends CI_Model {
         return $module;
     }
 	
+
+    function getAllRegisterDataForInvitation($state_name, $city_name, $grade_name,$exam_id) {
+    
+        $this->db->from('ci_exam_registration');
+        $admin_role_id = $this->session->userdata('admin_role_id');
+        if ($state_name != '' ) {
+            $this->db->where('ci_exam_registration.district', $state_name);
+        }
+        if ($city_name != '') { 
+         
+            $this->db->where('ci_exam_registration.city', $city_name);
+        }
+        if ($grade_name != '') {
+            $this->db->where('ci_exam_registration.ranking_admin', $grade_name);
+        }
+
+        if ($admin_role_id == 5) {
+              $this->db->where('ci_exam_registration.fileName6 is  NOT NULL');
+        }
+        if ($admin_role_id == 6) {
+            $this->db->where('ci_exam_registration.fileName6 is  NOT NULL');
+            $this->db->where('ci_exam_registration.created_by',$this->session->userdata('admin_id'));
+        }
+
+        $filterData = $this->session->userdata('filter_keyword');
+        $this->db->order_by('ci_exam_registration.id', 'desc');
+        $query = $this->db->get();
+        $module = array();
+    
+        if ($query->num_rows() > 0) {
+            $module = $query->result_array();
+        }
+        return $module;
+    }
     
     function get_all_search_registration_data($state_name, $city_name, $grade_name,$exam_id) {
 
@@ -173,8 +207,14 @@ class Exam_model extends CI_Model {
      
             $this->db->select_sum('ci_exam_registration.max_allocate_candidate');
             $this->db->from('ci_exam_registration');
-            $this->db->where('ci_exam_registration.district',$district_name);
-            $this->db->where('ci_exam_registration.city',$city_name);
+            if ($district_name != '' ) {
+                $this->db->where('ci_exam_registration.district', $district_name);
+            }
+            if ($city_name != '') { 
+             
+                $this->db->where('ci_exam_registration.city', $city_name);
+            }
+
             $this->db->order_by('max_allocate_candidate desc');
             $query = $this->db->get();
             $data = $query->result_array();
@@ -1539,27 +1579,27 @@ public function get_deactivation_data($id) {
     public function get_consent_not_recved_data($state_name, $city_name, $grade_name,$ref_id) {
         $this->db->from('ci_exam_registration');
 
-        // if ($city_name != '' && $state_name != '' ) {
+        if ($city_name != '' && $state_name != '' ) {
 
-        //     $this->db->where('ci_exam_registration.district', $state_name);
-        //     $this->db->where('ci_exam_registration.city', $city_name);
-        // }
+            $this->db->where('ci_exam_registration.district', $state_name);
+            $this->db->where('ci_exam_registration.city', $city_name);
+        }
 
-        // if ($state_name != '' || $state_name = '') {
+        if ($state_name != '' || $state_name = '') {
             
-        //     $this->db->where('ci_exam_registration.district', $state_name);
-        // }
+            $this->db->where('ci_exam_registration.district', $state_name);
+        }
         
         
-        // if ($grade_name != '') {
+        if ($grade_name != '') {
 
-        //     $this->db->where('ci_exam_registration.ranking_admin', $grade_name);
-        // }
-        // $admin_role_id = $this->session->userdata('admin_role_id');
-        // if ($admin_role_id == 6) {
-        //     $this->db->where('ci_exam_registration.created_by',
-        //             $this->session->userdata('admin_id'));
-        // }
+            $this->db->where('ci_exam_registration.ranking_admin', $grade_name);
+        }
+        $admin_role_id = $this->session->userdata('admin_role_id');
+        if ($admin_role_id == 6) {
+            $this->db->where('ci_exam_registration.created_by',
+                    $this->session->userdata('admin_id'));
+        }
 
         // $filterData = $this->session->userdata('filter_keyword');
         // $this->db->where('invt_recieved','0');

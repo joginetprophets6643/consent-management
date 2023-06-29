@@ -221,6 +221,7 @@
                                 <th>Grade</th>
                                 <th width="120">Max No of Applicant</th>
                                 <th width="120"><?= trans('action') ?></th>
+                                <th>School Id</th>
                             </tr>
                         </thead>
 
@@ -281,6 +282,7 @@
                             'csfr_token_name': csfr_token_value
                         },
                         success: function(data) {
+                            // console.log(data);
                             $('#district').html(data);
 
 
@@ -307,7 +309,7 @@
                             $('#send_invitation_list').DataTable().clear().destroy();
                             $('#send_invitation_list').hide();
                             $('#invitation_recreate_div').html(data);
-                            table = $('#invitation_recreate_div #send_invitation_list').DataTable();
+                            $('#invitation_recreate_div #send_invitation_list').DataTable();
 
                             // New Logic For Count Students on the basis of Distrcit Id  
                             $.ajax({
@@ -359,7 +361,7 @@
                             $('#send_invitation_list').DataTable().clear().destroy();
                             $('#send_invitation_list').hide();
                             $('#invitation_recreate_div').html(data);
-                            table = $('#invitation_recreate_div #send_invitation_list').DataTable();
+                            $('#invitation_recreate_div #send_invitation_list').DataTable();
 
                             $.ajax({
                                 type: "GET",
@@ -407,10 +409,10 @@
                             'csfr_token_name': csfr_token_value
                         },
                         success: function(data) {
-                            $('#send_invitation_list').DataTable().clear().destroy();
+                            $('#send_invitation_list').DataTable().destroy();
                             $('#send_invitation_list').hide();
                             $('#invitation_recreate_div').html(data);
-                            table = $('#invitation_recreate_div #send_invitation_list').DataTable();
+                            $('#invitation_recreate').DataTable();
 
                             $.ajax({
                                 type: "GET",
@@ -456,19 +458,12 @@
 
     $('#select_all').click(function(event) {
         if (confirm("Are you sure want to select All  user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?")) {
+            $(".send_email_ids").attr("checked", this.checked);
             var send_consent_id = $("#send_consent_id").val()
             var hrefs = new Array();
-            let rows = table.rows({
-                'search': 'applied'
-            }).nodes();
-            // Check checkboxes for all rows in the table
-            $('input[type="checkbox"]', rows).prop('checked', true);
-            rows.each((row) => {
-                if ($('input[type="checkbox"]', row).attr('rel')) {
-                    hrefs.push($('input[type="checkbox"]', row).attr('rel'))
-                }
-            })
-            var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all/') ?>"
+            var urlUpdate = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all/')
+                                ?>"
+            var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_OneTime/') ?>"
             $.ajax({
                 url: url,
                 type: 'get',
@@ -478,16 +473,32 @@
                     'send_consent_id': send_consent_id
                 },
                 success: function(result) {
+                    JSON.parse(result).forEach(element => $(`input[rel="${element}"]`).prop('checked', true));
                     if (result) {
-                        $('.loader').addClass('d-none');
-                        alert("Consent sent sucessfully ");
-                        $(':checkbox.send_email_ids').each(function() {
-                            this.checked = false;
-                        });
 
-                        window.location.reload();
+                        $('.loader').removeClass('d-none');
+                        $.ajax({
+                            url: urlUpdate,
+                            type: 'get',
+                            dataType: 'text',
+                            data: {
+                                data: JSON.parse(result),
+                                'send_consent_id': send_consent_id
+                            },
+                            success: function(result) {
+                                $('.loader').addClass('d-none');
+                                alert("Consent sent sucessfully");
+                                window.location.reload();
+                            }
+                        })
+
+
+
+
+
                     }
                 }
+
             });
         } else {
             return false;
@@ -497,28 +508,86 @@
 
 
     $('.select_all_count').click(function(event) {
-        arr = []
+        var hrefs = new Array();
         let rows = table.rows({
             'search': 'applied'
         }).nodes();
         // Check checkboxes for all rows in the table
         $('input[type="checkbox"]', rows).prop('checked', true);
-        rows.each((row) => {
-            if ($('input[type="checkbox"]', row).attr('rel')) {
-                arr.push($('input[type="checkbox"]', row).attr('rel'))
+        rows.each((row)=>{
+            if($('input[type="checkbox"]', row).attr('rel')){
+                hrefs.push($('input[type="checkbox"]', row).attr('rel'))
             }
         })
+        console.log(hrefs)
+        var sum = 0;
+        $('.sum').each(function() {
+            sum += parseFloat($(this).attr('rel'));
+        });
+        // alert(sum);
+        total_candidate_display = parseInt($("#total_candidate_display").text());
+
+
+        if (total_candidate_display > sum) {
+            renaming_value = (total_candidate_display - sum);
+            console.log('renaming_value', renaming_value);
+            $('#total_candidate_display').html(renaming_value);
+            return false;
+
+        } else {
+            $(':checkbox').each(function() {
+                // alert(this.checked)
+                this.checked = false;
+                var r = $(this).attr('rel');
+                if (r != 'undefined') {
+                    hrefs.push(r);
+                    // return false;
+                }
+            });
+            $("#allcheckids").focus();
+            return false;
+        }
     });
 
 
     $('.select_all_uncheck').click(function(event) {
-        let rows = table.rows({
-            'search': 'applied'
-        }).nodes();
-        // Check checkboxes for all rows in the table
-        $('input[type="checkbox"]', rows).prop('checked', false);
-        arr = []
-        $('schoolCount').hide();
+        var hrefs = new Array();
+
+        if ($('input[name="send_email_ids"]:checked').length > 1) {
+            var numberNotChecked = $('.sum').filter(':checked').length;
+            console.log('numberNotChecked', numberNotChecked);
+
+            if (numberNotChecked === 0) {
+                $("#allcheckids").focus();
+                return false;
+
+            } else {
+                $(':checkbox').each(function() {
+                    this.checked = false;
+                    var r = $(this).attr('rel');
+                    if (r != 'undefined') {
+                        hrefs.push(r);
+                        console.log('i am here', r)
+                        // return false;
+                    }
+                });
+                var sum = 0;
+                $('.sum').each(function() {
+                    sum += parseFloat($(this).attr('rel'));
+                });
+                total_candidate_int = parseInt($("#total_candidate_display").text());
+                var renaming_add_value = total_candidate_int + sum;
+                $('#total_candidate_display').html(renaming_add_value);
+                return false;
+            }
+        } else {
+
+            alert('Please click on send at least one checkbox\n(कृपया कम से कम दो चेकबॉक्स भेजें पर क्लिक करें)');
+            $("#allcheckids").focus();
+            return false;
+
+        }
+
     });
 
 
@@ -574,16 +643,27 @@
 
     $('#select_single_count').click(function(event) {
         if (confirm("Are you sure want to send select user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?")) {
-            if (arr.length > 0) {
+            if ($('input[name="send_email_ids"]:checked').length > 0) {
                 $('.loader').removeClass('d-none');
+                var hrefs = new Array();
                 var send_consent_id = $("#send_consent_id").val();
+                $('input[name="send_email_ids"]:checked').each(function() {
+                    console.log(this);
+                    var r = $(this).attr('rel');
+                    if (r != 'undefined') {
+                        hrefs.push(r);
+                    }
+
+                });
+                console.log(hrefs);
+                return false
                 var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all/') ?>"
                 $.ajax({
                     url: url,
                     type: 'get',
                     dataType: 'text',
                     data: {
-                        data: arr,
+                        data: hrefs,
                         'send_consent_id': send_consent_id
                     },
                     success: function(result) {
@@ -608,26 +688,79 @@
         }
 
     });
-    let arr = []
 
-    function getCount(id) {
-        if (arr.indexOf(id) === -1) {
-            arr.push(id)
-        } else {
-            arr = arr.filter(item => item !== id)
-        }
-        $.ajax({
-            type: "GET",
-            url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
-            data: {
-                'school_ids': arr,
-                'csfr_token_name': csfr_token_value
-            },
-            success: function(data) {
 
-                $('#schoolCount').removeClass("d-none");
-                $('#schoolWiseCounts').html(data);
+    // New Logic For Count Students on the basis of School Id  -- Jogi
+    $(document).ready(function() {
+        let arr = [];
+        $('.send_email_ids').click(function(e) {
+            if ($(this).is(".send_email_ids:checked")) {
+                arr.push(e.target.value)
+            } else {
+                arr = arr.filter(item => item !== e.target.value)
             }
+            $.ajax({
+                type: "GET",
+                url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
+                data: {
+                    'school_ids': arr,
+                    'csfr_token_name': csfr_token_value
+                },
+                success: function(data) {
+
+                    $('#schoolCount').removeClass("d-none");
+                    $('#schoolWiseCounts').html(data);
+                }
+
+            });
+
         });
-    }
+
+        $('.select_all_count').click(function(e) {
+            let arr = [];
+            // alert(this.checked).attr('rel');
+            // Iterate each checkbox
+
+            $('.send_email_ids:checkbox').each(function() {
+                // alert(this.checked)
+                this.checked = true;
+                var r = $(this).attr('value');
+                if (r !== 'undefined') {
+                    arr.push(r);
+
+                }
+            });
+            // let all = arr;
+            $.ajax({
+                type: "GET",
+                url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
+                data: {
+                    // 'school_ids': 'all',
+                    'school_ids': arr,
+                    'csfr_token_name': csfr_token_value
+                },
+                success: function(data) {
+                    $('#schoolCount').removeClass("d-none");
+                    $('#schoolWiseCounts').html(data);
+                }
+
+            });
+
+        });
+
+        $('.select_all_uncheck').click(function(e) {
+            $('.send_email_ids:checkbox').each(function() {
+                // alert(this.checked)
+                this.checked = false;
+                var r = $(this).attr('value');
+                if (r !== 'undefined') {
+                    arr.push(r);
+
+                }
+            });
+            $('#schoolCount').addClass("d-none");
+        });
+
+
+    })
 </script>
