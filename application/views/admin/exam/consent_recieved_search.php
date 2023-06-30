@@ -1,5 +1,5 @@
 
-<div class="row" hidden><b>Consent Recieved Count :- </b>&nbsp;<?php echo $count; ?></div>
+<div class="row"><b>Consent Recieved Count :- </b>&nbsp;<?php echo $count; ?></div>
    <div class="row">
    <table id="consentRecievedRecreatedTable" class="table table-bordered table-striped" style="border-collapse: collapse !important;">
       <thead>

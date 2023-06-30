@@ -227,7 +227,20 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        
+                    <div class="d-flex my-2">
+                            <div id="countInDistrict" class="d-none mr-5">
+                                <h4 class="text-bold" style="font-size: 17px; color: #373250;">
+                                    Total seats available in District :
+                                    <span style="color: #e14658;" id="districtCounts"></span>
+                                </h4>
+                            </div>
+                            <div id="schoolCount" class="d-none">
+                                <h4 class="text-bold" style="font-size: 17px; color: #373250;">
+                                    Selected school total seats :
+                                    <span style="color: #e14658;" id="schoolWiseCounts"></span>
+                                </h4>
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table id="consentRecievedRecreatedTable" class="table table-bordered table-striped w-100" style="border-collapse: collapse !important;">
                                 <thead>
@@ -335,7 +348,7 @@
                         // New Logic For Count Students on the basis of Distrcit Id  -- Jogi
                         $.ajax({
                             type: "GET",
-                            url: base_url + 'admin/Examshedule_schedule/districtWiseCountOfStudents',
+                            url: base_url + 'admin/Examshedule_schedule/districtWiseCountOfStudentsNotRecieved',
                             // dataType: 'html',
                             data: {
                                 'state_id': state_id,
@@ -345,6 +358,7 @@
                                 'csfr_token_name': csfr_token_value
                             },
                             success: function(data) {
+                            
                                 $('#countInDistrict').removeClass("d-none");
                                 $('#districtCounts').html(data);
                                 $('#schoolCount').addClass("d-none");
@@ -370,6 +384,11 @@
 
             if (district_id != '') {
 
+                $('#countInDistrict').addClass("d-none");
+                $('#districtCounts').html('');
+                $('#schoolCount').addClass("d-none");
+                $('#schoolWiseCounts').html('');
+
                 $.ajax({
                     type: "GET",
                     url: base_url + 'admin/Examshedule_schedule/consent_notrecieved_search',
@@ -386,6 +405,27 @@
                         $('#consentRecievedRecreatedTable').hide();
                         $('#consentNotRecievedDiv').html(data);
                         table = $('#consentNotRecievedDiv #consentRecievedRecreatedTable').DataTable();
+
+                        $.ajax({
+                            type: "GET",
+                            url: base_url + 'admin/Examshedule_schedule/districtWiseCountOfStudentsNotRecieved',
+                            // dataType: 'html',
+                            data: {
+                                'state_id': state_id,
+                                'district_id': district_id,
+                                'grade': grade,
+                                'exam_id': exam_new_id,
+                                'csfr_token_name': csfr_token_value
+                            },
+                            success: function(data) {
+                                $('#countInDistrict').removeClass("d-none");
+                                $('#districtCounts').html(data);
+                                $('#schoolCount').addClass("d-none");
+                                $('#schoolWiseCounts').html('');
+
+                            }
+
+                        });
 
 
                     }
@@ -421,6 +461,27 @@
                         $('#consentRecievedRecreatedTable').hide();
                         $('#consentNotRecievedDiv').html(data);
                         table = $('#consentNotRecievedDiv #consentRecievedRecreatedTable').DataTable();
+
+                        $.ajax({
+                            type: "GET",
+                            url: base_url + 'admin/Examshedule_schedule/districtWiseCountOfStudentsNotRecieved',
+                            // dataType: 'html',
+                            data: {
+                                'state_id': state_id,
+                                'district_id': district_id,
+                                'grade': grade,
+                                'exam_id': exam_new_id,
+                                'csfr_token_name': csfr_token_value
+                            },
+                            success: function(data) {
+                                $('#countInDistrict').removeClass("d-none");
+                                $('#districtCounts').html(data);
+                                $('#schoolCount').addClass("d-none");
+                                $('#schoolWiseCounts').html('');
+
+                            }
+
+                        });
                     }
                 });
             } else {

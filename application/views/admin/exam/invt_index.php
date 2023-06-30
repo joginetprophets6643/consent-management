@@ -313,7 +313,7 @@
                             $.ajax({
                                 type: "GET",
                                 url: base_url +
-                                    'admin/Examshedule_schedule/districtWiseCountOfStudents',
+                                    'admin/Examshedule_schedule/districtWiseCountOfStudentsRecieved',
                                 // dataType: 'html',
                                 data: {
                                     'state_id': state_id,
@@ -364,7 +364,7 @@
                             $.ajax({
                                 type: "GET",
                                 url: base_url +
-                                    'admin/Examshedule_schedule/districtWiseCountOfStudents',
+                                    'admin/Examshedule_schedule/districtWiseCountOfStudentsRecieved',
                                 // dataType: 'html',
                                 data: {
                                     'state_id': state_id,
@@ -415,7 +415,7 @@
                             $.ajax({
                                 type: "GET",
                                 url: base_url +
-                                    'admin/Examshedule_schedule/getGradeWiseCount',
+                                    'admin/Examshedule_schedule/districtWiseCountOfStudentsRecieved',
                                 data: {
                                     'state_id': state_id,
                                     'district_id': district_id,
@@ -508,6 +508,20 @@
                 arr.push($('input[type="checkbox"]', row).attr('rel'))
             }
         })
+        $.ajax({
+            type: "GET",
+            url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
+            data: {
+                'school_ids': arr,
+                'csfr_token_name': csfr_token_value
+            },
+            success: function(data) {
+
+                $('#schoolCount').removeClass("d-none");
+                $('#schoolWiseCounts').html(data);
+            }
+        });
+
     });
 
 
@@ -518,7 +532,8 @@
         // Check checkboxes for all rows in the table
         $('input[type="checkbox"]', rows).prop('checked', false);
         arr = []
-        $('schoolCount').hide();
+        $('#schoolCount').addClass("d-none");
+        $('#schoolWiseCounts').html('');
     });
 
 

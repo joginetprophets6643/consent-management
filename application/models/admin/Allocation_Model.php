@@ -107,16 +107,6 @@ class Allocation_Model extends CI_Model {
 
     }
 
-  //   public function get_all_recived_invites(){
-
-  //     $admin_id = $this->session->userdata('admin_id');
-  //     $this->db->from('ci_exam_invitation');
-  //     $this->db->where('invt_recieved','1');
-  //     $this->db->where('created_by',$admin_id);
-  //     $this->db->order_by('id','desc');
-  //     $q = $this->db->get()->result_array();
-  //     return $q;
-  // }
 
   public function get_all_recived_invites(){
 
@@ -124,7 +114,7 @@ class Allocation_Model extends CI_Model {
     $this->db->from('ci_exam_invitation');
     $this->db->where('create_letter_status','1');
     $this->db->where('created_by',$admin_id);
-    $this->db->group_by('exam_name','desc');
+    $this->db->order_by('id','desc');
     $q = $this->db->get()->result_array();
     return $q;
 }

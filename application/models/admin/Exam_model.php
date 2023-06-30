@@ -200,6 +200,59 @@ class Exam_model extends CI_Model {
         }
         return $module;
     }
+    function get_all_search_registration_data_recieved($state_name, $city_name, $grade_name,$exam_id) {
+        $this->db->select_sum('ci_exam_registration.max_allocate_candidate');
+        $this->db->from('ci_exam_registration');
+        if ($state_name != '' ) {
+            $this->db->where('ci_exam_registration.district', $state_name);
+        }
+        if ($city_name != '') { 
+         
+            $this->db->where('ci_exam_registration.city', $city_name);
+        }
+        if ($grade_name != '') {
+            $this->db->where('ci_exam_registration.ranking_admin', $grade_name);
+        }
+    
+
+        $this->db->where('ci_exam_registration.fileName6 is  NOT NULL');
+        $filterData = $this->session->userdata('filter_keyword');
+        $this->db->order_by('ci_exam_registration.id', 'desc');
+
+        $query = $this->db->get();
+        $data = $query->result_array();
+        
+        if(isset($data[0]['max_allocate_candidate']))
+        {
+            $data = $data[0]['max_allocate_candidate'];
+        }
+        else
+        {
+            $data = 0;
+        }
+        return $data;
+    }
+    function get_all_search_registration_data_not_recieved($state_name, $city_name, $grade_name,$exam_id) {
+        $this->db->from('ci_exam_registration');
+        if ($state_name != '' ) {
+            $this->db->where('ci_exam_registration.district', $state_name);
+        }
+        if ($city_name != '') { 
+         
+            $this->db->where('ci_exam_registration.city', $city_name);
+        }
+        if ($grade_name != '') {
+            $this->db->where('ci_exam_registration.ranking_admin', $grade_name);
+        }
+    
+
+        $this->db->where('ci_exam_registration.fileName6 is  NOT NULL');
+        $filterData = $this->session->userdata('filter_keyword');
+        $this->db->order_by('ci_exam_registration.id', 'desc');
+
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
  
 // NEW LOGIC FOR COUNTS
     public function getTotalCountinDistrict($district_name,$city_name)

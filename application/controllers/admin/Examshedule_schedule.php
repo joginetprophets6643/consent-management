@@ -236,6 +236,29 @@ class Examshedule_schedule extends MY_Controller {
 
         }
     }
+
+    public function districtWiseCountOfStudentsRecieved(){
+        $state_name = isset($_GET['state_id'])?get_district_name($_GET['state_id']):'';
+        $city_name = isset($_GET['district_id'])?get_subcity_name($_GET['district_id']):'';
+        $grade_name = isset($_GET['grade'])?$_GET['grade']:'';
+        $exam_id = isset($_GET['exam_Id'])?$_GET['exam_Id']:'';
+        $data['exam_id'] = isset($_GET['exam_Id'])?$_GET['exam_Id']:'';
+        $districtWiseCountOfStudents = $this->Exam_model->get_all_search_registration_data_recieved($state_name, $city_name, $grade_name,$exam_id);
+        echo $districtWiseCountOfStudents;
+        exit;
+   
+    }
+    public function districtWiseCountOfStudentsNotRecieved(){
+        $state_name = isset($_GET['state_id'])?get_district_name($_GET['state_id']):'';
+        $city_name = isset($_GET['district_id'])?get_subcity_name($_GET['district_id']):'';
+        $grade_name = isset($_GET['grade'])?$_GET['grade']:'';
+        $exam_id = isset($_GET['exam_Id'])?$_GET['exam_Id']:'';
+        $data['exam_id'] = isset($_GET['exam_Id'])?$_GET['exam_Id']:'';
+        $districtWiseCountOfStudents = $this->Exam_model->get_all_search_registration_data_not_recieved($state_name, $city_name, $grade_name,$exam_id);
+        echo $districtWiseCountOfStudents;
+        exit;
+   
+    }
     public function getGradeWiseCount()
     {
      
