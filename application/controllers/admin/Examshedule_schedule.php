@@ -229,6 +229,7 @@ class Examshedule_schedule extends MY_Controller {
             $state_name = get_district_name($id);
             $district_id = $_GET['district_id'];
             $city_name = get_subcity_name($district_id);
+            // $districtWiseCountOfStudents = $this->Exam_model->getTotalCountinDistrictConsentNotRecieved($state_name);
             $districtWiseCountOfStudents = $this->Exam_model->getTotalCountinDistrict($state_name,$city_name);
             echo $districtWiseCountOfStudents;
             exit;
@@ -1209,7 +1210,7 @@ class Examshedule_schedule extends MY_Controller {
 
         $this->load->view('admin/includes/_header', $data);
 
-    $this->load->view('admin/exam/invt_sent_index', $data);
+       $this->load->view('admin/exam/invt_sent_index', $data);
 
         $this->load->view('admin/includes/_footer', $data);
     }
@@ -1499,6 +1500,7 @@ class Examshedule_schedule extends MY_Controller {
         }    
         $data['count'] = $data['data'][0];
         $data['main_data'] = $data['data'][1];
+        $data['exam_id'] = $ref_id;
         $this->load->view('admin/exam/consent_not_recieved', $data);
     }
 
@@ -1520,8 +1522,8 @@ class Examshedule_schedule extends MY_Controller {
             {
             if($row['school_name'] != ''){
                 $row['principal_name'] = '<h4 class="m0 mb5">'.$row['principal_name'] .'</h4>'.'<small class="text-muted">'.$row['pri_mobile'].'</small><br/>'.'<small class="text-muted">'.$row['email'].'</small>';
-                $row['max_allocate_candidate'] = '<input style="height: 1px;width: 1px;" type="checkbox" id="a" id="sum_value" name="sum_value" class="checkbox-item sum" rel="'.$row['max_allocate_candidate'].'"> '.$row['max_allocate_candidate'].'';
-                $action =   '<input type="checkbox" id="a" class="send_email_ids" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">
+                $row['max_allocate_candidate'] = $row['max_allocate_candidate'];
+                $action =   '<input type="checkbox" id="a" class="send_email_ids" onClick="getCount('.$row['id'].')" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">
                  <a title="Send Invitations" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
                 $data[] = [
                     ++$i,

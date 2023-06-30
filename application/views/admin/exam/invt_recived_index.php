@@ -49,12 +49,13 @@
                 </div>
 
             </div>
-
+            <?php echo get_exam_name($id); ?>
             <div class="card-body">
 
                 <?php echo form_open("/",'class="filterdata"') ?>
 
                 <div class="row">
+                
                     <input type="text" id="exam_new_id" hidden value="<?php echo $id ?>">
                     <?php 
 
@@ -220,12 +221,6 @@
 <script src="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.js"></script>
 
 <script>
-//   $(function () {
-
-//     $("#example1").DataTable();
-
-//   });
-
 
 var table = $('#consent_recieved_list').DataTable({
     "processing": true,
@@ -234,61 +229,7 @@ var table = $('#consent_recieved_list').DataTable({
     "order": [
         [0, 'asc']
     ],
-    // "columnDefs": [{
-    //          "targets": 0,
-    //         "name": "id",
-    //         'searchable': true,
-    //         'orderable': true
-    //     },
-    //     {
-    //         "targets": 1,
-    //         "name": "school_name",
-    //         'searchable': true,
-    //         'orderable': true
-    //     },
-    //     {
-    //         "targets": 2,
-    //         "name": "district",
-    //         'searchable': true,
-    //         'orderable': true
-    //     },
-    //     {
-    //         "targets": 3,
-    //         "name": "city",
-    //         'searchable': true,
-    //         'orderable': true
-    //     },
-    //     {
-    //         "targets": 4,
-    //         "name": "principal_name",
-    //         'searchable': true,
-    //         'orderable': true
-    //     },
-    //     {
-    //         "targets": 5,
-    //         "name": "ranking_admin",
-    //         'searchable': true,
-    //         'orderable': true
-    //     },
-    //     {
-    //         "targets": 6,
-    //         "name": "max_allocate_candidate",
-    //         'max_allocate_candidate': true,
-    //         'orderable': true
-    //     },
-    //     {
-    //         "targets": 7,
-    //         "name": "created_at",
-    //         'searchable': true,
-    //         'orderable': true
-    //     },
-    //     {
-    //         "targets": 8,
-    //         "name": "consents_signstamp_file",
-    //         'searchable': true,
-    //         'orderable': true
-    //     },
-    // ]
+   
     "columnDefs": [{ "targets": 0, "name": "id", 'searchable': true, 'orderable': true },
         { "targets": 1, "name": "school_name", 'searchable': true, 'orderable': true },
         { "targets": 2, "name": "district", 'searchable': true, 'orderable': true },
@@ -346,8 +287,7 @@ $(function() {
                     'exam_new_id': exam_new_id,
                     'csfr_token_name': csfr_token_value
                 },
-                success: function(data) {
-                    // $('#consent_recieved_list').html(data);            
+                success: function(data) {         
                     $('#consent_recieved_list').DataTable().destroy();
                     $('#consentRecievedRecreatedTable').html(data);
                     $('#consent_recieved_list').hide();

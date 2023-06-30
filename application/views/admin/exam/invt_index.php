@@ -83,7 +83,7 @@
 
             <div class="card-header">
                 <h3 class="card-title" style="color: #373250;">
-                    <?php echo $examName; ?>
+                    <?php echo get_exam_name($exam_id); ?>
                     <input hidden type="text" id="exam_Id" value="<?php echo $exam_id ?>">
 
                 </h3>

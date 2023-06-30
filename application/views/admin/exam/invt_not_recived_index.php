@@ -1,21 +1,21 @@
 <style>
-  .view-btn{
-    border-color: #384e4a;
-    background-color: #384e4a;
-    color: #fff;
-  }
+    .view-btn {
+        border-color: #384e4a;
+        background-color: #384e4a;
+        color: #fff;
+    }
 
-  .view-btn:hover{
-    border-color: #384e4a;
-    background-color: #fff;
-    color: #384e4a;
-  }
+    .view-btn:hover {
+        border-color: #384e4a;
+        background-color: #fff;
+        color: #384e4a;
+    }
 
-  .view-all--button{
-    margin-top: 10px !important;
-  }
+    .view-all--button {
+        margin-top: 10px !important;
+    }
 
-  .loader {
+    .loader {
         border: 16px solid #e0e0e0;
         border-radius: 50%;
         border-top: 16px solid #373250;
@@ -77,57 +77,57 @@
 
             <div class="card-body">
 
-                <?php echo form_open("/",'class="filterdata"') ?>
-
+                <?php echo form_open("/", 'class="filterdata"') ?>
+                <?php echo get_exam_name($id); ?>
                 <div class="row">
                     <input type="text" hidden id="exam_new_id" value="<?php echo $id ?>">
-                    <?php 
+                    <?php
 
-                    if (in_array($_SESSION['admin_role_id'], array(1,2,3,4,5,6))){?>
+                    if (in_array($_SESSION['admin_role_id'], array(1, 2, 3, 4, 5, 6))) { ?>
 
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>District&nbsp;(ज़िला)</label>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>District&nbsp;(ज़िला)</label>
 
-                            <!-- <select name="state" class="form-control dd_state" onchange="filter_data()" > -->
-                            <select id="state" name="state" class="form-control dd_state">
+                                <!-- <select name="state" class="form-control dd_state" onchange="filter_data()" > -->
+                                <select id="state" name="state" class="form-control dd_state">
 
-                                <option value="">Select District</option>
+                                    <option value="">Select District</option>
 
-                                <?php foreach($states as $state):?>
+                                    <?php foreach ($states as $state) : ?>
 
-                                <option value="<?=$state->id?>">
-                                    <?=$state->name?>
-                                </option>
+                                        <option value="<?= $state->id ?>">
+                                            <?= $state->name ?>
+                                        </option>
 
-                                <?php endforeach;?>
+                                    <?php endforeach; ?>
 
-                            </select>
+                                </select>
+
+                            </div>
 
                         </div>
 
-                    </div>
-
                     <?php }
 
-                    if (in_array($_SESSION['admin_role_id'], array(1,2,3,4,5,6))){
+                    if (in_array($_SESSION['admin_role_id'], array(1, 2, 3, 4, 5, 6))) {
 
-                        
 
-                             ?>
 
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>City&nbsp;(शहर)</label>
-                            <select name="district" id="district" class="form-control">
-                                <option value=""> Select City</option>
-                            </select>
-                            <!-- <select name="district" id="city" class="form-control" onchange="filter_data()" > -->
-                            <!-- <select name="district" id="district" class="form-control" >
+                    ?>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>City&nbsp;(शहर)</label>
+                                <select name="district" id="district" class="form-control">
+                                    <option value=""> Select City</option>
+                                </select>
+                                <!-- <select name="district" id="city" class="form-control" onchange="filter_data()" > -->
+                                <!-- <select name="district" id="district" class="form-control" >
 
                                 <option value="">Select City</option>
 
-                                <?php 
+                                <?php
 
                                 // if(isset($districts) and count($districts ) >0){
 
@@ -137,15 +137,16 @@
 
                                 //      }
 
-                                // }?>
+                                // }
+                                ?>
 
                                 ?>
 
                             </select> -->
 
-                        </div>
+                            </div>
 
-                    </div>
+                        </div>
 
                     <?php } ?>
 
@@ -160,22 +161,22 @@
 
 
 
-                                <?php foreach(ALLOWED_FILE_MOVEMENT_ROLE_ID[1] as $k=>$v):
+                                <?php foreach (ALLOWED_FILE_MOVEMENT_ROLE_ID[1] as $k => $v) :
 
-                                    if (in_array($_SESSION['admin_role_id'], array(5)) && $k==5)
+                                    if (in_array($_SESSION['admin_role_id'], array(5)) && $k == 5)
 
                                         continue;
 
-                                        ?>
+                                ?>
 
 
 
-                                <!-- <option value="<?=$k?>"><?=$v?></option> -->
-                                <option value="<?=$v?>">
-                                    <?=$v?>
-                                </option>
+                                    <!-- <option value="<?= $k ?>"><?= $v ?></option> -->
+                                    <option value="<?= $v ?>">
+                                        <?= $v ?>
+                                    </option>
 
-                                <?php endforeach;?>
+                                <?php endforeach; ?>
 
 
 
@@ -185,7 +186,7 @@
 
                     </div>
 
-                    
+
 
 
                 </div>
@@ -209,26 +210,26 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <input type="hidden" id="send_consent_id" name="send_consent_id" value="<?= $this->uri->segment(4);?>">
+                        <input type="hidden" id="send_consent_id" name="send_consent_id" value="<?= $this->uri->segment(4); ?>">
                         <!-- </div> -->
                         <div id="allcheckids" class="mb-5" style="">
                             <div class="d-flex justify-centent-between align-items-center">
                                 <div class="check-option">
-                                    <input  type="button" class="select_all_count btn btn-success" id="select-all1" value="Select All (सभी चुनें)"> 
-                                    <input  type="button" class="select_all_uncheck btn btn-success" id="select-all1" value="Uncheck (अनचेक)"> 
+                                    <input type="button" class="select_all_count btn btn-success" id="select-all1" value="Select All (सभी चुनें)">
+                                    <input type="button" class="select_all_uncheck btn btn-success" id="select-all1" value="Uncheck (अनचेक)">
                                 </div>
                                 <div class="send-option">
-                                    <input  type="button"  class="btn btn-success" id="select_all" onclick="return confirm('Are you sure want to send all invitation?\nक्या आप वाकई सभी आमंत्रण भेजना चाहते हैं?')" value="Send to All (सभी को भेजो)"> 
-                                    <input  type="button" class="btn btn-success" id="select_single_count" value="Send to Selected (चयनित को भेजें)">
+                                    <input type="button" class="btn btn-success" id="select_all" onclick="return confirm('Are you sure want to send all invitation?\nक्या आप वाकई सभी आमंत्रण भेजना चाहते हैं?')" value="Send to All (सभी को भेजो)">
+                                    <input type="button" class="btn btn-success" id="select_single_count" value="Send to Selected (चयनित को भेजें)">
                                 </div>
                             </div>
                             <!-- <label style="font-weight:bold;" for="car"></label> -->
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div id="consentNotRecievedDiv"></div>
+                        
                         <div class="table-responsive">
-                            <table id="consent_not_recieved_by_user_list" class="table table-bordered table-striped w-100" style="border-collapse: collapse !important;">
+                            <table id="consentRecievedRecreatedTable" class="table table-bordered table-striped w-100" style="border-collapse: collapse !important;">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -246,13 +247,14 @@
 
                             </table>
                         </div>
-                        
+
                     </div>
                 </div>
+                <div id="consentNotRecievedDiv"></div>
                 <div class="loader d-none"></div>
                 <div class="view-all--button ml-1">
-            <button onclick="window.history.go(-1)" class="btn view-btn">Back (पीछे)</button>
-        </div>
+                    <button onclick="window.history.go(-1)" class="btn view-btn">Back (पीछे)</button>
+                </div>
             </div>
         </div>
     </section>
@@ -275,44 +277,20 @@
 
 <script>
 
-    var total_candidate = location.search.split('total_number=')[1] ? location.search.split('total_number=')[1] : '0';
-    console.log("total_candidate", total_candidate);
-    $('#total_candidate_display').html(total_candidate);
-
-    //   $(function () {
-
-    //     $("#example1").DataTable();
-
-    //   });
-
-
-    var table = $('#consent_not_recieved_by_user_list').DataTable({
+    let table = $('#consentRecievedRecreatedTable').DataTable({
         "processing": true,
         "serverSide": false,
-        "ajax": "<?=base_url('admin/Examshedule_schedule/consent_notrecieved_by_user_data/'.$id)?>",
+        "ajax": "<?= base_url('admin/Examshedule_schedule/consent_notrecieved_by_user_data/' . $id) ?>",
         "order": [
             [0, 'asc']
         ],
-        // "columnDefs": [{ "targets": 0, "name": "id", 'searchable': true, 'orderable': true },
-        // { "targets": 1, "name": "school_name", 'searchable': true, 'orderable': true },
-        // { "targets": 2, "name": "district", 'searchable': true, 'orderable': true },
-        // { "targets": 3, "name": "city", 'searchable': true, 'orderable': true },
-        // { "targets": 4, "name": "principal_name", 'searchable': true, 'orderable': true },
-        // { "targets": 5, "name": "ranking_admin", 'searchable': true, 'orderable': true },
-        // { "targets": 6, "name": "max_allocate_candidate", 'max_allocate_candidate': true, 'orderable': true },
-        // { "targets": 7, "name": "created_at", 'searchable': true, 'orderable': true },
-        // ]
+
     });
 
 
-    $(function () {
-        $('#state').change(function () {
-            // var grade = $('#grade').val();
-            // console.log('grade',grade);
-            // return false;
+    $(function() {
+        $('#state').change(function() {
             var district_id = $(this).val();
-            console.log("district", district_id);
-            // return false;
             if (district_id != '') {
                 $('#othstate').val('').hide();
 
@@ -320,16 +298,15 @@
                     type: "POST",
                     url: base_url + 'admin/location/get_city_by_state_id',
                     dataType: 'html',
-                    data: { 'district_id': district_id, 'csfr_token_name': csfr_token_value },
-                    success: function (data) {
+                    data: {
+                        'district_id': district_id,
+                        'csfr_token_name': csfr_token_value
+                    },
+                    success: function(data) {
                         $('#district').html(data);
                     }
                 });
             }
-            // else {
-            //     $('#state_id').val('').hide();
-            //     $('#othstate').show();
-            // }
 
             var district_id = $('#district').val();
             var state_id = $('#state').val();
@@ -337,29 +314,37 @@
             var district_id = $('#district').val();;
 
             if (state_id != '') {
-                console.log("state_id asfeasfd", state_id);
                 var exam_new_id = $('#exam_new_id').val();
 
                 $.ajax({
                     type: "GET",
                     url: base_url + 'admin/Examshedule_schedule/consent_notrecieved_search',
                     dataType: 'html',
-                    data: { 'state_id': state_id, 'district_id': district_id, 'grade': grade, 'exam_new_id': exam_new_id, 'csfr_token_name': csfr_token_value },
-                    success: function (data) {
-                        // $('#consent_not_recieved_by_user_list').html(data);
-                        $('#consent_not_recieved_by_user_list').DataTable().destroy();
-                        $('#consent_not_recieved_by_user_list').hide();
-                        $('#consentRecievedRecreatedTable').html(data);
+                    data: {
+                        'state_id': state_id,
+                        'district_id': district_id,
+                        'grade': grade,
+                        'exam_new_id': exam_new_id,
+                        'csfr_token_name': csfr_token_value
+                    },
+                    success: function(data) {
+                        $('#consentRecievedRecreatedTable').DataTable().clear().destroy();;
+                        $('#consentRecievedRecreatedTable').hide();
                         $('#consentNotRecievedDiv').html(data);
-                        $('#consentRecievedRecreatedTable').DataTable();
-
+                        table = $('#consentNotRecievedDiv #consentRecievedRecreatedTable').DataTable();
                         // New Logic For Count Students on the basis of Distrcit Id  -- Jogi
                         $.ajax({
                             type: "GET",
                             url: base_url + 'admin/Examshedule_schedule/districtWiseCountOfStudents',
                             // dataType: 'html',
-                            data: { 'state_id': state_id, 'district_id': district_id, 'grade': grade, 'csfr_token_name': csfr_token_value },
-                            success: function (data) {
+                            data: {
+                                'state_id': state_id,
+                                'district_id': district_id,
+                                'grade': grade,
+                                'exam_id': exam_new_id,
+                                'csfr_token_name': csfr_token_value
+                            },
+                            success: function(data) {
                                 $('#countInDistrict').removeClass("d-none");
                                 $('#districtCounts').html(data);
                                 $('#schoolCount').addClass("d-none");
@@ -370,14 +355,13 @@
                         });
                     }
                 });
-            }
-            else {
+            } else {
                 location.reload();
 
             }
         });
 
-        $('#district').change(function () {
+        $('#district').change(function() {
 
             var state_id = $('#state').val();
             var grade = $('#grade').val();
@@ -390,25 +374,29 @@
                     type: "GET",
                     url: base_url + 'admin/Examshedule_schedule/consent_notrecieved_search',
                     dataType: 'html',
-                    data: { 'district_id': district_id, 'state_id': state_id, 'grade': grade, 'exam_new_id': exam_new_id, 'csfr_token_name': csfr_token_value },
-                    success: function (data) {
-                        $('#consent_not_recieved_by_user_list').DataTable().destroy();
-                        $('#consent_not_recieved_by_user_list').hide();
-                        $('#consentRecievedRecreatedTable').html(data);
+                    data: {
+                        'district_id': district_id,
+                        'state_id': state_id,
+                        'grade': grade,
+                        'exam_new_id': exam_new_id,
+                        'csfr_token_name': csfr_token_value
+                    },
+                    success: function(data) {
+                        $('#consentRecievedRecreatedTable').DataTable().clear().destroy();;
+                        $('#consentRecievedRecreatedTable').hide();
                         $('#consentNotRecievedDiv').html(data);
-                        $('#consentRecievedRecreatedTable').DataTable();
+                        table = $('#consentNotRecievedDiv #consentRecievedRecreatedTable').DataTable();
 
 
                     }
                 });
-            }
-            else {
+            } else {
                 location.reload();
 
             }
         });
 
-        $('#grade').change(function () {
+        $('#grade').change(function() {
             var grade = $(this).val();
             var state_id = $('#state').val();
             var district_id = $('#district').val();
@@ -421,17 +409,21 @@
                     type: "GET",
                     url: base_url + 'admin/Examshedule_schedule/consent_notrecieved_search',
                     dataType: 'html',
-                    data: { 'district_id': district_id, 'state_id': state_id, 'grade': grade, 'exam_new_id': exam_new_id, 'csfr_token_name': csfr_token_value },
-                    success: function (data) {
-                        $('#consent_not_recieved_by_user_list').DataTable().destroy();
-                        $('#consent_not_recieved_by_user_list').hide();
-                        $('#consentRecievedRecreatedTable').html(data);
+                    data: {
+                        'district_id': district_id,
+                        'state_id': state_id,
+                        'grade': grade,
+                        'exam_new_id': exam_new_id,
+                        'csfr_token_name': csfr_token_value
+                    },
+                    success: function(data) {
+                        $('#consentRecievedRecreatedTable').DataTable().clear().destroy();;
+                        $('#consentRecievedRecreatedTable').hide();
                         $('#consentNotRecievedDiv').html(data);
-                        $('#consentRecievedRecreatedTable').DataTable();
+                        table = $('#consentNotRecievedDiv #consentRecievedRecreatedTable').DataTable();
                     }
                 });
-            }
-            else {
+            } else {
 
                 location.reload();
 
@@ -443,12 +435,21 @@
 
     $('#select_all').click(function(event) {
         if (confirm("Are you sure want to select All  user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?")) {
-            $(".send_email_ids").attr("checked", this.checked);
+        
             var send_consent_id = $("#send_consent_id").val()
             var hrefs = new Array();
-            var urlUpdate = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/')
-                            ?>"
-            var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_not_recieve_all_OneTime/') ?>"
+            let rows = table.rows({
+                'search': 'applied'
+            }).nodes();
+            // Check checkboxes for all rows in the table
+            $('input[type="checkbox"]', rows).prop('checked', true);
+            rows.each((row) => {
+                if ($('input[type="checkbox"]', row).attr('rel')) {
+                    hrefs.push($('input[type="checkbox"]', row).attr('rel'))
+                }
+            })
+            var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/')
+                                ?>"
             $.ajax({
                 url: url,
                 type: 'get',
@@ -458,29 +459,14 @@
                     'send_consent_id': send_consent_id
                 },
                 success: function(result) {
-                    JSON.parse(result).forEach(element => $(`input[rel="${element}"]`).prop('checked', true));
                     if (result) {
-                        
-                        $('.loader').removeClass('d-none');
-                        $.ajax({
-                            url: urlUpdate,
-                            type: 'get',
-                            dataType: 'text',
-                            data: {
-                                data: JSON.parse(result),
-                                'send_consent_id': send_consent_id
-                            },
-                            success: function(result) {
-                                $('.loader').addClass('d-none');
-                                alert("Consent sent sucessfully");
-                                  window.location.reload();
-                            }
-                        })
+                        $('.loader').addClass('d-none');
+                        alert("Consent sent sucessfully ");
+                        $(':checkbox.send_email_ids').each(function() {
+                            this.checked = false;
+                        });
 
-
-
-
-                      
+                        window.location.reload();
                     }
                 }
 
@@ -492,165 +478,94 @@
     });
 
 
-    $('#send_all').click(function (event) {
-        alert('ffj');
-        if ($('input[name="send_email_ids"]:checked').length > 2) {
-            var send_consent_id = $("#send_consent_id").val()
-            var hrefs = new Array();
-            $(':checkbox.send_email_ids').each(function () {
-                this.checked = true;
-                var r = $(this).attr('rel');
-
-                if (r != undefined) {
-                    hrefs.push(r);
-                }
-
-            });
-            var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/')?>"
-            $.ajax({
-                url: url,
-                type: 'get',
-                dataType: 'text',
-                data: { data: hrefs, 'send_consent_id': send_consent_id },
-                success: function (result) {
-                    alert("Consent sent sucessfully");
-                    $(':checkbox.send_email_ids').each(function () {
-                        // alert(this.checked)
-                        this.checked = false;
-                    });
-                }
-
-            });
-        } else {
-
-            alert('Please click on send at least two checkbox\n(कृपया कम से कम दो चेकबॉक्स भेजें पर क्लिक करें)');
-            $("#allcheckids").focus();
-            return false;
-
-        }
-
+    $('.select_all_uncheck').click(function(event) {
+        let rows = table.rows({
+            'search': 'applied'
+        }).nodes();
+        // Check checkboxes for all rows in the table
+        $('input[type="checkbox"]', rows).prop('checked', false);
+        arr = []
+        $('schoolCount').hide();
     });
-
-
-    $('.select_all_uncheck').click(function (event) {
-        // alert("13232132");return false;
-        var hrefs = new Array();
-
-        var numberNotChecked = $('.sum').filter(':checked').length;
-        console.log('numberNotChecked', numberNotChecked);
-
-        if ($('input[name="send_email_ids"]:checked').length == 0) {
-
-            alert('Please click on send atlest one checkbox\n(कृपया कम से कम एक चेकबॉक्स भेजें पर क्लिक करें)');
-            $("#allcheckids").focus();
-            return false;
-
-        } else {
-
-            $(':checkbox').each(function () {
-                this.checked = false;
-                var r = $(this).attr('rel'); if (r != 'undefined') {
-                    hrefs.push(r);
-                    // return false;
-                }
-            });
-
-            var sum = 0;
-            $('.sum').each(function () {
-                sum += parseFloat($(this).attr('rel'));
-            });
-
-            console.log('i am here', sum);
-            total_candidate_int = parseInt($("#total_candidate_display").text());
-            var renaming_add_value = total_candidate_int + sum;
-            console.log('renaming_add_value', renaming_add_value);
-            $('#total_candidate_display').html(renaming_add_value);
-            return false;
-
-        }
-
-    });
-
     function single_send_invitations(id) {
         $('.loader').removeClass('d-none');
         var send_consent_id = $("#send_consent_id").val();
-        var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/')?>"
+        var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/') ?>"
         $.ajax({
             url: url,
             type: 'get',
             dataType: 'text',
-            data: { id: id, 'send_consent_id': send_consent_id },
-            success: function (result) {
+            data: {
+                id: id,
+                'send_consent_id': send_consent_id
+            },
+            success: function(result) {
 
                 $('.loader').addClass('d-none');
-                    alert("Consent sent sucessfully ");
-                    // return false;
-                    window.location.reload();
+                alert("Consent sent sucessfully ");
+                // return false;
+                window.location.reload();
             }
         });
     }
 
-    $('#select_single_count').click(function (event) {
-        if (confirm('Are you sure want to send select user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?')) {
-        if ($('input[name="send_email_ids"]:checked').length > 1) {
-            $('.loader').removeClass('d-none');
-            var hrefs = new Array();
-            var send_consent_id = $("#send_consent_id").val();
-            $('input[name="send_email_ids"]:checked').each(function () {
+    $('#select_single_count').click(function(event) {
+        if (confirm("Are you sure want to send select user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?")) {
+            if (arr.length > 0) {
+                $('.loader').removeClass('d-none');
+                var send_consent_id = $("#send_consent_id").val();
+                var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/') ?>"
+                $.ajax({
+                    url: url,
+                    type: 'get',
+                    dataType: 'text',
+                    data: {
+                        data: arr,
+                        'send_consent_id': send_consent_id
+                    },
+                    success: function(result) {
+                        if (result) {
+                            $('.loader').addClass('d-none');
+                            alert("Consent sent sucessfully ");
+                            $(':checkbox.send_email_ids').each(function() {
+                                this.checked = false;
+                            });
 
-                var r = $(this).attr('rel');
-                if (r != 'undefined') {
-                    hrefs.push(r);
-                }
-
-            });
-            var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/')?>"
-            $.ajax({
-                url: url,
-                type: 'get',
-                dataType: 'text',
-                data: { data: hrefs, 'send_consent_id': send_consent_id },
-                success: function (result) {
-                    $('.loader').addClass('d-none');
-                    alert("Consent sent sucessfully");
-                    window.location.reload();
-                    // $(':checkbox.send_email_ids').each(function () {
-                    //     // alert(this.checked)
-                    //     this.checked = false;
-                    // });
-                }
-            });
-
+                            window.location.reload();
+                        }
+                    }
+                });
+            } else {
+                alert('Please click on send at least one checkbox\n(कृपया कम से कम दो चेकबॉक्स भेजें पर क्लिक करें)');
+                $("#allcheckids").focus();
+                return false;
+            }
         } else {
-            alert('Please click on send at least two checkbox\n(कृपया कम से कम दो चेकबॉक्स भेजें पर क्लिक करें)');
-            $("#allcheckids").focus();
             return false;
-
         }
-    }else{
-        return false;
-    }
 
     });
 
 
 
+
     // New Logic For Count Students on the basis of School Id  -- Jogi
-    $(document).ready(function () {
+    $(document).ready(function() {
         let arr = [];
-        $('.send_email_ids').click(function (e) {
+        $('.send_email_ids').click(function(e) {
             if ($(this).is(".send_email_ids:checked")) {
                 arr.push(e.target.value)
-            }
-            else {
+            } else {
                 arr = arr.filter(item => item !== e.target.value)
             }
-            console.log('not recieve');
             $.ajax({
                 type: "GET",
                 url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
-                data: { 'school_ids': arr, 'csfr_token_name': csfr_token_value },
-                success: function (data) {
+                data: {
+                    'school_ids': arr,
+                    'csfr_token_name': csfr_token_value
+                },
+                success: function(data) {
                     $('#schoolCount').removeClass("d-none");
                     $('#schoolWiseCounts').html(data);
                 }
@@ -659,47 +574,56 @@
 
         });
 
-        $('.select_all_count').click(function (e) {
-            //  let arr=[];
-            // alert(this.checked).attr('rel');
-            // Iterate each checkbox
-
-            $('.send_email_ids:checkbox').each(function () {
-                // alert(this.checked)
-                this.checked = true;
-                var r = $(this).attr('value');
-                if (r !== 'undefined') {
-                    arr.push(r);
-
+        $('.select_all_count').click(function(event) {
+            arr = []
+            let rows = table.rows({
+                'search': 'applied'
+            }).nodes();
+            // Check checkboxes for all rows in the table
+            $('input[type="checkbox"]', rows).prop('checked', true);
+            rows.each((row) => {
+                if ($('input[type="checkbox"]', row).attr('rel')) {
+                    arr.push($('input[type="checkbox"]', row).attr('rel'))
                 }
-            });
-            // console.log('testing',arr);
+            })
+
             $.ajax({
                 type: "GET",
                 url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
-                data: { 'school_ids': 'all', 'csfr_token_name': csfr_token_value },
-                success: function (data) {
+                data: {
+                    'school_ids': 'all',
+                    'csfr_token_name': csfr_token_value
+                },
+                success: function(data) {
                     $('#schoolCount').removeClass("d-none");
                     $('#schoolWiseCounts').html(data);
                 }
 
             });
-
+            console.log(arr);
+            return false;
         });
-
-        $('.select_all_uncheck').click(function (e) {
-            $('.send_email_ids:checkbox').each(function () {
-                // alert(this.checked)
-                this.checked = false;
-                var r = $(this).attr('value');
-                if (r !== 'undefined') {
-                    arr.push(r);
-
-                }
-            });
-            $('#schoolCount').addClass("d-none");
-        });
-
     })
 
+    let arr = []
+function getCount(id) {
+    if (arr.indexOf(id) === -1) {
+        arr.push(id)
+    } else {
+        arr = arr.filter(item => item !== id)
+    }
+    $.ajax({
+        type: "GET",
+        url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
+        data: {
+            'school_ids': arr,
+            'csfr_token_name': csfr_token_value
+        },
+        success: function(data) {
+
+            $('#schoolCount').removeClass("d-none");
+            $('#schoolWiseCounts').html(data);
+        }
+    });
+}
 </script>

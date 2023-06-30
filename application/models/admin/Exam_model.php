@@ -230,6 +230,16 @@ class Exam_model extends CI_Model {
             return $data;
     
     }
+
+
+    public function getTotalCountinDistrictConsentNotRecieved(){
+        $query = $this->db->query("SELECT SUM(ci_exam_registration.max_allocate_candidate)
+        FROM ci_exam_registration
+        INNER JOIN ci_registration_invitation ON ci_exam_registration.id=ci_registration_invitation.school_id WHERE ci_exam_registration.district='Dehradun' AND ci_registration_invitation.ref_id=1;
+        ");
+    }
+
+
     public function getTotalCountinSchoolWise($ids)
     {
            if($ids=='all')
@@ -1745,7 +1755,7 @@ public function get_deactivation_data($id) {
         $this->db->from('ci_exam_invitation');
         $this->db->where('create_letter_status','1');
         $this->db->where('created_by',$admin_id);
-        $this->db->group_by('exam_name','desc');
+        $this->db->order_by('id','desc');
         $q = $this->db->get()->result_array();
         return $q;
     }

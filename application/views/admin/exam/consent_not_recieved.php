@@ -3,7 +3,7 @@
 
 <!-- <div class="datalist"> -->
 <!-- <div> -->
-<div class="row"><b>Consent Recieved Count :- </b>&nbsp;<?php echo $count; ?></div>
+<div class="row" hidden><b>Consent Not Recieved Count :- </b>&nbsp;<?php echo $count; ?></div>
    <div class="row">
    <table id="consentRecievedRecreatedTable" class="table table-bordered table-striped" style="border-collapse: collapse !important;">
       <thead>
@@ -25,17 +25,17 @@
             if(!empty($main_data)){   
                   $i = 1;
                   foreach ($main_data as $row):
-                     // echo '<pre>';print_r($row);
                      $admin_role_id = $this->session->userdata('admin_role_id');
                      $admin_id = $this->session->userdata('admin_id');
-                  //    if (($admin_role_id != 6) && ((in_array($row['file_movement'], array(1))) )) {
-                  //       continue;
-                  // }
-               // if($row['school_name'] != '' && $row['school_name'] != '' && $row['district'] != ''){      
-               if(1==1){      
-               // if($value[1] ){      
-               // if($row['school_name'] != 'count'){      
+     
+               if(1==1){           
          ?>
+            <?php $invitationStatus = checkExamInvitationStatus($exam_id,$row['id']);
+            $invt_recieved = isset($invitationStatus['invt_recieved'])?$invitationStatus['invt_recieved']:0;
+            $invite_sent = isset($invitationStatus['invite_sent'])?$invitationStatus['invite_sent']:0;
+           
+            if($invt_recieved==0 && $invite_sent==1)
+            {?>
 
             <tr>
                <td>
@@ -67,16 +67,12 @@
                </td>             
                <td>
                   <?= $row['max_allocate_candidate']; ?>
-                  <input style="height: 1px;width: 1px;" type="checkbox" id="a" id="sum_value" name="sum_value" class="checkbox-item sum" rel="<?php echo $row['max_allocate_candidate']; ?>">
                </td>             
                <td style="text-align: center;">
-                     <!-- <input type="checkbox" id="a" class="checkbox-item" rel="<?php echo $row['id']; ?>"> -->
-                     <input type="checkbox" id="a" class="send_email_ids" name="send_email_ids" rel="<?php echo $row['id']; ?>">
+                     <input type="checkbox" id="a" class="send_email_ids" onClick="getCount(<?php echo $row['id']?>)" name="send_email_ids" rel="<?php echo $row['id']; ?>">
                      
                         <?php  if ($admin_role_id == 5 )  { ?>
-                           <!-- <a href="<?php // echo base_url("admin/examshedule_schedule/send_invitation_user/" . $row[8]); ?>" title="Send Invitations" class="btn btn-success btn-xs mr5" >
-                              <i class="fa fa-paper-plane-o"></i>
-                           </a> -->
+                          
                            <a onClick="single_send_invitations(<?php echo $row['id']; ?>)" title="Send Invitations" class="btn btn-success btn-xs mr5" >
                               <i class="fa fa-paper-plane-o"></i>
                            </a>
@@ -89,6 +85,8 @@
                         ?>               
                </td>
             </tr>
+            <?php }?>
+
          <?php
          }
             $i++;
