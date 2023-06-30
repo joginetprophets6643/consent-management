@@ -83,8 +83,8 @@
 
             <div class="card-header">
                 <h3 class="card-title" style="color: #373250;">
-                    <?php echo get_exam_name($exam_id); ?>
-                    <input hidden type="text" id="exam_Id" value="<?php echo $exam_id ?>">
+                    <?php echo get_exam_name(get_exam_name_downloadreport($exam_id)); ?>
+                    <input hidden  type="text" id="exam_Id" value="<?php echo $exam_id ?>">
 
                 </h3>
 
@@ -468,6 +468,9 @@
                     hrefs.push($('input[type="checkbox"]', row).attr('rel'))
                 }
             })
+          
+            if(hrefs.length!=0){
+                $('.loader').removeClass('d-none');
             var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all/') ?>"
             $.ajax({
                 url: url,
@@ -481,14 +484,17 @@
                     if (result) {
                         $('.loader').addClass('d-none');
                         alert("Consent sent sucessfully ");
-                        $(':checkbox.send_email_ids').each(function() {
-                            this.checked = false;
-                        });
-
+                 
                         window.location.reload();
                     }
                 }
             });
+        }else{
+            alert('Please click on send at least one checkbox\n(कृपया कम से कम दो चेकबॉक्स भेजें पर क्लिक करें)');
+                $("#allcheckids").focus();
+                return false;
+        }
+
         } else {
             return false;
         }
@@ -605,10 +611,6 @@
                         if (result) {
                             $('.loader').addClass('d-none');
                             alert("Consent sent sucessfully ");
-                            $(':checkbox.send_email_ids').each(function() {
-                                this.checked = false;
-                            });
-
                             window.location.reload();
                         }
                     }

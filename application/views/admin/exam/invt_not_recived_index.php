@@ -78,7 +78,7 @@
             <div class="card-body">
 
                 <?php echo form_open("/", 'class="filterdata"') ?>
-                <?php echo get_exam_name($id); ?>
+                <?php echo get_exam_name(get_exam_name_downloadreport($id)); ?>
                 <div class="row">
                     <input type="text" hidden id="exam_new_id" value="<?php echo $id ?>">
                     <?php
@@ -509,6 +509,7 @@
                     hrefs.push($('input[type="checkbox"]', row).attr('rel'))
                 }
             })
+            if(hrefs.length!=0){
             var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/')
                                 ?>"
             $.ajax({
@@ -523,15 +524,16 @@
                     if (result) {
                         $('.loader').addClass('d-none');
                         alert("Consent sent sucessfully ");
-                        $(':checkbox.send_email_ids').each(function() {
-                            this.checked = false;
-                        });
-
                         window.location.reload();
                     }
                 }
 
             });
+        }else{
+            alert('Please click on send at least one checkbox\n(कृपया कम से कम दो चेकबॉक्स भेजें पर क्लिक करें)');
+                $("#allcheckids").focus();
+                return false;
+        }
         } else {
             return false;
         }
@@ -588,9 +590,7 @@
                         if (result) {
                             $('.loader').addClass('d-none');
                             alert("Consent sent sucessfully ");
-                            $(':checkbox.send_email_ids').each(function() {
-                                this.checked = false;
-                            });
+                        
 
                             window.location.reload();
                         }
@@ -661,7 +661,6 @@
                 }
 
             });
-            console.log(arr);
             return false;
         });
     })

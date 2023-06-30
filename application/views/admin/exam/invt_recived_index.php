@@ -49,7 +49,7 @@
                 </div>
 
             </div>
-            <?php echo get_exam_name($id); ?>
+            <?php echo get_exam_name(get_exam_name_downloadreport($id)); ?>
             <div class="card-body">
 
                 <?php echo form_open("/",'class="filterdata"') ?>
