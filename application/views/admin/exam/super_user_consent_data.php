@@ -93,6 +93,7 @@ function superUserButtonHandle(exam_id ,school_id,status)
             'csfr_token_name': csfr_token_value
         },
         success: function(data) {
+        action =  (status===1) ? 'Approved' : 'Dis-Approved';
          alert(action + " Successfully");
          window.location.reload();
         }

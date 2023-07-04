@@ -332,7 +332,7 @@ class Examshedule_schedule extends MY_Controller {
                 }
                 elseif ($invt_recieved==1 && $invite_sent==1) {
                     $action =   'Status: <img src="'.$doneImage.'" alt=""> <br>
-                    <a title="Send Invitations" class="btn btn-warning mt-2" onClick="revokeConsentsInvitations('.$row['id'].')"> Revoke Consent </a>';
+                    <a title="Revoke Consent" class="btn btn-warning mt-2" onClick="revokeConsentsInvitations('.$row['id'].')"> Revoke Consent </a>';
                 }
                 else{
                     $action =   '<input type="checkbox" id="a" class="send_email_ids" onClick="getCount('.$row['id'].')" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">

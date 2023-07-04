@@ -317,6 +317,7 @@
                             'csfr_token_name': csfr_token_value
                         },
                         success: function(data) {
+                            alert(data);
                             $('#send_invitation_list').DataTable().clear().destroy();
                             $('#send_invitation_list').hide();
                             $('#invitation_recreate_div').html(data);

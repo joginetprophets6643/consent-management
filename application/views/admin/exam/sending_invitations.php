@@ -153,7 +153,7 @@
                            }
                            elseif ($invt_recieved==1 && $invite_sent==1) {
                                $action =   'Status: <img src="'.$doneImage.'" alt=""> <br>
-                               <a title="Send Invitations" class="btn btn-warning mt-2" onClick="revokeConsentsInvitations('.$row['id'].')"> Revoke Consent </a>';
+                               <a title="Revoke Consent" class="btn btn-warning mt-2" onClick="revokeConsentsInvitations('.$row['id'].')"> Revoke Consent </a>';
                            }
                            else{
                                $action =   '<input type="checkbox" id="a" onClick="getCount('.$row['id'].')" class="send_email_ids" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">
