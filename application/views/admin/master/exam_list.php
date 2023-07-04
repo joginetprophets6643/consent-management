@@ -88,7 +88,7 @@
 
                <th>End Date</th>
 
-              <th>Add/Edit Subject</th>
+              <th>Add/View Subject</th>
 
               <th>Action</th>
 
