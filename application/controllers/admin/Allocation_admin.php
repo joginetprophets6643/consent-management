@@ -352,7 +352,7 @@ class Allocation_admin extends MY_Controller {
             // Consent recieved Table
             $state_name = $city_name = $grade_name = '';
             $data['temp'][1] = $this->Exam_model->get_consent_recved_data($state_name, $city_name, $grade_name,$id);
-        
+            
             $data['data']=$data['temp'][1][1];
            
             foreach ($data['data'] as $key => $value) {
@@ -371,7 +371,7 @@ class Allocation_admin extends MY_Controller {
             $data['no_candidate'] = isset($records1['info'][0]['no_candidate']) ? explode(",",$records1['info'][0]['no_candidate']) : [];
             $data['candidates'] = isset($records1['info'][0]['candidates']) ? explode(",",$records1['info'][0]['candidates']) : [];
              
-            
+           
             // cosent_not_recved_data
             $state_name = $city_name = $grade_name = '';
 

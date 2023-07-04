@@ -54,14 +54,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name" class="col-sm- control-label">Present Candidate&nbsp;(वर्तमान उम्मीदवार)<i style="color:#ff0000; font-size:12px;">*</i></label>
-                            <input type="text" required  name="present_candidate" id="present_candidate" value="<?php echo $present_candidate ?>" class="form-control change"  placeholder="Present Candidates" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                            <input type="text" <?php echo date("Y-m-d") == $date_exam[$key]?'':'disabled'?> required  name="present_candidate" id="present_candidate" value="<?php echo $present_candidate ?>" class="form-control change"  placeholder="Present Candidates" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         </div>
                     </div>
                   
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name" class="col-sm- control-label">Absent Candidate&nbsp;(अनुपस्थित उम्मीदवार)<i style="color:#ff0000; font-size:12px;">*</i></label>
-                            <input type="text" required name="absent_candidate" id="absent_candidate" value="<?php echo $absent_candidate ?>" class="form-control change"  placeholder="Absent Candidates" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                            <input type="text" <?php echo date("Y-m-d") == $date_exam[$key]?'':'disabled'?> required name="absent_candidate" id="absent_candidate" value="<?php echo $absent_candidate ?>" class="form-control change"  placeholder="Absent Candidates" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         </div>
                     </div>
                    
@@ -89,7 +89,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="name" class="col-sm- control-label">key<i style="color:#ff0000; font-size:12px;">*</i></label>
-                            <input type="text"  name="key" value="<?php echo $key;?>" class="form-control">
+                            <input type="text"   name="key" value="<?php echo $key;?>" class="form-control">
                         </div>
                     </div>
                    

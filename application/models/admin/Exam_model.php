@@ -1552,7 +1552,7 @@ public function get_deactivation_data($id) {
         return $query->result_array();
     }
      public function get_consent_recved_data($state_name, $city_name, $grade_name,$ref_id) {
-     
+   
         $this->db->from('ci_exam_according_to_school');
 
         if ($city_name != '' && $state_name != '' ) {
@@ -1569,11 +1569,11 @@ public function get_deactivation_data($id) {
 
             $this->db->where('ci_exam_according_to_school.ranking_admin', $grade_name);
         }
-        $admin_role_id = $this->session->userdata('admin_role_id');
-        if ($admin_role_id == 6) {
-            $this->db->where('ci_exam_according_to_school.created_by',
-                    $this->session->userdata('admin_id'));
-        }
+        // $admin_role_id = $this->session->userdata('admin_role_id');
+        // if ($admin_role_id == 6) {
+        //     $this->db->where('ci_exam_according_to_school.created_by',
+        //             $this->session->userdata('admin_id'));
+        // }
 
         $filterData = $this->session->userdata('filter_keyword');
 

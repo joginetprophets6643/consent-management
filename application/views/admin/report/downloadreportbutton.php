@@ -175,9 +175,12 @@
 
                                                 <td>
                                                     <?php
-                                                    if ($row['invt_recieved'] == 1 && $row['invite_sent'] == 1) {
+                                                    if ($row['superuserStatus'] == 1) {
                                                         echo 'Recieved';
+                                                    }else{
+                                                        echo 'Pending';
                                                     }
+                                                    
                                                     ?>
                                                 </td>
 
@@ -312,7 +315,7 @@
 
                                                 <td>
                                                     <?php
-                                                    if ($row['invt_recieved'] == 0) {
+                                                    if ($row['superuserStatus'] == 0) {
                                                         echo 'Pending';
                                                     }
                                                     ?>
