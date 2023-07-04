@@ -14,7 +14,15 @@
     .view-all--button {
         margin-top: 10px !important;
     }
-
+    .loaderWrap{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #000;/*Fallback*/
+        background-color: rgba(0, 0, 0, .5);
+    }
     .loader {
         border: 16px solid #e0e0e0;
         border-radius: 50%;
@@ -219,7 +227,7 @@
                                     <input type="button" class="select_all_uncheck btn btn-success" id="select-all1" value="Uncheck (अनचेक)">
                                 </div>
                                 <div class="send-option">
-                                    <input type="button" class="btn btn-success" id="select_all" onclick="return confirm('Are you sure want to send all invitation?\nक्या आप वाकई सभी आमंत्रण भेजना चाहते हैं?')" value="Send to All (सभी को भेजो)">
+                                    <input type="button" class="btn btn-success" id="select_all"  value="Send to All (सभी को भेजो)">
                                     <input type="button" class="btn btn-success" id="select_single_count" value="Send to Selected (चयनित को भेजें)">
                                 </div>
                             </div>
@@ -264,7 +272,6 @@
                     </div>
                 </div>
                 <div id="consentNotRecievedDiv"></div>
-                <div class="loader d-none"></div>
                 <div class="view-all--button ml-1">
                     <button onclick="window.history.go(-1)" class="btn view-btn">Back (पीछे)</button>
                 </div>
@@ -279,7 +286,10 @@
 
 
 
+<div class="loaderWrap d-none">
+<div class="loader"></div>
 
+</div>
 
 
 <!-- DataTables -->
@@ -510,8 +520,10 @@
                 }
             })
             if(hrefs.length!=0){
+                $('.loaderWrap').removeClass('d-none');
             var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/')
                                 ?>"
+
             $.ajax({
                 url: url,
                 type: 'get',
@@ -522,7 +534,7 @@
                 },
                 success: function(result) {
                     if (result) {
-                        $('.loader').addClass('d-none');
+                        $('.loaderWrap').addClass('d-none');
                         alert("Consent sent sucessfully ");
                         window.location.reload();
                     }
@@ -551,7 +563,7 @@
         $('schoolCount').hide();
     });
     function single_send_invitations(id) {
-        $('.loader').removeClass('d-none');
+        $('.loaderWrap').removeClass('d-none');
         var send_consent_id = $("#send_consent_id").val();
         var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/') ?>"
         $.ajax({
@@ -563,11 +575,10 @@
                 'send_consent_id': send_consent_id
             },
             success: function(result) {
+                $('.loaderWrap').addClass('d-none');
+                 alert("Consent sent sucessfully ");
+                 window.location.reload();
 
-                $('.loader').addClass('d-none');
-                alert("Consent sent sucessfully ");
-                // return false;
-                window.location.reload();
             }
         });
     }
@@ -575,7 +586,7 @@
     $('#select_single_count').click(function(event) {
         if (confirm("Are you sure want to send select user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?")) {
             if (arr.length > 0) {
-                $('.loader').removeClass('d-none');
+            $('.loaderWrap').removeClass('d-none');
                 var send_consent_id = $("#send_consent_id").val();
                 var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all_not_recieved_consent/') ?>"
                 $.ajax({
@@ -588,10 +599,8 @@
                     },
                     success: function(result) {
                         if (result) {
-                            $('.loader').addClass('d-none');
+                            $('.loaderWrap').addClass('d-none');
                             alert("Consent sent sucessfully ");
-                        
-
                             window.location.reload();
                         }
                     }
@@ -611,29 +620,8 @@
 
 
     // New Logic For Count Students on the basis of School Id  -- Jogi
+    
     $(document).ready(function() {
-        let arr = [];
-        $('.send_email_ids').click(function(e) {
-            if ($(this).is(".send_email_ids:checked")) {
-                arr.push(e.target.value)
-            } else {
-                arr = arr.filter(item => item !== e.target.value)
-            }
-            $.ajax({
-                type: "GET",
-                url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
-                data: {
-                    'school_ids': arr,
-                    'csfr_token_name': csfr_token_value
-                },
-                success: function(data) {
-                    $('#schoolCount').removeClass("d-none");
-                    $('#schoolWiseCounts').html(data);
-                }
-
-            });
-
-        });
 
         $('.select_all_count').click(function(event) {
             arr = []
@@ -647,7 +635,6 @@
                     arr.push($('input[type="checkbox"]', row).attr('rel'))
                 }
             })
-
             $.ajax({
                 type: "GET",
                 url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
@@ -661,7 +648,7 @@
                 }
 
             });
-            return false;
+    
         });
     })
 

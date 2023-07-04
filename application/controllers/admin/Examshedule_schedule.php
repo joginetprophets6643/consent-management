@@ -890,9 +890,8 @@ class Examshedule_schedule extends MY_Controller {
         $send_consent_id = $this->input->get('send_consent_id');
         $new_id = urldecrypt($send_consent_id); 
         $data['exam'] = $this->Exam_model->get_invites_byid($new_id);
-      
-        
         if(!empty($ids)){
+        
             foreach ($ids as $id) {
 
                  $email = getEmail($id);
@@ -916,6 +915,7 @@ class Examshedule_schedule extends MY_Controller {
         }else{
             
             $id = $this->input->get('id');
+        
           
             $data['user_data'] = $this->Exam_model->get_all_invites_idsupdate($id); 
             $messageP1='Dear Sir/Madam ,';
