@@ -1447,7 +1447,7 @@ class Examshedule_schedule extends MY_Controller {
                 $row['principal_name'] = '<h4 class="m0 mb5">'.$row['principal_name'] .'</h4>'.'<small class="text-muted">'.$row['pri_mobile'].'</small><br/>'.'<small class="text-muted">'.$row['email'].'</small>';
                 $row['max_allocate_candidate'] = $row['max_allocate_candidate'];
                 $action =   '<input type="checkbox" id="a" class="send_email_ids" onClick="getCount('.$row['id'].')" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">
-                 <a title="Send Invitations" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
+                 <a title="Re-Send Invitation" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
                 $data[] = [
                     ++$i,
                     $row['school_name'] ? $row['school_name'] : '',
@@ -1499,7 +1499,7 @@ class Examshedule_schedule extends MY_Controller {
                 }
                 else{
                     $action =   '<input type="checkbox" id="a" class="send_email_ids" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">
-                    <a title="Revoke Consentfsend_consent" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
+                    <a title="Revoke Consent" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
                
                 }
                 $row['principal_name'] = '<h4 class="m0 mb5">'.$row['principal_name'] .'</h4>'.'<small class="text-muted">'.$row['pri_mobile'].'</small><br/>'.'<small class="text-muted">'.$row['email'].'</small>';
