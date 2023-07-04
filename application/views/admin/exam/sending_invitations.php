@@ -157,7 +157,7 @@
                            }
                            else{
                                $action =   '<input type="checkbox" id="a" onClick="getCount('.$row['id'].')" class="send_email_ids" name="send_email_ids" rel="'.$row['id'].'" value="'.$row['id'].'">
-                               <a title="Consent Sent" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
+                               <a title="Send Consent" class="btn btn-success btn-xs mr5" onClick="single_send_invitations('.$row['id'].')"> <i class="fa fa-paper-plane-o"></i></a>';
                           
                            }
                         
