@@ -86,14 +86,13 @@
                                         <p>Add your School/College/University Images as per required filed</p>
                                     </div>
                                     <?php
-                                  
                                     $file_url =  base_url('uploads/consent_data/');
-                                    $fileNameType1 = pathinfo($file_url . "/" . $info['fileName1'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info['fileName1'];
-                                    $fileNameType2 = pathinfo($file_url . "/" . $info['fileName2'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info['fileName2'];
-                                    $fileNameType3 = pathinfo($file_url . "/" . $info['fileName3'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info['fileName3'];;
-                                    $fileNameType4 = pathinfo($file_url . "/" . $info['fileName4'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info['fileName4'];;
-                                    $fileNameType5 = pathinfo($file_url . "/" . $info['fileName5'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info['fileName5'];;
-                                    $fileNameType6 = pathinfo($file_url . "/" . $info['fileName6'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . "/" . $info['fileName6'];;
+                                    $fileNameType1 = pathinfo($file_url . "/" . $info['fileName1'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url  . $info['fileName1'];
+                                    $fileNameType2 = pathinfo($file_url . "/" . $info['fileName2'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url  . $info['fileName2'];
+                                    $fileNameType3 = pathinfo($file_url . "/" . $info['fileName3'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . $info['fileName3'];;
+                                    $fileNameType4 = pathinfo($file_url . "/" . $info['fileName4'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url  . $info['fileName4'];;
+                                    $fileNameType5 = pathinfo($file_url . "/" . $info['fileName5'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url  . $info['fileName5'];;
+                                    $fileNameType6 = pathinfo($file_url . "/" . $info['fileName6'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url  . $info['fileName6'];;
 
                                     ?>
                                     <div class="row">
@@ -301,8 +300,9 @@
         }
         // Filename Name 1
         toDataUrl(file1, function(x) {
-            let blankURL = "http://localhost/consent-management/uploads/consent_data//Image-not-available.jpg";
-            let newUpdateFile = file1 === blankURL ? '' : '<?php echo $info[0]['fileName1']; ?>';
+            let blankURL = '<?= base_url("uploads/consent_data/Image-not-available.jpg"); ?>';
+            let newUpdateFile = file1 === blankURL ? '' :  '<?php echo $info['fileName1']; ?>';
+
             if (newUpdateFile === '') {
                 $('#fileName1').val('');
             } else {
@@ -318,9 +318,9 @@
 
         })
         // Filename Name 2
-        toDataUrl(file2, function(x) {
-            let blankURL = "http://localhost/consent-management/uploads/consent_data//Image-not-available.jpg";
-            let newUpdateFile = file2 === blankURL ? '' : '<?php echo $info[0]['fileName2']; ?>';
+        toDataUrl(file2, function(x) { 
+             let blankURL = '<?= base_url("uploads/consent_data/Image-not-available.jpg"); ?>';
+            let newUpdateFile = file2 === blankURL ? '' : '<?php echo $info['fileName2']; ?>';
             if (newUpdateFile === '') {
                 $('#fileName2').val('');
             } else {
@@ -336,8 +336,8 @@
         })
         // Filename Name 3
         toDataUrl(file3, function(x) {
-            let blankURL = "http://localhost/consent-management/uploads/consent_data//Image-not-available.jpg";
-            let newUpdateFile = file3 === blankURL ? '' : '<?php echo $info[0]['fileName3']; ?>';
+            let blankURL = '<?= base_url("uploads/consent_data/Image-not-available.jpg"); ?>';
+            let newUpdateFile = file3 === blankURL ? '' : '<?php echo $info['fileName3']; ?>';
             if (newUpdateFile === '') {
                 $('#fileName3').val('');
             } else {
@@ -353,8 +353,8 @@
         })
         // Filename Name 4
         toDataUrl(file4, function(x) {
-            let blankURL = "http://localhost/consent-management/uploads/consent_data//Image-not-available.jpg";
-            let newUpdateFile = file4 === blankURL ? '' : '<?php echo $info[0]['fileName4']; ?>';
+            let blankURL = '<?= base_url("uploads/consent_data/Image-not-available.jpg"); ?>';
+            let newUpdateFile = file4 === blankURL ? '' : '<?php echo $info['fileName4']; ?>';
             if (newUpdateFile === '') {
                 $('#fileName4').val('');
             } else {
@@ -370,8 +370,8 @@
         })
         // Filename Name 5
         toDataUrl(file5, function(x) {
-            let blankURL = "http://localhost/consent-management/uploads/consent_data//Image-not-available.jpg";
-            let newUpdateFile = file5 === blankURL ? '' : '<?php echo $info[0]['fileName5']; ?>';
+            let blankURL = '<?= base_url("uploads/consent_data/Image-not-available.jpg"); ?>';
+            let newUpdateFile = file5 === blankURL ? '' : '<?php echo $info['fileName5']; ?>';
             if (newUpdateFile === '') {
                 $('#fileName5').val('');
             } else {
@@ -387,8 +387,8 @@
         })
         // Filename Name 6
         toDataUrl(file6, function(x) {
-            let blankURL = "http://localhost/consent-management/uploads/consent_data//Image-not-available.jpg";
-            let newUpdateFile = file6 === blankURL ? '' : '<?php echo $info[0]['fileName6']; ?>';
+            let blankURL = '<?= base_url("uploads/consent_data/Image-not-available.jpg"); ?>';
+            let newUpdateFile = file6 === blankURL ? '' : '<?php echo $info['fileName6']; ?>';
             if (newUpdateFile === '') {
                 $('#fileName6').val('');
             } else {
@@ -559,4 +559,7 @@
         });
 
     }
+
+
+    
 </script>

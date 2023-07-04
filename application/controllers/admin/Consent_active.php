@@ -643,6 +643,7 @@ class Consent_active extends MY_Controller
             $data['admin'] = $this->admin_model->get_user_detail($admin_id);
             $data['user'] = $this->Certificate_model->get_user_detail_register_modify();
             $data['info'] = $this->admin_model->get_center_data_update($school_Id);
+           
             $examinationid = $this->uri->segment(4);
             $data["examinationid"] = $examinationid;
             $data["examination_form"] = $this->Certificate_model->get_examination_form($examinationid);
@@ -675,7 +676,7 @@ class Consent_active extends MY_Controller
                 $sub_info[$k]['no_candidate_array'] = isset($no_candidate_array[$k]) ? $no_candidate_array[$k] : '';
                 $sub_info[$k]['sub_name'] = $sub_name;
             }
-
+         
 
             $sub_info['sub_info'] = $sub_info;
             $this->load->view('admin/includes/_header', $sub_info);
