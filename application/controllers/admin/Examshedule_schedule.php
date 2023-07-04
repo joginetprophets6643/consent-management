@@ -891,7 +891,6 @@ class Examshedule_schedule extends MY_Controller {
         $new_id = urldecrypt($send_consent_id); 
         $data['exam'] = $this->Exam_model->get_invites_byid($new_id);
         if(!empty($ids)){
-        
             foreach ($ids as $id) {
 
                  $email = getEmail($id);
@@ -915,8 +914,6 @@ class Examshedule_schedule extends MY_Controller {
         }else{
             
             $id = $this->input->get('id');
-        
-          
             $data['user_data'] = $this->Exam_model->get_all_invites_idsupdate($id); 
             $messageP1='Dear Sir/Madam ,';
             $messageP1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.';
@@ -934,105 +931,8 @@ class Examshedule_schedule extends MY_Controller {
             $this->mailer->mail_template($email,'consent-not-send');
 
         }
-        
 
 
-
-
-
-
-        // New Code for Upadte
-
-        $ids = $this->input->get('data');
-       
-        $send_consent_id = $this->input->get('send_consent_id');
-        
-        $new_id = urldecrypt($send_consent_id); 
-       
-        $data['exam'] = $this->Exam_model->get_invites_byid($new_id);
-        
-        if(!empty($ids)){
-            $i = 0;
-            foreach ($ids as $id) {
-
-                $data[$i] = $this->Exam_model->get_all_invites_ids($id);  
-
-                foreach($data[$i] as $email => $value){
-                    $emails[$i] = $value['email'];
-                    $emails[$i] = $value['principal_name'];
-                }
-
-                $i++;
-            }
-        
-            $i = 0;
-            foreach ($ids as $id) {
-
-                $data['user_data'][$i] = $this->Exam_model->get_all_invites_idsupdate($id); 
-                $i++;
-            }
-
-
-        
-            foreach($data['user_data'] as $value){
-                foreach($value as $singledata){
-                  
-                    $examName = get_exam_name($data['exam'][0]['exam_name']);
-                    $messageP1='Dear Sir/Madam ,';
-                    $messageP1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.';
-                    $messageP1.='Kindly ignore if already done.';
-                    $messageP1.='Regards,';
-                    $messageP1.='UKPSC, Haridwar';
-                    // Message For Email Address 
-                    // $messageE1='Dear Sir/Madam ,<br>';
-                    // $messageE1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.<br>';
-                    // $messageE1.='Kindly ignore if already done.<br>';
-                    // $messageE1.='Regards,<br>';
-                    // $messageE1.='UKPSC, Haridwar';
-                    
-                    $email = $singledata['email'];
-                    $phone = $singledata['pri_mobile'];
-                    $template_id = "1007970272335112709";
-                    // EMAIL AND MESSAGE SEND UDING TEMPLETE
-                    sendSMS($phone,$messageP1,$template_id);
-                    // sendEmail($email,$messageE1,$template_id);
-                    $this->load->helper('email_helper');
-                    $this->mailer->mail_template($email,'consent-not-send');
-
-                }
-            }
-        
-        
-        }else{
-            
-            $id = $this->input->get('id');
-            $data['user_data'] = $this->Exam_model->get_all_invites_idsupdate($id); 
-            $examName = get_exam_name($data['exam'][0]['exam_name']);
-          
-            $messageP1='Dear Sir/Madam ,';
-            $messageP1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.';
-            $messageP1.='Kindly ignore if already done.';
-            $messageP1.='Regards,';
-            $messageP1.='UKPSC, Haridwar';
-            // Message For Email Address 
-            // $messageE1='Dear Sir/Madam ,<br>';
-            // $messageE1.='Your consent approval is still pending at your end. Kindly complete it by login into your account.<br>';
-            // $messageE1.='Kindly ignore if already done.<br>';
-            // $messageE1.='Regards,<br>';
-            // $messageE1.='UKPSC, Haridwar';
-            
-            $email = $data['user_data'][0]['email'];
-            $phone = $data['user_data'][0]['pri_mobile'];
-         
-            $template_id = "1007970272335112709";
-            // EMAIL AND MESSAGE SEND UDING TEMPLETE
-            sendSMS($phone,$messageP1,$template_id);
-            $this->load->helper('email_helper');
-            $this->mailer->mail_template($email,'consent-not-send');
-            // sendEmail($email,$messageE1,$template_id);
-        }
-    
-        
 
     }
     public function send_invitation_user_all_not_recieved_consent_copy() {

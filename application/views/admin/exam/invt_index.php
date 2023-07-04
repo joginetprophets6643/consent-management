@@ -20,6 +20,15 @@
     .table-main {
         width: 100% !important;
     }
+    .loaderWrap{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #000;/*Fallback*/
+        background-color: rgba(0, 0, 0, .5);
+    }
 
     .loader {
         border: 16px solid #e0e0e0;
@@ -227,7 +236,6 @@
                     </table>
                 </div>
                 <div id="invitation_recreate_div"></div>
-                <div class="loader d-none"></div>
                 <div class="view-all--button  ml-1">
                     <button onclick="window.history.go(-1)" class="btn view-btn">Back (पीछे)</button>
                 </div>
@@ -237,6 +245,11 @@
 
     </section>
 </div>
+
+<div class="loaderWrap d-none">
+    <div class="loader"></div>
+    
+    </div>
 
 
 <!-- DataTables -->
@@ -470,7 +483,8 @@
             })
           
             if(hrefs.length!=0){
-                $('.loader').removeClass('d-none');
+                $('.loaderWrap').removeClass('d-none');
+                $('.loaderWrap').removeClass('d-none');
             var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all/') ?>"
             $.ajax({
                 url: url,
@@ -482,7 +496,7 @@
                 },
                 success: function(result) {
                     if (result) {
-                        $('.loader').addClass('d-none');
+                        $('.loaderWrap').addClass('d-none');
                         alert("Consent sent sucessfully ");
                  
                         window.location.reload();
@@ -544,7 +558,7 @@
 
 
     function single_send_invitations(id) {
-        $('.loader').removeClass('d-none');
+        $('.loaderWrap').removeClass('d-none');
         var send_consent_id = $("#send_consent_id").val();
         var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all/') ?>"
         $.ajax({
@@ -557,7 +571,7 @@
             },
             success: function(result) {
                 if (result) {
-                    $('.loader').addClass('d-none');
+                    $('.loaderWrap').addClass('d-none');
                     alert("Consent sent sucessfully ");
                     this.checked = false;
                     // return false;
@@ -569,7 +583,7 @@
     }
 
     function revokeConsentsInvitations(id) {
-        $('.loader').removeClass('d-none');
+        $('.loaderWrap').removeClass('d-none');
         var send_consent_id = $("#send_consent_id").val();
         var url = "<?php echo base_url('admin/examshedule_schedule/revokeConsentsInvitations/') ?>"
         $.ajax({
@@ -583,7 +597,7 @@
             success: function(result) {
 
                 if (result) {
-                    $('.loader').addClass('d-none');
+                    $('.loaderWrap').addClass('d-none');
                     alert("Consent sent sucessfully");
                     this.checked = false;
                     window.location.reload();
@@ -596,7 +610,7 @@
     $('#select_single_count').click(function(event) {
         if (confirm("Are you sure want to send select user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?")) {
             if (arr.length > 0) {
-                $('.loader').removeClass('d-none');
+                $('.loaderWrap').removeClass('d-none');
                 var send_consent_id = $("#send_consent_id").val();
                 var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all/') ?>"
                 $.ajax({
@@ -609,7 +623,7 @@
                     },
                     success: function(result) {
                         if (result) {
-                            $('.loader').addClass('d-none');
+                            $('.loaderWrap').addClass('d-none');
                             alert("Consent sent sucessfully ");
                             window.location.reload();
                         }
@@ -625,8 +639,8 @@
         }
 
     });
-    let arr = []
 
+    let arr = []
     function getCount(id) {
         if (arr.indexOf(id) === -1) {
             arr.push(id)

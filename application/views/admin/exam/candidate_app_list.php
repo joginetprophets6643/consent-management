@@ -6,7 +6,7 @@
 
 
 
-   <table id="na_datatable" clpass="table table-bordered table-hover " style="overflow-x: auto; border-collapse: collapse !important;">
+   <table id="na_datatable" class="table table-bordered table-hover " style="overflow-x: auto; border-collapse: collapse !important;">
 
 
 
