@@ -25,9 +25,8 @@ class Super_user extends MY_Controller {
     {
     	$data['title'] = 'Exam List';
     	 $this->db->from('ci_exam_invitation');
-        // $this->db->where('invt_recieved','1');
+        $this->db->group_by('exam_name');
         $this->db->order_by('id','desc');
-        // $this->db->group_by('id','desc');
         $q = $this->db->get()->result_array();
         $data['data'] = $q;
       

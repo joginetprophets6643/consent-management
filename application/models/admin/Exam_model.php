@@ -56,18 +56,26 @@ class Exam_model extends CI_Model {
 
 
 
+
     public function add_invitation($data) {
 
         $this->db->insert('ci_exam_invitation', $data);
          return true;
     }
+    public function edit_invitation($data) {
+
+        $this->db->where('exam_name', $data['exam_name']);
+        $this->db->update('ci_exam_invitation', $data);
+         return true;
+    }
     
     public function update_invitation($data,$user_id) {
-        
+    
         $this->db->where('id', $user_id);
         $this->db->update('ci_exam_invitation', $data);
         return true;
     }
+
   public function add_application_cand($data) {
 
         $this->db->insert('ci_candidate_app', $data);
@@ -390,6 +398,11 @@ class Exam_model extends CI_Model {
     } 
  public function getCadidateDataUsingExamId($id) {
         $query = $this->db->get_where('ci_candidate_app', array('exam_name' => $id));
+        return $result = $query->row_array();
+    } 
+
+ public function getInvitationUsingExamId($id) {
+        $query = $this->db->get_where('ci_exam_invitation', array('exam_name' => $id));
         return $result = $query->row_array();
     } 
 

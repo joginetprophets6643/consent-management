@@ -387,6 +387,7 @@ class Master extends MY_Controller
                 'created_by' => $this->session->userdata('admin_id'),
                 'created_at' => date('d-m-Y : h:m:s'),
             );
+
     
             $data = $this->security->xss_clean($data);
             $this->Exam_model->add_application_cand($data);
@@ -618,6 +619,8 @@ class Master extends MY_Controller
             $shft_exam = $this->input->post('shft_exam') ? implode(',', $this->input->post('shft_exam')) : "";
             $date_exam = $this->input->post('date_exam') ? implode(',', $this->input->post('date_exam')) : "";
             $time_exam = $this->input->post('time_exam') ? implode(',', $this->input->post('time_exam')) : "";
+        
+
             // $subjectArray = $this->input->post('sub_name');
             // $candiArray = $this->input->post('no_candidate');
             // $shftExamArray = $this->input->post('shft_exam');
@@ -659,6 +662,8 @@ class Master extends MY_Controller
             // $shft_exam = implode(',', $se);
             // $date_exam = implode(',', $d);
             // $time_exam = implode(',', $t);
+
+
             if ($this->input->post('subjectline') == '') {
                 $subjectline = $this->input->post('exam_name');
                 $subjectline_name_array = $this->Exam_model->subjectline_name($subjectline);
@@ -666,6 +671,27 @@ class Master extends MY_Controller
             } else {
                 $subjectline = $this->input->post('subjectline');
             }
+
+            $editData = $this->Exam_model->getInvitationUsingExamId($this->input->post('exam_name'));
+            if(isset($editData)){
+            $data = array(
+                'speedpost' => $this->input->post('speedpost'),
+                'subjectline' => $subjectline,
+                'startdate' => $this->input->post('startdate'),
+                'enddate' => $this->input->post('enddate'),
+                'exam_name' => $this->input->post('exam_name'),
+                'sub_name' => $sub_name.','.$editData['sub_name'],
+                'no_candidate' => $no_candidate.','.$editData['no_candidate'],
+                'shft_exam' => $shft_exam.','.$editData['shft_exam'],
+                'date_exam' => $date_exam.','.$editData['date_exam'],
+                'time_exam' => $time_exam.','.$editData['time_exam'],
+                'created_at' => date('d-m-Y : h:m:s'),
+                'created_by' => $this->session->userdata('admin_id'),
+            );
+            $data = $this->security->xss_clean($data);
+            $result = $this->Exam_model->edit_invitation($data);
+        }else{
+
             $data = array(
                 'speedpost' => $this->input->post('speedpost'),
                 'subjectline' => $subjectline,
@@ -677,12 +703,14 @@ class Master extends MY_Controller
                 'shft_exam' => $shft_exam,
                 'date_exam' => $date_exam,
                 'time_exam' => $time_exam,
-                'created_by' => $this->session->userdata('admin_id'),
                 'created_at' => date('d-m-Y : h:m:s'),
                 'created_by' => $this->session->userdata('admin_id'),
             );
             $data = $this->security->xss_clean($data);
             $result = $this->Exam_model->add_invitation($data);
+        }
+
+
 
             $this->session->set_flashdata('success', 'create exam schedule successful<br/>परीक्षा कार्यक्रम सफल बनाएं');
 
