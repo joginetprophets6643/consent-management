@@ -301,8 +301,8 @@
                     });
                 }
                 var state_id = $('#state').val();
-                var grade = $('#grade').val();
-                var district_id = $('#district').val();
+                var grade = '';
+                var district_id = '';
                 if (state_id != '') {
 
                     $.ajax({
@@ -317,7 +317,6 @@
                             'csfr_token_name': csfr_token_value
                         },
                         success: function(data) {
-                            alert(data);
                             $('#send_invitation_list').DataTable().clear().destroy();
                             $('#send_invitation_list').hide();
                             $('#invitation_recreate_div').html(data);

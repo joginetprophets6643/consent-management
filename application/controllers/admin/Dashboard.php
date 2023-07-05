@@ -73,15 +73,7 @@ class Dashboard extends My_Controller {
         $data['sections'] = $this->dashboard_model->get_total_sections();
 		$data["row"] = $this->Certificate_model->get_all_active_consent_reg();
 
-		foreach ($data["row"] as $valueid){
-            // echo '<pre>';
-            $ref_id = $valueid['ref_id'];
-            $school_id = $valueid['id'];
-            
-            $get_full_data = $this->Certificate_model->get_all_data_consent($ref_id);
-        }
-		
-        $data["recieve_count"] = isset($get_full_data)?count($get_full_data):0;
+		$data["recieve_count"] = count($this->Certificate_model->getSentConsentFromExamController());
 		$admin_id = $this->session->userdata('admin_id'); 
 	
 		$data['allocation_recieved'] = count($this->Allocation_Model->allocationConsentRecievedByUser($admin_id));

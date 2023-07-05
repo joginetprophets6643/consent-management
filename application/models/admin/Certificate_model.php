@@ -338,7 +338,6 @@ class Certificate_model extends CI_Model {
 
     public function getSentConsentFromExamController(){
         $username = $this->session->userdata('username');
-
         $this->db->select('*');
         $this->db->from('ci_exam_registration');
         $this->db->where('email',$username);
