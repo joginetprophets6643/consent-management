@@ -294,7 +294,7 @@
                                                 <td><?= $row['acc_num_con'] ?></td>
                                                 <td><?php echo $row['ranking_admin'] ?></td>
                                                 <td><?php echo $row['consent_allocation'] ?></td>
-                                                <td><?php echo $row['max_allocate_candidate'] ?></td>
+                                                <td>N/A</td>
                                                 <?php if (count($row['candidateNo']) > 0) { ?>
                                                     <?php
 
@@ -314,11 +314,7 @@
                                                 <?php } ?>
 
                                                 <td>
-                                                    <?php
-                                                    if ($row['superuserStatus'] == 0) {
-                                                        echo 'Pending';
-                                                    }
-                                                    ?>
+                                                 N/A
                                                 </td>
 
                                             </tr>

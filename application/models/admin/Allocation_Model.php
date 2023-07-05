@@ -29,7 +29,7 @@ class Allocation_Model extends CI_Model {
         $this->db->from('ci_exam_according_to_school');
         $this->db->join('ci_exam_invitation', 'ci_exam_invitation.id = ci_exam_according_to_school.ref_id');
         $this->db->where('ci_exam_according_to_school.invt_recieved', 1);
-        // $this->db->where('ci_exam_according_to_school.consents_signstamp_status', 1);
+        $this->db->where('ci_exam_according_to_school.superuserStatus', 1);
         $this->db->where('ci_exam_according_to_school.ref_id', $ref_id);
         $this->db->order_by('ci_exam_according_to_school.admin_id', 'asc');
         //End the queryProvisanal
