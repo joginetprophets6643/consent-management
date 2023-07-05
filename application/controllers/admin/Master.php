@@ -614,56 +614,14 @@ class Master extends MY_Controller
     public function invitation_add()
     {
         if ($this->input->post()) {
+
             $sub_name = $this->input->post('sub_name') ? implode(',', $this->input->post('sub_name')) : "";
             $no_candidate = $this->input->post('no_candidate') ? implode(',', $this->input->post('no_candidate')) : "";
             $shft_exam = $this->input->post('shft_exam') ? implode(',', $this->input->post('shft_exam')) : "";
             $date_exam = $this->input->post('date_exam') ? implode(',', $this->input->post('date_exam')) : "";
             $time_exam = $this->input->post('time_exam') ? implode(',', $this->input->post('time_exam')) : "";
-        
-
-            // $subjectArray = $this->input->post('sub_name');
-            // $candiArray = $this->input->post('no_candidate');
-            // $shftExamArray = $this->input->post('shft_exam');
-            // $dateArray = $this->input->post('date_exam');
-            // $timeArray = $this->input->post('time_exam');
-            // $s = [];
-            // $c = [];
-            // $se = [];
-            // $d = [];
-            // $t = [];
-            // for ($i = 0; $i < count($subjectArray); $i++) {
-            //     if(count($subjectArray)==1){
-            //         array_push($s,$subjectArray[$i]);
-            //         array_push($c,$candiArray[$i]);
-            //         array_push($se,$shftExamArray[$i]);
-            //         array_push($d,$dateArray[$i]);
-            //         array_push($t,$timeArray[$i]);
-            //     }else{
-            //         $j = $i+1;
-            //         if($j==count($subjectArray)){
-            //             $j = count($subjectArray)-1;
-            //         }
-            //             $arr1 =  [$subjectArray[$i] , $candiArray[$i] , $shftExamArray[$i] , $dateArray[$i] , $timeArray[$i]];
-            //             $arr2 = [$subjectArray[$j] , $candiArray[$j] , $shftExamArray[$j] , $dateArray[$j] , $timeArray[$j]];  
-            //             $count = $arr1==$arr2?0:1;
-            //                 if($count!=0){
-            //                     array_push($s,$subjectArray[$i]);
-            //                     array_push($c,$candiArray[$i]);
-            //                     array_push($se,$shftExamArray[$i]);
-            //                     array_push($d,$dateArray[$i]);
-            //                     array_push($t,$timeArray[$i]);
-            //                 }
-            //     }
-          
-            // }
-
-            // $sub_name = implode(',', $s);
-            // $no_candidate = implode(',', $c);
-            // $shft_exam = implode(',', $se);
-            // $date_exam = implode(',', $d);
-            // $time_exam = implode(',', $t);
-
-
+            
+            
             if ($this->input->post('subjectline') == '') {
                 $subjectline = $this->input->post('exam_name');
                 $subjectline_name_array = $this->Exam_model->subjectline_name($subjectline);

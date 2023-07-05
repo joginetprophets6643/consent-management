@@ -182,10 +182,13 @@ class Auth extends MY_Controller {
 						$this->rbac->set_access_in_session(); // set access in session
 						$admin_id = $this->session->userdata['admin_id'];
 						$admin_role_id = $this->session->userdata['admin_role_id'];
+						 $this->session->userdata['last_login'];
+						 $this->session->userdata['last_ip'];
 						if($admin_role_id == 6){
                         $data = $this->db->select('*')->from('ci_exam_registration')->where('admin_id',$admin_id)->get()->result_array();
                         $match = count($data);
                         if($match != 0 ){
+						
 			             redirect(base_url('admin/dashboard'), 'refresh');
                         }else{
                         	redirect(base_url('admin/step1'), 'refresh');

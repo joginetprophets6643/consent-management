@@ -258,11 +258,7 @@ class Admin_model extends CI_Model{
 
 			$this->db->where('ci_admin.admin_id',$this->session->userdata('admin_id'));
 
-                // End Filter data as per user role
-
-                
-
-                
+                // End Filter data as per user role   
 
 		$filterData = $this->session->userdata('filter_keyword');
 
@@ -288,19 +284,11 @@ class Admin_model extends CI_Model{
 
 		$this->db->where('ci_admin.is_supper !=', 1);
 
-                // $this->db->where('ci_admin.admin_role_id !=', 6);
-
-                // $this->db->where('ci_admin.admin_role_id !=', 7);
-
-		// $this->db->order_by('ci_admin.admin_role_id','desc');
-		// $this->db->order_by('ci_admin.admin_id','desc');
 		$this->db->order_by('ci_admin.admin_id','desc');
-
-
 
 		$query = $this->db->get();
 
-                //echo $this->db->last_query();
+                // echo $this->db->last_query();
 
 		$module = array();
 
