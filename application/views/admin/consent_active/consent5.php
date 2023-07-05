@@ -240,6 +240,7 @@
 
                                 </div>
                                 <?php echo form_close(); ?>
+                                
                                 <?php echo form_open_multipart(base_url('admin/consent_active/consent_add_5'), 'id="from_upload" class="form-horizontal" '); ?>
 
                                 <div class="main active" id="from_upload_show">

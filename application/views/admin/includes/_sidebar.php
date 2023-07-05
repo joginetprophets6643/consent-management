@@ -101,10 +101,15 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); 
 
 
                 <a href="#" class="d-block"><?php echo ucwords($this->session->userdata['username']) . "<br/>" . " (" . ucwords($this->session->userdata('admin_role')) . ")"; ?><br/>
- <!-- echo $this->session->userdata('last_login')  -->
- <!-- $addTimeinDate = strtotime("+15 minutes", strtotime($this->session->userdata('last_login'))); echo date("Y-m-d H:i:s", $addTimeinDate); -->
+ <?php 
+    
+    $dateTime = explode(" ",$this->session->userdata('last_login'));
+    $date = date('d-m-Y',strtotime($dateTime[0]));
+    $time =  $dateTime[1];
+ ?> 
+ <?php //$addTimeinDate = strtotime("+15 minutes", strtotime($this->session->userdata('last_login'))); echo date("Y-m-d H:i:s", $addTimeinDate);?>
 
-                    Last Login IP :  <?php echo $this->session->userdata('last_ip') ?> <br/>Time: <?php echo $this->session->userdata('last_login') ?>
+                    Last Login IP :  <?php echo $this->session->userdata('last_ip') ?> <br/>Date & Time <?php echo $date." ".$time; ?>
 
 
 
