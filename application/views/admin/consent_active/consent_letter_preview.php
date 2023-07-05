@@ -45,7 +45,12 @@
         margin-bottom: 1.8rem;
 
     }
-
+@media print{
+    #info,
+    .card-footer{
+    display: none;       
+    }
+}
 
 
 </style>
@@ -86,6 +91,8 @@
 
                         <div class="card-header">
 
+                        <h2 class="text-center">Uttarakhand Public Service Commission</h2>
+
                             <div class="d-inline-block">
 
                                 <h3 class="card-title"> <i class="fa fa-pencil"></i>
@@ -116,7 +123,7 @@
 
                                     <div class="d-inline-block">
 
-                                        <h3 class="card-title" center>
+                                        <h3 id="info" class="card-title" center>
 
                                         Kindly check the following information, then sign and stamp it and then scan and upload it.
 
