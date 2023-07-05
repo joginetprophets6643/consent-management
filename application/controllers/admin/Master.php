@@ -614,14 +614,34 @@ class Master extends MY_Controller
     public function invitation_add()
     {
         if ($this->input->post()) {
-
-            $sub_name = $this->input->post('sub_name') ? implode(',', $this->input->post('sub_name')) : "";
-            $no_candidate = $this->input->post('no_candidate') ? implode(',', $this->input->post('no_candidate')) : "";
-            $shft_exam = $this->input->post('shft_exam') ? implode(',', $this->input->post('shft_exam')) : "";
-            $date_exam = $this->input->post('date_exam') ? implode(',', $this->input->post('date_exam')) : "";
-            $time_exam = $this->input->post('time_exam') ? implode(',', $this->input->post('time_exam')) : "";
-            
-            
+            $arr = [];
+            $sub_name1 = $this->input->post('sub_name') ;          
+            $no_candidate1 = $this->input->post('no_candidate');
+            $shft_exam1 = $this->input->post('shft_exam') ;
+            $date_exam1 = $this->input->post('date_exam') ;
+            $time_exam1 = $this->input->post('time_exam') ;
+            $sub_name=[];
+            $no_candidate = [];
+            $shft_exam = [] ;
+            $date_exam = [] ;
+            $time_exam = [] ;
+            foreach($this->input->post('sub_name') as $key=>$value){
+                $senData = $value.'_'.$no_candidate1[$key].'_'.$shft_exam1[$key].'_'.$date_exam1[$key].'_'.$time_exam1[$key];
+                if(!in_array($senData,$arr)){
+                    array_push($sub_name,$value);          
+                    array_push($no_candidate,$no_candidate1[$key]);          
+                    array_push($shft_exam,$shft_exam1[$key]);          
+                    array_push($date_exam,$date_exam1[$key]);          
+                    array_push($time_exam,$time_exam1[$key]);          
+                    array_push($arr,$senData);
+                }
+            }
+            $sub_name =  implode(',',$sub_name);
+            $no_candidate =  implode(',',$no_candidate);
+            $shft_exam = implode(',',$shft_exam);
+            $date_exam = implode(',',$date_exam);
+            $time_exam =  implode(',',$time_exam);
+           
             if ($this->input->post('subjectline') == '') {
                 $subjectline = $this->input->post('exam_name');
                 $subjectline_name_array = $this->Exam_model->subjectline_name($subjectline);
@@ -632,17 +652,46 @@ class Master extends MY_Controller
 
             $editData = $this->Exam_model->getInvitationUsingExamId($this->input->post('exam_name'));
             if(isset($editData)){
+                $arr = [];
+            $sub_name1 =  explode(",",$sub_name.','.$editData['sub_name']);
+            $no_candidate1 =  explode(",",$no_candidate.','.$editData['no_candidate']);
+            $shft_exam1 = explode(",",$shft_exam.','.$editData['shft_exam']);
+            $date_exam1 =   explode(",",$date_exam.','.$editData['date_exam']);
+            $time_exam1 = explode(",",$time_exam.','.$editData['time_exam']);
+            $sub_name=[];
+            $no_candidate = [];
+            $shft_exam = [] ;
+            $date_exam = [] ;
+            $time_exam = [] ;
+
+            foreach($sub_name1 as $key=>$value){
+                $senData = $value.'_'.$no_candidate1[$key].'_'.$shft_exam1[$key].'_'.$date_exam1[$key].'_'.$time_exam1[$key];
+                if(!in_array($senData,$arr)){
+                    array_push($sub_name,$value);          
+                    array_push($no_candidate,$no_candidate1[$key]);          
+                    array_push($shft_exam,$shft_exam1[$key]);          
+                    array_push($date_exam,$date_exam1[$key]);          
+                    array_push($time_exam,$time_exam1[$key]);          
+                    array_push($arr,$senData);
+                }
+            }
+            $sub_name =  implode(',',$sub_name);
+            $no_candidate =  implode(',',$no_candidate);
+            $shft_exam = implode(',',$shft_exam);
+            $date_exam = implode(',',$date_exam);
+            $time_exam =  implode(',',$time_exam);
+
             $data = array(
                 'speedpost' => $this->input->post('speedpost'),
                 'subjectline' => $subjectline,
                 'startdate' => $this->input->post('startdate'),
                 'enddate' => $this->input->post('enddate'),
                 'exam_name' => $this->input->post('exam_name'),
-                'sub_name' => $sub_name.','.$editData['sub_name'],
-                'no_candidate' => $no_candidate.','.$editData['no_candidate'],
-                'shft_exam' => $shft_exam.','.$editData['shft_exam'],
-                'date_exam' => $date_exam.','.$editData['date_exam'],
-                'time_exam' => $time_exam.','.$editData['time_exam'],
+                'sub_name' => $sub_name,
+                'no_candidate' => $no_candidate,
+                'shft_exam' => $shft_exam,
+                'date_exam' => $date_exam,
+                'time_exam' => $time_exam,
                 'created_at' => date('d-m-Y : h:m:s'),
                 'created_by' => $this->session->userdata('admin_id'),
             );
