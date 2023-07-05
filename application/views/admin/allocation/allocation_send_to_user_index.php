@@ -306,7 +306,7 @@ $('.dd_state').change(function() {
             },
             success: function(data) {
                 $('#district_filter').html(data);
-                var district_id = $('#district_filter').val();
+                var district_id = '';
                     $.ajax({
                         type: "GET",
                         url: base_url + 'admin/Allocation_admin/allocationDatatoUserOnChange',
@@ -320,7 +320,7 @@ $('.dd_state').change(function() {
                             'csfr_token_name': csfr_token_value
                         },
                         success: function(data1) {
-                            $('#allocationTablesend').DataTable().destroy();
+                            $('#allocationTablesend').DataTable().clear().destroy();;
                             $('#userDiv').removeClass('d-none');
                             $('#mainDiv').addClass('d-none');
                             $('#userDiv').html(data1);
@@ -334,7 +334,7 @@ $('.dd_state').change(function() {
 
     } else {
 
-        $('#state').val('').hide();
+        location.reload();
 
 
 

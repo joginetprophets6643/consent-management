@@ -322,7 +322,7 @@ $(function() {
 
         } else {
 
-            $('#state').val('').hide();
+            location.reload();
 
 
 
