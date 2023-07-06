@@ -45,6 +45,8 @@
     margin-top: 10px !important;
   }
     </style>
+    
+<link rel="stylesheet" href="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.css"> 
 
 
 </head>

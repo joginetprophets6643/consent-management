@@ -1,13 +1,5 @@
-<?php // echo '<pre>'; print_r($admin['city']);exit;
 
-?>
-
-<?php // echo '<pre>'; print_r($sub_info);exit;
-
-?>
-
-
-
+<link rel="stylesheet" href="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.css"> 
 <div class="content-wrapper">
 
 
@@ -112,7 +104,7 @@
 
                                 <div class="table-responsive">
 
-                                    <table class="table table-bordered table-striped" id="candidateView">
+                                    <table id="candidateView" class="table table-bordered table-hover  " style="overflow: auto; border-collapse: collapse !important;">
 
                                         <thead>
 

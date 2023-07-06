@@ -364,7 +364,7 @@
                                 <tr>
                                     <th>Date</th>
                                     <td>
-                                        <?php echo date("d/m/Y h:s:a"); ?>
+                                        <?php echo date("d/m/Y h:s a"); ?>
                                     </td>
                                 </tr>
                                 <tr>
