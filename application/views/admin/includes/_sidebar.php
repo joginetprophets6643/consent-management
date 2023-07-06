@@ -42,11 +42,7 @@
 </style>
 
 
-<?php
-
-
-
-$cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); ?>  
+<?php $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); ?>  
 
 
 
@@ -101,16 +97,17 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); 
 
 
                 <a href="#" class="d-block"><?php echo ucwords($this->session->userdata['username']) . "<br/>" . " (" . ucwords($this->session->userdata('admin_role')) . ")"; ?><br/>
- <?php 
-
-    $dateTime = explode(" ",$this->session->userdata('last_login'));
-    $date = $dateTime[0]!=''?date('d-m-Y',strtotime($dateTime[0])):''; 
-    // $date = isset($dateTime[0])?date('d-m-Y',strtotime($dateTime[0])):'';
-    $time =  isset($dateTime[1])?$dateTime[1]:'';
+ <?php
+ $dateTime = explode(" ", $this->session->userdata('last_login'));
+ $date = $dateTime[0] != '' ? date('d-m-Y', strtotime($dateTime[0])) : '';
+ // $date = isset($dateTime[0])?date('d-m-Y',strtotime($dateTime[0])):'';
+ $time = isset($dateTime[1]) ? $dateTime[1] : '';
  ?> 
- <?php //$addTimeinDate = strtotime("+15 minutes", strtotime($this->session->userdata('last_login'))); echo date("Y-m-d H:i:s", $addTimeinDate);?>
+ <?php
+//$addTimeinDate = strtotime("+15 minutes", strtotime($this->session->userdata('last_login'))); echo date("Y-m-d H:i:s", $addTimeinDate);
+?>
 
-                    Last Login IP :  <?php echo $this->session->userdata('last_ip') ?> <br/>Date & Time <?php echo $date." ".$time; ?>
+                    Last Login IP :  <?php echo $this->session->userdata('last_ip'); ?> <br/>Date & Time <?php echo $date . " " . $time; ?>
 
 
 
@@ -147,34 +144,18 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); 
 
 
                 <?php
-
-
-
                 $menu = get_sidebar_menu();
 
                 foreach ($menu as $nav):
 
-
-
-
-
-
-
                     $sub_menu = get_sidebar_sub_menu($nav['module_id']);
 
-                    
-
-                 
-
                     $has_submenu = count($sub_menu) > 0 ? true : false;
-
-
-
                     ?>
 
 
 
-                    <?php  if ($this->rbac->check_module_permission($nav['controller_name'])): ?> 
+                    <?php if ($this->rbac->check_module_permission($nav['controller_name'])): ?> 
 
                         <li id="<?= $nav['controller_name'] ?>" class="nav-item <?= $has_submenu ? 'has-treeview' : '' ?> has-treeview">
 
@@ -208,47 +189,19 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); 
 
 
 
-                                    <?php foreach ($sub_menu as $sub_nav):  ?>
+                                    <?php foreach ($sub_menu as $sub_nav): 
+                                       $activePAge = $this->uri->segment(2);
+                                    //    $activePAge. base_url('admin/' . $nav['controller_name'] . '/' . $sub_nav['link']).
+                                        ?>
                                         
+   
 
-
-                                        <li class="nav-item"  <?php if ($sub_nav['link']) {
-
-
-
-                                            if (current_url() == base_url('admin/' . $nav['controller_name'] . '/' . $sub_nav['link'])) { ?>
-
-
-
-                                            style="background:#5f6d7b;"
-
-
-
-                                            <?php }
-
-
-
-                                        } else {
-
-
-                                            if (current_url() == base_url('admin/' . $nav['controller_name'])) { ?>
-
-                                             style="background:#5f6d7b;"
-
-
-
-                                            <?php }
-
-
-
-                                        } ?>>
-
-
-                                           <?php if(trans($sub_nav['name'])!="View Paper (Subject)"){ ?>
+                                        <li class="nav-item" <?php echo current_url() == base_url('admin/' . $nav['controller_name'] . '/' . $sub_nav['link'])?'style="background:#5f6d7b"':'' ?>>
+                                           <?php if (trans($sub_nav['name']) != "View Paper (Subject)") { ?>
                                             <a href="<?= base_url('admin/' . $nav['controller_name'] . '/' . $sub_nav['link']) ?>" class="nav-link">
                                                 <i class="fa fa-circle-o nav-icon"></i>
                                                 <p>
-                                                    <?php echo trans($sub_nav['name']);?>
+                                                    <?php echo trans($sub_nav['name']); ?>
                                                 </p>
                                             </a>
                                             <?php } ?>
@@ -266,20 +219,13 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); 
 
 
                 <?php
-
-
-
                 endforeach;
-
-
-
                 ?>
 
-               <?php $admin_role_id = $this->session->userdata['admin_role_id'];
+               <?php
+               $admin_role_id = $this->session->userdata['admin_role_id'];
 
-                if($admin_role_id==5){
-
-               ?>
+               if ($admin_role_id == 5) { ?>
 
                 <li class="nav-item  has-treeview">
 
@@ -319,9 +265,10 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); 
 
                 </li>
 
-                <?php } ?>
+                <?php }
+               ?>
 
-            <?php if($admin_role_id==7) {?>
+            <?php if ($admin_role_id == 7) { ?>
                 <li class="nav-item  has-treeview">
 
                     <a href="<?= base_url('admin/Super_user/exam_list_super_user') ?>"  class="nav-link">
@@ -337,7 +284,7 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); 
                     </a>
 
                 </li>
-            <?php }?>
+            <?php } ?>
 
 
 
@@ -386,3 +333,14 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); 
 
 
 </script>
+<?php 
+ function curPageURL() {
+
+$url = $_SERVER['REQUEST_URI'];
+
+$url = explode('/', $url);
+$lastPart = array_pop($url);
+
+return $lastPart;
+}
+?>

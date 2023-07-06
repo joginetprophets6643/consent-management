@@ -205,7 +205,7 @@ $('#publish_permanent').click(function(event) {
 <script>
 $('#select_all').click(function(event) {
     
-        if (confirm("Are you sure want to select All  user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?")) {
+        if (confirm("Are you sure you want to send an invitation to all users?\nक्या आप वाकई सभी उपयोगकर्ताओं को निमंत्रण भेजना चाहते हैं?")) {
         var exam_id = $("#exam_id").val()
         var school_ids = new Array();
             let rows = table.rows({
@@ -250,7 +250,7 @@ $('#select_all').click(function(event) {
 
 
 $('#select_single_count').click(function(event) {
-        if (confirm("Are you sure want to send select user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?")) {
+        if (confirm("Are you sure you want to send invitation to only selected users?\nक्या आप वाकई केवल चयनित उपयोगकर्ताओं को ही आमंत्रण भेजना चाहते हैं?")) {
             if (arr.length > 0) {
                 $('.loaderWrap').removeClass('d-none');
                 var exam_id = $("#exam_id").val();
