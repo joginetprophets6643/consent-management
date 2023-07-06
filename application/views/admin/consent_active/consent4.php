@@ -58,18 +58,6 @@
 
         <h3 class="mb-0">Step <span class="step-number">5</span></h3>
 
-        <!--<p class="step-number-content active">Enter your School/College Information.</p>
-
-        <p class="step-number-content d-none">Enter your School/College Principal Deatils</p>
-
-        <p class="step-number-content d-none">Enter your School/College Centre Superintendent Details</p>
-
-        <p class="step-number-content d-none">Enter your School/College Centre Infrastructure Details.</p>
-
-    <p class="step-number-content d-none">Add Bank Details</p>
-
-    <p class="step-number-content d-none">Add your School/College Images as per required filed</p>-->
-
      
 
       </div>
