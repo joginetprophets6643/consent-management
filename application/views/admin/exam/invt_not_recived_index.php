@@ -249,7 +249,7 @@
                     <div class="d-flex my-2">
                             <div id="countInDistrict" class="d-none mr-5">
                                 <h4 class="text-bold" style="font-size: 17px; color: #373250;">
-                                    Total seats available in District :
+                                    Total seats available:
                                     <span style="color: #e14658;" id="districtCounts"></span>
                                 </h4>
                             </div>
