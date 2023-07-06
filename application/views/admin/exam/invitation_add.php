@@ -330,12 +330,12 @@
 
                                 <br>
 
-                                <select name="shft_exam[]" class="form-control" class="" id="shft_exam"
+                                <select name="shft_exam[]" class="form-control"  id="shft_exam"
                                     style="width:140px;">
 
 
 
-                                    <option>Select</option>
+                                    <option value="">Select</option>
 
 
 
