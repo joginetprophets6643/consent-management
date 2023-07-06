@@ -1,19 +1,30 @@
 <style>
-.loader {
-  border: 16px solid #e0e0e0;
-  border-radius: 50%;
-  border-top: 16px solid #373250;
-  border-bottom: 16px solid #373250;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(50%, 50%)
-}
+ .loaderWrap{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #000;/*Fallback*/
+        background-color: rgba(0, 0, 0, .5);
+    }
 
+    .loader {
+        border: 16px solid #e0e0e0;
+        border-radius: 50%;
+        border-top: 16px solid #373250;
+        border-bottom: 16px solid #373250;
+        width: 120px;
+        height: 120px;
+
+        -webkit-animation: spin 2s linear infinite;
+        /* Safari */
+        animation: spin 2s linear infinite;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(50%, 50%);
+    }
 /* Safari */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
@@ -41,12 +52,8 @@
                             value="Uncheck (अनचेक)">
                     </div>
                     <div class="send-option">
-                        <input type="button" class="btn btn-success" id="select_all"
-                            onclick="return confirm('Are you sure want to send all invitation?\nक्या आप वाकई सभी आमंत्रण भेजना चाहते हैं?')"
-                            value="Send to All (सभी को भेजो)">
-                        <input type="button" class="btn btn-success" id="select_single_count"
-                            onclick="return confirm('Are you sure want to send select user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?')"
-                            value="Send to Selected (चयनित को भेजें)">
+                        <input type="button" class="btn btn-success" id="select_all" value="Send to All (सभी को भेजो)">
+                        <input type="button" class="btn btn-success" id="select_single_count" value="Send to Selected (चयनित को भेजें)">
                     </div>
                 </div>
                 <?php } ?>
@@ -138,7 +145,7 @@
                             <?php }  if ($admin_role_id == 5 )  { ?>
                             <?php if($blank !='disabled' && $getCenterCode!=''){?>
                             <div class="d-flex">
-                                <input type="checkbox" id="a" class="allocation_user_ids mr-2 disabled" name="allocation_user_ids"
+                                <input type="checkbox" id="a" onclick="getCount(<?php echo $row['school_id']?>)" class="allocation_user_ids mr-2 disabled" name="allocation_user_ids"
                                     rel="<?php echo $row['school_id']?>" value="<?php echo $row['school_id']?>">
                                 <a title="Send Invitations" class="btn btn-success"
                                     onclick="single_send_allocation(<?php echo $row['school_id']?>)"> <i class="fa fa-paper-plane-o"></i></a>
@@ -166,13 +173,14 @@
             </div>
 
         </div>
-        <div class="loader d-none"></div>
 
     </div>
     <!-- Modal -->
 
 
 </div>
+
+
 <!-- DataTables -->
 
 <script>
@@ -205,18 +213,22 @@ $('#publish_permanent').click(function(event) {
 <script>
 $('#select_all').click(function(event) {
     
-    if ($('input[name="allocation_user_ids"]:checked').length > 0) {
-        $('.loader').removeClass('d-none');
+        if (confirm("Are you sure want to select All  user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?")) {
         var exam_id = $("#exam_id").val()
         var school_ids = new Array();
-        $(':checkbox.allocation_user_ids').each(function() {
-            this.checked = true;
-            var r = $(this).attr('rel');
-            if (r != undefined) {
-                school_ids.push(r);
-            }
-
-        });
+            let rows = table.rows({
+                'search': 'applied'
+            }).nodes();
+            // Check checkboxes for all rows in the table
+            $('input[type="checkbox"]', rows).prop('checked', true);
+            rows.each((row) => {
+                if ($('input[type="checkbox"]', row).attr('rel')) {
+                    school_ids.push($('input[type="checkbox"]', row).attr('rel'))
+                }
+            })
+            if(school_ids.length!=0){
+                $('.loaderWrap').removeClass('d-none');
+                $('.loaderWrap').removeClass('d-none');
 
         var url = "<?php echo base_url('admin/Allocation_admin/send_allocation_to_user/')?>"
         $.ajax({
@@ -225,111 +237,108 @@ $('#select_all').click(function(event) {
             data : {school_ids:school_ids,'exam_id':exam_id},
                 success:function(result){
                     if(result){
-                    $('.loader').addClass('d-none');
+                    $('.loaderWrap').addClass('d-none');
                     alert("Send allocation sucessfully");
-                    $(':checkbox.allocation_user_ids').each(function() {
-                    this.checked = false;     
-                });
-                // window.location.reload();
+                    window.location.reload();
             }
             } 
 
         });  
-    } else {
+        } else {
 
         alert('Please click on send at least one  checkbox\n(कृपया कम से कम दो चेकबॉक्स भेजें पर क्लिक करें)');
         $("#allcheckids").focus();
         return false;
 
     }
-
+    }
 });
+
 
 
 $('#select_single_count').click(function(event) {
-    if ($('input[name="allocation_user_ids"]:checked').length > 0) {
-        $('.loader').removeClass('d-none');
-        var school_ids = new Array();
-        var exam_id = $("#exam_id").val();
-        $('input[name="allocation_user_ids"]:checked').each(function() {
-            var r = $(this).attr('rel');
-            if (r != 'undefined') {
-                school_ids.push(r);
-            }
-
-        });
-        var url = "<?php echo base_url('admin/Allocation_admin/send_allocation_to_user/')?>"
-        $.ajax({
-            url: url,
-            type:'GET',
-            data : {'school_ids':school_ids,'exam_id':exam_id},
-                success:function(result){
-                    if(result){
-                    $('.loader').addClass('d-none');
-                    alert("success, Allocated Sucessfully");
-                    $(':checkbox.allocation_user_ids').each(function() {
-                    this.checked = false;     
+        if (confirm("Are you sure want to send select user invitation?\nक्या आप वाकई चुनिंदा उपयोगकर्ता आमंत्रण भेजना चाहते हैं?")) {
+            if (arr.length > 0) {
+                $('.loaderWrap').removeClass('d-none');
+                var exam_id = $("#exam_id").val();
+                var url = "<?php echo base_url('admin/Allocation_admin/send_allocation_to_user/')?>"
+                $.ajax({
+                    url: url,
+                    type:'GET',
+                    data : {'school_ids':arr,'exam_id':exam_id},
+                    success: function(result) {
+                        if (result) {
+                            $('.loaderWrap').addClass('d-none');
+                            alert("Consent sent sucessfully ");
+                            window.location.reload();
+                        }
+                    }
                 });
-                window.location.reload();
+            } else {
+                alert('Please click on send at least one checkbox\n(कृपया कम से कम दो चेकबॉक्स भेजें पर क्लिक करें)');
+                $("#allcheckids").focus();
+                return false;
             }
-            } 
+        } else {
+            return false;
+        }
 
-        }); 
-    } else {
-        alert('Please click on send at least one checkbox\n(कृपया कम से कम दो चेकबॉक्स भेजें पर क्लिक करें)');
-        $("#allcheckids").focus();
-        return false;
-    }
-
-});
-let arr=[];
-$('.select_all_count').click(function(e) {
-    $('.allocation_user_ids:checkbox').each(function() {
-            this.checked = true;     
-            var r= $(this).attr('value'); 
-            if(r !== 'undefined'){   
-                arr.push(r); 
-            
-            }
-        });
     });
 
-    $('.select_all_uncheck').click(function(e) {  
-    $('.allocation_user_ids:checkbox').each(function() {
-            this.checked = false;     
-            var r= $(this).attr('value'); 
-            if(r !== 'undefined'){   
-                arr.push(r); 
-            
+$('.select_all_count').click(function(event) {
+        arr = []
+        let rows = table.rows({
+            'search': 'applied'
+        }).nodes();
+        // Check checkboxes for all rows in the table
+        $('input[type="checkbox"]', rows).prop('checked', true);
+        rows.each((row) => {
+            if ($('input[type="checkbox"]', row).attr('rel')) {
+                arr.push($('input[type="checkbox"]', row).attr('rel'))
             }
-        }); 
+        })
     });
 
-    function single_send_allocation(id){
-        let school_ids = [];
-        school_ids.push(id);
-        console.log(school_ids,'rejfej');
-        $('.loader').removeClass('d-none');
+    $('.select_all_uncheck').click(function(event) {
+        let rows = table.rows({
+            'search': 'applied'
+        }).nodes();
+        $('input[type="checkbox"]', rows).prop('checked', false);
+        arr = []
+        $('#schoolCount').addClass("d-none");
+        $('#schoolWiseCounts').html('');
+    });
+
+    function single_send_allocation(id) {
+        let schoolIds = [];
+        schoolIds.push(id);
+        $('.loaderWrap').removeClass('d-none');
         var exam_id = $("#exam_id").val();
         var url = "<?php echo base_url('admin/Allocation_admin/send_allocation_to_user/')?>"
         $.ajax({
             url: url,
             type:'GET',
-            data : {'school_ids':school_ids,'exam_id':exam_id},
-                success:function(result){
-                    if(result){
-                    $('.loader').addClass('d-none');
+            data : {'school_ids':schoolIds,'exam_id':exam_id},
+            success: function(result) {
+                if (result) {
+                    $('.loaderWrap').addClass('d-none');
                     alert("Send allocation sucessfully");
-                    $(':checkbox.allocation_user_ids').each(function() {
-                    this.checked = false;     
-                });
-                window.location.reload();
-            }
-            } 
+                    return false;
+                    // window.location.reload();
+                }
 
+            }
         });
     }
 
+    let arr = []
+    function getCount(id) {
+        if (arr.indexOf(id) === -1) {
+            arr.push(id)
+        } else {
+            arr = arr.filter(item => item !== id)
+        }
+    }
 </script>
 <style type="text/css">
 .permanent_info {

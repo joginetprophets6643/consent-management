@@ -1698,11 +1698,12 @@ public function get_deactivation_data($id) {
     }
 
     public function get_consent_not_recved_datadownrport($state_name, $city_name, $grade_name,$ref_id) {
-
-        $sql = "SELECT `school_id` FROM `ci_exam_according_to_school` WHERE `ref_id` =$ref_id and `invt_recieved`='0'";
+        
+        $sql = "SELECT `school_id` FROM `ci_exam_according_to_school` WHERE `ref_id` = $ref_id and `invt_recieved`='0'";
         $query = $this->db->query($sql);
         $array = $query->result_array();
         $arr = array_column($array,"school_id");
+        $arr = count($arr)>0?$arr:0;
         // print_r($arr);
         // die();
         $this->db->from('ci_exam_registration');

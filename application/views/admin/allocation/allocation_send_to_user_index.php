@@ -204,7 +204,10 @@
 
 
 
-
+<div class="loaderWrap d-none">
+    <div class="loader"></div>
+    
+    </div>
 
 
 

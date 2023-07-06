@@ -263,6 +263,7 @@ class Allocation_admin extends MY_Controller {
                         'examname' => $examName
                       
                     );
+                 
                 foreach(array_unique($school_ids) as $id){
                     $email = getEmail($id);
                     $phone = getMobile($id);
@@ -352,7 +353,8 @@ class Allocation_admin extends MY_Controller {
             // Consent recieved Table
             $state_name = $city_name = $grade_name = '';
             $data['temp'][1] = $this->Exam_model->get_consent_recved_data($state_name, $city_name, $grade_name,$id);
-            
+           
+
             $data['data']=$data['temp'][1][1];
            
             foreach ($data['data'] as $key => $value) {
@@ -362,6 +364,7 @@ class Allocation_admin extends MY_Controller {
                 $data['data'][$key]['uniqueSnoschool'] = uniqueSnoschool($value['email']);
 
             }
+            
           
             $records1['info'] = $this->Allocation_Model->get_data_for_allocation($id);
             $date_exam_consent_recieve = isset($records1['info'][0]['date_exam']) ? explode(",",$records1['info'][0]['date_exam']) : [];
@@ -379,7 +382,9 @@ class Allocation_admin extends MY_Controller {
             
             $data['notrecievetempdata'][1] = $this->Exam_model->get_consent_not_recved_datadownrport($state_name, $city_name, $grade_name,$id);
          
+
             $data['notrecieveddata']=$data['notrecievetempdata'][1][1];
+        
             foreach ($data['notrecieveddata'] as $key => $value) {
                 $data['notrecieveddata'][$key]['centerCode'] = getCenterCode( $value['id'],$id)?getCenterCode( $value['id'],$id):'';
                 $data['notrecieveddata'][$key]['consent_allocation'] = getConsentAllocate_max($value['id'])?getConsentAllocate_max($value['id']):'';
@@ -387,7 +392,8 @@ class Allocation_admin extends MY_Controller {
                 $data['notrecieveddata'][$key]['uniqueSnoschool'] = uniqueSnoschool($value['email']);
 
             }
-            
+
+          
 
             $records2['info'] = $this->Allocation_Model->get_data_for_allocation($id);
             $date_exam_consent_not_recieve = isset($records2['info'][0]['date_exam']) ? explode(",",$records2['info'][0]['date_exam']) : [];
