@@ -574,7 +574,7 @@
                     $('.loaderWrap').addClass('d-none');
                     alert("Consent sent sucessfully ");
                     this.checked = false;
-                    // return false;
+                 
                     window.location.reload();
                 }
 

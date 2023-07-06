@@ -599,6 +599,13 @@ function checkExamInvitationStatus($exam_id, $school_rgister_id)
     return $query->row_array();
 }
 
+function getSchoolDetails($school_id)
+{
+    $ci = &get_instance();
+    $query =  $ci->db->from('ci_exam_registration')->where('id', $school_id)->get();
+    return $query->row_array();
+}
+
 function getStateInSuperAdminList($admin_id)
 {
 

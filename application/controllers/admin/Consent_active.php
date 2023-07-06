@@ -228,14 +228,7 @@ class Consent_active extends MY_Controller
             $exam_id = $this->uri->segment(4);
             $school_Id = getSchoolNameFromEmailId($this->session->userdata('username'));
             $data['exam_name'] = $this->Certificate_model->get_exam_detail($exam_id);
-            $data['admin'] = $this->Certificate_model->get_user_detail_register_modify();
-            $data['user'] = $this->admin_model->get_center_data_update($school_Id);
-
-
-            // $data['exam_name'] = $this->Certificate_model->get_exam_detail($exam_id);
-            // $data['admin'] = $this->Certificate_model->get_user_detail_register($school_Id, $exam_id);
-            // $data['user'] = $this->admin_model->get_old_data($admin_id);
-    
+            $data['admin'] = $this->admin_model->get_center_data_updatenew($exam_id,$school_Id);
             $this->load->view('admin/includes/_header');
             $this->load->view('admin/consent_active/consent1', $data);
             $this->load->view('admin/includes/_footer');
@@ -267,8 +260,7 @@ class Consent_active extends MY_Controller
             $school_Id = getSchoolNameFromEmailId($this->session->userdata('username'));
             $exam_id = $this->uri->segment(4);
             $data['exam_name'] = $this->Certificate_model->get_exam_detail($exam_id);
-            $data['admin'] = $this->Certificate_model->get_user_detail_register_modify();
-            $data['user'] = $this->admin_model->get_center_data_update($school_Id);
+            $data['user'] = $this->admin_model->get_center_data_updatenew($exam_id,$school_Id);
             $this->load->view('admin/includes/_header');
             $this->load->view('admin/consent_active/consent2', $data);
             $this->load->view('admin/includes/_footer');
@@ -307,8 +299,7 @@ class Consent_active extends MY_Controller
             $school_Id = getSchoolNameFromEmailId($this->session->userdata('username'));
             $exam_id = $ref_id = $this->uri->segment(4);
             $data['exam_name'] = $this->Certificate_model->get_exam_detail($exam_id);
-            $data['admin'] = $this->Certificate_model->get_user_detail_register_modify();
-            $data['user'] = $this->admin_model->get_center_data_update($school_Id);
+            $data['user'] = $this->admin_model->get_center_data_updatenew($exam_id,$school_Id);
             $this->load->view('admin/includes/_header');
             $this->load->view('admin/consent_active/consent3', $data);
             $this->load->view('admin/includes/_footer');
@@ -341,8 +332,7 @@ class Consent_active extends MY_Controller
             $school_Id = getSchoolNameFromEmailId($this->session->userdata('username'));
             $exam_id = $ref_id = $this->uri->segment(4);
             $data['exam_name'] = $this->Certificate_model->get_exam_detail($exam_id);
-            $data['admin'] = $this->Certificate_model->get_user_detail_register_modify();
-            $data['user'] = $this->admin_model->get_center_data_update($school_Id);
+            $data['user'] = $this->admin_model->get_center_data_updatenew($exam_id,$school_Id);
             $this->load->view('admin/includes/_header');
             $this->load->view('admin/consent_active/consent4', $data);
             $this->load->view('admin/includes/_footer');
@@ -529,6 +519,7 @@ class Consent_active extends MY_Controller
                 'ref_id' => $ref_id,
                 'school_id' => $school_Id,
             ];
+          
             $result = $this->Certificate_model->editNewDataForExam($dataForExamSchool);
 
             if ($result) {
@@ -638,11 +629,12 @@ class Consent_active extends MY_Controller
                 }
             }
         } else {
-
+            $exam_id = $this->uri->segment(4);
             $school_Id = getSchoolNameFromEmailId($this->session->userdata('username'));
             $data['admin'] = $this->admin_model->get_user_detail($admin_id);
             $data['user'] = $this->Certificate_model->get_user_detail_register_modify();
-            $data['info'] = $this->admin_model->get_center_data_update($school_Id);
+            // $data['info'] = $this->admin_model->get_center_data_update($school_Id);
+            $data['info'] = $this->admin_model->get_center_data_updatenew($exam_id,$school_Id);
            
             $examinationid = $this->uri->segment(4);
             $data["examinationid"] = $examinationid;

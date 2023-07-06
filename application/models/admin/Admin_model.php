@@ -76,6 +76,17 @@ class Admin_model extends CI_Model{
 		return $result = $query->row_array();
 
 	}
+	public function get_center_data_updatenew($exam_id,$schol_id){
+
+		$id = $this->session->userdata('admin_id');
+
+		$query = $this->db->get_where('ci_exam_according_to_school', array('ref_id'=>$exam_id,'school_id' => $schol_id));
+
+		// echo $this->db->last_query();
+
+		return $result = $query->row_array();
+
+	}
 
 	//--------------------------------------------------------------------
 

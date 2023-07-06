@@ -87,13 +87,19 @@
                                     </div>
                                     <?php
                                     $file_url =  base_url('uploads/consent_data/');
-                                    $fileNameType1 = pathinfo($file_url . "/" . $info['fileName1'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url  . $info['fileName1'];
-                                    $fileNameType2 = pathinfo($file_url . "/" . $info['fileName2'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url  . $info['fileName2'];
-                                    $fileNameType3 = pathinfo($file_url . "/" . $info['fileName3'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url . $info['fileName3'];;
-                                    $fileNameType4 = pathinfo($file_url . "/" . $info['fileName4'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url  . $info['fileName4'];;
-                                    $fileNameType5 = pathinfo($file_url . "/" . $info['fileName5'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url  . $info['fileName5'];;
-                                    $fileNameType6 = pathinfo($file_url . "/" . $info['fileName6'], PATHINFO_EXTENSION) == 'pdf' ?  $file_url . "/" . 'Image-not-available.jpg' : $file_url  . $info['fileName6'];;
-
+                                    $notFoundUrl = $file_url . 'Image-not-available.jpg';
+                                    $fileNameType1 = $info['fileName1'] !=''? $file_url  . $info['fileName1']:$file_url.'invalidImage404.jpg';
+                                    $fileNameType1 = @get_headers($fileNameType1)[0]=='HTTP/1.1 404 Not Found'?$notFoundUrl:$fileNameType1;
+                                    $fileNameType2 = $info['fileName2'] !=''? $file_url  . $info['fileName2']:$file_url.'invalidImage404.jpg';
+                                    $fileNameType2 = @get_headers($fileNameType2)[0]=='HTTP/1.1 404 Not Found'?$notFoundUrl:$fileNameType2;  
+                                    $fileNameType3 = $info['fileName3'] !=''? $file_url  . $info['fileName3']:$file_url.'invalidImage404.jpg';
+                                    $fileNameType3 = @get_headers($fileNameType3)[0]=='HTTP/1.1 404 Not Found'?$notFoundUrl:$fileNameType3;
+                                    $fileNameType4 = $info['fileName4'] !=''? $file_url  . $info['fileName4']:$file_url.'invalidImage404.jpg';
+                                    $fileNameType4 = @get_headers($fileNameType4)[0]=='HTTP/1.1 404 Not Found'?$notFoundUrl:$fileNameType4;
+                                    $fileNameType5 = $info['fileName5'] !=''? $file_url  . $info['fileName5']:$file_url.'invalidImage404.jpg';
+                                    $fileNameType5 = @get_headers($fileNameType5)[0]=='HTTP/1.1 404 Not Found'?$notFoundUrl:$fileNameType5;
+                                    $fileNameType6 = $info['fileName6'] !=''? $file_url  . $info['fileName6']:$file_url.'invalidImage404.jpg';
+                                    $fileNameType6 = @get_headers($fileNameType6)[0]=='HTTP/1.1 404 Not Found'?$notFoundUrl:$fileNameType6;
                                     ?>
                                     <div class="row">
                                         <div class="form-group col-md-6">
