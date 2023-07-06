@@ -32,7 +32,7 @@
                <th>Principal Name</th>
                <th>Principal Mobile</th>
                <th>Principal Email</th>
-               <th>Principal whatsup Number</th>
+               <th>Principal WhatsApp Number</th>
                <th>Centre Superintendent Name</th>
                <th>Centre Superintendent Designation</th>
                <th>Centre Superintendent Mobile No</th>
