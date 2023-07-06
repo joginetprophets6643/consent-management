@@ -505,7 +505,7 @@ class Consent_active extends MY_Controller
             $school_Id = getSchoolNameFromEmailId($this->session->userdata('username'));
 
             $dataForExamSchool = [
-                'fileName1' => $fileName6,
+                'fileName1' => $fileName1,
                 'fileName2' => $fileName2,
                 'fileName3' => $fileName3,
                 'fileName4' => $fileName4,
@@ -519,7 +519,7 @@ class Consent_active extends MY_Controller
                 'ref_id' => $ref_id,
                 'school_id' => $school_Id,
             ];
-          
+ 
             $result = $this->Certificate_model->editNewDataForExam($dataForExamSchool);
 
             if ($result) {
