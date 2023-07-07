@@ -43,6 +43,10 @@
 
 
 <?php $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); ?>  
+<?php $cur_tab1 = $this->uri->segment(3) == 'attendance_master' ? 'attendance_master' :'';?>  
+<?php $cur_tab2 = $this->uri->segment(3) == 'reports_list' ? 'reports_list' :'';?>  
+<?php $cur_tab3 = $this->uri->segment(3) == 'exam_list_super_user' ? 'exam_list_super_user' :'';?>  
+<?php $cur_tab4 = $this->uri->segment(3) ==  'consent_recieved_by_super_user'  ? 'exam_list_super_user' :'';?>  
 
 
 
@@ -145,7 +149,8 @@
 
                 <?php
                 $menu = get_sidebar_menu();
-
+             
+              
                 foreach ($menu as $nav):
 
                     $sub_menu = get_sidebar_sub_menu($nav['module_id']);
@@ -158,6 +163,7 @@
                     <?php if ($this->rbac->check_module_permission($nav['controller_name'])): ?> 
 
                         <li id="<?= $nav['controller_name'] ?>" class="nav-item <?= $has_submenu ? 'has-treeview' : '' ?> has-treeview">
+
 
                             <a href="<?= base_url('admin/' . $nav['controller_name']) ?>" class="nav-link">
 
@@ -177,6 +183,7 @@
 
 
 
+
                             <!-- sub-menu -->
 
                             
@@ -190,13 +197,87 @@
 
 
                                     <?php foreach ($sub_menu as $sub_nav): 
-                                       $activePAge = $this->uri->segment(2);
-                                    //    $activePAge. base_url('admin/' . $nav['controller_name'] . '/' . $sub_nav['link']).
+                                    //    $activePAge = $this->uri->segment(2);
+                                       if($this->uri->segment(2)=='profile'){
+                                        $activePAge = 'View Profile';
+                                       }
+                                       else if($this->uri->segment(3)=='exam_list' ||
+                                            $this->uri->segment(3)=='addSubjectNew' ||
+                                            $this->uri->segment(3)=='view_all_subjectNew' ||
+                                            $this->uri->segment(3)=='edit_subject_new' || 
+                                            $this->uri->segment(3)== 'exam_add' ||
+                                             $this->uri->segment(3)=='exam_edit' ||
+                                             $this->uri->segment(3)=='que_list'
+                                             ){
+                                              $activePAge = 'Create Exam Detail';
+                                       }
+                                       else if($this->uri->segment(2)=='dashboard' ||
+                                        $this->uri->segment(3)=='consent_list'){
+                                              $activePAge = 'Dashboard';
+                                       }
+                                       else if($this->uri->segment(3)=='invt_list' ||
+                                       $this->uri->segment(3)=='invitation_add' ||
+                                       $this->uri->segment(3)=='invitation_preview'
+                                       ){
+                                              $activePAge = 'Create Exam Schedule';
+                                       }
+                                       else if($this->uri->segment(3)=='app_of_candidate' ||
+                                       $this->uri->segment(3)=='candidate_add' ||
+                                       $this->uri->segment(3)=='candidate_view' ||
+                                       $this->uri->segment(3)=='candidate_edit' 
+                                       ){
+                                              $activePAge = 'Candidate Applications';
+                                       }
+                                       else if($this->uri->segment(3)=='create_letter' ||
+                                       $this->uri->segment(3)=='consent_letter_preview' ||
+                                       $this->uri->segment(3)=='date_sheet_edit' ||
+                                       $this->uri->segment(3)=='create_invt_add' 
+                                       ){
+                                              $activePAge = 'Create Letter';
+                                       }
+                                       else if($this->uri->segment(3)=='send_consent' ||
+                                       $this->uri->segment(3)=='send_invitation' ||
+                                       $this->uri->segment(3)=='date_sheet_edit' ||
+                                       $this->uri->segment(3)=='create_invt_add' 
+                                       ){
+                                              $activePAge = 'Send Consent';
+                                       }
+                                       else if($this->uri->segment(3)=='invitation_sent_list' ||
+                                       $this->uri->segment(3)=='consent_recieved_by_user_list' ||
+                                       $this->uri->segment(3)=='consent_not_recieved_by_user_list'
+                                       ){
+                                              $activePAge = 'Consent Recieved';
+                                       }
+                                       else if($this->uri->segment(3)=='examList' ||
+                                       $this->uri->segment(3)=='allocation_list'
+                                       ){
+                                              $activePAge = 'Allocate Candidates';
+                                       }
+                                       else if($this->uri->segment(3)=='allocation_send' ||
+                                       $this->uri->segment(3)=='allocation_send_to_user'
+                                       ){
+                                              $activePAge = 'Update to Exam Center';
+                                       }
+                                       else if($this->uri->segment(3)=='attendance_master' ||
+                                        $this->uri->segment(3)== 'reports_list'
+                                       ){
+                                              $activePAge = '';
+                                       } else if($this->uri->segment(3)=="consent_recieved"){
+                                        $activePAge = 'Consent Recieved';
+                                       }else if($this->uri->segment(3)=="allocation_user_list" || $this->uri->segment(3)=='allocation_data_recieve_by_user'){
+                                        $activePAge = 'Allocated List';
+                                       }else if($this->uri->segment(3)=="mark_attendance" || $this->uri->segment(3)=='mark_attendance_allocation' || $this->uri->segment(3)=='allocate_user_attendance'){
+                                        $activePAge = 'Mark Attendance';
+                                       }
+                                 
+                                                    
                                         ?>
                                         
    
 
-                                        <li class="nav-item" <?php echo current_url() == base_url('admin/' . $nav['controller_name'] . '/' . $sub_nav['link'])?'style="background:#5f6d7b"':'' ?>>
+                                        <li class="nav-item" <?php echo $activePAge == trans($sub_nav['name'])?'style="background:#5f6d7b"':'' ?>>
+                                        <!-- <li class="nav-item" <?php echo current_url() == base_url('admin/' . $nav['controller_name'] . '/' . $sub_nav['link'])?'style="background:#5f6d7b"':'' ?>> -->
+
                                            <?php if (trans($sub_nav['name']) != "View Paper (Subject)") { ?>
                                             <a href="<?= base_url('admin/' . $nav['controller_name'] . '/' . $sub_nav['link']) ?>" class="nav-link">
                                                 <i class="fa fa-circle-o nav-icon"></i>
@@ -227,8 +308,7 @@
 
                if ($admin_role_id == 5) { ?>
 
-                <li class="nav-item  has-treeview">
-
+                <li  class="nav-item" id="attendance_master">
                     <a href="<?= base_url('admin/allocation_admin/attendance_master') ?>" class="nav-link">
 
                         <i class="nav-icon fa fa-dashboard"></i>
@@ -245,7 +325,8 @@
 
                 </li>
 
-                <li class="nav-item  has-treeview">
+
+                <li  class="nav-item" id="reports_list">
 
                     <a href="<?= base_url('admin/allocation_admin/reports_list') ?>" class="nav-link">
 
@@ -269,7 +350,7 @@
                ?>
 
             <?php if ($admin_role_id == 7) { ?>
-                <li class="nav-item  has-treeview">
+                <li  class="nav-item" id="exam_list_super_user">
 
                     <a href="<?= base_url('admin/Super_user/exam_list_super_user') ?>"  class="nav-link">
 
@@ -277,7 +358,7 @@
 
                         <p>
 
-                            Constent Recieved                                                               
+                            Constent Recieved                                                         
 
                         </p>
 
@@ -317,14 +398,35 @@
 
 
 <script>
+ 
+ 
 
 
+ if('<?=$admin_role_id==7?>'){
+    if('<?= $cur_tab3 ?>'=='exam_list_super_user'){
+        $("#<?= $cur_tab3 ?> > a ").addClass('active');
+       
+    }else if('<?= $cur_tab4 ?>'=='consent_recieved_by_super_user'){
+        $("#<?= $cur_tab4 ?> > a ").addClass('active');
+    }
+    else{
+        $("#<?= $cur_tab ?> > a ").addClass('active');
+    }
 
+ }else{
+    if('<?= $cur_tab1 ?>'=='attendance_master'){
+    $("#<?= $cur_tab1 ?> > a ").addClass('active');
+ }else if('<?= $cur_tab2 ?>'=='reports_list') {
+    $("#<?= $cur_tab2 ?> > a ").addClass('active');
+ }
+
+ else{
     $("#<?= $cur_tab ?>").addClass('menu-open');
-
-
-
     $("#<?= $cur_tab ?> > a ").addClass('active');
+ }
+ }
+
+
 
 
 
