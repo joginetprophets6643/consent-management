@@ -11,7 +11,7 @@
                                 <table class="table table-striped table-bordered" id="consentTable">
                                     <thead>
                                         <tr>
-                                            <th>S.No</th>
+                                            <th>S.No.</th>
                                             <th>Exam Name</th>
                                             <th>Total Candidates</th>
                                             <th>Start Date of exam</th>

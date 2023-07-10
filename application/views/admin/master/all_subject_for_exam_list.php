@@ -62,7 +62,7 @@
 
             <tr>
 
-              <th>#</th>
+              <th>S.No.</th>
 
               <th>Subject English Name</th>
 

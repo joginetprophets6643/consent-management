@@ -44,9 +44,11 @@
 
 <?php $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2); ?>  
 <?php $cur_tab1 = $this->uri->segment(3) == 'attendance_master' ? 'attendance_master' :'';?>  
+<?php $cur_tab5 = $this->uri->segment(3) == 'school_list_exam_for_allocation' ? 'school_list_exam_for_allocation' :'';?>  
 <?php $cur_tab2 = $this->uri->segment(3) == 'reports_list' ? 'reports_list' :'';?>  
 <?php $cur_tab3 = $this->uri->segment(3) == 'exam_list_super_user' ? 'exam_list_super_user' :'';?>  
 <?php $cur_tab4 = $this->uri->segment(3) ==  'consent_recieved_by_super_user'  ? 'exam_list_super_user' :'';?>  
+<?php $cur_tab6 = $this->uri->segment(3) ==  'downreportbutton'  ? 'downreportbutton' :'';?>  
 
 
 
@@ -259,7 +261,7 @@
                                               $activePAge = 'Update to Exam Center';
                                        }
                                        else if($this->uri->segment(3)=='attendance_master' ||
-                                        $this->uri->segment(3)== 'reports_list'
+                                        $this->uri->segment(3)== 'reports_list'|| $this->uri->segment(3)== 'school_list_exam_for_allocation' || $this->uri->segment(3)=='downreportbutton'
                                        ){
                                               $activePAge = '';
                                        } else if($this->uri->segment(3)=="consent_recieved"){
@@ -414,12 +416,20 @@
     }
 
  }else{
+    '<?= $cur_tab5 ?>'=='school_list_exam_for_allocation'
+
     if('<?= $cur_tab1 ?>'=='attendance_master'){
     $("#<?= $cur_tab1 ?> > a ").addClass('active');
- }else if('<?= $cur_tab2 ?>'=='reports_list') {
+ }else if('<?= $cur_tab5 ?>'=='school_list_exam_for_allocation') {
+
+    $("#attendance_master > a ").addClass('active');
+ }
+else if('<?= $cur_tab2 ?>'=='reports_list') {
     $("#<?= $cur_tab2 ?> > a ").addClass('active');
  }
-
+else if('<?= $cur_tab6 ?>'=='downreportbutton') {
+    $("#reports_list > a ").addClass('active');
+ }
  else{
     $("#<?= $cur_tab ?>").addClass('menu-open');
     $("#<?= $cur_tab ?> > a ").addClass('active');

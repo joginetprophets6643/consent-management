@@ -58,7 +58,7 @@
                                 <table class="table table-striped table-bordered d-none" id="consentTable">
                                     <thead>
                                         <tr>
-                                            <th>S.No</th>
+                                            <th>S.No.</th>
                                             <!-- <th>School SNO Uni </th> -->
                                             <th>School Registration No. </th>
                                             <th>School Name </th>
@@ -200,7 +200,7 @@
                                 <table class="table table-striped table-bordered d-none" id="consentNotRecieve">
                                     <thead>
                                         <tr>
-                                            <th>S.No</th>
+                                            <th>S.No.</th>
                                             <th>School Registration No. </th>
                                             <th>School Name </th>
                                             <th>School Address</th>
@@ -333,7 +333,7 @@
                                 <table id="attendanceMaster" class="table table-bordered table-striped d-none" style="border-collapse: collapse !important;">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th>S.No.</th>
                                             <th>Examination Center</th>
                                             <th>Center Code</th>
                                             <th>Date</th>

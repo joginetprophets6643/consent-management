@@ -172,7 +172,7 @@
                     style="border-collapse: collapse !important;">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>S.No.</th>
                             <th>School Name </th>
                             <th>District</th>
                             <th>City</th>

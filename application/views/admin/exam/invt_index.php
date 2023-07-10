@@ -222,7 +222,7 @@
                     <table id="send_invitation_list" class="table table-bordered table-striped table-main" style="border-collapse: collapse !important;">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>S.No.</th>
                                 <th>School Name </th>
                                 <th>District</th>
                                 <th>City</th>

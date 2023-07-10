@@ -17,7 +17,7 @@
                     style="border-collapse: collapse !important;">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>S.No.</th>
                             <th>Exam Name </th>
                             <th>Total Enrolled Candidates</th>
                             <th>Start Date</th>

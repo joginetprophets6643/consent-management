@@ -164,7 +164,7 @@
                 <table id="na_datatable" class="table table-bordered table-striped"  style="border-collapse: collapse !important;">
                     <thead>
                         <tr>
-                            <th>S.No</th>
+                            <th>S.No.</th>
                             <th>Exam Name</th>
                             <th>Total Candidates</th>
                             <th>Start Date of exam</th>

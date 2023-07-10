@@ -187,7 +187,7 @@
                 <table id="na_datatable" class="table table-bordered table-striped" style="border-collapse: collapse !important;">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>S.No.</th>
                             <th>Examination Center</th>
                             <th>Center Code</th>
                             <th>Date</th>

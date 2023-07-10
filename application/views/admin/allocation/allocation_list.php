@@ -4,7 +4,7 @@
         <table id="allocationTable" class="table table-bordered table-hover dataTable no-footer" style="border-collapse: collapse !important;">
             <thead>
                 <tr>
-                    <th>S.No</th>
+                    <th>S.No.</th>
                     <th>Examination Center Name</th>
                     <th>Consent recieved</th>
                     <th>Examination Center code</th>

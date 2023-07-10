@@ -12,7 +12,7 @@
 
       <tr>
 
-         <th>#</th>
+         <th>S.No.</th>
 
          <th>School Name </th>
 

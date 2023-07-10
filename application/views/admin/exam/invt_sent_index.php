@@ -330,7 +330,7 @@
 
                         <tr>
 
-                            <th>#</th>
+                            <th>S.No.</th>
 
                             <th>Exam Name</th>
 
