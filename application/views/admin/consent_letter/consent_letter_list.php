@@ -299,7 +299,8 @@
 </div>
 
 </div>
-<?php } else { ?>
+<?php } else {  $admin_role_id = $this->session->userdata('admin_role_id');?>
+   <?php if($admin_role_id!=1){?>
    <div class="col-lg-4 col-6">
       <div class="small-box bg-warning" style="margin-bottom: 0 !important;">
 
@@ -318,6 +319,34 @@
 
       </div>
    </div>
+   <?php } else {?>
+      <div class="table-responsive">
+         <table id="" class="table table-bordered table-striped table-hover" style="overflow: auto; border-collapse: collapse !important;">
+            <thead>
+               <tr>
+                  <th width="50">S.No.</th>
+                  <th>School/Center/College (UKPSC Id) </th>
+                  <th>School Registration No. </th>
+                  <th>School Name </th>
+                  <th>School Address </th>
+                  <th>Principal Details</th>
+              
+                  <th width="120"><?= trans('action') ?></th>
+               </tr>
+            </thead>
+            <tbody>
+
+                  <tr>
+                     <td style="text-align: center;" colspan="11">No data available in table</td>
+                  </tr>
+              
+
+
+            </tbody>
+         </table>
+
+      </div>
+      <?php } ?>
    </div>
 <?php } ?>
 

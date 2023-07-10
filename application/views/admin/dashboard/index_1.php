@@ -48,9 +48,11 @@
                   <img src=" <?php echo base_url("assets/dist/img/people_2.png")?>" height="100" alt="">
                 </div>
               </div>
+              <?php if($registerSchool>0){?>
               <a href=" <?php echo base_url("admin/profile/consent_user")?>" class="small-box-footer">
                 <?= trans('more_info') ?> <i class="fa fa-arrow-circle-right"></i>
               </a>
+              <?php }?>
 
             </div>
 

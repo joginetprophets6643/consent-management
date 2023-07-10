@@ -102,18 +102,25 @@
 
 
 
-                <a href="#" class="d-block"><?php echo ucwords($this->session->userdata['username']) . "<br/>" . " (" . ucwords($this->session->userdata('admin_role')) . ")"; ?><br/>
+    <a href="#" class="d-block"><?php echo ucwords($this->session->userdata['username']) . "<br/>" . " (" . ucwords($this->session->userdata('admin_role')) . ")"; ?><br/>
  <?php
+
+ if($this->session->userdata('last_login')!=""){
  $dateTime = explode(" ", $this->session->userdata('last_login'));
  $date = $dateTime[0] != '' ? date('d-m-Y', strtotime($dateTime[0])) : '';
- // $date = isset($dateTime[0])?date('d-m-Y',strtotime($dateTime[0])):'';
  $time = isset($dateTime[1]) ? $dateTime[1] : '';
+}else{
+    $date = '';
+    $time = '';
+}
+
+
  ?> 
  <?php
 //$addTimeinDate = strtotime("+15 minutes", strtotime($this->session->userdata('last_login'))); echo date("Y-m-d H:i:s", $addTimeinDate);
 ?>
 
-                    Last Login IP :  <?php echo $this->session->userdata('last_ip'); ?> <br/>Date & Time <?php echo $date . " " . $time; ?>
+  Last Login IP :  <?php echo $this->session->userdata('last_ip'); ?> <br/>Date & Time <?php echo $date . " " . $time; ?>
 
 
 
@@ -214,7 +221,17 @@
                                               $activePAge = 'Create Exam Detail';
                                        }
                                        else if($this->uri->segment(2)=='dashboard' ||
-                                        $this->uri->segment(3)=='consent_list'){
+                                        $this->uri->segment(3)=='consent_list' ||
+                                        $this->uri->segment(2)=='step1'||
+                                        $this->uri->segment(2)=='step2'|| 
+                                        $this->uri->segment(2)=='step3'|| 
+                                        $this->uri->segment(2)=='step4'|| 
+                                        $this->uri->segment(2)=='step5'|| 
+                                        $this->uri->segment(2)=='step6'|| 
+                                        $this->uri->segment(2)=='step7'||
+                                        $this->uri->segment(3)=='update_user_info' ||
+                                        $this->uri->segment(3)=='consent_add'
+                                        ){
                                               $activePAge = 'Dashboard';
                                        }
                                        else if($this->uri->segment(3)=='invt_list' ||
@@ -246,7 +263,13 @@
                                        }
                                        else if($this->uri->segment(3)=='invitation_sent_list' ||
                                        $this->uri->segment(3)=='consent_recieved_by_user_list' ||
-                                       $this->uri->segment(3)=='consent_not_recieved_by_user_list'
+                                       $this->uri->segment(3)=='consent_not_recieved_by_user_list' ||
+                                       $this->uri->segment(3)=='consent_add_1' ||
+                                       $this->uri->segment(3)=='consent_add_2' ||
+                                       $this->uri->segment(3)=='consent_add_3' ||
+                                       $this->uri->segment(3)=='consent_add_4' ||
+                                       $this->uri->segment(3)=='consent_add_5' ||
+                                       $this->uri->segment(3)=='consent_add_6' 
                                        ){
                                               $activePAge = 'Consent Recieved';
                                        }
@@ -271,15 +294,27 @@
                                        }else if($this->uri->segment(3)=="mark_attendance" || $this->uri->segment(3)=='mark_attendance_allocation' || $this->uri->segment(3)=='allocate_user_attendance'){
                                         $activePAge = 'Mark Attendance';
                                        }
-                                 
+                                       else if($this->uri->segment(2)=="admin" && $this->uri->segment(3)==""){
+                                        $activePAge = 'System User List';
+                                       }
+                                       else if($this->uri->segment(2)=="admin_roles"){
+                                        $activePAge = 'Role & Permissions';
+                                       }
+                                       else if($this->uri->segment(3)=="grade_list"){
+                                        $activePAge = 'Grading /Status';
+                                       }
+                                       else if($this->uri->segment(2)=="consent_letter" && $this->uri->segment(3)=="consent_list"){
+                                        $activePAge = 'School/College List';
+                                       }
+                                       else if($this->uri->segment(3)=="add" || $this->uri->segment(2)=="admin"){
+                                        $activePAge = 'Add New System User';
+                                       }
                                                     
                                         ?>
                                         
    
 
                                         <li class="nav-item" <?php echo $activePAge == trans($sub_nav['name'])?'style="background:#5f6d7b"':'' ?>>
-                                        <!-- <li class="nav-item" <?php echo current_url() == base_url('admin/' . $nav['controller_name'] . '/' . $sub_nav['link'])?'style="background:#5f6d7b"':'' ?>> -->
-
                                            <?php if (trans($sub_nav['name']) != "View Paper (Subject)") { ?>
                                             <a href="<?= base_url('admin/' . $nav['controller_name'] . '/' . $sub_nav['link']) ?>" class="nav-link">
                                                 <i class="fa fa-circle-o nav-icon"></i>
@@ -360,7 +395,7 @@
 
                         <p>
 
-                            Constent Recieved                                                         
+                            Consent Recieved                                                         
 
                         </p>
 

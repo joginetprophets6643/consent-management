@@ -238,7 +238,7 @@ $('#select_all').click(function(event) {
                 success:function(result){
                     if(result){
                     $('.loaderWrap').addClass('d-none');
-                    alert("Send allocation sucessfully");
+                    alert("allocation send sucessfully");
                     window.location.reload();
             }
             } 

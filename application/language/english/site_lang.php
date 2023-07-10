@@ -1255,7 +1255,7 @@ $lang['	'] = "Consent Recieved";
 
 
 
-$lang['grade_list'] = "Grading /Status ";
+$lang['grade_list'] = "Grading /Status";
 
 
 
