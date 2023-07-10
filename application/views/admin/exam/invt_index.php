@@ -199,6 +199,10 @@
                             </div>
                         </div>
                     </div>
+                    <?php 
+                    $count = getValues($this->uri->segment(4));
+                    if($count>0){
+                    ?>
                     <div class="col-md-12">
                         <input type="hidden" id="send_consent_id" name="send_consent_id" value="<?= $this->uri->segment(4); ?>">
                         <!-- </div> -->
@@ -216,6 +220,9 @@
                             <!-- <label style="font-weight:bold;" for="car"></label> -->
                         </div>
                     </div>
+                    <?php }?>
+
+
                 </div>
 
                 <div class="table-responsive">
@@ -464,6 +471,7 @@
             [0, 'asc']
         ],
     });
+
 
 
 

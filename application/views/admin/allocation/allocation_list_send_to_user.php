@@ -35,6 +35,18 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+#allocationTablesend_wrapper table,
+#allocationTablesend1_wrapper table{
+        display: block;
+	width: 100%;
+	overflow-x: auto;
+    }
+    #allocationTablesend_wrapper table th,
+#allocationTablesend1_wrapper table th{
+        white-space: nowrap;
+    }
 </style>
 <div class="datalist">
     <div class="row">
@@ -42,7 +54,10 @@
         
         <div class="col-md-12">
             <!-- </div> -->
-            <?php if ($hideselectbutton=='ok') { ?>
+            <?php if ($hideselectbutton=='ok')  { 
+                if (count($info)>0)  {
+                ?>
+            
             <div id="allcheckids" class="mb-5" style="">
                 <div class="d-flex justify-centent-between align-items-center">
                     <div class="check-option">
@@ -56,7 +71,9 @@
                         <input type="button" class="btn btn-success" id="select_single_count" value="Send to Selected (चयनित को भेजें)">
                     </div>
                 </div>
-                <?php } ?>
+                <?php }} ?>
+
+
             </div>
         </div>
         <div class="col-md-12 ">
@@ -238,7 +255,7 @@ $('#select_all').click(function(event) {
                 success:function(result){
                     if(result){
                     $('.loaderWrap').addClass('d-none');
-                    alert("allocation send sucessfully");
+                    alert("Allocation send sucessfully");
                     window.location.reload();
             }
             } 
@@ -322,9 +339,9 @@ $('.select_all_count').click(function(event) {
             success: function(result) {
                 if (result) {
                     $('.loaderWrap').addClass('d-none');
-                    alert("Send allocation sucessfully");
-                    return false;
-                    // window.location.reload();
+                    alert("Allocation send sucessfully");
+                  
+                    window.location.reload();
                 }
 
             }

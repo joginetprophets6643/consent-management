@@ -640,6 +640,43 @@ function checkOption($exam_id, $school_id, $dateexam, $shiftexam)
     return $choice;
 }
 
+function getsendInvitationSchoolList($exam_id){
+    $examId = urldecode($exam_id);
+    $ci = &get_instance();
+   $rowCount = $ci->db->query("SELECT * FROM ci_exam_registration INNER JOIN ci_registration_invitation ON ci_exam_registration.id=ci_registration_invitation.school_id");
+   ;
+return $rowCount->num_rows();
+}
+function getValues($exam_id){
+    $exam_id = urldecrypt($exam_id);
+    $ci = &get_instance();
+    $ci->db->from('ci_exam_registration');
+    $ci->db->where('ci_exam_registration.fileName6 is  NOT NULL');
+    $ci->db->order_by('ci_exam_registration.id', 'desc');
+    $query = $ci->db->get();
+    $module = array();
+    if ($query->num_rows() > 0) {
+        $module = $query->result_array();
+    }
+    // echo $query->num_rows();
+    $pendingCount = 0;
+    foreach ($module as $key => $row) {
+        $school_rgister_id = $row['id'];
+        $ci = &get_instance();
+        $query =  $ci->db->from('ci_registration_invitation')->where('ci_registration_invitation.ref_id', $exam_id)->where('ci_registration_invitation.school_id', $school_rgister_id)->get();
+        $invitationStatus =  $query->row_array();
+        $invt_recieved = isset($invitationStatus['invt_recieved'])?$invitationStatus['invt_recieved']:0;
+        $invite_sent = isset($invitationStatus['invite_sent'])?$invitationStatus['invite_sent']:0;
+        if($invt_recieved==0 && $invite_sent==0){
+            $pendingCount = $pendingCount+1;
+        }
+        
+        # code...
+    }
+    return $pendingCount;
+}
+
+
 
 function sendSMS($mobile, $message, $template_id)
 {

@@ -1,5 +1,16 @@
+<style>
+    #allocationTable_wrapper table,
+    #allocationTable_recreate_wrapper table{
+        display: block;
+	width: 100%;
+	overflow-x: auto;
+    }
+    #allocationTable_wrapper table th,
+    #allocationTable_recreate_wrapper th{
+        white-space: nowrap;
+    }
+</style>
 <div class="datalist">
-    <div class="table-responsive">
 
         <table id="allocationTable" class="table table-bordered table-hover dataTable no-footer" style="border-collapse: collapse !important;">
             <thead>
@@ -120,7 +131,7 @@
                         ?> -->
             </tbody>
         </table>
-    </div>
+    
 
 </div>
 <!-- Modal -->

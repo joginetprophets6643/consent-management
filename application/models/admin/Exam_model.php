@@ -166,7 +166,7 @@ class Exam_model extends CI_Model {
             $this->db->where('ci_exam_registration.fileName6 is  NOT NULL');
             $this->db->where('ci_exam_registration.created_by',$this->session->userdata('admin_id'));
         }
-
+        // $this->db->where('ci_exam_registration.created_by','jogi');
         $filterData = $this->session->userdata('filter_keyword');
         $this->db->order_by('ci_exam_registration.id', 'desc');
         $query = $this->db->get();
