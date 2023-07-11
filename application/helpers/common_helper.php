@@ -676,6 +676,18 @@ function getValues($exam_id){
     return $pendingCount;
 }
 
+function getNotRecievedCount($exam_id){
+    $exam_id = urldecrypt($exam_id);
+
+    $ci = &get_instance();
+    $ci->db->from(' ci_exam_according_to_school');
+    $ci->db->where(' ci_exam_according_to_school.fileName6 is  NOT NULL');
+    $ci->db->where('ci_exam_according_to_school.invt_recieved',0);
+    $ci->db->where('ci_exam_according_to_school.ref_id',$exam_id);
+    $ci->db->order_by(' ci_exam_according_to_school.id', 'desc');
+    $query = $ci->db->get();
+    return $query->num_rows();
+}
 
 
 function sendSMS($mobile, $message, $template_id)

@@ -241,22 +241,26 @@ class Exam_model extends CI_Model {
         return $data;
     }
     function get_all_search_registration_data_not_recieved($state_name, $city_name, $grade_name,$exam_id) {
-        $this->db->from('ci_exam_registration');
+        // echo $state_name."==".$city_name."==".$grade_name."=".$exam_id;
+        //  die();
+        $this->db->from('ci_exam_according_to_school');
         if ($state_name != '' ) {
-            $this->db->where('ci_exam_registration.district', $state_name);
+            $this->db->where('ci_exam_according_to_school.district', $state_name);
         }
         if ($city_name != '') { 
          
-            $this->db->where('ci_exam_registration.city', $city_name);
+            $this->db->where('ci_exam_according_to_school.city', $city_name);
         }
         if ($grade_name != '') {
-            $this->db->where('ci_exam_registration.ranking_admin', $grade_name);
+            $this->db->where('ci_exam_according_to_school.ranking_admin', $grade_name);
         }
     
 
-        $this->db->where('ci_exam_registration.fileName6 is  NOT NULL');
+        $this->db->where('ci_exam_according_to_school.fileName6 is  NOT NULL');
+        $this->db->where('ci_exam_according_to_school.invt_recieved',0);
+        $this->db->where('ci_exam_according_to_school.ref_id',$exam_id);
         $filterData = $this->session->userdata('filter_keyword');
-        $this->db->order_by('ci_exam_registration.id', 'desc');
+        $this->db->order_by('ci_exam_according_to_school.id', 'desc');
 
         $query = $this->db->get();
         return $query->num_rows();

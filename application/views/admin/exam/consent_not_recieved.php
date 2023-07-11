@@ -23,7 +23,7 @@
           
          <?php
             if(!empty($main_data)){   
-                  $i = 1;
+               $i = 0;
                   foreach ($main_data as $row):
                      $admin_role_id = $this->session->userdata('admin_role_id');
                      $admin_id = $this->session->userdata('admin_id');
@@ -33,7 +33,7 @@
             <?php $invitationStatus = checkExamInvitationStatus($exam_id,$row['id']);
             $invt_recieved = isset($invitationStatus['invt_recieved'])?$invitationStatus['invt_recieved']:0;
             $invite_sent = isset($invitationStatus['invite_sent'])?$invitationStatus['invite_sent']:0;
-           
+            
             if($invt_recieved==0 && $invite_sent==1)
             {?>
 

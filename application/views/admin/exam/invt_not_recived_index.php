@@ -228,9 +228,11 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
+                    <?php $count = getNotRecievedCount($this->uri->segment(4)); 
+                    if($count>0){
+                    ?>
                     <div class="col-md-12">
                         <input type="hidden" id="send_consent_id" name="send_consent_id" value="<?= $this->uri->segment(4); ?>">
-                        <!-- </div> -->
                         <div id="allcheckids" class="mb-5" style="">
                             <div class="d-flex justify-centent-between align-items-center">
                                 <div class="check-option">
@@ -245,6 +247,8 @@
                             <!-- <label style="font-weight:bold;" for="car"></label> -->
                         </div>
                     </div>
+                    <?php }?>
+
                     <div class="col-md-12">
                     <div class="d-flex my-2">
                             <div id="countInDistrict" class="d-none mr-5">
@@ -342,14 +346,14 @@
                 });
             }
 
-            var district_id = $('#district').val();
             var state_id = $('#state').val();
-            var grade = $('#grade').val();
-            var district_id = $('#district').val();;
+            var grade = '';
+            var district_id = '';
 
             if (state_id != '') {
                 var exam_new_id = $('#exam_new_id').val();
-
+                $('#countInDistrict').addClass("d-none");
+                $('#districtCounts').html('');
                 $.ajax({
                     type: "GET",
                     url: base_url + 'admin/Examshedule_schedule/consent_notrecieved_search',
@@ -366,11 +370,10 @@
                         $('#consentRecievedRecreatedTable').hide();
                         $('#consentNotRecievedDiv').html(data);
                         table = $('#consentNotRecievedDiv #consentRecievedRecreatedTable').DataTable();
-                        // New Logic For Count Students on the basis of Distrcit Id  -- Jogi
+                        // New Logic For Count Students on the basis of Distrcit Id  -- 
                         $.ajax({
                             type: "GET",
                             url: base_url + 'admin/Examshedule_schedule/districtWiseCountOfStudentsNotRecieved',
-                            // dataType: 'html',
                             data: {
                                 'state_id': state_id,
                                 'district_id': district_id,
@@ -379,7 +382,6 @@
                                 'csfr_token_name': csfr_token_value
                             },
                             success: function(data) {
-                            
                                 $('#countInDistrict').removeClass("d-none");
                                 $('#districtCounts').html(data);
                                 $('#schoolCount').addClass("d-none");
@@ -565,13 +567,14 @@
 
 
     $('.select_all_uncheck').click(function(event) {
+
         let rows = table.rows({
             'search': 'applied'
         }).nodes();
         // Check checkboxes for all rows in the table
         $('input[type="checkbox"]', rows).prop('checked', false);
         arr = []
-        $('schoolCount').hide();
+        $('#schoolCount').hide();
     });
     function single_send_invitations(id) {
         $('.loaderWrap').removeClass('d-none');
@@ -651,7 +654,7 @@
                 type: "GET",
                 url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
                 data: {
-                    'school_ids': 'all',
+                    'school_ids': arr,
                     'csfr_token_name': csfr_token_value
                 },
                 success: function(data) {
