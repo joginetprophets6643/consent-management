@@ -20,13 +20,15 @@
     .table-main {
         width: 100% !important;
     }
-    .loaderWrap{
+
+    .loaderWrap {
         position: absolute;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: #000;/*Fallback*/
+        background-color: #000;
+        /*Fallback*/
         background-color: rgba(0, 0, 0, .5);
     }
 
@@ -93,7 +95,7 @@
             <div class="card-header">
                 <h3 class="card-title" style="color: #373250;">
                     <?php echo get_exam_name(get_exam_name_downloadreport($exam_id)); ?>
-                    <input hidden  type="text" id="exam_Id" value="<?php echo $exam_id ?>">
+                    <input hidden type="text" id="exam_Id" value="<?php echo $exam_id ?>">
 
                 </h3>
 
@@ -199,28 +201,28 @@
                             </div>
                         </div>
                     </div>
-                    <?php 
+                    <?php
                     $count = getValues($this->uri->segment(4));
-                    if($count>0){
+                    if ($count > 0) {
                     ?>
-                    <div class="col-md-12">
-                        <input type="hidden" id="send_consent_id" name="send_consent_id" value="<?= $this->uri->segment(4); ?>">
-                        <!-- </div> -->
-                        <div id="allcheckids" class="mb-5" style="">
-                            <div class="d-flex justify-centent-between align-items-center">
-                                <div class="check-option">
-                                    <input type="button" class="select_all_count btn btn-success" id="select-all1" value="Select All (सभी चुनें)">
-                                    <input type="button" class="select_all_uncheck btn btn-success" id="select-all1" value="Uncheck (अनचेक)">
+                        <div class="col-md-12">
+                            <input type="hidden" id="send_consent_id" name="send_consent_id" value="<?= $this->uri->segment(4); ?>">
+                            <!-- </div> -->
+                            <div id="allcheckids" class="mb-5" style="">
+                                <div class="d-flex justify-centent-between align-items-center">
+                                    <div class="check-option">
+                                        <input type="button" class="select_all_count btn btn-success" id="select-all1" value="Select All (सभी चुनें)">
+                                        <input type="button" class="select_all_uncheck btn btn-success" id="select-all1" value="Uncheck (अनचेक)">
+                                    </div>
+                                    <div class="send-option">
+                                        <input type="button" class="btn btn-success" id="select_all" value="Send to All (सभी को भेजो)">
+                                        <input type="button" class="btn btn-success" id="select_single_count" value="Send to Selected (चयनित को भेजें)">
+                                    </div>
                                 </div>
-                                <div class="send-option">
-                                    <input type="button" class="btn btn-success" id="select_all" value="Send to All (सभी को भेजो)">
-                                    <input type="button" class="btn btn-success" id="select_single_count" value="Send to Selected (चयनित को भेजें)">
-                                </div>
+                                <!-- <label style="font-weight:bold;" for="car"></label> -->
                             </div>
-                            <!-- <label style="font-weight:bold;" for="car"></label> -->
                         </div>
-                    </div>
-                    <?php }?>
+                    <?php } ?>
 
 
                 </div>
@@ -255,8 +257,8 @@
 
 <div class="loaderWrap d-none">
     <div class="loader"></div>
-    
-    </div>
+
+</div>
 
 
 <!-- DataTables -->
@@ -302,8 +304,6 @@
                         },
                         success: function(data) {
                             $('#district').html(data);
-
-
                         }
                     });
                 }
@@ -324,11 +324,10 @@
                             'csfr_token_name': csfr_token_value
                         },
                         success: function(data) {
-                            $('#send_invitation_list').DataTable().clear().destroy();
+                            table.clear().destroy();
                             $('#send_invitation_list').hide();
                             $('#invitation_recreate_div').html(data);
                             table = $('#invitation_recreate_div #send_invitation_list').DataTable();
-
                             // New Logic For Count Students on the basis of Distrcit Id  
                             $.ajax({
                                 type: "GET",
@@ -489,33 +488,33 @@
                     hrefs.push($('input[type="checkbox"]', row).attr('rel'))
                 }
             })
-          
-            if(hrefs.length!=0){
+        
+            if (hrefs.length != 0) {
                 $('.loaderWrap').removeClass('d-none');
                 $('.loaderWrap').removeClass('d-none');
-            var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all/') ?>"
-            $.ajax({
-                url: url,
-                type: 'get',
-                dataType: 'text',
-                data: {
-                    data: hrefs,
-                    'send_consent_id': send_consent_id
-                },
-                success: function(result) {
-                    if (result) {
-                        $('.loaderWrap').addClass('d-none');
-                        alert("Consent sent sucessfully ");
-                 
-                        window.location.reload();
+                var url = "<?php echo base_url('admin/examshedule_schedule/send_invitation_user_all/') ?>"
+                $.ajax({
+                    url: url,
+                    type: 'get',
+                    dataType: 'text',
+                    data: {
+                        data: hrefs,
+                        'send_consent_id': send_consent_id
+                    },
+                    success: function(result) {
+                        if (result) {
+                            $('.loaderWrap').addClass('d-none');
+                            alert("Consent sent sucessfully ");
+
+                            window.location.reload();
+                        }
                     }
-                }
-            });
-        }else{
-            alert('Please click on send at least one checkbox\n(कृपया कम से कम दो चेकबॉक्स भेजें पर क्लिक करें)');
+                });
+            } else {
+                alert('Please click on send at least one checkbox\n(कृपया कम से कम दो चेकबॉक्स भेजें पर क्लिक करें)');
                 $("#allcheckids").focus();
                 return false;
-        }
+            }
 
         } else {
             return false;
@@ -544,9 +543,15 @@
                 'csfr_token_name': csfr_token_value
             },
             success: function(data) {
-
+                if(data===''){
+                    alert('kk')
+                $('#schoolCount').addClass("d-none");
+                $('#schoolWiseCounts').html('');
+                }else{
                 $('#schoolCount').removeClass("d-none");
                 $('#schoolWiseCounts').html(data);
+                }
+            
             }
         });
 
@@ -582,7 +587,7 @@
                     $('.loaderWrap').addClass('d-none');
                     alert("Consent sent sucessfully ");
                     this.checked = false;
-                 
+
                     window.location.reload();
                 }
 
@@ -649,6 +654,7 @@
     });
 
     let arr = []
+
     function getCount(id) {
         if (arr.indexOf(id) === -1) {
             arr.push(id)

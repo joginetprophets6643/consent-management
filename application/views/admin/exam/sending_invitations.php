@@ -178,18 +178,6 @@
 
             endforeach;
 
-         }else{
-
-            ?>
-
-            <tr>
-
-               <td style="text-align: center;" colspan="11">No data available in table</td>               
-
-            </tr> 
-
-         <?php
-
          }
 
          ?>

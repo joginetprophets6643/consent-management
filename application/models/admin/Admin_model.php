@@ -238,6 +238,7 @@ class Admin_model extends CI_Model{
         $this->db->join('ci_cities','ci_cities.id=ci_admin.district_id', 'left');
 
         $this->db->join('ci_states','ci_states.id=ci_admin.state_id', 'left');
+   
 		
 
 		if($this->session->userdata('filter_type')!='')
@@ -272,6 +273,7 @@ class Admin_model extends CI_Model{
                 // End Filter data as per user role   
 
 		$filterData = $this->session->userdata('filter_keyword');
+	
 
                 if($filterData!=''){
 
@@ -293,13 +295,13 @@ class Admin_model extends CI_Model{
 
                 }
 
+		
 		$this->db->where('ci_admin.is_supper !=', 1);
-
 		$this->db->order_by('ci_admin.admin_id','desc');
+		
 
 		$query = $this->db->get();
 
-                // echo $this->db->last_query();
 
 		$module = array();
 

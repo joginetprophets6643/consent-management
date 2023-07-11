@@ -210,7 +210,7 @@
                                                             <td>
 
                                                                 <input type="hidden" id="yes" id="examincation_ids" name="examincation_ids" value="<?= $val['sub_name'] ?>">
-                                                                <input type="radio" id="yes" onclick="optionFunction('<?= $passValue ?>','yes')" name="exmin_ceter_option[]<?= $x; ?>" value="Yes" checked>Yes
+                                                                <input type="radio" id="yes" class="yesNoCount" onclick="optionFunction('<?= $passValue ?>','yes')" name="exmin_ceter_option[]<?= $x; ?>" value="Yes" checked>Yes
                                                                 <!-- <input type="radio" id="no" onclick="optionFunction('<?= $passValue ?>','no')" name="exmin_ceter_option[]<?= $x; ?>" value="No">No -->
                                                                 <input type="hidden" name="examincation_id" id="examincation_id" value="<?= $all_value; ?>" />
                                                             </td>
@@ -233,13 +233,13 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <?php $segment_value = $this->uri->segment(4); ?>
+                                            <?php $segment_value = $this->uri->segment(4);?>
                                             <input type="hidden" name="ci_exam_registrationid5" id="ci_exam_registrationid5" value="<?= $segment_value; ?>">
                                             <div class="form-group">
                                                 <a href="<?= base_url("admin/consent_active/consent_add_4" . '/' . $segment_value); ?>" id="dwn" class="btn btn-sec">
                                                     Back
                                                 </a>
-                                                <input type="submit" name="submit" id="submit" class="btn btn-primary next_button" value="Preview and Download Form">
+                                                <input type="submit" name="submit" id="submit" class="btn btn-primary next_button"  value="Preview and Download Form">
                                             </div>
                                         </div>
                                     </div>
@@ -544,7 +544,23 @@
 
     });
     // yes ANd No Function 
+    var yes = 0;
+    var no = 0;
+    var totalCount ='<?php echo count($sub_info)?>';
     function optionFunction(passArray, option) {
+       
+        if(option==='yes'){
+           no = no-1;
+        }else{
+            no = no+1;
+
+        }
+        if(Number(totalCount)===Number(no)){
+            alert("Please select at least one yes option");
+            $('.next_button').attr("disabled", true);
+        }else{
+            $('.next_button').attr("disabled", false);
+        }
         var url = "<?php echo base_url('admin/Consent_active/optionsCheck/') ?>"
         $.ajax({
             url: url,
