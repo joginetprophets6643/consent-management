@@ -543,12 +543,14 @@
                 'csfr_token_name': csfr_token_value
             },
             success: function(data) {
-                if(data===''){
-                    alert('kk')
+                if(data==0){
                 $('#schoolCount').addClass("d-none");
+                $('#countInDistrict').addClass("d-none");
+                $('#districtCounts').html("");
                 $('#schoolWiseCounts').html('');
                 }else{
                 $('#schoolCount').removeClass("d-none");
+                $('#countInDistrict').removeClass("d-none");
                 $('#schoolWiseCounts').html(data);
                 }
             

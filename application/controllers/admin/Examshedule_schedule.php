@@ -279,10 +279,17 @@ class Examshedule_schedule extends MY_Controller {
         if(isset($_GET['school_ids']))
         {
             $ids = $_GET['school_ids'];
+             print_r($ids);
+             die();
             $SchoolWiseCounts = $this->Exam_model->getTotalCountinSchoolWise($ids);
             echo $SchoolWiseCounts;
             exit;
 
+        }else{
+    
+            $data = 0;
+            echo $data;
+            exit;
         }
     }
     // End Login Jogi..
