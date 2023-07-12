@@ -8,6 +8,7 @@
     #allocationTable_wrapper table th,
     #allocationTable_recreate_wrapper th{
         white-space: nowrap;
+        width:25%!important;
     }
 </style>
 <div class="datalist">

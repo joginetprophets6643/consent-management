@@ -46,6 +46,7 @@
     #allocationTablesend_wrapper table th,
 #allocationTablesend1_wrapper table th{
         white-space: nowrap;
+        width:25%!important;
     }
 </style>
 <div class="datalist">
