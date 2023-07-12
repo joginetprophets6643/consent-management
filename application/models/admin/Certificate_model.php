@@ -357,9 +357,16 @@ class Certificate_model extends CI_Model {
         $this->db->order_by('ci_exam_invitation.id', 'desc');
 
         $query = $this->db->get();
-        // echo $this->db->last_query(); die;
-        // print_r($query);
-        // die();
+        return $query->result_array();
+    }
+	 public function getExaminationData($examinationid) {
+       
+        $admin_id = $this->session->userdata('admin_id');
+        $this->db->from('ci_exam_invitation');
+        $this->db->where('id',$examinationid);
+        $this->db->order_by('ci_exam_invitation.id', 'desc');
+
+        $query = $this->db->get();
         return $query->result_array();
     }
 public function get_all_active_consent_reg() {

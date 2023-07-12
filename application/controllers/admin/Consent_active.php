@@ -630,6 +630,7 @@ class Consent_active extends MY_Controller
             }
         } else {
             $exam_id = $this->uri->segment(4);
+          
             $school_Id = getSchoolNameFromEmailId($this->session->userdata('username'));
             $data['admin'] = $this->admin_model->get_user_detail($admin_id);
             $data['user'] = $this->Certificate_model->get_user_detail_register_modify();
@@ -637,12 +638,16 @@ class Consent_active extends MY_Controller
             $data['info'] = $this->admin_model->get_center_data_updatenew($exam_id,$school_Id);
            
             $examinationid = $this->uri->segment(4);
+         
             $data["examinationid"] = $examinationid;
-            $data["examination_form"] = $this->Certificate_model->get_examination_form($examinationid);
-
+            // $data["examination_form"] = $this->Certificate_model->get_examination_form($examinationid);
+            $data["examination_form"] = $this->Certificate_model->getExaminationData($examinationid);
+           
             $data["schoolId"] = $school_Id;
+          
             // New Exam ID
             $data['exam_name_replace_subject_id'] = $data["examination_form"][0]['exam_name'];
+       
 
             $sub_name = $data["examination_form"][0]['sub_name'];
             $sub_name_array = explode(",", $sub_name);
@@ -654,7 +659,7 @@ class Consent_active extends MY_Controller
             $time_exam_array = explode(",", $time_exam);
             $no_candidate = $data["examination_form"][0]['no_candidate'];
             $no_candidate_array = explode(",", $no_candidate);
-
+           
             foreach ($sub_name_array as $k => $value1) {
                 $subjectId = $sub_name_array[$k];
                 $xs = $this->admin_model->get_sub_name($subjectId);
@@ -669,7 +674,7 @@ class Consent_active extends MY_Controller
                 $sub_info[$k]['sub_name'] = $sub_name;
             }
          
-
+        
             $sub_info['sub_info'] = $sub_info;
             $this->load->view('admin/includes/_header', $sub_info);
             $this->load->view('admin/consent_active/consent5', $data);
@@ -709,7 +714,8 @@ class Consent_active extends MY_Controller
         $data['user'] = $this->admin_model->get_old_data($id);
 
         $examinationid = $this->uri->segment(5);
-        $data["examination_form"] = $this->Certificate_model->get_examination_form($examinationid);
+        // $data["examination_form"] = $this->Certificate_model->get_examination_form($examinationid);
+        $data["examination_form"] = $this->Certificate_model->getExaminationData($examinationid);
         $data['exam_name_replace_subject_id'] = $data["examination_form"][0]['exam_name'];
         $sub_name = $data['admin']['examincation_id'];
         $sub_name_array = explode(",", $sub_name);

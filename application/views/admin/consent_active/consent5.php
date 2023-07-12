@@ -201,7 +201,7 @@
                                                                 <td>
 
                                                                     <input type="hidden" id="yes" id="examincation_ids" name="examincation_ids" value="<?= $val['sub_name'] ?>">
-                                                                    <input type="radio" id="yes<?= $x?>" class="checkClass" onclick="optionFunction('<?= $passValue ?>','yes','<?= $x?>')" name="exmin_ceter_option[]<?= $x; ?>" value="Yes" checked>Yes
+                                                                    <input type="radio" id="yes<?= $x?>"  onclick="optionFunction('<?= $passValue ?>','yes','<?= $x?>')" name="exmin_ceter_option[]<?= $x; ?>" value="Yes" checked>Yes
                                                                     <input type="radio" id="no<?= $x?>"class="checkClass" onclick="optionFunction('<?= $passValue ?>','no','<?= $x?>')" name="exmin_ceter_option[]<?= $x; ?>" value="No">No
                                                                     <input type="hidden" name="examincation_id" id="examincation_id" value="<?= $all_value; ?>" />
                                                                 </td>
@@ -547,28 +547,21 @@
     var yes = 0;
     var no = 0;
     var totalCount ='<?php echo count($sub_info)?>';
+    
     function optionFunction(passArray, option,autoId) {
-
-    //    if ($('#no'+autoId).is(":checked")) {
-    //        // do what you need here     
-    //        $('#no'+autoId).attr('checked',true);
-    //        $('#yes'+autoId).attr('checked',false);
-    //     }
-
-    //    if ($('#yes'+autoId).is(":checked")) {
-    //        // do what you need here     
-    //        $('#no'+autoId).attr('checked',false);
-    //        $('#yes'+autoId).attr('checked',true);
-    //     }
-
-    //    return false;
+    
+       let count =  $('input.checkClass:checked').length;
         if(option==='yes'){
            no = no-1;
+        $('#yes'+autoId).prop('checked',true);
+        $('#no'+autoId).prop('checked',false); 
         }else{
             no = no+1;
+        $('#yes'+autoId).prop('checked',false);
+        $('#no'+autoId).prop('checked',true); 
 
         }
-        if(Number(totalCount)===Number(no)){
+        if(Number(totalCount)===Number(no) || Number(totalCount) === count){
             no = no-1;
            alert("Please select at least one yes option");
            $('#yes'+autoId).prop('checked',true);
