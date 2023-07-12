@@ -240,7 +240,7 @@
 
                                                             <div class="form-group">
 
-                                                                <label for="state" class="col-md-12 control-label"><?= trans('state') ?><span style="color:red;font-weight:bold">*</span>
+                                                                <label for="state" class="col-md-12 control-label">Select District<span style="color:red;font-weight:bold">*</span>
 
                                                                 </label>
 
@@ -250,7 +250,7 @@
 
                                                                 <select name="state" id="state" class="form-control">
 
-                                                                    <option value=""><?= trans('select_state') ?></option>
+                                                                    <option value="">Select District</option>
 
                                                                     <?php foreach($states as $k=>$state){?>
 
@@ -274,13 +274,13 @@
 
                                                             <div class="form-group ">
 
-                                                                <label for="district" class="col-md-12 control-label"><?= trans('district') ?><span style="color:red;font-weight:bold">*</span>
+                                                                <label for="district" class="col-md-12 control-label">Select City<span style="color:red;font-weight:bold">*</span></label>
 
                                                                 </label>
 
                                                                 <select name="district" id="district" class="form-control">
 
-                                                                    <option value=""><?= trans('select_district') ?></option>
+                                                                    <option value="">Select City</option>
 
                                                                 </select>
 
