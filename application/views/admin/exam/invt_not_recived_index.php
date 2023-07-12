@@ -571,10 +571,9 @@
         let rows = table.rows({
             'search': 'applied'
         }).nodes();
-        // Check checkboxes for all rows in the table
         $('input[type="checkbox"]', rows).prop('checked', false);
-        arr = []
-        $('#schoolCount').hide();
+        arr = [];
+        $('#schoolCount').addClass('d-none');
     });
     function single_send_invitations(id) {
         $('.loaderWrap').removeClass('d-none');
@@ -669,16 +668,19 @@
 
     let arr = []
 function getCount(id) {
+     id = id.toString();
     if (arr.indexOf(id) === -1) {
         arr.push(id)
     } else {
         arr = arr.filter(item => item !== id)
     }
+
+ let arr1 = arr.map(item => Number(item));
     $.ajax({
         type: "GET",
         url: base_url + 'admin/Examshedule_schedule/totalCountSchoolWise',
         data: {
-            'school_ids': arr,
+            'school_ids': arr1,
             'csfr_token_name': csfr_token_value
         },
         success: function(data) {

@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-12">
                             <div class="table-responsive">
-                            <table id="sunbjectTable" class="table table-bordered table-hover  " style="overflow: auto; border-collapse: collapse !important;">
+                            <table id="subjectTable" class="table table-bordered table-hover  " style="overflow: auto; border-collapse: collapse !important;">
                                 <!-- <table class="table table-bordered table-hover dataTable sunbjectTable" style="overflow: auto; border-collapse: collapse !important;"> -->
                                     <thead>
                                         <tr>
@@ -178,12 +178,12 @@
     </div>
 
 </body>
-<script src="http://localhost/consent-management/assets/plugins/datatables/jquery.dataTables.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables/jquery.dataTables.js"></script>
 
-<script src="http://localhost/consent-management/assets/plugins/datatables/dataTables.bootstrap4.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.js"></script>
 <script>
     $(document).ready( function () {
-    $('#sunbjectTable').DataTable();
+    $('#subjectTable').DataTable();
 } );
 </script>
 </html>
