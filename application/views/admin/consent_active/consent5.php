@@ -201,8 +201,8 @@
                                                                 <td>
 
                                                                     <input type="hidden" id="yes" id="examincation_ids" name="examincation_ids" value="<?= $val['sub_name'] ?>">
-                                                                    <input type="radio" id="yes" onclick="optionFunction('<?= $passValue ?>','yes')" name="exmin_ceter_option[]<?= $x; ?>" value="Yes" checked>Yes
-                                                                    <input type="radio" id="no" onclick="optionFunction('<?= $passValue ?>','no')" name="exmin_ceter_option[]<?= $x; ?>" value="No">No
+                                                                    <input type="radio" id="yes<?= $x?>" class="checkClass" onclick="optionFunction('<?= $passValue ?>','yes','<?= $x?>')" name="exmin_ceter_option[]<?= $x; ?>" value="Yes" checked>Yes
+                                                                    <input type="radio" id="no<?= $x?>"class="checkClass" onclick="optionFunction('<?= $passValue ?>','no','<?= $x?>')" name="exmin_ceter_option[]<?= $x; ?>" value="No">No
                                                                     <input type="hidden" name="examincation_id" id="examincation_id" value="<?= $all_value; ?>" />
                                                                 </td>
                                                                 <?php }else{
@@ -210,7 +210,7 @@
                                                             <td>
 
                                                                 <input type="hidden" id="yes" id="examincation_ids" name="examincation_ids" value="<?= $val['sub_name'] ?>">
-                                                                <input type="radio" id="yes" class="yesNoCount" onclick="optionFunction('<?= $passValue ?>','yes')" name="exmin_ceter_option[]<?= $x; ?>" value="Yes" checked>Yes
+                                                                <input type="radio" id="yes" class="yesNoCount" onclick="optionFunction('<?= $passValue ?>','yes','<?= $x?>')" name="exmin_ceter_option[]<?= $x; ?>" value="Yes" checked>Yes
                                                                 <!-- <input type="radio" id="no" onclick="optionFunction('<?= $passValue ?>','no')" name="exmin_ceter_option[]<?= $x; ?>" value="No">No -->
                                                                 <input type="hidden" name="examincation_id" id="examincation_id" value="<?= $all_value; ?>" />
                                                             </td>
@@ -547,8 +547,21 @@
     var yes = 0;
     var no = 0;
     var totalCount ='<?php echo count($sub_info)?>';
-    function optionFunction(passArray, option) {
-       
+    function optionFunction(passArray, option,autoId) {
+
+    //    if ($('#no'+autoId).is(":checked")) {
+    //        // do what you need here     
+    //        $('#no'+autoId).attr('checked',true);
+    //        $('#yes'+autoId).attr('checked',false);
+    //     }
+
+    //    if ($('#yes'+autoId).is(":checked")) {
+    //        // do what you need here     
+    //        $('#no'+autoId).attr('checked',false);
+    //        $('#yes'+autoId).attr('checked',true);
+    //     }
+
+    //    return false;
         if(option==='yes'){
            no = no-1;
         }else{
@@ -556,8 +569,11 @@
 
         }
         if(Number(totalCount)===Number(no)){
-            alert("Please select at least one yes option");
-            $('.next_button').attr("disabled", true);
+            no = no-1;
+           alert("Please select at least one yes option");
+           $('#yes'+autoId).prop('checked',true);
+           $('#no'+autoId).prop('checked',false);    
+          
         }else{
             $('.next_button').attr("disabled", false);
         }
