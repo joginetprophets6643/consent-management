@@ -613,7 +613,7 @@
 
                 if (result) {
                     $('.loaderWrap').addClass('d-none');
-                    alert("Consent sent sucessfully");
+                    alert("Revoked consent successfully");
                     this.checked = false;
                     window.location.reload();
                 }

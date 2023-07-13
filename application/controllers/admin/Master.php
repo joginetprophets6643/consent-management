@@ -156,8 +156,8 @@ class Master extends MY_Controller
                 $row['no_of_cand'] ? $row['no_of_cand'] : '',
                 $row['start_date_exam'] ? date("d-m-Y", strtotime($row['start_date_exam'])) : '',
                 $row['end_date_exam'] ?   date("d-m-Y", strtotime($row['end_date_exam'])) : '',
-                '<a title="Edit"  class="update btn btn-sm btn-success" href="' . base_url('admin/master/addSubjectNew/' . urlencrypt($row['id'])) . '"> <i class="fa fa-plus"></i></a>
-                <a title="Edit"  class="update btn btn-sm btn-warning" href="' . base_url('admin/master/view_all_subjectNew/' . urlencrypt($row['id'])) . '"> <i class="fa fa-eye"></i></a>',
+                '<a title="Add"  class="update btn btn-sm btn-success" href="' . base_url('admin/master/addSubjectNew/' . urlencrypt($row['id'])) . '"> <i class="fa fa-plus"></i></a>
+                <a title="View"  class="update btn btn-sm btn-warning" href="' . base_url('admin/master/view_all_subjectNew/' . urlencrypt($row['id'])) . '"> <i class="fa fa-eye"></i></a>',
                 '<a title="Edit"  class="update btn btn-sm btn-warning" href="' . base_url('admin/master/exam_edit/' . urlencrypt($row['id'])) . '"> <i class="fa fa-pencil-square-o"></i></a>
                 <a title="Delete" class="delete btn btn-sm btn-danger" href="' .
                     base_url('admin/master/exam_del/' . urlencrypt($row['id'])) .
@@ -394,17 +394,15 @@ class Master extends MY_Controller
             }
            
 
-            $this->session->set_flashdata('success', ' Add successfully!<br>सफलतापूर्वक जोड़ें!');
+            $this->session->set_flashdata('success', 'Candidate Application added successfully(उम्मीदवार का आवेदन सफलतापूर्वक जोड़ा गया)');
 
             redirect(base_url('admin/master/app_of_candidate'), 'refresh');
         } else {
 
-            // $data['subject'] = $this->Master_model->get_subject();
             $data['subject'] = $this->Master_model->get_subject();
             $data['states'] = $this->location_model->get_states();
             $data['role'] = $this->auth_model->get_auth_dd();
             $data['exam'] = $this->Master_model->get_exam();
-            // echo '<pre>';print_r($data['subject']); die();
 
             $this->load->view('admin/includes/_header');
             $this->load->view('admin/exam/candidate_add', $data);
@@ -719,7 +717,7 @@ class Master extends MY_Controller
 
 
 
-            $this->session->set_flashdata('success', 'create exam schedule successful<br/>परीक्षा कार्यक्रम सफल बनाएं');
+            $this->session->set_flashdata('success', 'Create exam schedule  has been added successfully(परीक्षा कार्यक्रम बनाएं सफलतापूर्वक जोड़ दिया गया है)');
 
             redirect(base_url('admin/master/invt_list'), 'refresh');
         } else {
@@ -791,11 +789,8 @@ class Master extends MY_Controller
             } else {
                 $result = $this->master_model->add_subjectNew($data);
             }
-            // $result = $this->master_model->add_subject($data);
 
-
-            $this->session->set_flashdata('success', 'Subject has been updated successfully<br/विषय को सफलतापूर्वक अपडेट कर दिया गया है>');
-            //    'admin/master/view_all_subjectNew/'. urlencrypt($id)
+            $this->session->set_flashdata('success', 'Subject has been added successfully (विषय सफलतापूर्वक जोड़ दिया गया है)');
             redirect(base_url('admin/master/view_all_subjectNew/' . urlencrypt($this->input->post('exam_id'))));
         }
     }

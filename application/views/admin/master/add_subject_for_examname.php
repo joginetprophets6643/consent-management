@@ -166,7 +166,7 @@
 
                             <div class="form-group mb-0">
 
-                                <input type="submit" name="submit" value="Add Subject&nbsp;(विषय जोड़ने)"
+                                <input type="submit" name="submit" value="Add Subject&nbsp;(विषय जोड़ें)"
 
                                 class="btn btn-primary">
 
