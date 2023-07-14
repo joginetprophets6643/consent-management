@@ -30,7 +30,7 @@
 
 
 
-            <div class="card-header">
+            <div class="card-header border-0">
 
 
 

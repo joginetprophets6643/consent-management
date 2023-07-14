@@ -24,7 +24,7 @@
 
 <div class="content-wrapper">
 
-    <section class="content">
+    <section class="content pb-0">
 
         <!-- For Messages -->
 
@@ -32,7 +32,7 @@
 
         <div class="card">
 
-            <div class="card-header">
+            <div class="card-header border-0">
 
                 <div class="d-inline-block">
 
@@ -49,7 +49,13 @@
                 </div>
 
             </div>
-            <?php echo get_exam_name(get_exam_name_downloadreport($id)); ?>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title" style="color: #373250;">
+                <?php echo get_exam_name(get_exam_name_downloadreport($id)); ?>
+                </h3>
+            </div>
             <div class="card-body">
 
                 <?php echo form_open("/",'class="filterdata"') ?>
@@ -164,7 +170,7 @@
     </section>
     <!-- Main content -->
 
-    <section class="content mt10">
+    <section class="content pt-0">
         <div class="card">
             <div class="card-body table-responsive">
                 <div id="consentRecievedDiv"></div>

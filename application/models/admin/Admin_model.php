@@ -298,14 +298,10 @@ class Admin_model extends CI_Model{
 		
 		$this->db->where('ci_admin.is_supper !=', 1);
 		$this->db->order_by('ci_admin.admin_id','desc');
-		
-
 		$query = $this->db->get();
-
-
 		$module = array();
 
-       
+		// print_r($this->db->last_query()); 
 
 		if ($query->num_rows() > 0) 
 
