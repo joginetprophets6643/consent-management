@@ -1,18 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-
-
-
-
-
-
 class Dashboard extends My_Controller {
-
-
- 
-
-
-
 
 	public function __construct(){
 
@@ -44,25 +32,6 @@ class Dashboard extends My_Controller {
 	}
 
 
-
-	//--------------------------------------------------------------------------
-
-        /*
-
-         *  [admin_id] => 31
-
-            [username] => superadmin
-
-            [admin_role_id] => 1
-
-            [admin_role] => Super Admin
-
-            [is_supper] => 1
-
-            [is_admin_login] => 1
-
-         */
-
 	public function index(){
 
 		$data['title'] = 'Dashboard';
@@ -72,7 +41,7 @@ class Dashboard extends My_Controller {
         $data['registerSchool'] = $this->dashboard_model->get_register_school();
         $data['sections'] = $this->dashboard_model->get_total_sections();
 		$data["row"] = $this->Certificate_model->get_all_active_consent_reg();
-
+         
 		$data["recieve_count"] = count($this->Certificate_model->getSentConsentFromExamController());
 		$admin_id = $this->session->userdata('admin_id'); 
 	
@@ -81,7 +50,7 @@ class Dashboard extends My_Controller {
 		$this->load->view('admin/includes/_header', $data);
 		$this->load->view('admin/dashboard/index_'.$_SESSION['admin_role_id']); //general .$_SESSION['admin_role_id'].$_SESSION['admin_role_id']
 		$this->load->view('admin/includes/_footer');
-
+		
 	}
 
 
