@@ -43,6 +43,28 @@
         <p class="login-box-msg mt-3 p-0 text-bold text-white" class="mb-4 ">Forgot Password (पासवर्ड भूल गए)</p>
         <hr class="style1" style="border-color: #fff;">
         <?php $this->load->view('admin/includes/_messages.php') ?>
+        
+    <?php if ($this->session->flashdata('error')): ?>
+
+<div class="m-b-15 flasremove" >
+
+    <div class="alert alert-error alert-dismissable">
+
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+
+        <p>
+
+            <i class="icon fa fa-check"></i>
+
+            <?php echo $this->session->flashdata('error'); ?>
+
+        </p>
+
+    </div>
+
+</div>
+
+<?php endif; ?>
         <?php echo form_open(base_url('admin/auth/forgot_password'), 'id="xin-form"  class="login-form" '); ?>
         <p class="retrive">
           Please provide your Email Id to retrieve the password <br>(पासवर्ड पुनः प्राप्त करने के लिए
