@@ -149,7 +149,6 @@ $query_builder = TRUE;
 
 
 $db['default'] = array(
-
 	'dsn'	=> '',
 
 	'hostname' => 'localhost',
@@ -159,6 +158,14 @@ $db['default'] = array(
 	'password' => '',
 
 	'database' => 'consentmng',
+
+	// 'hostname' => 'localhost',
+
+	// 'username' => 'cms_dbu',
+
+	// 'password' => '%$SY$Ygh&^%*#@1',
+
+	// 'database' => 'cms_db',
 
 	'dbdriver' => 'mysqli',
 
@@ -190,3 +197,4 @@ $db['default'] = array(
 
 );
 
+// $db['default']['port'] = '3355';
